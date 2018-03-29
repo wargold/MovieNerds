@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import Slider from 'react-slick'
 import MovieCardComponent from './moviecards'
 
@@ -8,8 +8,8 @@ const SimpleSlider = (props) => {
 
     let getGenresName = () => {
         if (props.genres !== undefined && props.genres.length > 0) {
-            let genre = props.genres.map((elem) => <div key={elem.id}>
-                <h2> {elem.name}</h2>
+            let genre = props.genres.map((elem) => <div className="genreSliderBox" key={elem.id}>
+                <h2 className="genreTitle"> {elem.name}</h2>
                 <Slider className="carsoule" {...settings}>
                     <div>
                         <MovieCardComponent movie={movie}/>
@@ -23,7 +23,7 @@ const SimpleSlider = (props) => {
                 </Slider>
             </div>);
             return genre
-        } else return <li>{"Loading..."}</li>
+        } else return <h2>{"Loading..."}</h2>
     };
 
 
