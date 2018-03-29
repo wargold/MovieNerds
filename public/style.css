@@ -1,0 +1,60 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+#StartScreen {
+    color: black;
+    background-color: darkgray;
+    text-align: center;
+}
+
+h2 {
+    color: #006699;
+}
+
+.carsoule{
+    background: yellow;
+    margin: 0 auto;
+    overflow: visible;
+    width: 80%;
+    height: 200px;
+}
+.slick-prev {
+    position: absolute;
+    background: red;
+}
+
+.slick-next{
+    position: absolute;
+    background: red;
+}
+
+.slick-slide.slick-center img { margin-left: auto; margin-right: auto; }
+
+.container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.image {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    width: 200px;
+    height: 200px;
+}
+
+.footer {
+    position: relative;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #efefef;
+    text-align: center;
+}

@@ -4,22 +4,19 @@ var webpack = require('webpack');
 module.exports = {
     devServer: {
         inline: true,
-        contentBase: './src',
-        port: 3000
+        contentBase: './public',
+        port: 3000,
+        historyApiFallback: true
     },
-    devtool: 'cheap-module-eval-source-map',
-    entry: './dev/js/index.js',
+    devtool: 'inline-source-map',
+    entry: './src/js/index.js',
     module: {
         loaders: [
-            {
-                test: /\.js$/,
-                loaders: ['babel'],
-                exclude: /node_modules/
-            },
+            {test: /\.js$/ , loader:'babel-loader', exclude: '/node_modules/'},
+            {test: /\.jsx$/ , loader:'babel-loader', exclude: '/node_modules/'},
             {
                 test: /\.scss/,
-                loader: 'style-loader!css-loader!sass-loader'
-            }
+                loader: 'style-loader!css-loader!sass-loader'}
         ]
     },
     output: {
