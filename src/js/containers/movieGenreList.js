@@ -9,7 +9,7 @@ class MovieGenreList extends Component {
         this.props.getMovieGenres();
     }
 
-    getGenresName=()=>{
+    getGenresName(){
         if(this.props.genres.length>0) {
             let genre = this.props.genres.map((elem) => <li key={elem.id}>{elem.name}</li>);
             return genre
