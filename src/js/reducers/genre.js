@@ -7,21 +7,21 @@ const initialState = {
 }
 
 const genre = (state = initialState, action) => {
-    switch (action.type){
+    switch (action.type) {
         case FETCHING_GENRE:
             return Object.assign({}, state, {
-                isFetching:true,
-                genres:[]
+                isFetching: true,
+                genres: []
             });
         case FETCHING_GENRE_SUCCESS:
             return Object.assign({}, state, {
-                isFetching:false,
-                genres:action.data
+                isFetching: false,
+                genres: action.data
             });
         case FETCHING_GENRE_FAILURE:
             return Object.assign({}, state, {
-                isFetching:false,
-                error:action.data,
+                isFetching: false,
+                error: action.data,
             });
         default:
             return state;

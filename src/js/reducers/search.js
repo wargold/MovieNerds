@@ -5,10 +5,10 @@ const initialState = {
 }
 
 const Search = (state = initialState, action) => {
-    switch (action.type){
+    switch (action.type) {
         case SEARCH:
             return Object.assign({}, state, {
-                value:action
+                value: action
             });
         default:
             return state;

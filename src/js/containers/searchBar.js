@@ -10,9 +10,9 @@ class SearchBar extends Component {
         return (
             <input
                 className="form-control"
-                placeholder = "Search For A Movie"
+                placeholder="Search For A Movie"
                 onChange={(e) => search(e.target.value)}
-                value={value} />
+                value={value}/>
         );
     }
 }
