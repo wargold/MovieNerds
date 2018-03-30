@@ -10,6 +10,7 @@ const MovieCardComponent = (props) => {
             width: 200px;
     &:hover .image{
        opacity:1;
+        transform: scale(1.3);
     }
     &:hover .title{
        opacity: ${movie.subtitle ? 1 : 0};
