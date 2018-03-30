@@ -1,0 +1,8 @@
+- D3 local development
+
+> npm install -g http-server
+> http-server &
+
+- Image Urls: https://developers.themoviedb.org/3/getting-started/images
+
+https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg
