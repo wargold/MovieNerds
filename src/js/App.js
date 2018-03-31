@@ -4,7 +4,7 @@ import {MovieGenreList, SearchBar} from './containers'
 require('../scss/style.scss');
 
 const App = () => (
-    <div>
+    <div className="main">
         <SearchBar/>
         <hr/>
         <MovieGenreList/>

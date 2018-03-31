@@ -30,7 +30,7 @@ export function getSearchMovie(text) {
         return fetch(url)
             .then(response => response.json())
             .then(json => json.results)
-            .then(data => dispatch(searchMovieSuccess(data, text)))
+            .then(data => dispatch(searchMovieSuccess(text, data)))
             .catch(error => dispatch(searchMovieFAILURE(error)))
     }
 }
@@ -91,7 +91,7 @@ function movieGenresFAILURE(error) {
 }
 
 export function getMovieGenres() {
-    let url = constants.URL_GENRE + constants.API_KEY1 + '&language=en-US';
+    let url = constants.URL_GENRE + 'movie/list' + constants.API_KEY1 + '&language=en-US';
     return function (dispatch) {
         dispatch(movieGenres())
         return fetch(url)
@@ -102,6 +102,54 @@ export function getMovieGenres() {
     };
 }
 
+//Temporally for testing the search bar
 export function search(value) {
     return {type: constants.SEARCH, value};
+}
+
+// Handles action for getting movies for a specific genre api call
+function moviesByGenre(id) {
+    return {
+        type: constants.FETCHING_MOVIES_BY_GENRE,
+        id
+    };
+}
+
+function moviesByGenreSuccess(id, data) {
+    return {
+        type: constants.FETCHING_MOVIES_BY_GENRE_SUCCESS,
+        id,
+        data
+    };
+}
+
+function moviesByGenreFAILURE(error) {
+    return {
+        type: constants.FETCHING_MOVIES_BY_GENRE_FAILURE,
+        error
+    };
+}
+
+export function getMoviesByGenre(id) {
+    let url = constants.URL_GENRE + id + '/movies' + constants.API_KEY1 + '&language=en-US&include_adult=false&sort_by=created_at.asc';
+    return function (dispatch) {
+        dispatch(moviesByGenre(id))
+        return fetch(url)
+            .then(response => response.json())
+            .then(json => json.results)
+            .then(data => dispatch(moviesByGenreSuccess(id, data)))
+            .catch(error => dispatch(moviesByGenreFAILURE(error)))
+    };
+}
+
+// UPDATE list of genres
+export function updateGenre(data, fetchStatus) {
+return {type: constants.UPDATE_GENRES, data, fetchStatus}
+}
+
+// UPDATE list with all genres and movies
+export function updateAllMoviesGenres(data) {
+    console.log("Vaddddadadd");
+    console.log(data);
+    return {type: constants.UPDATE_ALLMOVIESBYGENRE, data}
 }

@@ -9,7 +9,7 @@ module.exports = {
         historyApiFallback: true
     },
     devtool: 'inline-source-map',
-    entry: './src/js/index.js',
+    entry: ['babel-polyfill','./src/js/index.js'],
     module: {
         loaders: [
             {test: /\.js$/ , loader:'babel-loader', exclude: '/node_modules/'},

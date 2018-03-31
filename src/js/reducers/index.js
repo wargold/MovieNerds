@@ -1,7 +1,11 @@
 import {combineReducers} from 'redux';
 import genre from './genre'
 import Search from './search'
-import { routerReducer } from 'react-router-redux'
+import MoviesByGenre from './moviesByGenre'
+import UpdateGenres from './updateGenre'
+import UpdateMoviesByGenre from './updateMoviesByGenre'
+
+import {routerReducer} from 'react-router-redux'
 
 /*
  * We combine all reducers into a single object before updated data is dispatched (sent) to store
@@ -11,6 +15,9 @@ import { routerReducer } from 'react-router-redux'
 const allReducers = combineReducers({
     genres: genre,
     search: Search,
+    movies: MoviesByGenre,
+    updateMoviesByGenre:UpdateMoviesByGenre,
+    updateGenres:UpdateGenres,
     routing: routerReducer
 });
 

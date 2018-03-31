@@ -2,12 +2,14 @@ import React from 'react';
 import {Image} from 'react-bootstrap'
 import styled from 'styled-components'
 import {Glyphicon} from 'react-bootstrap'
+import {URL_IMG, IMG_LOGO_S_SIZE} from '../constants/constants'
 
 const MovieCardComponent = (props) => {
     const {movie} = props;
+
     const StyledImg = styled.div`
-            height: 200px;
-            width: 200px;
+            height: 250px;
+            width: 250px;
     &:hover .image{
        opacity:1;
         transform: scale(1.3);
@@ -26,12 +28,12 @@ const MovieCardComponent = (props) => {
   `;
     return (
         <StyledImg>
-            <div className="container">
-                <Image className="image" src={movie.imga} responsive/>
-                {movie.subtitle &&
+            <div className="container" key={movie.id}>
+                <Image className="image" src={URL_IMG + IMG_LOGO_S_SIZE + movie.poster_path} responsive/>
+                {movie.original_language &&
                 <Info className="title">
-                    <h4>{movie.title}</h4>
-                    <Glyphicon glyph={'star'}/> {"10"} &nbsp;&nbsp; {"2019"}
+                    <h4>{movie.original_title}</h4>
+                    <Glyphicon glyph={'star'}/> {movie.vote_average} &nbsp;&nbsp; {movie.release_date}
                 </Info>
                 }
             </div>
