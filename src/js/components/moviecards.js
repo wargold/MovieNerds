@@ -4,10 +4,7 @@ import styled from 'styled-components'
 import {Glyphicon} from 'react-bootstrap'
 import {URL_IMG, IMG_LOGO_S_SIZE} from '../constants/constants'
 
-const MovieCardComponent = (props) => {
-    const {movie} = props;
-
-    const StyledImg = styled.div`
+const StyledImg = styled.div`
             height: 250px;
             width: 250px;
     &:hover .image{
@@ -15,30 +12,39 @@ const MovieCardComponent = (props) => {
         transform: scale(1.3);
     }
     &:hover .title{
-       opacity: ${movie.subtitle ? 1 : 0};
+       opacity: 0.9;
     }
   `;
-    const Info = styled.div`
+const Info = styled.div`
       position: absolute;
       top: 0;
       margin:10px;
-      color:white;
+      color:darkgrey;
       font-weight:bold;
       opacity:0;
   `;
-    return (
-        <StyledImg>
-            <div className="container" key={movie.id}>
-                <Image className="image" src={URL_IMG + IMG_LOGO_S_SIZE + movie.poster_path} responsive/>
-                {movie.original_language &&
-                <Info className="title">
-                    <h4>{movie.original_title}</h4>
-                    <Glyphicon glyph={'star'}/> {movie.vote_average} &nbsp;&nbsp; {movie.release_date}
-                </Info>
-                }
-            </div>
-        </StyledImg>
-    );
+
+class MovieCardComponent extends React.Component {
+
+    render() {
+        const movie = this.props.movie;
+        return (
+            <StyledImg>
+                <div className="container" key={this.props.movie.id}>
+                    <Image className="image" src={URL_IMG + IMG_LOGO_S_SIZE + this.props.movie.poster_path}
+                           alt={this.props.movie.original_title} responsive/>
+                    {movie.original_language &&
+                    <Info className="title">
+                        <h4>{movie.original_title}</h4>
+                        <Glyphicon
+                            glyph={'star'}/> {this.props.movie.vote_average} &nbsp;&nbsp; {this.props.movie.release_date}
+                    </Info>
+                    }
+                </div>
+            </StyledImg>
+        );
+    }
 }
 
 export default MovieCardComponent;
+

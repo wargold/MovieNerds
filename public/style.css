@@ -15,34 +15,32 @@ html, body {
 h2 {
     color: #006699;
 }
-.genreTitle{
+
+.genreTitle {
     overflow: hidden;
     position: relative;
-    left: 12%;
+    left: 8%;
 }
 
-.genreSliderBox{
-    margin-bottom: 10px;
+.genreSliderBox {
+    margin-bottom: 50px;
 }
 
-.carsoule{
-    background: #e2ebe8;
+.carsoule {
     margin: 0 auto;
     overflow: visible;
     width: 90%;
     height: 250px;
 }
-.slick-prev {
+
+.slick-prev, .slick-next {
     position: absolute;
-    background: darkslategray;
 }
 
-.slick-next{
-    position: absolute;
-    background: darkslategray;
+.slick-slide.slick-center img {
+    margin-left: auto;
+    margin-right: auto;
 }
-
-.slick-slide.slick-center img { margin-left: auto; margin-right: auto; }
 
 .container {
     position: relative;
@@ -68,6 +66,6 @@ h2 {
     text-align: center;
 }
 
-.main{
+.main {
     background: darkgrey;
 }

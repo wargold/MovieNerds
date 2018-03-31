@@ -18,15 +18,23 @@ const SimpleSlider = (props) => {
         return props.movies[index].movies.map((mov) => <div><MovieCardComponent movie={mov}/></div>)
     }
 
-
     const settings = {
+        focusOnSelect: true,
         dots: true,
         infinite: true,
         lazyLoad: true,
         speed: 500,
         slidesToShow: 4,
         slidesToScroll: 1,
-        arrows: true
+        arrows: true,
+        appendDots: dots => (
+            <div style={{
+                backgroundColor: '#ddd', borderRadius: '10px', padding: '10px', overflow: 'hidden',
+                position: 'absolute', marginBottom: '-20px'
+            }}>
+                <ul style={{margin: '0px'}}> {dots} </ul>
+            </div>
+        )
     };
 
     return (

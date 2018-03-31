@@ -24,7 +24,7 @@ function searchMovieFAILURE(error) {
 }
 
 export function getSearchMovie(text) {
-    let url = constants.URL_SEARCH + text + constants.API_KEY1;
+    let url = constants.URL_SEARCH + text + constants.API_KEY2;
     return function (dispatch) {
         dispatch(searchMovie())
         return fetch(url)
@@ -131,7 +131,7 @@ function moviesByGenreFAILURE(error) {
 }
 
 export function getMoviesByGenre(id) {
-    let url = constants.URL_GENRE + id + '/movies' + constants.API_KEY1 + '&language=en-US&include_adult=false&sort_by=created_at.asc';
+    let url = constants.URL_GENRE + id + '/movies' + constants.API_KEY2 + '&language=en-US&include_adult=false&sort_by=created_at.asc';
     return function (dispatch) {
         dispatch(moviesByGenre(id))
         return fetch(url)
@@ -144,7 +144,7 @@ export function getMoviesByGenre(id) {
 
 // UPDATE list of genres
 export function updateGenre(data, fetchStatus) {
-return {type: constants.UPDATE_GENRES, data, fetchStatus}
+    return {type: constants.UPDATE_GENRES, data, fetchStatus}
 }
 
 // UPDATE list with all genres and movies
