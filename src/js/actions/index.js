@@ -142,14 +142,7 @@ export function getMoviesByGenre(id) {
     };
 }
 
-// UPDATE list of genres
-export function updateGenre(data, fetchStatus) {
-    return {type: constants.UPDATE_GENRES, data, fetchStatus}
-}
-
 // UPDATE list with all genres and movies
-export function updateAllMoviesGenres(data) {
-    console.log("Vaddddadadd");
-    console.log(data);
-    return {type: constants.UPDATE_ALLMOVIESBYGENRE, data}
+export function updateAllMoviesGenres(allGenre, movieGenres) {
+    return {type: constants.UPDATE_ALLMOVIESBYGENRE, allGenre, movieGenres}
 }

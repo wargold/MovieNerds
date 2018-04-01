@@ -41,7 +41,6 @@ export const URL_YOUTUBE = 'https://www.youtube.com/embed/';
 export const URL_CAST = '/casts';
 export const URL_VIDEO = '/videos';
 
-export const UPDATE_GENRES = 'UPDATE_GENRES';
 export const UPDATE_ALLMOVIESBYGENRE = 'UPDATE_ALLMOVIESBYGENRE';
 
 

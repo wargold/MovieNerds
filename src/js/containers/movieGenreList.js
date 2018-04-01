@@ -5,14 +5,6 @@ import {getMovieGenres, getMoviesByGenre, updateAllMoviesGenres} from '../action
 import SimpleSlider from "../components/genreSlider";
 
 class MovieGenreList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loading: false,
-            genres: [],
-            moviesByGenre: []
-        };
-    }
 
     async componentWillMount() {
         let arr = [];
@@ -29,12 +21,12 @@ class MovieGenreList extends Component {
         }).catch((err) => {
             console.error(err)
         });
-        this.setState({genres: arr, moviesByGenre: pro});
+        await this.props.updateAllMoviesGenres(arr, pro);
     }
 
     render() {
-        const de = (this.state.genres.length > 0 && this.state.moviesByGenre.length > 0) ?
-            (<SimpleSlider genres={this.state.genres} movies={this.state.moviesByGenre}/>)
+        const de = (this.props.updateMoviesByGenre.genres[0]!==undefined && this.props.updateMoviesByGenre.movies[0]!== undefined && this.props.updateMoviesByGenre.genres[0].length > 0 && this.props.updateMoviesByGenre.movies[0].length > 0) ?
+            (<SimpleSlider genres={this.props.updateMoviesByGenre.genres[0]} movies={this.props.updateMoviesByGenre.movies[0]}/>)
             : (
                 <h2>{"Hej och laddning"}</h2>
             )
@@ -46,7 +38,7 @@ function mapStateToProps(state) {
     return {
         genres: state.genres.genres,
         movies: state.movies,
-        updateMoviesByGenre: state.updateMoviesByGenre.movies
+        updateMoviesByGenre: state.updateMoviesByGenre
     };
 }
 

@@ -1,15 +1,18 @@
 import {UPDATE_ALLMOVIESBYGENRE} from "../constants/constants";
 
 const initialState = {
-    movies:[]
+    movies:[],
+    genres:[]
 }
 
 const UpdateMoviesByGenre = (state = initialState, action) => {
     switch (action.type) {
         case UPDATE_ALLMOVIESBYGENRE:
-            return Object.assign({}, state, {
-                movies: state.movies.push(action.data)
-            });
+            return {
+                ...state,
+                movies: [...state.movies, action.movieGenres],
+                genres: [...state.genres, action.allGenre]
+            };
         default:
             return state;
     }

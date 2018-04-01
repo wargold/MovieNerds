@@ -22,12 +22,14 @@ const store = createStore(
     applyMiddleware(thunk, promise, logger, routeMiddleware)
 );
 
+const NotFound = () => <h1>404.. Whoops, page not found!</h1>;
 
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <div>
                 <Route path="/" component={App}/>
+                <Route path="/not" component={NotFound} />
             </div>
         </Router>
     </Provider>,

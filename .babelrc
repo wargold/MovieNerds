@@ -8,13 +8,7 @@
       "presets": []
     }
   },
-  "plugins": ["transform-es2015-modules-commonjs"]
-,
-// with options
-  "plugins": [
-    ["transform-es2015-modules-commonjs", {
-      "allowTopLevelThis": true
-    }]
-  ],
-  "plugins": ["transform-async-to-generator"]
+  "plugins": ["transform-es2015-modules-commonjs",["transform-es2015-modules-commonjs", {
+    "allowTopLevelThis": true
+  }],["transform-async-to-generator"],["transform-object-rest-spread"]]
 }

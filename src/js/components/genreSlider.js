@@ -15,7 +15,7 @@ const SimpleSlider = (props) => {
     };
 
     let getMoviesByGenre = (index) => {
-        return props.movies[index].movies.map((mov) => <div><MovieCardComponent movie={mov}/></div>)
+        return props.movies[index].movies.map((mov) => <div key={mov.id}><MovieCardComponent movie={mov}/></div>)
     }
 
     const settings = {
