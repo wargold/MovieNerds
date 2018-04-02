@@ -6,7 +6,6 @@ require('../scss/style.css');
 const App = () => (
     <div className="main">
         <SearchBar/>
-        <hr/>
     </div>
 
 );

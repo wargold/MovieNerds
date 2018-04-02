@@ -24,15 +24,28 @@ function searchMovieFAILURE(error) {
 }
 
 export function getSearchMovie(text) {
-    let url = constants.URL_SEARCH + text + constants.API_KEY2;
+    let url = constants.URL_SEARCH + text + constants.API_KEYSEARCH;
     return function (dispatch) {
-        dispatch(searchMovie())
+        dispatch(searchMovie(text));
         return fetch(url)
             .then(response => response.json())
             .then(json => json.results)
             .then(data => dispatch(searchMovieSuccess(text, data)))
-            .catch(error => dispatch(searchMovieFAILURE(error)))
+            .catch(error => dispatch(searchMovieFAILURE(text, error)))
     }
+}
+
+export function updateInputValue(text) {
+    return {
+        type: constants.UPDATE_INPUT_VALUE,
+        text
+    };
+}
+
+export function clearSuggestions() {
+    return {
+        type: constants.CLEAR_SUGGESTIONS
+    };
 }
 
 // Handles action for getting popular movies api call
@@ -58,7 +71,7 @@ function popularMoviesFAILURE(error) {
 }
 
 export function getPopularMovies() {
-    let url = constants.URL_DETAIL + 'popular' + constants.API_KEY1;
+    let url = constants.URL_DETAIL + 'popular' + constants.API_KEY2;
     return function (dispatch) {
         dispatch(popularMovies())
         return fetch(url)
@@ -91,7 +104,7 @@ function movieGenresFAILURE(error) {
 }
 
 export function getMovieGenres() {
-    let url = constants.URL_GENRE + 'movie/list' + constants.API_KEY1 + '&language=en-US';
+    let url = constants.URL_GENRE + 'movie/list' + constants.API_KEY2 + '&language=en-US';
     return function (dispatch) {
         dispatch(movieGenres())
         return fetch(url)
@@ -100,11 +113,6 @@ export function getMovieGenres() {
             .then(data => dispatch(movieGenresSuccess(data)))
             .catch(error => dispatch(movieGenresFAILURE(error)))
     };
-}
-
-//Temporally for testing the search bar
-export function search(value) {
-    return {type: constants.SEARCH, value};
 }
 
 // Handles action for getting movies for a specific genre api call
@@ -145,4 +153,46 @@ export function getMoviesByGenre(id) {
 // UPDATE list with all genres and movies
 export function updateAllMoviesGenres(allGenre, movieGenres) {
     return {type: constants.UPDATE_ALLMOVIESBYGENRE, allGenre, movieGenres}
+}
+
+//UPDATE value of selected genres in selection
+export function updateSelectedValues(value) {
+    return {type: constants.UPDATE_GENRE_SELECTION, value}
+}
+
+
+
+
+// Handles action for getting movies by genres by the genres selected, api call
+function moviesByGenres(genres) {
+    return {
+        type: constants.FETCHING_MOVIES_BY_GENRES,
+        genres
+    };
+}
+
+function moviesByGenresSuccess(genres,data) {
+    return {
+        type: constants.FETCHING_MOVIES_BY_GENRES_SUCCESS,
+        genres, data
+    };
+}
+
+function moviesByGenresFAILURE(error) {
+    return {
+        type: constants.FETCHING_MOVIES_BY_GENRES_FAILURE,
+        error
+    };
+}
+
+export function getMoviesByGenres(genres) {
+    let url = constants.URL_LIST + constants.API_KEY2 + '&with_genres='+genres;
+    return function (dispatch) {
+        dispatch(moviesByGenres(genres))
+        return fetch(url)
+            .then(response => response.json())
+            .then(json => json.results)
+            .then(data => dispatch(moviesByGenresSuccess(genres,data)))
+            .catch(error => dispatch(moviesByGenresFAILURE(error)))
+    };
 }

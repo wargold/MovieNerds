@@ -1,4 +1,4 @@
-export const API_KEY1 = '?api_key=b6bbbb876524fb068f4abcc95fa67e9f';
+export const API_KEYSEARCH = '&api_key=b6bbbb876524fb068f4abcc95fa67e9f';
 export const API_KEY2 = '?api_key=340854c6d4e0cc3575399a4c61edf636';
 export const FETCHING_MOVIES = 'FETCHING_MOVIES';
 export const FETCHING_MOVIES_SUCCESS = 'FETCHING_MOVIES_SUCCESS';
@@ -42,6 +42,16 @@ export const URL_CAST = '/casts';
 export const URL_VIDEO = '/videos';
 
 export const UPDATE_ALLMOVIESBYGENRE = 'UPDATE_ALLMOVIESBYGENRE';
-
-
 export const SEARCH = 'SEARCH';
+export const UPDATE_INPUT_VALUE = 'UPDATE_INPUT_VALUE';
+export const CLEAR_SUGGESTIONS = 'CLEAR_SUGGESTIONS';
+
+export const UPDATE_GENRE_SELECTION = 'UPDATE_GENRE_SELECTION';
+export const UPDATE_OPTIONS = 'UPDATE_OPTIONS';
+
+export const BROKEN_IMAGE = 'http://rlv.zcache.com/broken_internet_image_icon_poster-r0a8517b32a704c618ef72685782dc663_a3uq_8byvr_324.jpg';
+
+
+export const FETCHING_MOVIES_BY_GENRES = 'FETCHING_MOVIES_BY_GENRES';
+export const FETCHING_MOVIES_BY_GENRES_SUCCESS = 'FETCHING_MOVIES_BY_GENRES_SUCCESS';
+export const FETCHING_MOVIES_BY_GENRES_FAILURE = 'FETCHING_MOVIES_BY_GENRES_FAILURE';

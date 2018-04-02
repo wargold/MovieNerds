@@ -1,7 +1,7 @@
 import React from 'react'
 import Slider from 'react-slick'
 import MovieCardComponent from './moviecards'
-
+import './css/slider.css'
 const SimpleSlider = (props) => {
 
     let getGenresName = () => {

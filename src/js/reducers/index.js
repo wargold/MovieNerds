@@ -3,7 +3,8 @@ import genre from './genre'
 import Search from './search'
 import MoviesByGenre from './moviesByGenre'
 import UpdateMoviesByGenre from './updateMoviesByGenre'
-
+import GenreSelections from './genreSelection'
+import MoviesByMultiGenre from './moviesByMultiGenres'
 import {routerReducer} from 'react-router-redux'
 
 /*
@@ -16,6 +17,8 @@ const allReducers = combineReducers({
     search: Search,
     movies: MoviesByGenre,
     updateMoviesByGenre:UpdateMoviesByGenre,
+    selections: GenreSelections,
+    moviesByMultiGenre: MoviesByMultiGenre,
     routing: routerReducer
 });
 

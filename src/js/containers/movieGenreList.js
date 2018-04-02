@@ -6,22 +6,39 @@ import SimpleSlider from "../components/genreSlider";
 
 class MovieGenreList extends Component {
 
-    async componentWillMount() {
-        let arr = [];
-        let pro = [];
-        Promise.all([this.props.getMovieGenres()]).then((res) => {
-            res[0].data.map((elem) => {
-                return (this.props.getMoviesByGenre(elem.id)).then(() => {
-                    arr.push(elem);
-                    pro.push(this.props.movies);
-                }).catch((err) => {
-                    console.error(err)
-                })
-            });
-        }).catch((err) => {
-            console.error(err)
+
+    componentWillMount() {
+        let arr=[];
+        let pro=[];
+
+        this.loadData().then((data)=> {data.data.map((elem) => {return (this.loadData2(elem.id)).then(() => {
+            arr.push(elem);
+            pro.push(this.props.movies);
+        })})});
+        this.props.updateAllMoviesGenres(arr, pro);
+    }
+
+    loadData() {
+        let promise = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('This happens 5th (after 3 seconds).');
+                resolve(this.props.getMovieGenres());
+            }, 3000);
         });
-        await this.props.updateAllMoviesGenres(arr, pro);
+        return promise;
+    }
+
+    loadData2(item) {
+        let promise = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('This happens 5th (after 3 seconds).');
+                resolve(this.props.getMoviesByGenre(item));
+            }, 3000);
+        });
+
+        console.log('This happens 3rd.');
+
+        return promise;
     }
 
     render() {
