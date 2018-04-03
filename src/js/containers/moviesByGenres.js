@@ -18,7 +18,6 @@ class MoviesByGenres extends Component {
         }
     }
 
-
     loadData() {
         const lenOfGenres = this.props.selector.value.length;
         let gen = '';

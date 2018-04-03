@@ -1,4 +1,7 @@
 import * as constants from '../constants/constants'
+import {FETCHING_CASTBYID} from "../constants/constants";
+import {FETCHING_CASTBYID_SUCCESS} from "../constants/constants";
+import {FETCHING_CASTBYID_FAILURE} from "../constants/constants";
 
 // Handles action for search movies api call
 function searchMovie(text) {
@@ -161,8 +164,6 @@ export function updateSelectedValues(value) {
 }
 
 
-
-
 // Handles action for getting movies by genres by the genres selected, api call
 function moviesByGenres(genres) {
     return {
@@ -171,7 +172,7 @@ function moviesByGenres(genres) {
     };
 }
 
-function moviesByGenresSuccess(genres,data) {
+function moviesByGenresSuccess(genres, data) {
     return {
         type: constants.FETCHING_MOVIES_BY_GENRES_SUCCESS,
         genres, data
@@ -186,13 +187,208 @@ function moviesByGenresFAILURE(error) {
 }
 
 export function getMoviesByGenres(genres) {
-    let url = constants.URL_LIST + constants.API_KEY2 + '&with_genres='+genres;
+    let url = constants.URL_LIST + constants.API_KEY2 + '&with_genres=' + genres;
     return function (dispatch) {
         dispatch(moviesByGenres(genres))
         return fetch(url)
             .then(response => response.json())
             .then(json => json.results)
-            .then(data => dispatch(moviesByGenresSuccess(genres,data)))
+            .then(data => dispatch(moviesByGenresSuccess(genres, data)))
             .catch(error => dispatch(moviesByGenresFAILURE(error)))
+    };
+}
+
+// Handles action for getting the most popular movies, api call
+function mostPopMovies() {
+    return {
+        type: constants.FETCHING_MOST_POPULAR_MOVIES
+    };
+}
+
+function mostPopMoviesSuccess(data) {
+    return {
+        type: constants.FETCHING_MOST_POPULAR_MOVIES_SUCCESS, data
+    };
+}
+
+function mostPopMoviesFAILURE(error) {
+    return {
+        type: constants.FETCHING_MOST_POPULAR_MOVIES_FAILURE,
+        error
+    };
+}
+
+export function getMostPopMovies() {
+    let url = constants.URL_DETAIL + 'popular' + constants.API_KEY2 + '&language=en-US&page=1';
+    return function (dispatch) {
+        dispatch(mostPopMovies())
+        return fetch(url)
+            .then(response => response.json())
+            .then(json => json.results)
+            .then(data => dispatch(mostPopMoviesSuccess(data)))
+            .catch(error => dispatch(mostPopMoviesFAILURE(error)))
+    };
+}
+
+// Handles action for getting the a specific movie by movieID, api call
+function movieID(id) {
+    return {
+        type: constants.FETCHING_MOVIEBYID,
+        id
+    };
+}
+
+function movieIDSuccess(id, data) {
+    return {
+        type: constants.FETCHING_MOVIEBYID_SUCCESS, id, data
+    };
+}
+
+function movieIDFAILURE(error) {
+    return {
+        type: constants.FETCHING_MOVIEBYID_FAILURE,
+        error
+    };
+}
+
+export function getMovieByMovieID(id) {
+    let url = constants.URL_DETAIL + id + constants.API_KEY1 + '&language=en-US';
+    return function (dispatch) {
+        dispatch(movieID(id))
+        return fetch(url)
+            .then(response => response.json())
+            .then(data => dispatch(movieIDSuccess(id, data)))
+            .catch(error => dispatch(movieIDFAILURE(error)))
+    };
+}
+
+// Handles action for getting a trailer for a movie by movieID, api call
+function trailerByMovieID(id) {
+    return {
+        type: constants.FETCHING_MOVIETRAILER,
+        id
+    };
+}
+
+function trailerByMovieIDSuccess(id, data) {
+    return {
+        type: constants.FETCHING_MOVIETRAILER_SUCCESS, id, data
+    };
+}
+
+function trailerByMovieIDFAILURE(error) {
+    return {
+        type: constants.FETCHING_MOVIETRAILER_FAILURE,
+        error
+    };
+}
+
+export function getTrailerByMovieID(id) {
+    let url = constants.URL_DETAIL + id + constants.URL_VIDEO + constants.API_KEY1 + '&language=en-US';
+    return function (dispatch) {
+        dispatch(trailerByMovieID(id))
+        return fetch(url)
+            .then(response => response.json())
+            .then(json => json.results)
+            .then(data => dispatch(trailerByMovieIDSuccess(id, data)))
+            .catch(error => dispatch(trailerByMovieIDFAILURE(error)))
+    };
+}
+
+// Handles action for getting a cast members for a movie by movieID, api call
+function castByMovieID(id) {
+    return {
+        type: constants.FETCHING_CAST,
+        id
+    };
+}
+
+function castByMovieIDSuccess(id, data) {
+    return {
+        type: constants.FETCHING_CAST_SUCCESS, id, data
+    };
+}
+
+function castByMovieIDFAILURE(error) {
+    return {
+        type: constants.FETCHING_CAST_FAILURE,
+        error
+    };
+}
+
+export function getCastByMovieID(id) {
+    let url = constants.URL_DETAIL + id + constants.CAST_CREDIT + constants.API_KEY1;
+    return function (dispatch) {
+        dispatch(castByMovieID(id))
+        return fetch(url)
+            .then(response => response.json())
+            .then(json => json.cast)
+            .then(data => dispatch(castByMovieIDSuccess(id, data)))
+            .catch(error => dispatch(castByMovieIDFAILURE(error)))
+    };
+}
+
+// Handles action for getting information about a cast member for a movie by ID, api call
+function castInfoByID(id) {
+    return {
+        type: constants.FETCHING_CASTBYID,
+        id
+    };
+}
+
+function castInfoByIDSuccess(id, data) {
+    return {
+        type: constants.FETCHING_CASTBYID_SUCCESS, id, data
+    };
+}
+
+function castInfoByIDFAILURE(error) {
+    return {
+        type: constants.FETCHING_CASTBYID_FAILURE,
+        error
+    };
+}
+
+export function getCastInfoByID(id) {
+    let url = constants.URL_PERSON + id + constants.API_KEY1;
+    return function (dispatch) {
+        dispatch(castInfoByID(id))
+        return fetch(url)
+            .then(response => response.json())
+            .then(data => dispatch(castInfoByIDSuccess(id, data)))
+            .catch(error => dispatch(castInfoByIDFAILURE(error)))
+    };
+}
+
+// Handles action for getting information about a movies a cast member is known for by ID, api call
+function castKnownMovies(id) {
+    return {
+        type: constants.FETCHING_CAST_KNOWN_MOVIES,
+        id
+    };
+}
+
+function castKnownMoviesSuccess(id, data) {
+    return {
+        type: constants.FETCHING_CAST_KNOWN_MOVIES_SUCCESS, id, data
+    };
+}
+
+function castKnownMoviesFAILURE(error) {
+    return {
+        type: constants.FETCHING_CAST_KNOWN_MOVIES_FAILURE,
+        error
+    };
+}
+
+export function getCastKnownMovies(id) {
+    let url =  constants.URL_PERSON + id + constants.MOVIE_CREDIT + constants.API_KEY1 + '&language=en-US';
+    return function (dispatch) {
+        dispatch(castKnownMovies(id))
+        return fetch(url)
+            .then(response => response.json())
+            .then(json => json.cast)
+            .then(data => dispatch(castKnownMoviesSuccess(id, data)))
+            .catch(error => dispatch(castKnownMoviesFAILURE(error)))
     };
 }

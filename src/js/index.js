@@ -13,6 +13,9 @@ import createHistory from 'history/createBrowserHistory'
 import routes from './router';
 import App from './App';
 import MovieFirstPage from './components/movieFirstPage'
+import Movie from './containers/movie'
+import Cast from './containers/cast'
+import { BrowserRouter } from 'react-router-dom'
 
 const history = createHistory()
 const routeMiddleware = routerMiddleware(hashHistory);
@@ -28,7 +31,9 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <div>
-                <Route path="/" component={App}/>
+                <Route exact path="/" component={App}/>
+                <Route path="/movie/:id" component={Movie}/>
+                <Route path="/cast/:id" component={Cast}/>
                 <Route path="/not" component={NotFound} />
             </div>
         </Router>

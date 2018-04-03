@@ -1,0 +1,27 @@
+.carousel, .carousel-inner, img.kan.img-responsive {
+    width:1080px;
+    height:500px;
+    margin: auto;
+}
+
+@media (max-width: 900px) {
+    .carousel {
+        width:auto;
+        height:auto;
+    }
+}
+
+.mostPopularMovies{
+    margin-bottom: 20px;
+}
+
+.mostPopularMoviesTitle{
+    overflow: hidden;
+    position: relative;
+    left: 8%;
+    width: 40%;
+}
+
+.h2{
+    color: white;
+}

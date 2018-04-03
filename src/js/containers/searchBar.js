@@ -8,9 +8,6 @@ import {Panel} from 'react-bootstrap'
 import './css/searchBar.css'
 import {URL_IMG, IMG_LOGO_XS_SIZE, BROKEN_IMAGE} from '../constants/constants'
 import Contributors from './selectGenre'
-import MovieGenreList from './movieGenreList'
-import MoviesByGenres from './moviesByGenres'
-
 
 class SearchBar extends Component {
 
@@ -108,11 +105,6 @@ class SearchBar extends Component {
                         <Contributors/>
                     </Panel.Body>
                 </Panel>
-                {this.props.selector.value.length > 0 ?
-                    <MoviesByGenres/>
-                    :
-                    <MovieGenreList/>
-                }
             </div>
         );
     }

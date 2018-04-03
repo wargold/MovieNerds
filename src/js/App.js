@@ -1,11 +1,11 @@
 import React from 'react';
-import {SearchBar} from './containers'
+import Main from './containers/main'
 
 require('../css/style.css');
 
 const App = () => (
     <div className="main">
-        <SearchBar/>
+        <Main/>
     </div>
 
 );

@@ -2,6 +2,8 @@ import React from 'react'
 import Slider from 'react-slick'
 import MovieCardComponent from './moviecards'
 import './css/slider.css'
+import {Link} from 'react-router-dom'
+
 const SimpleSlider = (props) => {
 
     let getGenresName = () => {
@@ -15,7 +17,11 @@ const SimpleSlider = (props) => {
     };
 
     let getMoviesByGenre = (index) => {
-        return props.movies[index].movies.map((mov) => <div key={mov.id}><MovieCardComponent movie={mov}/></div>)
+        return props.movies[index].movies.map((mov) => <div key={mov.id}>
+            <Link to={`/movie/${mov.id}`} key={mov.id}>
+            <MovieCardComponent movie={mov}/>
+            </Link>
+        </div>)
     }
 
     const settings = {

@@ -12,22 +12,20 @@ html, body {
     text-align: center;
 }
 
+#root {
+    min-height: calc(100vh - 70px);
+}
+.footer {
+    height: 50px;
+    padding: 1rem;
+    background-color: #efefef;
+    text-align: center;
+}
+
 h2 {
     color: #006699;
 }
 
-
-
-.footer {
-    position: relative;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 1rem;
-    background-color: #efefef;
-    text-align: center;
-    z-index: 0;
-}
 
 .main {
     background: darkgrey;
