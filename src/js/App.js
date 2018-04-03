@@ -1,7 +1,7 @@
 import React from 'react';
-import {MovieGenreList, SearchBar} from './containers'
+import {SearchBar} from './containers'
 
-require('../scss/style.css');
+require('../css/style.css');
 
 const App = () => (
     <div className="main">

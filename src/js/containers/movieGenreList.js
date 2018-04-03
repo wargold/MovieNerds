@@ -3,7 +3,8 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {getMovieGenres, getMoviesByGenre, updateAllMoviesGenres} from '../actions';
 import SimpleSlider from "../components/genreSlider";
-
+import {Image} from 'react-bootstrap';
+import {LOADING_SPINNER} from '../constants/constants'
 class MovieGenreList extends Component {
 
 
@@ -42,11 +43,11 @@ class MovieGenreList extends Component {
     }
 
     render() {
-        const de = (this.props.updateMoviesByGenre.genres[0]!==undefined && this.props.updateMoviesByGenre.movies[0]!== undefined && this.props.updateMoviesByGenre.genres[0].length > 0 && this.props.updateMoviesByGenre.movies[0].length > 0) ?
+        const de = this.props.updateMoviesByGenre.genres[0]!==undefined && this.props.updateMoviesByGenre.movies[0]!== undefined && this.props.updateMoviesByGenre.genres[0].length > 0 && this.props.updateMoviesByGenre.movies[0].length > 0 ?
             (<SimpleSlider genres={this.props.updateMoviesByGenre.genres[0]} movies={this.props.updateMoviesByGenre.movies[0]}/>)
             : (
-                <h2>{"Hej och laddning"}</h2>
-            )
+                <Image src={LOADING_SPINNER}  style={{width: 100, height:100 }}/>
+            );
         return (<div>{de}</div>)
     }
 }

@@ -55,3 +55,4 @@ export const BROKEN_IMAGE = 'http://rlv.zcache.com/broken_internet_image_icon_po
 export const FETCHING_MOVIES_BY_GENRES = 'FETCHING_MOVIES_BY_GENRES';
 export const FETCHING_MOVIES_BY_GENRES_SUCCESS = 'FETCHING_MOVIES_BY_GENRES_SUCCESS';
 export const FETCHING_MOVIES_BY_GENRES_FAILURE = 'FETCHING_MOVIES_BY_GENRES_FAILURE';
+export const LOADING_SPINNER = 'https://cdn.dribbble.com/users/90627/screenshots/1096260/loading.gif';

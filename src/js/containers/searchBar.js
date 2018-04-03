@@ -11,6 +11,7 @@ import Contributors from './selectGenre'
 import MovieGenreList from './movieGenreList'
 import MoviesByGenres from './moviesByGenres'
 
+
 class SearchBar extends Component {
 
     onChange = (event, {newValue, method}) => {
@@ -108,11 +109,9 @@ class SearchBar extends Component {
                     </Panel.Body>
                 </Panel>
                 {this.props.selector.value.length > 0 ?
-                    <div>
-                        <MoviesByGenres/>
-                    </div>
+                    <MoviesByGenres/>
                     :
-                    <div> <MovieGenreList/> </div>
+                    <MovieGenreList/>
                 }
             </div>
         );

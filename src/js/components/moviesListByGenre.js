@@ -1,7 +1,6 @@
 import React from 'react'
 import MovieCardComponent from './moviecards'
 import {row} from 'react-bootstrap'
-import './css/moviesListByGenres.css'
 const MoviesListByGenres = (props) => {
 
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import MovieGenreList from '../containers/movieGenreList';
-require('../../scss/style.css');
+require('../../css/style.css');
 
 const MovieFirstPage = () => (
     <div>
