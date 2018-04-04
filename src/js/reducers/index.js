@@ -6,8 +6,8 @@ import UpdateMoviesByGenre from './updateMoviesByGenre'
 import GenreSelections from './genreSelection'
 import MoviesByMultiGenre from './moviesByMultiGenres'
 import MostPopularMovies from './mostPopularMovies'
-import {MovieByID,TrailerByMovieID,CastByMovieID} from './movieByID'
-import {CastByID,CastKnowMovies} from './cast'
+import {MovieByID, TrailerByMovieID, CastByMovieID, SimilarMovies} from './movieByID'
+import {CastByID, CastKnowMovies} from './cast'
 import {routerReducer} from 'react-router-redux'
 
 /*
@@ -19,13 +19,14 @@ const allReducers = combineReducers({
     genres: genre,
     search: Search,
     movies: MoviesByGenre,
-    updateMoviesByGenre:UpdateMoviesByGenre,
+    updateMoviesByGenre: UpdateMoviesByGenre,
     selections: GenreSelections,
     moviesByMultiGenre: MoviesByMultiGenre,
-    mostPopularMovies:MostPopularMovies,
+    mostPopularMovies: MostPopularMovies,
     movieInfo: MovieByID,
     trailer: TrailerByMovieID,
     castList: CastByMovieID,
+    similarMovies: SimilarMovies,
     castAbout: CastByID,
     castKnownMovies: CastKnowMovies,
     routing: routerReducer

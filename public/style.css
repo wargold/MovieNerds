@@ -16,6 +16,7 @@ html, body {
     min-height: calc(100vh - 70px);
 }
 .footer {
+    display: none;
     height: 50px;
     padding: 1rem;
     background-color: #efefef;

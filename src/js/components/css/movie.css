@@ -132,12 +132,15 @@
     z-index: 2;
 }
 
-.player{
+.player {
     width: 40%;
 }
 
+.fs {
+    color: black;
+    width: 40%;
+}
 
-
-.picture{
+.picture {
     width: 40%;
 }

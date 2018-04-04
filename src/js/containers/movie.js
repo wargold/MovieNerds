@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {getMovieByMovieID, getTrailerByMovieID, getCastByMovieID} from '../actions';
+import {getMovieByMovieID, getTrailerByMovieID, getCastByMovieID, getSimilarMovies} from '../actions';
 import {Image} from 'react-bootstrap';
 import {LOADING_SPINNER} from '../constants/constants';
 import MovieInfo from '../components/movieInfo';
@@ -16,18 +16,16 @@ class Movie extends Component {
         this.props.getMovieByMovieID(id);
         this.props.getTrailerByMovieID(id);
         this.props.getCastByMovieID(id);
+        this.props.getSimilarMovies(id);
     }
 
 
     render() {
-        console.log("Kolla Movie", this.props.movieInfo);
-        console.log("Kolla trailer", this.props.trailer);
-        console.log("Kolla castlist", this.props.castList);
-
-        const de = this.props.movieInfo.movieInfo !== undefined && this.props.trailer !== undefined &&
-        this.props.castList !== undefined && this.props.trailer.length > 0 && this.props.castList.length > 0 ?
+        const de = this.props.movieInfo !== undefined && this.props.trailer !== undefined &&
+        this.props.castList !== undefined && this.props.similarMovies !== undefined &&
+        this.props.trailer.length > 0 && this.props.castList.length > 0 && this.props.similarMovies.length > 0 ?
             (<MovieInfo movie={this.props.movieInfo.movieInfo} trailer={this.props.trailer}
-                        castList={this.props.castList}/>)
+                        castList={this.props.castList} similarMovies={this.props.similarMovies}/>)
             : (<Image src={LOADING_SPINNER} style={{width: 100, height: 100}}/>);
         return (<div>
             <SearchBar/>
@@ -45,7 +43,8 @@ function mapStateToProps(state) {
         selector: state.selections,
         movieInfo: state.movieInfo,
         trailer: state.trailer.movieInfo,
-        castList: state.castList.movieInfo
+        castList: state.castList.movieInfo,
+        similarMovies: state.similarMovies.movieInfo
     };
 }
 
@@ -53,7 +52,8 @@ function matchDispatchToProps(dispatch) {
     return bindActionCreators({
         getMovieByMovieID: getMovieByMovieID,
         getTrailerByMovieID: getTrailerByMovieID,
-        getCastByMovieID: getCastByMovieID
+        getCastByMovieID: getCastByMovieID,
+        getSimilarMovies: getSimilarMovies
     }, dispatch);
 }
 

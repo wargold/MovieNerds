@@ -382,7 +382,7 @@ function castKnownMoviesFAILURE(error) {
 }
 
 export function getCastKnownMovies(id) {
-    let url =  constants.URL_PERSON + id + constants.MOVIE_CREDIT + constants.API_KEY1 + '&language=en-US';
+    let url = constants.URL_PERSON + id + constants.MOVIE_CREDIT + constants.API_KEY1 + '&language=en-US';
     return function (dispatch) {
         dispatch(castKnownMovies(id))
         return fetch(url)
@@ -390,5 +390,38 @@ export function getCastKnownMovies(id) {
             .then(json => json.cast)
             .then(data => dispatch(castKnownMoviesSuccess(id, data)))
             .catch(error => dispatch(castKnownMoviesFAILURE(error)))
+    };
+}
+
+// Handles action for getting similar movies to a movie by ID, api call
+function similarMovies(id) {
+    return {
+        type: constants.FETCHING_SIMILAR_MOVIES,
+        id
+    };
+}
+
+function similarMoviesSuccess(id, data) {
+    return {
+        type: constants.FETCHING_SIMILAR_MOVIES_SUCCESS, id, data
+    };
+}
+
+function similarMoviesFAILURE(error) {
+    return {
+        type: constants.FETCHING_SIMILAR_MOVIES_FAILURE,
+        error
+    };
+}
+
+export function getSimilarMovies(id) {
+    let url = constants.URL_DETAIL + id + constants.SIMILAR + constants.API_KEY1 + '&language=en-US&page=1';
+    return function (dispatch) {
+        dispatch(similarMovies(id))
+        return fetch(url)
+            .then(response => response.json())
+            .then(json => json.results)
+            .then(data => dispatch(similarMoviesSuccess(id, data)))
+            .catch(error => dispatch(similarMoviesFAILURE(error)))
     };
 }

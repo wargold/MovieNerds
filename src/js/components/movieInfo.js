@@ -46,10 +46,13 @@ class MovieInfo extends React.Component {
     getMovieInfo() {
         let info = (
             <div>
-                <h3> Info: {<p>{this.props.movie.overview}</p>} </h3>
-                <h3> Vote: {<p>{this.props.movie.vote_average}</p>}</h3>
-                <h3> Genres: {<div>{this.getMovieGenres()}</div>}</h3>
-
+                <Glyphicon
+                    glyph={'star'}/> {this.props.movie.vote_average} &nbsp;
+                <Glyphicon
+                    glyph={'heart'}/> {this.props.movie.vote_count} &nbsp;<Glyphicon
+                glyph={'calendar'}/> {this.props.movie.release_date}
+                <h3 className="fs"> Info: {<p>{this.props.movie.overview}</p>} </h3>
+                <h3 className="fs"> Genres: {<div>{this.getMovieGenres()}</div>}</h3>
             </div>
         );
         return info;
@@ -66,19 +69,27 @@ class MovieInfo extends React.Component {
                 <Link to={`/cast/${actor.id}`} key={actor.id}>
                 <div>
                 <Image src={URL_IMG+IMG_LOGO_S_SIZE+actor.profile_path} responsive circle/>
-                <h3> Character: {<p>{actor.character}</p>} </h3>
-                <h3> Name: {<p>{actor.name}</p>} </h3>
+                <h3 className="fs"> Character: {<p>{actor.character}</p>} </h3>
+                <h3 className="fs"> Name: {<p>{actor.name}</p>} </h3>
                 </div>
                 </Link>
             </Col>))
         return cast;
     }
 
+    getSimilarMovies() {
+        let temp = this.props.similarMovies.slice(0,5).map((movie)=>
+            <Col xs={4} sm={3} md={2} key={movie.id}>
+                <MovieCardComponent className="picture" movie={movie}/>
+                <h3 className="fs"> Movie: {<p>{movie.original_title}</p>} </h3>
+            </Col>
+
+        );
+        return temp;
+    }
+
     render() {
         const movie = this.props.movie;
-        console.log("Insidan i COmponent movieInfo", this.props.movie);
-        console.log("Insidan i COmponent trailer", this.props.trailer);
-        console.log("Insidan i COmponent castlist", this.props.castList);
 
         return (
             <div>
@@ -87,6 +98,7 @@ class MovieInfo extends React.Component {
                 <div>{this.getImages()}</div>
                 <div>{this.getVideo()}</div>
                 <div>{this.getCast()}</div>
+                <div>{this.getSimilarMovies()}</div>
             </div>
         );
     }

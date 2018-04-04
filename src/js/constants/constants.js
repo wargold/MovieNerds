@@ -33,6 +33,10 @@ export const FETCHING_MOVIES_BY_GENRE = 'FETCHING_MOVIES_BY_GENRE';
 export const FETCHING_MOVIES_BY_GENRE_SUCCESS = 'FETCHING_MOVIES_BY_GENRE_SUCCESS';
 export const FETCHING_MOVIES_BY_GENRE_FAILURE = 'FETCHING_MOVIES_BY_GENRE_FAILURE';
 
+export const FETCHING_SIMILAR_MOVIES = 'FETCHING_SIMILAR_MOVIES';
+export const FETCHING_SIMILAR_MOVIES_SUCCESS = 'FETCHING_SIMILAR_MOVIES_SUCCESS';
+export const FETCHING_SIMILAR_MOVIES_FAILURE = 'FETCHING_SIMILAR_MOVIES_FAILURE';
+
 export const IMG_LOGO_XS_SIZE = 'w45/';
 export const IMG_LOGO_S_SIZE = 'w185/';
 export const IMG_LOGO_M_SIZE = 'w300/';
@@ -47,6 +51,7 @@ export const URL_YOUTUBE = 'https://www.youtube.com/embed/';
 export const CAST_CREDIT = '/credits';
 export const MOVIE_CREDIT = '/movie_credits';
 export const URL_VIDEO = '/videos';
+export const SIMILAR ='/similar';
 
 export const UPDATE_ALLMOVIESBYGENRE = 'UPDATE_ALLMOVIESBYGENRE';
 export const SEARCH = 'SEARCH';

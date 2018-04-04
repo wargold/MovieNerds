@@ -2,17 +2,25 @@ import React from 'react'
 import {Carousel} from 'react-bootstrap'
 import {Image} from 'react-bootstrap'
 import './css/mostPopularSlide.css'
+import {Glyphicon} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 
 const MostPopularSlide = (props) => {
-    console.log("Insidan av mososdsddsff",props.mostPopular);
-
     let getMostPopularMovies = () => {
-        let temp = props.mostPopular.slice(0,6).map((movie)=>
+        let temp = props.mostPopular.slice(0, 6).map((movie) =>
             <Carousel.Item>
-                <Image className="kan" src={"https://image.tmdb.org/t/p/w780"+movie.backdrop_path} responsive />
+                <Image className="kan" src={"https://image.tmdb.org/t/p/w780" + movie.backdrop_path} responsive/>
                 <Carousel.Caption>
                     <h3>{movie.title}</h3>
-                    <p>{movie.overview}</p>
+                    <div>
+                        <Glyphicon
+                            glyph={'star'}/> {movie.vote_average} &nbsp;
+                        <Glyphicon
+                            glyph={'heart'}/> {movie.vote_count} &nbsp;<Glyphicon
+                        glyph={'calendar'}/> {movie.release_date}
+                    </div>
+                    <p>{movie.overview}&nbsp; {<Link to={`/movie/${movie.id}`} key={movie.id}>
+                     <Glyphicon className="moreInfo" glyph={'info-sign'}/> </Link>}</p>
                 </Carousel.Caption>
             </Carousel.Item>);
         return temp;
@@ -21,11 +29,11 @@ const MostPopularSlide = (props) => {
     return (
         <div className="mostPopularMovies">
             <h2 className="mostPopularMoviesTitle">{"Most Popular Movies"}</h2>
-        <Carousel className="heh" pauseOnHover={true} interval={3000}>
-            {getMostPopularMovies()}
-        </Carousel>
+            <Carousel className="heh" pauseOnHover={true} interval={3000}>
+                {getMostPopularMovies()}
+            </Carousel>
         </div>
-);
+    );
 }
 
 export default MostPopularSlide

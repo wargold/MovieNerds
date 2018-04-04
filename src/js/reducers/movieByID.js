@@ -1,13 +1,6 @@
-import {
-    FETCHING_MOVIEBYID,
-    FETCHING_MOVIEBYID_SUCCESS,
-    FETCHING_MOVIEBYID_FAILURE,
-    FETCHING_MOVIETRAILER,
-    FETCHING_MOVIETRAILER_SUCCESS,
-    FETCHING_MOVIETRAILER_FAILURE,
-    FETCHING_CAST,
-    FETCHING_CAST_SUCCESS,
-    FETCHING_CAST_FAILURE
+import {FETCHING_MOVIEBYID, FETCHING_MOVIEBYID_SUCCESS, FETCHING_MOVIEBYID_FAILURE, FETCHING_MOVIETRAILER,
+    FETCHING_MOVIETRAILER_SUCCESS, FETCHING_MOVIETRAILER_FAILURE, FETCHING_CAST, FETCHING_CAST_SUCCESS,
+    FETCHING_CAST_FAILURE, FETCHING_SIMILAR_MOVIES, FETCHING_SIMILAR_MOVIES_SUCCESS, FETCHING_SIMILAR_MOVIES_FAILURE
 } from '../constants/constants'
 
 const initialState = {
@@ -50,6 +43,19 @@ export const CastByMovieID = (state = initialState, action) => {
         case FETCHING_CAST_SUCCESS:
             return {...state, isFetching: false, movieID: action.id, movieInfo: action.data};
         case FETCHING_CAST_FAILURE:
+            return {...state, isFetching: false, error: action.error};
+        default:
+            return state;
+    }
+};
+
+export const SimilarMovies = (state = initialState, action) => {
+    switch (action.type) {
+        case FETCHING_SIMILAR_MOVIES:
+            return {...state, isFetching: true, movieID: action.id, movieInfo: []};
+        case FETCHING_SIMILAR_MOVIES_SUCCESS:
+            return {...state, isFetching: false, movieID: action.id, movieInfo: action.data};
+        case FETCHING_SIMILAR_MOVIES_FAILURE:
             return {...state, isFetching: false, error: action.error};
         default:
             return state;

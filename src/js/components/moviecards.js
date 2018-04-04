@@ -5,6 +5,7 @@ import {URL_IMG, IMG_LOGO_M_SIZE, BROKEN_IMAGE, IMG_LOGO_XS_SIZE} from '../const
 import {StyledImg, Info} from './css/movieCardStyleComp'
 import './css/moviecards.css'
 import loader from '../../img/gif/loadingCircle.gif'
+
 class MovieCardComponent extends React.Component {
     constructor() {//Can have a state due to that it only handles local state about a image...
         super();
@@ -17,17 +18,18 @@ class MovieCardComponent extends React.Component {
         const movie = this.props.movie;
         return (
             <StyledImg>
-                <div className="container" key={this.props.movie.id}>
-                {!this.state.img_loaded && <div><Image src={loader}/></div>}
-                    <Image className="image" src={this.props.movie.poster_path==null ? BROKEN_IMAGE
-                        : URL_IMG + IMG_LOGO_M_SIZE + this.props.movie.poster_path}
-                           alt={this.props.movie.original_title} responsive  onLoad={() => this.setState({
+                <div className="container" key={movie.id}>
+                    {!this.state.img_loaded && <div><Image src={loader}/></div>}
+                    <Image className="image" src={movie.poster_path == null ? BROKEN_IMAGE
+                        : URL_IMG + IMG_LOGO_M_SIZE + movie.poster_path}
+                           alt={movie.original_title} responsive onLoad={() => this.setState({
                         img_loaded: true,
                     })}/>
                     <Info className="title">
                         <h4 className="hiddenTitle">{movie.original_title}</h4>
                         <Glyphicon
-                            glyph={'star'}/> {this.props.movie.vote_average} &nbsp;&nbsp; {this.props.movie.release_date}
+                            glyph={'star'}/> {movie.vote_average} &nbsp;&nbsp;<Glyphicon glyph={'calendar'}/>
+                        {movie.release_date}
                     </Info>
                 </div>
             </StyledImg>
