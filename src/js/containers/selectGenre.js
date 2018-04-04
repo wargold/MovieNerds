@@ -40,8 +40,6 @@ class Contributors extends Component{
     };
 
     render () {
-        console.log("Value redux:", this.props.selector.value);
-
         return (
             <div className="section">
                 <Select.Async multi={this.props.selector.multi} value={this.props.selector.value} onChange={this.onChange}

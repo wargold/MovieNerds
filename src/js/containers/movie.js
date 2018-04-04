@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {getMovieByMovieID, getTrailerByMovieID, getCastByMovieID, getSimilarMovies} from '../actions';
+import {
+    getMovieByMovieID, getTrailerByMovieID, getCastByMovieID, getSimilarMovies,
+    resetSelectedValues
+} from '../actions';
 import {Image} from 'react-bootstrap';
 import {LOADING_SPINNER} from '../constants/constants';
 import MovieInfo from '../components/movieInfo';
@@ -12,6 +15,21 @@ class Movie extends Component {
 
     componentWillMount() {
         console.log("Check param id", this.props.match.params.id);
+        this.load();
+    }
+
+    componentDidUpdate(prevProps, preState) {
+        console.log("Compenent Update" );
+        console.log("Previous params id length",prevProps.match.params.id);
+        console.log("New value: length",this.props.match.params.id );
+        if(prevProps.match.params.id !==this.props.match.params.id){
+            console.log("Update kan göras");
+            this.props.resetGenreValue();
+            this.load();
+        }
+    }
+
+    load(){
         const id = this.props.match.params.id;
         this.props.getMovieByMovieID(id);
         this.props.getTrailerByMovieID(id);
@@ -21,6 +39,9 @@ class Movie extends Component {
 
 
     render() {
+        console.log("Render" );
+        console.log("Render" );
+        console.log("Selector value:",this.props.selector.value);
         const de = this.props.movieInfo !== undefined && this.props.trailer !== undefined &&
         this.props.castList !== undefined && this.props.similarMovies !== undefined &&
         this.props.trailer.length > 0 && this.props.castList.length > 0 && this.props.similarMovies.length > 0 ?
@@ -53,7 +74,8 @@ function matchDispatchToProps(dispatch) {
         getMovieByMovieID: getMovieByMovieID,
         getTrailerByMovieID: getTrailerByMovieID,
         getCastByMovieID: getCastByMovieID,
-        getSimilarMovies: getSimilarMovies
+        getSimilarMovies: getSimilarMovies,
+        resetGenreValue: resetSelectedValues
     }, dispatch);
 }
 

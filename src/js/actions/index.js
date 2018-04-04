@@ -163,6 +163,11 @@ export function updateSelectedValues(value) {
     return {type: constants.UPDATE_GENRE_SELECTION, value}
 }
 
+//UPDATE value of selected genres in selection
+export function resetSelectedValues() {
+    return {type: constants.RESET_GENRE_SELECTION}
+}
+
 
 // Handles action for getting movies by genres by the genres selected, api call
 function moviesByGenres(genres) {

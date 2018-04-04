@@ -59,6 +59,8 @@ export const UPDATE_INPUT_VALUE = 'UPDATE_INPUT_VALUE';
 export const CLEAR_SUGGESTIONS = 'CLEAR_SUGGESTIONS';
 
 export const UPDATE_GENRE_SELECTION = 'UPDATE_GENRE_SELECTION';
+export const RESET_GENRE_SELECTION = 'RESET_GENRE_SELECTION';
+
 export const UPDATE_OPTIONS = 'UPDATE_OPTIONS';
 
 export const BROKEN_IMAGE = 'http://rlv.zcache.com/broken_internet_image_icon_poster-r0a8517b32a704c618ef72685782dc663_a3uq_8byvr_324.jpg';

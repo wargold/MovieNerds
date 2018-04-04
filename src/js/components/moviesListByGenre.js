@@ -15,9 +15,6 @@ const MoviesListByGenres = (props) => {
                 name += ', ';
             }
         }
-        console.log("name", name);
-        console.log("props.genres", props.genres);
-
         return (<h2 className="sdds">{name}</h2>);
     };
 
@@ -28,10 +25,6 @@ const MoviesListByGenres = (props) => {
         return genre
     };
 
-    console.log("Indid MoviesListByGenres", props.movies);
-    props.movies.map((elem) => {
-        console.log("m ", elem.title)
-    });
     return (
         <div>
             {getGenresName()}
