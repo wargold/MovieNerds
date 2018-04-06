@@ -8,7 +8,7 @@ import {LOADING_SPINNER} from '../constants/constants'
 
 class MoviesByGenres extends Component {
 
-    componentWillMount() {
+    componentDidMount() {
         this.loadData();
     }
 

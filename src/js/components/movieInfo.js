@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image} from 'react-bootstrap'
-import {Glyphicon,Col} from 'react-bootstrap'
+import {Glyphicon, Col, Grid, Row} from 'react-bootstrap'
 import ModalVideo from 'react-modal-video'
 import MovieCardComponent from './moviecards'
 import {URL_IMG, IMG_LOGO_S_SIZE} from "../constants/constants"
@@ -35,8 +35,15 @@ class MovieInfo extends React.Component {
     getImages() {
         let temp = (
             <div>
-                <MovieCardComponent className="picture" movie={this.props.movie}/>
-                <Image className="poster" src={"https://image.tmdb.org/t/p/w780" + this.props.movie.backdrop_path} responsive/>
+                <div className="poster">
+                    <Image className="pos loading"
+                           src={"https://image.tmdb.org/t/p/w780" + this.props.movie.backdrop_path}
+                           responsive/>
+                    <div className="ghd">
+                        <MovieCardComponent className="picture" movie={this.props.movie}/>
+                    </div>
+                    {this.getVideo()}
+                </div>
             </div>
 
         );
@@ -46,11 +53,11 @@ class MovieInfo extends React.Component {
     getMovieInfo() {
         let info = (
             <div>
-                <Glyphicon
-                    glyph={'star'}/> {this.props.movie.vote_average} &nbsp;
-                <Glyphicon
-                    glyph={'heart'}/> {this.props.movie.vote_count} &nbsp;<Glyphicon
-                glyph={'calendar'}/> {this.props.movie.release_date}
+                <div className="icons"><Glyphicon
+                    glyph={'star'}/>{this.props.movie.vote_average} &nbsp;
+                    <Glyphicon
+                        glyph={'heart'}/> {this.props.movie.vote_count} &nbsp;<Glyphicon
+                        glyph={'calendar'}/> {this.props.movie.release_date} </div>
                 <h3 className="fs"> Info: {<p>{this.props.movie.overview}</p>} </h3>
                 <h3 className="fs"> Genres: {<div>{this.getMovieGenres()}</div>}</h3>
             </div>
@@ -58,32 +65,32 @@ class MovieInfo extends React.Component {
         return info;
     }
 
-    getMovieGenres(){
-        let genres = this.props.movie.genres.map((genre)=>(<h6 key={genre.id}>{genre.name}</h6>))
+    getMovieGenres() {
+        let genres = this.props.movie.genres.map((genre) => (<h6 key={genre.id}>{genre.name}</h6>))
         return genres;
     }
 
-    getCast(){
-        let cast = this.props.castList.slice(0,5).map((actor)=>
-            ( <Col xs={4} sm={3} md={2} key={actor.cast_id}>
+    getCast() {
+        let cast = this.props.castList.slice(0, 5).map((actor) =>
+            (<Col xs={4} sm={3} md={2} key={actor.cast_id}>
                 <Link to={`/cast/${actor.id}`} key={actor.id}>
-                <div>
-                <Image src={URL_IMG+IMG_LOGO_S_SIZE+actor.profile_path} responsive circle/>
-                <h3 className="fs"> Character: {<p>{actor.character}</p>} </h3>
-                <h3 className="fs"> Name: {<p>{actor.name}</p>} </h3>
-                </div>
+                    <div>
+                        <Image className="loading" src={URL_IMG + IMG_LOGO_S_SIZE + actor.profile_path} responsive
+                               circle/>
+                        <h3 className="fs"> Character: {<p>{actor.character}</p>} </h3>
+                        <h3 className="fs"> Name: {<p>{actor.name}</p>} </h3>
+                    </div>
                 </Link>
             </Col>))
         return cast;
     }
 
     getSimilarMovies() {
-        let temp = this.props.similarMovies.slice(0,5).map((movie)=>
+        let temp = this.props.similarMovies.slice(0, 5).map((movie) =>
             <Col xs={4} sm={3} md={2} key={movie.id}>
                 <MovieCardComponent className="picture" movie={movie}/>
                 <h3 className="fs"> Movie: {<p>{movie.original_title}</p>} </h3>
             </Col>
-
         );
         return temp;
     }
@@ -92,13 +99,24 @@ class MovieInfo extends React.Component {
         const movie = this.props.movie;
 
         return (
-            <div>
-                <h2>{movie.title}</h2>
-                <div>{this.getMovieInfo()}</div>
+            <div className="tests">
                 <div>{this.getImages()}</div>
-                <div>{this.getVideo()}</div>
-                <div>{this.getCast()}</div>
-                <div>{this.getSimilarMovies()}</div>
+                <div>
+                    <Grid fluid={true}>
+                        <Row>
+                            <h1>{movie.title}</h1>
+                            <div>{this.getMovieInfo()}</div>
+                        </Row>
+                        <Row>
+                            <h1>Cast Members:</h1>
+                            {this.getCast()}
+                        </Row>
+                        <Row>
+                            <h1>Movies That You May Like:</h1>
+                            {this.getSimilarMovies()}
+                        </Row>
+                    </Grid>
+                </div>
             </div>
         );
     }

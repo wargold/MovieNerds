@@ -12,7 +12,6 @@ import {syncHistoryWithStore, routerMiddleware} from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 import routes from './router';
 import App from './App';
-import MovieFirstPage from './components/movieFirstPage'
 import Movie from './containers/movie'
 import Cast from './containers/cast'
 import { BrowserRouter } from 'react-router-dom'

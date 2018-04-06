@@ -1,11 +1,12 @@
 .carousel, .carousel-inner, img.kan.img-responsive {
-    width:1080px;
+    width: 100%;
+    max-width: 1363px;
     height:500px;
     margin: auto;
 }
 
 @media (max-width: 900px) {
-    .carousel {
+    .carousel, .carousel-inner, img.kan.img-responsive {
         width:auto;
         height:auto;
     }

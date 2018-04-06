@@ -10,7 +10,7 @@ import MostPopularSlide from "../components/mostPopularSlide"
 
 class MovieGenreList extends Component {
 
-    componentWillMount() {
+    componentDidMount() {
         if (this.props.updateMoviesByGenre.genres[0] === undefined || this.props.updateMoviesByGenre.movies[0] === undefined
             && !(this.props.updateMoviesByGenre.genres[0].length > 0) ||
             !(this.props.updateMoviesByGenre.movies[0].length > 0)) { //Dont Fetch data if data already exist!

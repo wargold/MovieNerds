@@ -10,7 +10,7 @@ import MoviesByGenres from './moviesByGenres';
 
 class Cast extends Component {
 
-    componentWillMount() {
+    componentDidMount() {
         console.log("Check param id",this.props.match.params.id);
         const id=this.props.match.params.id;
         this.props.getCastInfoByID(id);

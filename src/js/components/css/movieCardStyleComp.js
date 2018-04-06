@@ -18,4 +18,5 @@ export const Info = styled.div`
       color:white;
       font-weight:bold;
       opacity:0;
+      z-index:200;
   `;

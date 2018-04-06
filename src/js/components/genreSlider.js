@@ -44,7 +44,7 @@ const SimpleSlider = (props) => {
     };
 
     return (
-        <div>
+        <div className="genreSliderContainer">
             {getGenresName()}
         </div>
     );

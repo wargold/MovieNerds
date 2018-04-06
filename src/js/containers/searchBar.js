@@ -47,7 +47,7 @@ class SearchBar extends Component {
     renderSuggestion = (suggestion) => {
         return (
             <a>
-                <img className="searchResult-image"
+                <img className="searchResult-image loading"
                      src={suggestion.poster_path == null ? BROKEN_IMAGE : URL_IMG + IMG_LOGO_XS_SIZE + suggestion.poster_path}
                      alt={"NO I"}/>
                 <div className="searchResult-text">

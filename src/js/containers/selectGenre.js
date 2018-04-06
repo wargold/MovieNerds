@@ -9,7 +9,7 @@ const ASYNC_DELAY = 500;
 
 class Contributors extends Component{
 
-    async componentWillMount(){
+    async componentDidMount(){
         await this.props.getMovieGenres();
     }
 

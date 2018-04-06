@@ -13,7 +13,7 @@ import MoviesByGenres from './moviesByGenres';
 
 class Movie extends Component {
 
-    componentWillMount() {
+    componentDidMount() {
         console.log("Check param id", this.props.match.params.id);
         this.load();
     }
