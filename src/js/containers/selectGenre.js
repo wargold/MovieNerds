@@ -7,22 +7,22 @@ import {bindActionCreators} from 'redux';
 
 const ASYNC_DELAY = 500;
 
-class Contributors extends Component{
+class SearchByGenres extends Component {
 
-    async componentDidMount(){
+    async componentDidMount() {
         await this.props.getMovieGenres();
     }
 
-    onChange = (value) =>{
+    onChange = (value) => {
         this.props.setValue(value);
     };
 
-    getContributors = (input, callback) =>{
-        let arr =[];
+    getContributors = (input, callback) => {
+        let arr = [];
         Promise.all([this.props.getMovieGenres()]).then((res) => {
             res[0].data.map((elem) => {
-                    arr.push(elem);
-                    });
+                arr.push(elem);
+            });
         }).catch((err) => {
             console.error(err)
         });
@@ -34,18 +34,18 @@ class Contributors extends Component{
         var data = {
             options: options
         };
-        setTimeout(function() {
+        setTimeout(function () {
             callback(null, data);
         }, ASYNC_DELAY);
     };
 
-    render () {
+    render() {
         return (
             <div className="section">
-                <Select.Async multi={this.props.selector.multi} value={this.props.selector.value} onChange={this.onChange}
+                <Select.Async multi={this.props.selector.multi} value={this.props.selector.value}
+                              onChange={this.onChange}
                               valueKey="name" labelKey="name"
-                              placeholder="Select Genres" loadOptions={this.getContributors} />
-                <div className="hint">This only search for movies by genres and no search text is required</div>
+                              placeholder="Select Genres" loadOptions={this.getContributors}/>
             </div>
         );
     }
@@ -65,4 +65,4 @@ function mapDispatchToProps(dispatch) {
     }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Contributors);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchByGenres);

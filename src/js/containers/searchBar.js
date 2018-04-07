@@ -7,7 +7,8 @@ import Autosuggest from 'react-autosuggest'
 import {Panel} from 'react-bootstrap'
 import './css/searchBar.css'
 import {URL_IMG, IMG_LOGO_XS_SIZE, BROKEN_IMAGE} from '../constants/constants'
-import Contributors from './selectGenre'
+import SearchByGenres from './selectGenre'
+import {Link} from 'react-router-dom'
 
 class SearchBar extends Component {
 
@@ -89,11 +90,14 @@ class SearchBar extends Component {
             <div>
                 <Panel>
                     <Panel.Heading>
+                        <Link to={'/'}>
                         <Panel.Title>
                             <h2 className="homeTitle">{"The Home For All Movie Nerds Out There"}</h2>
                         </Panel.Title>
+                        </Link>
                     </Panel.Heading>
                     <Panel.Body>
+                        <div><h4>Search For A Movie Based On A Movie Title</h4></div>
                         <Autosuggest
                             suggestions={suggestions}
                             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -102,8 +106,11 @@ class SearchBar extends Component {
                             getSuggestionValue={this.getSuggestionValue}
                             renderSuggestion={this.renderSuggestion}
                             inputProps={inputProps}/>
-                        <Contributors/>
                     </Panel.Body>
+                    <Panel.Footer>
+                        <div><h4>Search For A Movie Based On Movie Genres</h4></div>
+                        <SearchByGenres/>
+                    </Panel.Footer>
                 </Panel>
             </div>
         );

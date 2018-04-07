@@ -3,7 +3,7 @@ import {Image} from 'react-bootstrap'
 import {Glyphicon, Col, Grid, Row} from 'react-bootstrap'
 import ModalVideo from 'react-modal-video'
 import MovieCardComponent from './moviecards'
-import {URL_IMG, IMG_LOGO_S_SIZE} from "../constants/constants"
+import {URL_IMG, IMG_LOGO_S_SIZE, BROKEN_IMAGE} from "../constants/constants"
 import {Link} from 'react-router-dom'
 import './css/movie.css'
 
@@ -37,7 +37,8 @@ class MovieInfo extends React.Component {
             <div>
                 <div className="poster">
                     <Image className="pos loading"
-                           src={"https://image.tmdb.org/t/p/w780" + this.props.movie.backdrop_path}
+                           src={this.props.movie.backdrop_path == null ? BROKEN_IMAGE
+                               : "https://image.tmdb.org/t/p/w780" + this.props.movie.backdrop_path}
                            responsive/>
                     <div className="ghd">
                         <MovieCardComponent className="picture" movie={this.props.movie}/>
@@ -75,7 +76,8 @@ class MovieInfo extends React.Component {
             (<Col xs={4} sm={3} md={2} key={actor.cast_id}>
                 <Link to={`/cast/${actor.id}`} key={actor.id}>
                     <div>
-                        <Image className="loading" src={URL_IMG + IMG_LOGO_S_SIZE + actor.profile_path} responsive
+                        <Image className="loading" src={actor.profile_path == null ? BROKEN_IMAGE
+                            :URL_IMG + IMG_LOGO_S_SIZE + actor.profile_path} alt={actor.name} responsive
                                circle/>
                         <h3 className="fs"> Character: {<p>{actor.character}</p>} </h3>
                         <h3 className="fs"> Name: {<p>{actor.name}</p>} </h3>

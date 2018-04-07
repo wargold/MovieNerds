@@ -15,22 +15,22 @@ class Movie extends Component {
 
     componentDidMount() {
         console.log("Check param id", this.props.match.params.id);
-        this.load();
+        this.load(this.props.match.params.id);
     }
 
-    componentDidUpdate(prevProps, preState) {
+    componentWillReceiveProps(nextProps){
         console.log("Compenent Update" );
-        console.log("Previous params id length",prevProps.match.params.id);
+        console.log("Previous params id length",nextProps.match.params.id);
         console.log("New value: length",this.props.match.params.id );
-        if(prevProps.match.params.id !==this.props.match.params.id){
+        if(nextProps.match.params.id !==this.props.match.params.id){
             console.log("Update kan göras");
             this.props.resetGenreValue();
-            this.load();
+            this.load(nextProps.match.params.id);
         }
     }
 
-    load(){
-        const id = this.props.match.params.id;
+    load(hg){
+        const id = hg;
         this.props.getMovieByMovieID(id);
         this.props.getTrailerByMovieID(id);
         this.props.getCastByMovieID(id);
