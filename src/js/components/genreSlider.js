@@ -17,7 +17,7 @@ const SimpleSlider = (props) => {
     };
 
     let getMoviesByGenre = (index) => {
-        return props.movies[index].movies.map((mov) => <div key={mov.id}>
+        return props.movies[index].movies.map((mov) => <div className="slideBox" key={mov.id}>
             <Link to={`/movie/${mov.id}`} key={mov.id}>
             <MovieCardComponent movie={mov}/>
             </Link>
@@ -36,7 +36,7 @@ const SimpleSlider = (props) => {
         appendDots: dots => (
             <div style={{
                 backgroundColor: '#ddd', borderRadius: '10px', padding: '10px', overflow: 'hidden',
-                position: 'absolute', marginBottom: '-20px'
+                position: 'relative'
             }}>
                 <ul style={{margin: '0px'}}> {dots} </ul>
             </div>

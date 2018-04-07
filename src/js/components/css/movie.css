@@ -186,6 +186,14 @@ div.poster {
         width: auto;
         height: auto;
     }
+    .ghd {
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        top: 1em;
+        left: 0;
+        z-index: 4;
+    }
 }
 
 .icons {
