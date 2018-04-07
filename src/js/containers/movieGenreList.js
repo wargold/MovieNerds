@@ -33,7 +33,7 @@ class MovieGenreList extends Component {
         let promise = new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve(this.props.getMovieGenres());
-            }, 1000);
+            }, 3000);
         });
         return promise;
     }
@@ -42,7 +42,7 @@ class MovieGenreList extends Component {
         let promise = new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve(this.props.getMoviesByGenre(item));
-            }, 1500);
+            }, 3000);
         });
         return promise;
     }

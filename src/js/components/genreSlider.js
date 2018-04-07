@@ -33,6 +33,14 @@ const SimpleSlider = (props) => {
         slidesToShow: 4,
         slidesToScroll: 1,
         arrows: true,
+        responsive: [
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1
+                }
+            }
+        ],
         appendDots: dots => (
             <div style={{
                 backgroundColor: '#ddd', borderRadius: '10px', padding: '10px', overflow: 'hidden',

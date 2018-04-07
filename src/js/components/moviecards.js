@@ -31,6 +31,7 @@ const MovieCardComponent = (props) => {
 
     const movie = props.movie;
     return (
+        <div className="moviecard">
         <StyledImg>
             <div className="container" key={movie.id}>
                 <Link to={`/movie/${movie.id}`} key={movie.id}>
@@ -46,6 +47,7 @@ const MovieCardComponent = (props) => {
                 </Info>
             </div>
         </StyledImg>
+        </div>
     );
 }
 
