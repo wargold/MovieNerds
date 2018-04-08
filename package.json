@@ -8,6 +8,7 @@
   },
   "license": "ISC",
   "dependencies": {
+    "@blueprintjs/core": "^2.1.1",
     "axios": "^0.18.0",
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
@@ -24,6 +25,7 @@
     "node-libs-browser": "^1.0.0",
     "node-sass": "^3.8.0",
     "prop-types": "^15.6.1",
+    "re-base": "^3.2.2",
     "react": "^15.6.2",
     "react-addons-test-utils": "^15.1.0",
     "react-autosuggest": "^9.3.4",
@@ -48,7 +50,6 @@
     "sass-loader": "^4.0.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^3.2.3",
-    "webpack": "^1.13.1",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.11.0"
@@ -66,6 +67,18 @@
     "react-svg-loader": "^2.1.0",
     "react-transform-hmr": "^1.0.4",
     "style-loader": "^0.13.2",
+    "webpack": "^1.15.0",
     "webpack-cli": "^2.0.14"
-  }
+  },
+  "description": "![](http://i.imgur.com/DUiL9yn.png)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wargold/MovieNerds.git"
+  },
+  "keywords": [],
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/wargold/MovieNerds/issues"
+  },
+  "homepage": "https://github.com/wargold/MovieNerds#readme"
 }

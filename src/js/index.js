@@ -14,7 +14,9 @@ import routes from './router';
 import App from './App';
 import Movie from './containers/movie'
 import Cast from './containers/cast'
+import Login from './containers/login'
 import { BrowserRouter } from 'react-router-dom'
+import { app, base } from './base';
 
 const history = createHistory()
 const routeMiddleware = routerMiddleware(hashHistory);
@@ -31,6 +33,7 @@ ReactDOM.render(
         <Router history={history}>
             <div>
                 <Route exact path="/" component={App}/>
+                <Route path="/login" component={Login}/>
                 <Route path="/movie/:id" component={Movie}/>
                 <Route path="/cast/:id" component={Cast}/>
                 <Route path="/not" component={NotFound} />

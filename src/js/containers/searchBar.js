@@ -1,18 +1,18 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {getSearchMovie, updateInputValue, clearSuggestions} from '../actions';
-import {push} from 'react-router-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getSearchMovie, updateInputValue, clearSuggestions } from '../actions';
+import { push } from 'react-router-redux'
 import Autosuggest from 'react-autosuggest'
-import {Panel} from 'react-bootstrap'
+import { Panel, Glyphicon, Button } from 'react-bootstrap'
 import './css/searchBar.css'
-import {URL_IMG, IMG_LOGO_XS_SIZE, BROKEN_IMAGE} from '../constants/constants'
+import { URL_IMG, IMG_LOGO_XS_SIZE, BROKEN_IMAGE } from '../constants/constants'
 import SearchByGenres from './selectGenre'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class SearchBar extends Component {
-
-    onChange = (event, {newValue, method}) => {
+    
+    onChange = (event, { newValue, method }) => {
         this.props.updateInputValue(newValue);
     };
 
@@ -32,7 +32,7 @@ class SearchBar extends Component {
         return suggestion.title;
     };
 
-    onSuggestionsFetchRequested = ({value}) => {
+    onSuggestionsFetchRequested = ({ value }) => {
         if (value.length > 0 && value.replace(/\s/g, '').length > 0) {
             this.props.getsearch(value);
         }
@@ -48,9 +48,10 @@ class SearchBar extends Component {
     renderSuggestion = (suggestion) => {
         return (
             <a>
+                
                 <img className="searchResult-image loading"
-                     src={suggestion.poster_path == null ? BROKEN_IMAGE : URL_IMG + IMG_LOGO_XS_SIZE + suggestion.poster_path}
-                     alt={"NO I"}/>
+                    src={suggestion.poster_path == null ? BROKEN_IMAGE : URL_IMG + IMG_LOGO_XS_SIZE + suggestion.poster_path}
+                    alt={"NO I"} />
                 <div className="searchResult-text">
                     <div className="searchResult-name">
                         {suggestion.title}
@@ -62,7 +63,7 @@ class SearchBar extends Component {
     };
 
 
-    onSuggestionSelected = (event, {suggestion, method}) => {
+    onSuggestionSelected = (event, { suggestion, method }) => {
         if (method === 'enter')
             event.preventDefault();
         this.props.dispatch(push('/movie/' + suggestion.id));
@@ -71,6 +72,7 @@ class SearchBar extends Component {
 
     render() {
         console.log("Check data", this.props.getse.suggestions);
+        console.log("lik", this.props);
 
         const value = this.props.getse.value;
         let suggestions = this.props.getse.suggestions;
@@ -91,10 +93,20 @@ class SearchBar extends Component {
                 <Panel>
                     <Panel.Heading>
                         <Link to={'/'}>
-                        <Panel.Title>
-                            <h2 className="homeTitle">{"The Home For All Movie Nerds Out There"}</h2>
-                        </Panel.Title>
+                            <Panel.Title>
+                                <h2 className="homeTitle">{"The Home For All Movie Nerds Out There"}</h2>
+                            </Panel.Title>
                         </Link>
+                        {this.props.getse.authenticated
+                            ? <Glyphicon glyph="search"> You are logged in </Glyphicon>
+                            : (
+                                <Link to={'/login'}>
+                                    <Button>
+                                        <Glyphicon glyph="user" /> Login/Register
+                                    </Button>
+                                </Link>
+                            )}
+
                     </Panel.Heading>
                     <Panel.Body>
                         <div><h4>Search For A Movie Based On A Movie Title</h4></div>
@@ -105,11 +117,11 @@ class SearchBar extends Component {
                             onSuggestionsClearRequested={this.onSuggestionsClearRequested}
                             getSuggestionValue={this.getSuggestionValue}
                             renderSuggestion={this.renderSuggestion}
-                            inputProps={inputProps}/>
+                            inputProps={inputProps} />
                     </Panel.Body>
                     <Panel.Footer>
                         <div><h4>Search For A Movie Based On Movie Genres</h4></div>
-                        <SearchByGenres/>
+                        <SearchByGenres />
                     </Panel.Footer>
                 </Panel>
             </div>

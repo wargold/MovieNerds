@@ -5,7 +5,8 @@ const initialState = {
     value: '',
     suggestions:[],
     error: null,
-    isLoading: false
+    isLoading: false,
+    authenticated: false
 }
 
 const Search = (state = initialState, action={}) => {
