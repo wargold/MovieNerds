@@ -21,4 +21,9 @@ Start the development server (changes will now update live in browser)
 > npm run start
 ```
 
+New Dependencies for authentication:
+
+> npm install @blueprintjs/core
+> npm install npm install --save re-base
+
 To view your project, go to: [http://localhost:3000/](http://localhost:3000/)
