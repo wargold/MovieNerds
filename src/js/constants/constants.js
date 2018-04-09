@@ -64,3 +64,11 @@ export const RESET_GENRE_SELECTION = 'RESET_GENRE_SELECTION';
 export const UPDATE_OPTIONS = 'UPDATE_OPTIONS';
 
 export const BROKEN_IMAGE = 'http://rlv.zcache.com/broken_internet_image_icon_poster-r0a8517b32a704c618ef72685782dc663_a3uq_8byvr_324.jpg';
+
+export const AUTH_EMAIL = 'AUTH_EMAIL';
+export const AUTH_EMAIL_SUCCESS = 'AUTH_EMAIL_SUCCESS';
+export const AUTH_EMAIL_FAIL = 'AUTH_EMAIL_FAIL';
+
+export const AUTH_FACEBOOK = 'AUTH_FACEBOOK';
+export const AUTH_FACEBOOK_SUCCESS = 'AUTH_FACEBOOK_SUCCESS';
+export const AUTH_FACEBOOK_FAIL = 'AUTH_FACEBOOK_FAIL';
