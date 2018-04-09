@@ -8,7 +8,7 @@ import styled from 'styled-components'
 
 const MovieCardComponent = (props) => {
 
-    const StyledImg = styled.div`
+    const StyleImage = styled.div`
             height: 278px;
             width:185px;
     &:hover .image{
@@ -19,7 +19,7 @@ const MovieCardComponent = (props) => {
        opacity: 0.9;
     }
   `;
-    const Info = styled.div`
+    const MovieInfo = styled.div`
       position: absolute;
       top: 0;
       margin:10px;
@@ -32,21 +32,21 @@ const MovieCardComponent = (props) => {
     const movie = props.movie;
     return (
         <div className="moviecard">
-            <StyledImg>
+            <StyleImage>
                 <div className="container" key={movie.id}>
                     <Link to={`/movie/${movie.id}`} key={movie.id}>
                         <Image className="image loading" src={movie.poster_path == null ? BROKEN_IMAGE
                             : URL_IMG + IMG_LOGO_S_SIZE + movie.poster_path}
                                alt={movie.original_title} responsive/>
                     </Link>
-                    <Info className="title">
+                    <MovieInfo className="title">
                         <h4 className="hiddenTitle">{movie.original_title}</h4>
                         <Glyphicon
                             glyph={'star'}/> {movie.vote_average} &nbsp;&nbsp;<Glyphicon glyph={'calendar'}/>
                         {movie.release_date}
-                    </Info>
+                    </MovieInfo>
                 </div>
-            </StyledImg>
+            </StyleImage>
         </div>
     );
 }
