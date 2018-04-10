@@ -1,7 +1,7 @@
 import * as constants from '../constants/constants'
-import {FETCHING_CASTBYID} from "../constants/constants";
-import {FETCHING_CASTBYID_SUCCESS} from "../constants/constants";
-import {FETCHING_CASTBYID_FAILURE} from "../constants/constants";
+import { FETCHING_CASTBYID } from "../constants/constants";
+import { FETCHING_CASTBYID_SUCCESS } from "../constants/constants";
+import { FETCHING_CASTBYID_FAILURE } from "../constants/constants";
 
 // Handles action for search movies api call
 function searchMovie(text) {
@@ -155,17 +155,17 @@ export function getMoviesByGenre(id) {
 
 // UPDATE list with all genres and movies
 export function updateAllMoviesGenres(allGenre, movieGenres) {
-    return {type: constants.UPDATE_ALLMOVIESBYGENRE, allGenre, movieGenres}
+    return { type: constants.UPDATE_ALLMOVIESBYGENRE, allGenre, movieGenres }
 }
 
 //UPDATE value of selected genres in selection
 export function updateSelectedValues(value) {
-    return {type: constants.UPDATE_GENRE_SELECTION, value}
+    return { type: constants.UPDATE_GENRE_SELECTION, value }
 }
 
 //UPDATE value of selected genres in selection
 export function resetSelectedValues() {
-    return {type: constants.RESET_GENRE_SELECTION}
+    return { type: constants.RESET_GENRE_SELECTION }
 }
 
 
@@ -428,5 +428,23 @@ export function getSimilarMovies(id) {
             .then(json => json.results)
             .then(data => dispatch(similarMoviesSuccess(id, data)))
             .catch(error => dispatch(similarMoviesFAILURE(error)))
+    };
+}
+
+export function testFunc() {
+    return {
+        type: "wtf"
+    };
+}
+
+export function setAuthenticated(user) {
+    return function (dispatch) {
+        dispatch(facebookLoginSuccess(user))
+    }
+}
+
+function facebookLoginSuccess(user) {
+    return {
+        type: constants.AUTH_FACEBOOK_SUCCESS, user
     };
 }

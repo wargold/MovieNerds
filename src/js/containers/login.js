@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
-import { Toaster, Intent} from '@blueprintjs/core'
-
+import { Toaster, Intent } from '@blueprintjs/core'
+import { testFunc, setAuthenticated } from '../actions';
 import { app, facebookProvider } from '../base'
 
 const loginStyles = {
@@ -21,9 +21,6 @@ class Login extends Component {
         super(props)
         this.authWithFacebook = this.authWithFacebook.bind(this)
         this.authWithEmailPassword = this.authWithEmailPassword.bind(this)
-        this.state = {
-            redirect: false
-        }
     }
 
     authWithFacebook() {
@@ -33,7 +30,10 @@ class Login extends Component {
                 if (error) {
                     this.toaster.show({ intent: Intent.DANGER, message: "Facebook signin failed" })
                 } else {
-                    this.setState({ redirect: true })
+                    // Successfully signed in with facebook
+                    //this.setState({ redirect: true })
+                    console.log(result.user.displayName)
+                    this.props.setAuthenticated(result.user.displayName);
                 }
             })
 
@@ -50,10 +50,12 @@ class Login extends Component {
 
     render() {
 
-    
-        if (this.state.redirect === true) {
+
+        if (this.props.redirect === true) {
             return <Redirect to={'/'} />
         }
+
+        console.log("rendering",this.props.test(), this.props.redirect)
 
         return (
             <div style={loginStyles}>
@@ -83,4 +85,20 @@ class Login extends Component {
 
 }
 
-export default connect()(Login);
+// Import actions that the view uses to update the store
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({
+        test: testFunc,
+        setAuthenticated: setAuthenticated
+    }, dispatch);
+}
+
+// Access data from the store
+function mapStateToProps(state) {
+    return {
+        authenticated: state.auth.authenticated,
+        redirect: state.auth.redirect
+    };
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(Login);

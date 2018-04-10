@@ -25,6 +25,7 @@ const logger = createLogger();
 const store = createStore(
     allReducers,
     applyMiddleware(thunk, promise, logger, routeMiddleware)
+
 );
 
 const NotFound = () => <h1>404.. Whoops, page not found!</h1>;

@@ -97,8 +97,8 @@ class SearchBar extends Component {
                                 <h2 className="homeTitle">{"The Home For All Movie Nerds Out There"}</h2>
                             </Panel.Title>
                         </Link>
-                        {this.props.getse.authenticated
-                            ? <Glyphicon glyph="search"> You are logged in </Glyphicon>
+                        {this.props.authenticated
+                            ? <p>Welcome {this.props.user}</p>
                             : (
                                 <Link to={'/login'}>
                                     <Button>
@@ -133,6 +133,8 @@ function mapStateToProps(state) {
     return {
         getse: state.search,
         selector: state.selections,
+        authenticated: state.auth.authenticated,
+        user: state.auth.user
     };
 }
 

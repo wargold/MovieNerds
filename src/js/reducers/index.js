@@ -9,6 +9,7 @@ import MostPopularMovies from './mostPopularMovies'
 import {MovieByID, TrailerByMovieID, CastByMovieID, SimilarMovies} from './movieByID'
 import {CastByID, CastKnowMovies} from './cast'
 import {routerReducer} from 'react-router-redux'
+import Auth from './auth'
 
 /*
  * We combine all reducers into a single object before updated data is dispatched (sent) to store
@@ -16,6 +17,7 @@ import {routerReducer} from 'react-router-redux'
  * */
 
 const allReducers = combineReducers({
+    auth: Auth,
     genres: genre,
     search: Search,
     movies: MoviesByGenre,
