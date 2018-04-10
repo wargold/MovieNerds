@@ -32,7 +32,7 @@ class Vis extends Component {
                 // based on favorite movies list
                 let pop1 = heap.pop();
                 let peek2 = heap.peek();
-                if (pop1.id === peek2.id && pop1.id !== prev.id){
+                if (pop1.id === peek2.id && pop1.id !== prev.id && !favorite.includes(pop1.id)){
                     temp.push(pop1);
                     heap.pop();
                 }
