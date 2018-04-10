@@ -11,7 +11,7 @@ import SearchByGenres from './selectGenre'
 import { Link } from 'react-router-dom'
 
 class SearchBar extends Component {
-    
+
     onChange = (event, { newValue, method }) => {
         this.props.updateInputValue(newValue);
     };
@@ -48,7 +48,7 @@ class SearchBar extends Component {
     renderSuggestion = (suggestion) => {
         return (
             <a>
-                
+
                 <img className="searchResult-image loading"
                     src={suggestion.poster_path == null ? BROKEN_IMAGE : URL_IMG + IMG_LOGO_XS_SIZE + suggestion.poster_path}
                     alt={"NO I"} />
@@ -72,7 +72,6 @@ class SearchBar extends Component {
 
     render() {
         console.log("Check data", this.props.getse.suggestions);
-        console.log("lik", this.props);
 
         const value = this.props.getse.value;
         let suggestions = this.props.getse.suggestions;
@@ -87,6 +86,20 @@ class SearchBar extends Component {
             placeholder: 'Search Movie Title...'
         };
 
+        console.log("aseewf", this.props.authenticated)
+        
+        const loggin = this.props.authenticated ? (
+            <p>Welcome {this.props.user}</p>
+        ) : (
+                <Link to={'/login'}>
+                    <Button>
+                        <Glyphicon glyph="user" /> Login/Register
+                    </Button>
+                </Link>
+            );
+
+        console.log("aseewf", loggin)
+
 
         return (
             <div>
@@ -97,15 +110,7 @@ class SearchBar extends Component {
                                 <h2 className="homeTitle">{"The Home For All Movie Nerds Out There"}</h2>
                             </Panel.Title>
                         </Link>
-                        {this.props.authenticated
-                            ? <p>Welcome {this.props.user}</p>
-                            : (
-                                <Link to={'/login'}>
-                                    <Button>
-                                        <Glyphicon glyph="user" /> Login/Register
-                                    </Button>
-                                </Link>
-                            )}
+                        {loggin}
 
                     </Panel.Heading>
                     <Panel.Body>
