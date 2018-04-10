@@ -13,18 +13,18 @@ const SimpleSlider = (props) => {
                 <Slider className="carsoule" {...settings}>
                     {getMoviesByGenre(i)}
                 </Slider>
-        </div>
-    );
-    return genre
+            </div>
+        );
+        return genre
     };
 
     let getMoviesByGenre = (index) => {
         return props.movies[index].movies.map((mov) => <div className="slideBox" key={mov.id}>
-        <Link to={`/movie/${mov.id}`} key={mov.id}>
-        <LazyLoad height={200}>
-        <MovieCardComponent movie={mov}/>
-        </LazyLoad>
-        </Link>
+            <Link to={`/movie/${mov.id}`} key={mov.id}>
+                <LazyLoad height={200}>
+                    <MovieCardComponent movie={mov}/>
+                </LazyLoad>
+            </Link>
         </div>)
     }
 
@@ -38,25 +38,44 @@ const SimpleSlider = (props) => {
         slidesToScroll: 1,
         arrows: true,
         responsive: [
-    {
-        breakpoint: 600,
-        settings: {
-        slidesToShow: 1
-    }
-    }, {
-                breakpoint: 1200,
+            {
+                breakpoint: 550,
+                settings: {
+                    slidesToShow: 1
+                }
+            },
+            {
+                breakpoint: 650,
+                settings: {
+                    slidesToShow: 2
+                }
+            },{
+                breakpoint: 700,
+                settings: {
+                    slidesToShow: 3
+                }
+            }
+            ,
+            {
+                breakpoint: 900,
                 settings: {
                     slidesToShow: 4
+                }
+            },
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 5
                 }
             }
         ],
         appendDots: dots => (
-        <div style={{
-            backgroundColor: '#ddd', borderRadius: '10px', padding: '10px', overflow: 'hidden',
-            position: 'relative'
-        }}>
-        <ul style={{margin: '0px'}}> {dots} </ul>
-        </div>
+            <div style={{
+                backgroundColor: '#ddd', borderRadius: '10px', padding: '10px', overflow: 'hidden',
+                position: 'relative'
+            }}>
+                <ul style={{margin: '0px'}}> {dots} </ul>
+            </div>
         )
     };
 
@@ -65,6 +84,6 @@ const SimpleSlider = (props) => {
             {getGenresName()}
         </div>
     );
-    }
+}
 
-    export default SimpleSlider
+export default SimpleSlider
