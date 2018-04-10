@@ -41,11 +41,38 @@ class Login extends Component {
 
     authWithEmailPassword(event) {
         event.preventDefault()
-        console.log("email auth")
-        console.table([{
-            email: this.emailInput.value,
-            password: this.passwordInput.value
-        }])
+       
+        const email = this.emailInput.value
+        const password = this.passwordInput.value
+        
+        app.auth().fetchProvidersForEmail(email)
+            .then((providers) => {
+                if (providers.length === 0) {
+                    // create user
+                    console.log("create")
+                    return app.auth().createUserWithEmailAndPassword(email, password)
+                    
+                } else if (providers.indexOf("password") === -1) {
+                    // they used facebook
+                    console.log("already facebook")
+                    //this.toaster.show({ intent: Intent.WARNING, message: "Try alternative login." })
+                } else {
+                    // sign user in
+                    console.log("success login")
+                    return app.auth().signInWithEmailAndPassword(email, password)
+                }
+            })
+            .then((user) => {
+                if (user && user.email) {
+                    //this.props.setCurrentUser(user)
+                    //this.setState({ redirect: true })
+                    console.log(user)
+                    this.props.setAuthenticated(user.email)
+                }
+            })
+            .catch((error) => {
+                this.toaster.show({ intent: Intent.DANGER, message: error.message })
+            })
     }
 
     render() {
@@ -55,7 +82,7 @@ class Login extends Component {
             return <Redirect to={'/'} />
         }
 
-        console.log("rendering",this.props.test(), this.props.redirect)
+        console.log("rendering", this.props.test(), this.props.redirect)
 
         return (
             <div style={loginStyles}>
@@ -66,7 +93,7 @@ class Login extends Component {
                     <div style={{ marginBottom: "10px" }} className="pt-callout pt-icon-info-sign">
                         <h5>Note</h5>
                         If you don't have an account already, this form will create your account.
-          </div>
+                    </div>
                     <label className="pt-label">
                         Email
             <input style={{ width: "100%" }} className="pt-input" name="email" type="email" ref={(input) => { this.emailInput = input }} placeholder="Email"></input>

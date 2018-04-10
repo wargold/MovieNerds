@@ -448,3 +448,15 @@ function facebookLoginSuccess(user) {
         type: constants.AUTH_FACEBOOK_SUCCESS, user
     };
 }
+
+export function logout() {
+    return {
+        type: constants.AUTH_LOGOUT
+    }
+}
+
+export function notLoggedIn() {
+    return {
+        type: constants.AUTH_UNREGISTERED
+    }
+}

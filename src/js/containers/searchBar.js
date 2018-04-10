@@ -87,9 +87,16 @@ class SearchBar extends Component {
         };
 
         console.log("aseewf", this.props.authenticated)
-        
-        const loggin = this.props.authenticated ? (
-            <p>Welcome {this.props.user}</p>
+
+        let loggin = this.props.authenticated ? (
+            <div>
+                <p>Signed in as: {this.props.user}</p>
+                <Link to={'/logout'}>
+                    <Button>
+                        <Glyphicon glyph="log-out" /> Log Out
+                    </Button>
+                </Link>
+            </div>
         ) : (
                 <Link to={'/login'}>
                     <Button>
@@ -98,7 +105,6 @@ class SearchBar extends Component {
                 </Link>
             );
 
-        console.log("aseewf", loggin)
 
 
         return (
@@ -139,7 +145,8 @@ function mapStateToProps(state) {
         getse: state.search,
         selector: state.selections,
         authenticated: state.auth.authenticated,
-        user: state.auth.user
+        user: state.auth.user,
+        loading: state.auth.loading
     };
 }
 

@@ -15,6 +15,7 @@ import App from './App';
 import Movie from './containers/movie'
 import Cast from './containers/cast'
 import Login from './containers/login'
+import Logout from './containers/logout'
 import { BrowserRouter } from 'react-router-dom'
 import { app, base } from './base';
 import Vis from './containers/visualization'
@@ -37,6 +38,7 @@ ReactDOM.render(
             <Switch>
                 <Route exact path="/" component={App}/>
                 <Route path="/login" component={Login}/>
+                <Route path="/logout" component={Logout}/>
                 <Route path="/movie/:id" component={Movie}/>
                 <Route path="/cast/:id" component={Cast}/>
                 <Route path="/vis" component={Vis}/>
