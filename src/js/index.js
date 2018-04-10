@@ -17,7 +17,7 @@ import Cast from './containers/cast'
 import Login from './containers/login'
 import { BrowserRouter } from 'react-router-dom'
 import { app, base } from './base';
-
+import Vis from './containers/visualization'
 
 const history = createHistory()
 const routeMiddleware = routerMiddleware(hashHistory);
@@ -37,6 +37,7 @@ ReactDOM.render(
                 <Route path="/login" component={Login}/>
                 <Route path="/movie/:id" component={Movie}/>
                 <Route path="/cast/:id" component={Cast}/>
+                <Route path="/vis" component={Vis}/>
                 <Route path='/404' component={NotFound} />
                 <Redirect from='*' to='/404' />
             </Switch>

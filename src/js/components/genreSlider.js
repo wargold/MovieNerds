@@ -34,7 +34,7 @@ const SimpleSlider = (props) => {
         infinite: true,
         lazyLoad: true,
         speed: 500,
-        slidesToShow: 4,
+        slidesToShow: 6,
         slidesToScroll: 1,
         arrows: true,
         responsive: [
@@ -43,7 +43,12 @@ const SimpleSlider = (props) => {
         settings: {
         slidesToShow: 1
     }
-    }
+    }, {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 4
+                }
+            }
         ],
         appendDots: dots => (
         <div style={{
