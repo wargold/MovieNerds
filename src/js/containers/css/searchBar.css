@@ -29,7 +29,7 @@
 .react-autosuggest__suggestions-container--open {
     display: block;
     position: absolute;
-    top: 38px;
+    top: 30px;
     width: 400px;
     border: 1px solid #aaa;
     background-color: #fff;
@@ -51,7 +51,7 @@
 
 .react-autosuggest__suggestion {
     cursor: pointer;
-    padding: 20px 30px;
+    padding: 40px 35px;
 }
 
 .react-autosuggest__suggestion--highlighted {
@@ -72,14 +72,19 @@
     margin-right: 8px;
 }
 
+.react-autosuggest__suggestion.react-autosuggest__suggestion--first{
+}
+
 .searchResult-name {
     font-weight: bold;
 }
 
 .searchResult-link {
     display: block;
+    height: 30px;
     padding: 5px;
 }
+
 
 .homeTitle{
     text-align: center;

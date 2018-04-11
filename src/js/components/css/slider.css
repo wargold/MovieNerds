@@ -38,6 +38,9 @@
     display: inline-block;
 }
 
+.slick-dots{
+}
+
 div.slick-slide.slick-active.slideBox{
     display: flex;
     justify-content: center;

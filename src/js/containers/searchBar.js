@@ -1,18 +1,25 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { getSearchMovie, updateInputValue, clearSuggestions } from '../actions';
-import { push } from 'react-router-redux'
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {getSearchMovie, updateInputValue, clearSuggestions} from '../actions';
+import {push} from 'react-router-redux'
 import Autosuggest from 'react-autosuggest'
-import { Panel, Glyphicon, Button } from 'react-bootstrap'
+import {Panel, Glyphicon, Button} from 'react-bootstrap'
 import './css/searchBar.css'
-import { URL_IMG, IMG_LOGO_XS_SIZE, BROKEN_IMAGE } from '../constants/constants'
+import {URL_IMG, IMG_LOGO_XS_SIZE, BROKEN_IMAGE} from '../constants/constants'
 import SearchByGenres from './selectGenre'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
+import {DebounceInput} from 'react-debounce-input';
+
+let debounce = require('lodash.debounce');
 
 class SearchBar extends Component {
 
-    onChange = (event, { newValue, method }) => {
+    constructor() {
+        super();
+    }
+
+    onChange = (event, {newValue, method}) => {
         this.props.updateInputValue(newValue);
     };
 
@@ -32,7 +39,16 @@ class SearchBar extends Component {
         return suggestion.title;
     };
 
-    onSuggestionsFetchRequested = ({ value }) => {
+    loadSuggestions(value) {
+        console.log("Kolla här VIKITGT", value);
+        this.props.getsearch(value);
+    }
+
+    randomDelay() {
+        return 300 + Math.random() * 1000;
+    }
+
+    onSuggestionsFetchRequested = ({value}) => {
         if (value.length > 0 && value.replace(/\s/g, '').length > 0) {
             this.props.getsearch(value);
         }
@@ -47,23 +63,23 @@ class SearchBar extends Component {
 
     renderSuggestion = (suggestion) => {
         return (
-            <a>
+            <a className="da">
 
                 <img className="searchResult-image loading"
-                    src={suggestion.poster_path == null ? BROKEN_IMAGE : URL_IMG + IMG_LOGO_XS_SIZE + suggestion.poster_path}
-                    alt={"NO I"} />
+                     src={suggestion.poster_path == null ? BROKEN_IMAGE : URL_IMG + IMG_LOGO_XS_SIZE + suggestion.poster_path}
+                     alt={suggestion.title}/>
                 <div className="searchResult-text">
                     <div className="searchResult-name">
                         {suggestion.title}
                     </div>
-                    {suggestion.release_date.substring(0, 4)}
+                    {suggestion.release_date==null ? 1994 : suggestion.release_date.substring(0, 4)}
                 </div>
             </a>
         );
     };
 
 
-    onSuggestionSelected = (event, { suggestion, method }) => {
+    onSuggestionSelected = (event, {suggestion, method}) => {
         if (method === 'enter')
             event.preventDefault();
         this.props.dispatch(push('/movie/' + suggestion.id));
@@ -74,6 +90,7 @@ class SearchBar extends Component {
         console.log("Check data", this.props.getse.suggestions);
 
         const value = this.props.getse.value;
+        console.log("kolla input value", value);
         let suggestions = this.props.getse.suggestions;
         if (suggestions === undefined) {
             suggestions = [];
@@ -86,6 +103,15 @@ class SearchBar extends Component {
             placeholder: 'Search Movie Title...'
         };
 
+        const renderSearchInput = (inputProps) => (
+            <DebounceInput
+                minLength={1}
+                debounceTimeout={500}
+                autoFocus
+                {...inputProps}
+            />
+        );
+
         console.log("aseewf", this.props.authenticated)
 
         let loggin = this.props.authenticated ? (
@@ -93,18 +119,17 @@ class SearchBar extends Component {
                 <p>Signed in as: {this.props.user}</p>
                 <Link to={'/logout'}>
                     <Button>
-                        <Glyphicon glyph="log-out" /> Log Out
+                        <Glyphicon glyph="log-out"/> Log Out
                     </Button>
                 </Link>
             </div>
         ) : (
-                <Link to={'/login'}>
-                    <Button>
-                        <Glyphicon glyph="user" /> Login/Register
-                    </Button>
-                </Link>
-            );
-
+            <Link to={'/login'}>
+                <Button>
+                    <Glyphicon glyph="user"/> Login/Register
+                </Button>
+            </Link>
+        );
 
 
         return (
@@ -128,11 +153,13 @@ class SearchBar extends Component {
                             onSuggestionsClearRequested={this.onSuggestionsClearRequested}
                             getSuggestionValue={this.getSuggestionValue}
                             renderSuggestion={this.renderSuggestion}
-                            inputProps={inputProps} />
+                            inputProps={inputProps}
+                            renderInputComponent={renderSearchInput}/>
+
                     </Panel.Body>
                     <Panel.Footer>
                         <div><h4>Search For A Movie Based On Movie Genres</h4></div>
-                        <SearchByGenres />
+                        <SearchByGenres/>
                     </Panel.Footer>
                 </Panel>
             </div>
