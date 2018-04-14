@@ -63,8 +63,7 @@ class SearchBar extends Component {
 
     renderSuggestion = (suggestion) => {
         return (
-            <a className="da">
-
+            <div className="divMovieSugg">
                 <img className="searchResult-image loading"
                      src={suggestion.poster_path == null ? BROKEN_IMAGE : URL_IMG + IMG_LOGO_XS_SIZE + suggestion.poster_path}
                      alt={suggestion.title}/>
@@ -74,7 +73,7 @@ class SearchBar extends Component {
                     </div>
                     {suggestion.release_date==null ? 1994 : suggestion.release_date.substring(0, 4)}
                 </div>
-            </a>
+            </div>
         );
     };
 
