@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { Spinner } from '@blueprintjs/core'
-import { app } from '../base'
+import { app } from '../constants/base'
 import { logout } from '../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

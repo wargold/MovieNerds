@@ -138,6 +138,16 @@
     color: white;
 }
 
+.notrailer{
+    z-index: 2;
+    position: absolute;
+    transform: translate(-50%, -15%);
+    margin: auto;
+    top: 15%;
+    left: 50%;
+    color: white;
+}
+
 .player {
     width: 40%;
 }

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {getSearchMovie, updateInputValue, clearSuggestions} from '../actions';
-import {push} from 'react-router-redux'
+import history from '../history'
 import Autosuggest from 'react-autosuggest'
 import {Panel, Glyphicon, Button} from 'react-bootstrap'
 import './css/searchBar.css'
@@ -31,7 +31,7 @@ class SearchBar extends Component {
     };
 
     handleSubmit = (searchText) => {
-        this.props.dispatch(push('/search/' + searchText));
+        console.log(searchText);
         this.props.updateInputValue('');
     };
 
@@ -81,7 +81,7 @@ class SearchBar extends Component {
     onSuggestionSelected = (event, {suggestion, method}) => {
         if (method === 'enter')
             event.preventDefault();
-        this.props.dispatch(push('/movie/' + suggestion.id));
+        history.push('/movie/'+suggestion.id);
         this.props.updateInputValue('');
     };
 
@@ -154,7 +154,6 @@ class SearchBar extends Component {
                             renderSuggestion={this.renderSuggestion}
                             inputProps={inputProps}
                             renderInputComponent={renderSearchInput}/>
-
                     </Panel.Body>
                     <Panel.Footer>
                         <div><h4>Search For A Movie Based On Movie Genres</h4></div>

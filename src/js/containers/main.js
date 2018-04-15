@@ -9,7 +9,7 @@ import SearchBar from './searchBar'
 import MovieGenreList from './movieGenreList'
 import MoviesByGenres from './moviesByGenres'
 import Login from './login'
-import { app, base } from '../base';
+import { app, base } from '../constants/base';
 import { setAuthenticated, notLoggedIn } from '../actions';
 import { Spinner } from '@blueprintjs/core';
 

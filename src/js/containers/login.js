@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
 import { Toaster, Intent } from '@blueprintjs/core'
 import { testFunc, setAuthenticated } from '../actions';
-import { app, facebookProvider } from '../base'
+import { app, facebookProvider } from '../constants/base'
 
 const loginStyles = {
     width: "90%",

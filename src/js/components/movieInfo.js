@@ -28,7 +28,7 @@ class MovieInfo extends React.Component {
                 <Glyphicon className="playIcon" glyph={'play-circle'} onClick={this.openModal}/>
             </div>);
         } else {
-            return (<h2>Sorry No Trailer Available!</h2>)
+            return (<h2 className="notrailer">Sorry No Trailer Available!</h2>)
         }
     }
 

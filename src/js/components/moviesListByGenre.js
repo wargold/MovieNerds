@@ -1,6 +1,6 @@
 import React from 'react'
 import MovieCardComponent from './moviecards'
-import {row} from 'react-bootstrap'
+import {Col, Grid, Row} from 'react-bootstrap'
 
 const MoviesListByGenres = (props) => {
 
@@ -15,23 +15,27 @@ const MoviesListByGenres = (props) => {
                 name += ', ';
             }
         }
-        return (<h2 className="sdds">{name}</h2>);
+        return (<h2 className="genresTitle">{name}</h2>);
     };
 
     let getMovies = () => {
-        let genre = props.movies.map((mov) => <div className="genreSliderBox" key={mov.id}>
+        let genre = props.movies.map((mov) =>
+            <Col xs={4} sm={3} md={2} key={mov.id}>
             <MovieCardComponent movie={mov}/>
-        </div>);
+            </Col>);
+
         return genre
     };
 
     return (
-        <div>
-            {getGenresName()}
-            <row>
-                {getMovies()}
-            </row>
-        </div>
+            <div>
+                <Grid fluid={true}>
+                    <Row>
+                        {getGenresName()}
+                        {getMovies()}
+                    </Row>
+                </Grid>
+            </div>
     );
 }
 

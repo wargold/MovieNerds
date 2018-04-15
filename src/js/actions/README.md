@@ -9,45 +9,16 @@ Actions are just things that happen *(seriously, that's it)*.
 
 **type** - describes the action that occurred
 ```
-ADD_USER_BUTTON_CLICKED
+FETCHING_MOVIEBYID
 ```
 
 
 **payload** - *(optional)* any extra data that is needed
-```
-{
-    first: "Samantha",
-    last: "Williams",
-    age: 52,
-    description: "Samantha is a good woman with a heart of gold."
-}
-```
+
 
 ## Actions vs. Action Creators
 
 Action creators are functions that create objects, actions are the objects that get created.
-
-**Action creator**
-```
-export default function () {
-    return {
-        first: "Samantha",
-        last: "Williams",
-        age: 52,
-        description: "Samantha is a good woman with a heart of gold."
-    }
-}
-```
-
-**Action**
-```
-{
-    first: "Samantha",
-    last: "Williams",
-    age: 52,
-    description: "Samantha is a good woman with a heart of gold."
-}
-```
 
 ## What happens next?
 

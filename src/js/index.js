@@ -17,10 +17,10 @@ import Cast from './containers/cast'
 import Login from './containers/login'
 import Logout from './containers/logout'
 import { BrowserRouter } from 'react-router-dom'
-import { app, base } from './base';
+import { app, base } from './constants/base';
 import Vis from './containers/visualization'
+import history from './history'
 
-const history = createHistory()
 const routeMiddleware = routerMiddleware(hashHistory);
 const logger = createLogger();
 const store = createStore(
@@ -31,6 +31,7 @@ const store = createStore(
 );
 
 const NotFound = () => <h1>404.. Whoops, page not found!</h1>;
+const APIError = () => <h1>404.. Whoops, page not found!</h1>;
 
 ReactDOM.render(
     <Provider store={store}>
@@ -42,6 +43,7 @@ ReactDOM.render(
                 <Route path="/movie/:id" component={Movie}/>
                 <Route path="/cast/:id" component={Cast}/>
                 <Route path="/vis" component={Vis}/>
+                <Route path='/APIError' component={APIError} />
                 <Route path='/404' component={NotFound} />
                 <Redirect from='*' to='/404' />
             </Switch>

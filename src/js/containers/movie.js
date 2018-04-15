@@ -16,20 +16,22 @@ class Movie extends Component {
     componentDidMount() {
         console.log("Check param id", this.props.match.params.id);
         this.load(this.props.match.params.id);
+
     }
 
-    componentWillReceiveProps(nextProps){
-        console.log("Compenent Update" );
-        console.log("Previous params id length",nextProps.match.params.id);
-        console.log("New value: length",this.props.match.params.id );
-        if(nextProps.match.params.id !==this.props.match.params.id){
+    componentWillReceiveProps(nextProps) {
+        console.log("Compenent Update");
+        console.log("Previous params id length", nextProps.match.params.id);
+        console.log("New value: length", this.props.match.params.id);
+        if (nextProps.match.params.id && this.props.match.params.id !== nextProps.match.params.id) {
             console.log("Update kan göras");
             this.props.resetGenreValue();
             this.load(nextProps.match.params.id);
         }
     }
 
-    load(hg){
+
+    load(hg) {
         const id = hg;
         this.props.getMovieByMovieID(id);
         this.props.getTrailerByMovieID(id);
@@ -39,12 +41,10 @@ class Movie extends Component {
 
 
     render() {
-        console.log("Render" );
-        console.log("Render" );
-        console.log("Selector value:",this.props.selector.value);
-        const de = this.props.movieInfo !== undefined && this.props.trailer !== undefined &&
-        this.props.castList !== undefined && this.props.similarMovies !== undefined &&
-        this.props.trailer.length > 0 && this.props.castList.length > 0 && this.props.similarMovies.length > 0 ?
+        console.log("Render");
+        console.log("Render");
+        console.log("Selector value:", this.props.selector.value);
+        const de = this.props.similarMovies !== undefined && this.props.similarMovies.length > 0 ?
             (<MovieInfo movie={this.props.movieInfo.movieInfo} trailer={this.props.trailer}
                         castList={this.props.castList} similarMovies={this.props.similarMovies}/>)
             : (<Image src={LOADING_SPINNER} style={{width: 100, height: 100}}/>);
