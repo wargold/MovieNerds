@@ -1,31 +1,35 @@
 import React from 'react';
-import {Image} from 'react-bootstrap'
-import {Glyphicon, Col, Grid, Row} from 'react-bootstrap'
+import { Image } from 'react-bootstrap'
+import { Glyphicon, Col, Grid, Row, Button } from 'react-bootstrap'
 import ModalVideo from 'react-modal-video'
 import MovieCardComponent from './moviecards'
-import {URL_IMG, IMG_LOGO_S_SIZE, BROKEN_IMAGE} from "../constants/constants"
-import {Link} from 'react-router-dom'
+import { URL_IMG, IMG_LOGO_S_SIZE, BROKEN_IMAGE } from "../constants/constants"
+import { Link } from 'react-router-dom'
+import { database, auth } from '../constants/base'
 import './css/movie.css'
+
 
 class MovieInfo extends React.Component {
     constructor() {//Can have a state due to that it only handles local state about a image...
         super()
         this.state = {
-            isOpen: false
+            isOpen: false,
+            isFav: false
         }
         this.openModal = this.openModal.bind(this)
     }
 
+
     openModal() {
-        this.setState({isOpen: true})
+        this.setState({ isOpen: true })
     }
 
     getVideo() {
         if (this.props.trailer.length > 0) {
             return (<div className="player">
                 <ModalVideo channel='youtube' isOpen={this.state.isOpen} videoId={this.props.trailer[0].key}
-                            onClose={() => this.setState({isOpen: false})}/>
-                <Glyphicon className="playIcon" glyph={'play-circle'} onClick={this.openModal}/>
+                    onClose={() => this.setState({ isOpen: false })} />
+                <Glyphicon className="playIcon" glyph={'play-circle'} onClick={this.openModal} />
             </div>);
         } else {
             return (<h2 className="notrailer">Sorry No Trailer Available!</h2>)
@@ -37,11 +41,11 @@ class MovieInfo extends React.Component {
             <div>
                 <div className="poster">
                     <Image className="pos loading"
-                           src={this.props.movie.backdrop_path == null ? BROKEN_IMAGE
-                               : "https://image.tmdb.org/t/p/w780" + this.props.movie.backdrop_path}
-                           responsive/>
+                        src={this.props.movie.backdrop_path == null ? BROKEN_IMAGE
+                            : "https://image.tmdb.org/t/p/w780" + this.props.movie.backdrop_path}
+                        responsive />
                     <div className="ghd">
-                        <MovieCardComponent className="picture" movie={this.props.movie}/>
+                        <MovieCardComponent className="picture" movie={this.props.movie} />
                     </div>
                     {this.getVideo()}
                 </div>
@@ -55,10 +59,10 @@ class MovieInfo extends React.Component {
         let info = (
             <div>
                 <div className="icons"><Glyphicon
-                    glyph={'star'}/>{this.props.movie.vote_average} &nbsp;
+                    glyph={'star'} />{this.props.movie.vote_average} &nbsp;
                     <Glyphicon
-                        glyph={'heart'}/> {this.props.movie.vote_count} &nbsp;<Glyphicon
-                        glyph={'calendar'}/> {this.props.movie.release_date} </div>
+                        glyph={'heart'} /> {this.props.movie.vote_count} &nbsp;<Glyphicon
+                        glyph={'calendar'} /> {this.props.movie.release_date} </div>
                 <h3 className="fs"> Info: {<p>{this.props.movie.overview}</p>} </h3>
                 <h3 className="fs"> Genres: {<div>{this.getMovieGenres()}</div>}</h3>
             </div>
@@ -77,8 +81,8 @@ class MovieInfo extends React.Component {
                 <Link to={`/cast/${actor.id}`} key={actor.id}>
                     <div>
                         <Image className="loading" src={actor.profile_path == null ? BROKEN_IMAGE
-                            :URL_IMG + IMG_LOGO_S_SIZE + actor.profile_path} alt={actor.name} responsive
-                               circle/>
+                            : URL_IMG + IMG_LOGO_S_SIZE + actor.profile_path} alt={actor.name} responsive
+                            circle />
                         <h3 className="fs"> Character: {<p>{actor.character}</p>} </h3>
                         <h3 className="fs"> Name: {<p>{actor.name}</p>} </h3>
                     </div>
@@ -90,15 +94,83 @@ class MovieInfo extends React.Component {
     getSimilarMovies() {
         let temp = this.props.similarMovies.slice(0, 5).map((movie) =>
             <Col xs={4} sm={3} md={2} key={movie.id}>
-                <MovieCardComponent className="picture" movie={movie}/>
+                <MovieCardComponent className="picture" movie={movie} />
                 <h3 className="fs"> Movie: {<p>{movie.original_title}</p>} </h3>
             </Col>
         );
         return temp;
     }
 
+    addFavorite(id) {
+        console.log(id)
+        var self = this;
+
+        database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
+            var favs = snapshot.val()
+            if (favs !== null && favs.includes(id)) {
+                console.log("Already favorited")
+            } else {
+                if (favs === null) {
+                    favs = [];
+                }
+                favs.push(id);
+                console.log(favs)
+                self.setState({
+                    isFav: true
+                })
+                var ref = database.ref('users/' + auth.currentUser.uid).child('favorites').set(favs);
+            }
+        })
+    }
+
+    removeFavorite(id) {
+        var self = this;
+        database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
+            var favs = snapshot.val()
+            if (favs !== null && favs.includes(id)) {
+                var index = favs.indexOf(id);
+                if (index > -1) {
+                    favs.splice(index, 1);
+                }
+                console.log(favs)
+                self.setState({
+                    isFav: false
+                })
+                var ref = database.ref('users/' + auth.currentUser.uid).child('favorites').set(favs);
+            } else {
+                console.log("Not in favs")
+            }
+        })
+    }
+
+    
+    componentWillMount() {
+        var self = this;
+        database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
+            var favs = snapshot.val()
+            if (favs !== null && favs.includes(self.props.movie.id)) {
+                console.log("-----IS FAV")
+                self.setState({
+                    isFav: true
+                })
+            }
+        })
+    }
+
+
+
     render() {
         const movie = this.props.movie;
+        const favButton = this.state.isFav ? (
+            <Button onClick={() => { this.removeFavorite(movie.id) }}>
+                <Glyphicon glyph="trash" /> Remove Favorite
+                </Button>
+        ) : (<div>
+            <Button onClick={() => { this.addFavorite(movie.id) }}>
+                <Glyphicon glyph="heart" /> Add Favorite
+                </Button>
+        </div>
+            );
 
         return (
             <div className="tests">
@@ -107,6 +179,7 @@ class MovieInfo extends React.Component {
                     <Grid fluid={true}>
                         <Row>
                             <h1>{movie.title}</h1>
+                            {favButton}
                             <div>{this.getMovieInfo()}</div>
                         </Row>
                         <Row>

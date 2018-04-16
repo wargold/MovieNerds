@@ -431,11 +431,6 @@ export function getSimilarMovies(id) {
     };
 }
 
-export function testFunc() {
-    return {
-        type: "wtf"
-    };
-}
 
 export function setAuthenticated(user) {
     return function (dispatch) {

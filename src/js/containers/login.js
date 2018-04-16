@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
 import { Toaster, Intent } from '@blueprintjs/core'
-import { testFunc, setAuthenticated } from '../actions';
-import { app, facebookProvider } from '../constants/base'
+import { setAuthenticated } from '../actions';
+import { app, facebookProvider, database } from '../constants/base'
 
 const loginStyles = {
     width: "90%",
@@ -23,6 +23,12 @@ class Login extends Component {
         this.authWithEmailPassword = this.authWithEmailPassword.bind(this)
     }
 
+    saveUser(id, email) {
+        database.ref('users/' + id).set({
+            email: email
+        });
+    }
+
     authWithFacebook() {
         console.log("facebook auth")
         app.auth().signInWithPopup(facebookProvider)
@@ -32,8 +38,10 @@ class Login extends Component {
                 } else {
                     // Successfully signed in with facebook
                     //this.setState({ redirect: true })
-                    console.log(result.user.displayName)
+                    console.log(result.user)
                     this.props.setAuthenticated(result.user.displayName);
+
+                    //this.saveUser(result.user.uid, result.user.email)
                 }
             })
 
@@ -41,17 +49,17 @@ class Login extends Component {
 
     authWithEmailPassword(event) {
         event.preventDefault()
-       
+
         const email = this.emailInput.value
         const password = this.passwordInput.value
-        
+
         app.auth().fetchProvidersForEmail(email)
             .then((providers) => {
                 if (providers.length === 0) {
                     // create user
                     console.log("create")
                     return app.auth().createUserWithEmailAndPassword(email, password)
-                    
+
                 } else if (providers.indexOf("password") === -1) {
                     // they used facebook
                     console.log("already facebook")
@@ -68,6 +76,8 @@ class Login extends Component {
                     //this.setState({ redirect: true })
                     console.log(user)
                     this.props.setAuthenticated(user.email)
+
+                    //this.saveUser(user.uid, user.email)
                 }
             })
             .catch((error) => {
@@ -82,7 +92,7 @@ class Login extends Component {
             return <Redirect to={'/'} />
         }
 
-        console.log("rendering", this.props.test(), this.props.redirect)
+        console.log("rendering", this.props.redirect)
 
         return (
             <div style={loginStyles}>
@@ -102,7 +112,7 @@ class Login extends Component {
                         Password
             <input style={{ width: "100%" }} className="pt-input" name="password" type="password" ref={(input) => { this.passwordInput = input }} placeholder="Password"></input>
                     </label>
-                    <input style={{ width: "100%" }} type="submit" className="pt-button pt-intent-primary" value="Log In"></input>
+                    <input style={{ width: "100%" }} type="submit" className="pt-button pt-intent-primary" value="Log In / Register"></input>
                 </form>
             </div>
 
@@ -115,7 +125,6 @@ class Login extends Component {
 // Import actions that the view uses to update the store
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
-        test: testFunc,
         setAuthenticated: setAuthenticated
     }, dispatch);
 }
