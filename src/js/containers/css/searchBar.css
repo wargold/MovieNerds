@@ -95,3 +95,8 @@
     width: auto;
     height: 30px;
 }
+
+.myfavorites{
+    position: absolute;
+    right: 3em;
+}

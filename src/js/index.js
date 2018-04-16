@@ -16,6 +16,7 @@ import Movie from './containers/movie'
 import Cast from './containers/cast'
 import Login from './containers/login'
 import Logout from './containers/logout'
+import FavoriteMovies from './containers/favoriteMovie'
 import { BrowserRouter } from 'react-router-dom'
 import { app, base } from './constants/base';
 import Vis from './containers/visualization'
@@ -43,6 +44,7 @@ ReactDOM.render(
                 <Route path="/movie/:id" component={Movie}/>
                 <Route path="/cast/:id" component={Cast}/>
                 <Route path="/vis" component={Vis}/>
+                <Route path="/myfavorites" component={FavoriteMovies}/>
                 <Route path='/APIError' component={APIError} />
                 <Route path='/404' component={NotFound} />
                 <Redirect from='*' to='/404' />

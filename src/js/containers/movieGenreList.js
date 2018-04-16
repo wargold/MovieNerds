@@ -7,7 +7,7 @@ import {Image} from 'react-bootstrap';
 import {LOADING_SPINNER} from '../constants/constants'
 import MostPopularSlide from "../components/mostPopularSlide"
 
-
+let len;
 class MovieGenreList extends Component {
 
     componentDidMount() {

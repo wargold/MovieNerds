@@ -431,7 +431,6 @@ export function getSimilarMovies(id) {
     };
 }
 
-
 export function setAuthenticated(user) {
     return function (dispatch) {
         dispatch(facebookLoginSuccess(user))
@@ -454,4 +453,9 @@ export function notLoggedIn() {
     return {
         type: constants.AUTH_UNREGISTERED
     }
+}
+
+// UPDATE list with all genres and movies
+export function updateMovieFavorites(favoriteMovies) {
+    return { type: constants.UPDATE_FAVORITE_MOVIE, favoriteMovies }
 }

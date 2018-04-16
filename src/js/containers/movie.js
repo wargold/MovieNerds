@@ -46,7 +46,7 @@ class Movie extends Component {
         console.log("Selector value:", this.props.selector.value);
         const de = this.props.similarMovies !== undefined && this.props.similarMovies.length > 0 ?
             (<MovieInfo movie={this.props.movieInfo.movieInfo} trailer={this.props.trailer}
-                        castList={this.props.castList} similarMovies={this.props.similarMovies}/>)
+                        castList={this.props.castList} similarMovies={this.props.similarMovies} user={this.props.auth.user}/>)
             : (<Image src={LOADING_SPINNER} style={{width: 100, height: 100}}/>);
         return (<div>
             <SearchBar/>
@@ -65,7 +65,8 @@ function mapStateToProps(state) {
         movieInfo: state.movieInfo,
         trailer: state.trailer.movieInfo,
         castList: state.castList.movieInfo,
-        similarMovies: state.similarMovies.movieInfo
+        similarMovies: state.similarMovies.movieInfo,
+        auth: state.auth
     };
 }
 

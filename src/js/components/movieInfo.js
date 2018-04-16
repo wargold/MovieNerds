@@ -143,25 +143,25 @@ class MovieInfo extends React.Component {
         })
     }
 
-    
-    componentWillMount() {
-        var self = this;
-        database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
-            var favs = snapshot.val()
-            if (favs !== null && favs.includes(self.props.movie.id)) {
-                console.log("-----IS FAV")
-                self.setState({
-                    isFav: true
-                })
-            }
-        })
+    componentDidMount() {
+        console.log("KOLA ASASSA", auth.currentUser);
+        if ( auth.currentUser !== null) {
+            var self = this;
+            database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
+                var favs = snapshot.val()
+                if (favs !== null && favs.includes(self.props.movie.id)) {
+                    console.log("-----IS FAV")
+                    self.setState({
+                        isFav: true
+                    })
+                }
+            })
+        }
     }
-
-
 
     render() {
         const movie = this.props.movie;
-        const favButton = this.state.isFav ? (
+        const favButton = this.state.isFav && this.props.user !== '' ? (
             <Button onClick={() => { this.removeFavorite(movie.id) }}>
                 <Glyphicon glyph="trash" /> Remove Favorite
                 </Button>
@@ -172,6 +172,12 @@ class MovieInfo extends React.Component {
         </div>
             );
 
+        let ren = () =>{
+            if (this.props.user !== '' ){
+                return favButton;
+            }
+        }
+
         return (
             <div className="tests">
                 <div>{this.getImages()}</div>
@@ -179,7 +185,7 @@ class MovieInfo extends React.Component {
                     <Grid fluid={true}>
                         <Row>
                             <h1>{movie.title}</h1>
-                            {favButton}
+                            {ren()}
                             <div>{this.getMovieInfo()}</div>
                         </Row>
                         <Row>

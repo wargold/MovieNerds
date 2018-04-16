@@ -8,7 +8,7 @@ import {Panel, Glyphicon, Button} from 'react-bootstrap'
 import './css/searchBar.css'
 import {URL_IMG, IMG_LOGO_XS_SIZE, BROKEN_IMAGE} from '../constants/constants'
 import SearchByGenres from './selectGenre'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import {DebounceInput} from 'react-debounce-input';
 
 let debounce = require('lodash.debounce');
@@ -121,6 +121,11 @@ class SearchBar extends Component {
                         <Glyphicon glyph="log-out"/> Log Out
                     </Button>
                 </Link>
+                <Link to={'/myfavorites'}>
+                <Button className="myfavorites">
+                    <Glyphicon glyph="heart" /> My Favorites
+                </Button>
+                </Link>
             </div>
         ) : (
             <Link to={'/login'}>
@@ -141,7 +146,6 @@ class SearchBar extends Component {
                             </Panel.Title>
                         </Link>
                         {loggin}
-
                     </Panel.Heading>
                     <Panel.Body>
                         <div><h4>Search For A Movie Based On A Movie Title</h4></div>

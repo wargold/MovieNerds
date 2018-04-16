@@ -2,7 +2,7 @@ import {combineReducers} from 'redux';
 import genre from './genre'
 import Search from './search'
 import MoviesByGenre from './moviesByGenre'
-import UpdateMoviesByGenre from './updateMoviesByGenre'
+import {UpdateMoviesByGenre, UpdateFavoriteMovies} from './updateMoviesByGenre'
 import GenreSelections from './genreSelection'
 import MoviesByMultiGenre from './moviesByMultiGenres'
 import MostPopularMovies from './mostPopularMovies'
@@ -31,7 +31,8 @@ const allReducers = combineReducers({
     similarMovies: SimilarMovies,
     castAbout: CastByID,
     castKnownMovies: CastKnowMovies,
-    routing: routerReducer
+    routing: routerReducer,
+    updateFavorites: UpdateFavoriteMovies
 });
 
 export default allReducers

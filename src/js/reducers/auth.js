@@ -1,4 +1,4 @@
-import { AUTH_FACEBOOK, AUTH_FACEBOOK_SUCCESS, AUTH_FACEBOOK_FAIL, AUTH_LOGOUT, AUTH_UNREGISTERED } from '../constants/constants'
+import { AUTH_FACEBOOK, AUTH_FACEBOOK_SUCCESS, AUTH_FACEBOOK_FAIL, AUTH_LOGOUT, AUTH_UNREGISTERED, UPDATE_FAVORITE_MOVIE } from '../constants/constants'
 
 const initialState = {
     user: '',
@@ -6,7 +6,8 @@ const initialState = {
     authenticated: false,
     redirect: false,
     redirectLogout: false,
-    error: null
+    error: null,
+    favorite: []
 }
 
 const Auth = (state = initialState, action) => {
@@ -19,6 +20,9 @@ const Auth = (state = initialState, action) => {
             return { ...state, authenticated: false, redirect: false, error: action.error, loading: false };
         case AUTH_LOGOUT:
             return { ...state, authenticated: false, redirectLogout: true, error: action.error, loading: false };
+        case UPDATE_FAVORITE_MOVIE:
+            return {
+                ...state, favorite: [...state.favorite, action.favorite]};
         default:
             return state;
     }

@@ -1,11 +1,11 @@
-import {UPDATE_ALLMOVIESBYGENRE} from "../constants/constants";
+import {UPDATE_ALLMOVIESBYGENRE, UPDATE_FAVORITE_MOVIE} from "../constants/constants";
 
 const initialState = {
     movies:[],
     genres:[]
 }
 
-const UpdateMoviesByGenre = (state = initialState, action) => {
+export const UpdateMoviesByGenre = (state = initialState, action) => {
     switch (action.type) {
         case UPDATE_ALLMOVIESBYGENRE:
             return {
@@ -18,4 +18,15 @@ const UpdateMoviesByGenre = (state = initialState, action) => {
     }
 };
 
-export default UpdateMoviesByGenre;
+export const UpdateFavoriteMovies = (state = initialState, action) => {
+    switch (action.type) {
+        case UPDATE_FAVORITE_MOVIE:
+            return {
+                ...state,
+                movies: [action.favoriteMovies],
+                genres: []
+            };
+        default:
+            return state;
+    }
+};
