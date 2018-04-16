@@ -456,6 +456,6 @@ export function notLoggedIn() {
 }
 
 // UPDATE list with all genres and movies
-export function updateMovieFavorites(favoriteMovies) {
-    return { type: constants.UPDATE_FAVORITE_MOVIE, favoriteMovies }
+export function updateMovieFavorites(favoriteMovies, favoriteIDs) {
+    return { type: constants.UPDATE_FAVORITE_MOVIE, favoriteMovies, favoriteIDs }
 }

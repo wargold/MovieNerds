@@ -46,7 +46,7 @@ class Movie extends Component {
         console.log("Selector value:", this.props.selector.value);
         const de = this.props.similarMovies !== undefined && this.props.similarMovies.length > 0 ?
             (<MovieInfo movie={this.props.movieInfo.movieInfo} trailer={this.props.trailer}
-                        castList={this.props.castList} similarMovies={this.props.similarMovies} user={this.props.auth.user}/>)
+                        castList={this.props.castList} similarMovies={this.props.similarMovies} user={this.props.auth.user} userUID={this.props.auth.userUID}/>)
             : (<Image src={LOADING_SPINNER} style={{width: 100, height: 100}}/>);
         return (<div>
             <SearchBar/>
