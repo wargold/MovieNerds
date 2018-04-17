@@ -67,7 +67,7 @@ Run an initial webpack build
 
 Start the development server (changes will now update live in browser)
 ```
-> npm run start
+> npm run startdev
 ```
 
 New Dependencies for authentication:
