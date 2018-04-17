@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "webpack",
     "startdev": "webpack-dev-server --mode development --open --hot",
-    "postinstall": "webpack --mode production",
+    "heroku-postbuild": "webpack --mode production",
     "start": "node server.js"
   },
   "license": "ISC",
