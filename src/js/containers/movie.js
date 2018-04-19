@@ -5,8 +5,7 @@ import {
     getMovieByMovieID, getTrailerByMovieID, getCastByMovieID, getSimilarMovies,
     resetSelectedValues
 } from '../actions';
-import {Image} from 'react-bootstrap';
-import {LOADING_SPINNER} from '../constants/constants';
+import {Loader} from '../../loader/loader'
 import MovieInfo from '../components/movieInfo';
 import SearchBar from './searchBar';
 import MoviesByGenres from './moviesByGenres';
@@ -47,7 +46,7 @@ class Movie extends Component {
         const de = this.props.similarMovies !== undefined && this.props.similarMovies.length > 0 ?
             (<MovieInfo movie={this.props.movieInfo.movieInfo} trailer={this.props.trailer}
                         castList={this.props.castList} similarMovies={this.props.similarMovies} user={this.props.auth.user} userUID={this.props.auth.userUID}/>)
-            : (<Image src={LOADING_SPINNER} style={{width: 100, height: 100}}/>);
+            : (Loader());
         return (<div>
             <SearchBar/>
             {this.props.selector.value.length > 0 ?

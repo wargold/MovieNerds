@@ -4,14 +4,13 @@ import { connect } from 'react-redux';
 import {
     getMovieByMovieID, updateMovieFavorites
 } from '../actions';
-import { Image } from 'react-bootstrap';
-import { LOADING_SPINNER } from '../constants/constants';
 import SearchBar from './searchBar';
 import MoviesByGenres from './moviesByGenres';
 import { database, auth } from '../constants/base'
 import { Col, Grid, Row, Glyphicon, Button } from 'react-bootstrap'
 import MovieCardComponent from '../components/moviecards'
 import * as d3 from "d3";
+import {Loader} from '../../loader/loader'
 
 let movies;
 
@@ -550,7 +549,7 @@ class FavoriteMovies extends Component {
                         {this.getMovies()}
                     </Row>
                 </Grid>)
-                : (<Image src={LOADING_SPINNER} style={{ width: 100, height: 100 }} />)) : (<h2>You Have To Be Logged In To Show This Page!</h2>)
+                : (Loader())) : (<h2>You Have To Be Logged In To Show This Page!</h2>)
         return (<div>
             <SearchBar />
             {this.props.selector.value.length > 0 ?

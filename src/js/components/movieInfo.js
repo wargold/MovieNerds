@@ -40,7 +40,7 @@ class MovieInfo extends React.Component {
         let temp = (
             <div>
                 <div className="poster">
-                    <Image className="pos loading"
+                    <Image className="pos loader"
                         src={this.props.movie.backdrop_path == null ? BROKEN_IMAGE
                             : "https://image.tmdb.org/t/p/w780" + this.props.movie.backdrop_path}
                         responsive />
@@ -80,9 +80,9 @@ class MovieInfo extends React.Component {
             (<Col xs={4} sm={3} md={2} key={actor.cast_id}>
                 <Link to={`/cast/${actor.id}`} key={actor.id}>
                     <div>
-                        <Image className="loading" src={actor.profile_path == null ? BROKEN_IMAGE
+                        <Image className="loader" src={actor.profile_path == null ? BROKEN_IMAGE
                             : URL_IMG + IMG_LOGO_S_SIZE + actor.profile_path} alt={actor.name} responsive
-                            circle />
+                               circle />
                         <h3 className="fs"> Character: {<p>{actor.character}</p>} </h3>
                         <h3 className="fs"> Name: {<p>{actor.name}</p>} </h3>
                     </div>

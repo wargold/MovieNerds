@@ -26,12 +26,7 @@ h2 {
     color: #006699;
 }
 
-
-.main {
-    background: darkgrey;
-}
-
-.loading {
+.loader {
     background: transparent url('http://thinkfuture.com/wp-content/uploads/2013/10/loading_spinner.gif') center no-repeat;
     opacity: 1;
     z-index: 10;

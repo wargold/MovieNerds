@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getMovieByMovieID, getTrailerByMovieID, getCastByMovieID } from '../actions';
-import { Image } from 'react-bootstrap';
-import { LOADING_SPINNER } from '../constants/constants';
-import MovieInfo from '../components/movieInfo';
 import SearchBar from './searchBar'
 import MovieGenreList from './movieGenreList'
 import MoviesByGenres from './moviesByGenres'
-import Login from './login'
 import { app, base } from '../constants/base';
 import { setAuthenticated, notLoggedIn } from '../actions';
 import { Spinner } from '@blueprintjs/core';

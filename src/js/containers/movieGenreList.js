@@ -3,10 +3,8 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {getMovieGenres, getMoviesByGenre, updateAllMoviesGenres, getMostPopMovies} from '../actions';
 import SimpleSlider from "../components/genreSlider";
-import {Image} from 'react-bootstrap';
-import {LOADING_SPINNER} from '../constants/constants'
 import MostPopularSlide from "../components/mostPopularSlide"
-
+import {Loader} from '../../loader/loader'
 let len;
 class MovieGenreList extends Component {
 
@@ -48,17 +46,15 @@ class MovieGenreList extends Component {
     }
 
     render() {
-
         const de = this.props.updateMoviesByGenre.genres[0] !== undefined && this.props.updateMoviesByGenre.movies[0] !== undefined
         && this.props.mostPopMovies.movies !== undefined && this.props.updateMoviesByGenre.genres[0].length > 0 &&
         this.props.updateMoviesByGenre.movies[0].length > 0 && this.props.mostPopMovies.movies.length > 0 ?
-            (<div>
+            (<div className="sliderBackground">
                 <MostPopularSlide mostPopular={this.props.mostPopMovies.movies}/>
                 <SimpleSlider genres={this.props.updateMoviesByGenre.genres[0]}
                               movies={this.props.updateMoviesByGenre.movies[0]}/>
             </div>)
-            : (
-                <Image src={LOADING_SPINNER} style={{width: 100, height: 100}}/>
+            : (Loader()
             );
         return (<div>{de}</div>)
     }

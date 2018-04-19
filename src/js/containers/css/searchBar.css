@@ -100,3 +100,7 @@
     position: absolute;
     right: 3em;
 }
+
+div.panel.panel-default{
+    margin-bottom: 0px;
+}

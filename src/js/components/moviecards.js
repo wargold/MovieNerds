@@ -35,7 +35,7 @@ const MovieCardComponent = (props) => {
             <StyleImage>
                 <div className="container" key={movie.id}>
                     <Link to={`/movie/${movie.id}`} key={movie.id}>
-                        <Image className="image loading" src={movie.poster_path == null ? BROKEN_IMAGE
+                        <Image className="image loader" src={movie.poster_path == null ? BROKEN_IMAGE
                             : URL_IMG + IMG_LOGO_S_SIZE + movie.poster_path}
                                alt={movie.original_title} responsive/>
                     </Link>

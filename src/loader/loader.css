@@ -1,0 +1,171 @@
+/*Credits: https://codepen.io/jkantner/pen/NaqooN*/
+
+*, *:before, *:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+:root {
+    --dur: 2s;
+}
+.background {
+    background-color: #aad;
+    display: flex;
+    height: 100vh;
+}
+.icon {
+    animation: darken var(--dur) linear infinite alternate;
+    background-color: #000;
+    border-radius: 16px;
+    margin: auto;
+    overflow: hidden;
+    width: 256px;
+    height: 256px;
+}
+.parts {
+    animation: turn var(--dur) linear infinite alternate;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform: rotate(90deg);
+}
+.parts > * {
+    position: absolute;
+}
+.a, .b, .c {
+    width: 188px;
+    height: 36px;
+    will-change: transform;
+}
+.a, .c {
+    background-color: #be0004;
+}
+.b, .d {
+    z-index: 1;
+}
+.a {
+    animation: a var(--dur) linear infinite alternate;
+    transform: translate(34px,144px) skewY(0);
+}
+.b {
+    animation: b var(--dur) linear infinite alternate;
+    background-color: #f50006;
+    box-shadow: 0 0 8px 0 #000;
+    transform: translate(34px,111px) skewY(-19deg);
+}
+.b-inner {
+    animation: bInner var(--dur) linear infinite alternate;
+    background-image: linear-gradient(#000,transparent 10px);
+    background-position: 0 -10px;
+    background-repeat: no-repeat;
+    border-radius: 0 8px 0 0;
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    right: -6px;
+    width: 94px;
+    height: 30px;
+    transform: scale(1,0) skewX(-90deg);
+    transform-origin: 100% 0;
+}
+.c {
+    animation: c var(--dur) linear infinite alternate;
+    transform: translate(34px,78px) skewY(-0);
+}
+.d {
+    animation: d var(--dur) linear infinite alternate;
+    background-color: #000;
+    border-radius: 50% 0 0 50%;
+    top: 12%;
+    right: 0;
+    width: 37px;
+    height: 76%;
+}
+@keyframes a {
+    from, 25% {
+        background-color: #be0004;
+        border-radius: 0;
+        transform: translate(34px,144px) skewY(0);
+        width: 188px;
+        height: 36px;
+    }
+    75%, to {
+        background-color: #ff9228;
+        border-radius: 4px;
+        transform: translate(54px,58px) skewY(-16deg);
+        width: 148px;
+        height: 54px;
+    }
+}
+@keyframes b {
+    from, 25% {
+        background-color: #f50006;
+        border-radius: 0;
+        box-shadow: 0 0 8px 0 #000;
+        transform: translate(34px,111px) skewY(-19deg);
+        width: 188px;
+        height: 36px;
+    }
+    75%, to {
+        background-color: #ff9228;
+        border-radius: 4px;
+        box-shadow: none;
+        transform: translate(54px,102px) skewY(16deg);
+        width: 148px;
+        height: 54px;
+    }
+}
+@keyframes bInner {
+    from, 25% {
+        background-position: 0 -10px;
+        opacity: 0;
+        transform: scale(2.9,0) skewX(-90deg);
+    }
+    75%, to {
+        background-position: 0 0;
+        opacity: 0.2;
+        transform: scale(1,1) skewX(-61deg);
+    }
+}
+@keyframes c {
+    from, 25% {
+        background-color: #be0004;
+        border-radius: 0;
+        transform: translate(34px,78px) skewY(0);
+        width: 188px;
+        height: 36px;
+    }
+    75%, to {
+        background-color: #ff9228;
+        border-radius: 4px;
+        transform: translate(54px,148px) skewY(-16deg);
+        width: 148px;
+        height: 54px;
+    }
+}
+@keyframes d {
+    from, 25% {
+        background-color: #000;
+    }
+    75%, to {
+        background-color: #4b4b4b;
+    }
+}
+@keyframes darken {
+    from, 25% {
+        background-color: #000;
+        border-radius: 0;
+    }
+    75%, to {
+        background-color: #4b4b4b;
+        border-radius: 16px;
+    }
+}
+@keyframes turn {
+    from, 25% {transform: rotate(90deg);}
+    75%, to {transform: rotate(0);}
+}
+
+.sliderBackground{
+    background: darkgrey;
+}

@@ -3,8 +3,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {getMoviesByGenres} from '../actions';
 import MoviesListByGenres from '../components/moviesListByGenre';
-import {Image} from 'react-bootstrap';
-import {LOADING_SPINNER} from '../constants/constants'
+import {Loader} from '../../loader/loader'
 
 class MoviesByGenres extends Component {
 
@@ -41,7 +40,7 @@ class MoviesByGenres extends Component {
         console.log("Kolla props: ", this.props.moviesByGenres.moviesByGenres);
         if(this.props.moviesByGenres.moviesByGenres!==null && this.props.moviesByGenres.moviesByGenres.length>0) {
             return (<MoviesListByGenres movies={this.props.moviesByGenres.moviesByGenres} genres={this.props.selector.value}/>)
-        }else return(<Image src={LOADING_SPINNER}  style={{width: 100, height:100 }}/>)
+        }else return(Loader())
     }
 }
 
