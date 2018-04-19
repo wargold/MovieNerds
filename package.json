@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack",
-    "startdev": "webpack-dev-server --mode development --open --hot",
-    "heroku-postbuild": "webpack --mode production",
-    "start": "node server.js"
+    "dev": "./node_modules/.bin/webpack-dev-server --config ./webpack/webpack-dev.config.js --watch --colors",
+    "build": "rm -rf dist && ./node_modules/.bin/webpack --config ./webpack/webpack-prod.config.js --colors",
+    "start": "PORT=8080 pm2 start ./server.js",
+    "test": "./node_modules/.bin/eslint src && ./node_modules/.bin/mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
+    "test:watch": "npm run test -- --watch",
+    "lint": "./node_modules/.bin/eslint src"
   },
   "license": "ISC",
+  "keywords": [],
   "dependencies": {
     "@blueprintjs/core": "^2.1.1",
     "axios": "^0.18.0",
@@ -71,6 +74,12 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^3.6.1",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-plugin-react": "^6.3.0",
+    "extract-text-webpack-plugin": "^1.0.1",
     "css-loader": "^0.23.1",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
@@ -86,7 +95,6 @@
     "type": "git",
     "url": "git+https://github.com/wargold/MovieNerds.git"
   },
-  "keywords": [],
   "author": "",
   "bugs": {
     "url": "https://github.com/wargold/MovieNerds/issues"

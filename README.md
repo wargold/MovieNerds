@@ -60,7 +60,11 @@ then we save the error message.
  
 `src/img/:` containing gif and logo.
 
-`webpack.config.js:` Our build tool.
+`webpack/webpack.config.js:` The main webpack config, webpack is our build tool.
+
+`webpack/webpack-dev.config.js:` Development mode config.
+
+`webpack/webpack-prod.config.js:` Production mode config.
 
 `.gitignore:` For not uploading necessary files to github.
 
@@ -78,15 +82,37 @@ To get started, first install all the necessary dependencies.
 > npm install
 ```
 
-Run an initial webpack build
+Run an initial webpack build and start the development server 
 ```
-> webpack
+> npm run dev
+> Then open http://localhost:3000
 ```
 
-Start the development server (changes will now update live in browser)
+Build production mode
 ```
-> npm run startdev
+> npm run build
 ```
+
+Host server locally on your own computer
+
+If you don't have pm2 installed on your computer, please run 
+```
+> npm i pm2
+```
+
+Then you can start your server
+
+```
+> npm run start
+> The open http://localhost:8080
+```
+
+Close server
+
+```
+> pm2 stop [id]
+```
+
 
 New Dependencies for authentication:
 ```

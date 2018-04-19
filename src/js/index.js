@@ -9,8 +9,6 @@ import createLogger from 'redux-logger';
 import allReducers from './reducers';
 import {Router, Route, browserHistory, hashHistory, Redirect, Switch} from 'react-router'
 import {syncHistoryWithStore, routerMiddleware} from 'react-router-redux'
-import createHistory from 'history/createBrowserHistory'
-import routes from './router';
 import App from './App';
 import Movie from './containers/movie'
 import Cast from './containers/cast'
@@ -18,9 +16,9 @@ import Login from './containers/login'
 import Logout from './containers/logout'
 import FavoriteMovies from './containers/favoriteMovie'
 import { BrowserRouter } from 'react-router-dom'
-import { app, base } from './constants/base';
 import Vis from './containers/visualization'
 import history from './history'
+import "../../public/style.css"
 
 const routeMiddleware = routerMiddleware(hashHistory);
 const logger = createLogger();
