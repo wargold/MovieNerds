@@ -20,7 +20,7 @@ const SimpleSlider = (props) => {
 
     let getMoviesByGenre = (index) => {
         return props.movies[index].movies.map((mov) => <div className="slideBox" key={mov.id}>
-            <Link to={`/movie/${mov.id}`} key={mov.id}>
+            <Link to={`/movie/${mov.id}`} key={mov.id} style={{ textDecoration: 'none' }}>
                 <LazyLoad height={200}>
                     <MovieCardComponent movie={mov}/>
                 </LazyLoad>

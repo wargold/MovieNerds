@@ -19,7 +19,7 @@ const MostPopularSlide = (props) => {
                             glyph={'heart'}/> {movie.vote_count} &nbsp;<Glyphicon
                         glyph={'calendar'}/> {movie.release_date}
                     </div>
-                    <p>{movie.overview}&nbsp; {<Link to={`/movie/${movie.id}`} key={movie.id}>
+                    <p>{movie.overview}&nbsp; {<Link to={`/movie/${movie.id}`} key={movie.id} style={{ textDecoration: 'none' }}>
                      <Glyphicon className="moreInfo" glyph={'info-sign'}/> </Link>}</p>
                 </Carousel.Caption>
             </Carousel.Item>);

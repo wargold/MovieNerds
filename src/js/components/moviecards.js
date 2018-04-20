@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image} from 'react-bootstrap'
 import {Glyphicon} from 'react-bootstrap'
-import {URL_IMG, IMG_LOGO_S_SIZE, BROKEN_IMAGE, IMG_LOGO_XS_SIZE} from '../constants/constants'
+import {URL_IMG, IMG_LOGO_S_SIZE, BROKEN_IMAGE} from '../constants/constants'
 import './css/moviecards.css'
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
@@ -34,7 +34,7 @@ const MovieCardComponent = (props) => {
         <div className="moviecard">
             <StyleImage>
                 <div className="container" key={movie.id}>
-                    <Link to={`/movie/${movie.id}`} key={movie.id}>
+                    <Link to={`/movie/${movie.id}`} key={movie.id} style={{ textDecoration: 'none' }}>
                         <Image className="image loader" src={movie.poster_path == null ? BROKEN_IMAGE
                             : URL_IMG + IMG_LOGO_S_SIZE + movie.poster_path}
                                alt={movie.original_title} responsive/>

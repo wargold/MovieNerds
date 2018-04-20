@@ -78,7 +78,7 @@ class MovieInfo extends React.Component {
     getCast() {
         let cast = this.props.castList.slice(0, 5).map((actor) =>
             (<Col xs={4} sm={3} md={2} key={actor.cast_id}>
-                <Link to={`/cast/${actor.id}`} key={actor.id}>
+                <Link to={`/cast/${actor.id}`} key={actor.id} style={{ textDecoration: 'none' }}>
                     <div>
                         <Image className="loader" src={actor.profile_path == null ? BROKEN_IMAGE
                             : URL_IMG + IMG_LOGO_S_SIZE + actor.profile_path} alt={actor.name} responsive
@@ -92,12 +92,15 @@ class MovieInfo extends React.Component {
     }
 
     getSimilarMovies() {
-        let temp = this.props.similarMovies.slice(0, 5).map((movie) =>
-            <Col xs={4} sm={3} md={2} key={movie.id}>
-                <MovieCardComponent className="picture" movie={movie} />
-                <h3 className="fs"> Movie: {<p>{movie.original_title}</p>} </h3>
-            </Col>
-        );
+        let temp=  <h3 className="nonsimilarMovies">No Similar movies Found!</h3>;
+        if (this.props.similarMovies.length>0) {
+             temp = this.props.similarMovies.slice(0, 5).map((movie) =>
+                <Col xs={4} sm={3} md={2} key={movie.id}>
+                    <MovieCardComponent className="picture" movie={movie}/>
+                    <h3 className="fs"> Movie: {<p>{movie.original_title}</p>} </h3>
+                </Col>
+            );
+        }
         return temp;
     }
 
@@ -161,6 +164,7 @@ class MovieInfo extends React.Component {
 
     render() {
         const movie = this.props.movie;
+        console.log("kolla movieinfo", movie);
         const favButton = this.state.isFav && this.props.user !== '' ? (
             <Button onClick={() => { this.removeFavorite(movie.id) }}>
                 <Glyphicon glyph="trash" /> Remove Favorite

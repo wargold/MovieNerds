@@ -27,13 +27,7 @@ class MoviesByGenres extends Component {
             }
         }
         console.log("Kolla genres värdet: ", gen);
-        let promise = new Promise((resolve, reject) => {
-            setTimeout(() => {
-                console.log('This happens 5th (after 3 seconds).');
-                resolve(this.props.getMoviesByGenres(gen));
-            }, 3000);
-        });
-        return promise;
+        this.props.getMoviesByGenres(gen);
     }
 
     render() {

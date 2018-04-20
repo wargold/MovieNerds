@@ -1,6 +1,7 @@
 import {FETCHING_MOVIEBYID, FETCHING_MOVIEBYID_SUCCESS, FETCHING_MOVIEBYID_FAILURE, FETCHING_MOVIETRAILER,
     FETCHING_MOVIETRAILER_SUCCESS, FETCHING_MOVIETRAILER_FAILURE, FETCHING_CAST, FETCHING_CAST_SUCCESS,
-    FETCHING_CAST_FAILURE, FETCHING_SIMILAR_MOVIES, FETCHING_SIMILAR_MOVIES_SUCCESS, FETCHING_SIMILAR_MOVIES_FAILURE
+    FETCHING_CAST_FAILURE, FETCHING_SIMILAR_MOVIES, FETCHING_SIMILAR_MOVIES_SUCCESS, FETCHING_SIMILAR_MOVIES_FAILURE,
+    UPDATE_CASTLIST, UPDATE_MOVIELIST
 } from '../constants/constants'
 
 const initialState = {
@@ -18,6 +19,8 @@ export const MovieByID = (state = initialState, action) => {
             return {...state, isFetching: false, movieID: action.id, movieInfo: action.data};
         case FETCHING_MOVIEBYID_FAILURE:
             return {...state, isFetching: false, error: action.error};
+        case UPDATE_MOVIELIST:
+            return {...state, movieInfo:[]};
         default:
             return state;
     }
@@ -44,6 +47,8 @@ export const CastByMovieID = (state = initialState, action) => {
             return {...state, isFetching: false, movieID: action.id, movieInfo: action.data};
         case FETCHING_CAST_FAILURE:
             return {...state, isFetching: false, error: action.error};
+        case UPDATE_CASTLIST:
+            return {...state, movieID:[]};
         default:
             return state;
     }

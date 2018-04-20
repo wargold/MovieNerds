@@ -11,7 +11,7 @@ const CastInfo = (props) => {
     let getMovies = () => {
         let cast = props.moviesKnown.slice(0, 5).map((movie) =>
             (<Col xs={4} sm={3} md={2} key={movie.id}>
-                <Link to={`/movie/${movie.id}`} key={movie.id}>
+                <Link to={`/movie/${movie.id}`}  key={movie.id} style={{ textDecoration: 'none' }} >
                     <MovieCardComponent movie={movie}/>
                 </Link>
             </Col>))

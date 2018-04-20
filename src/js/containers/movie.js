@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {
     getMovieByMovieID, getTrailerByMovieID, getCastByMovieID, getSimilarMovies,
-    resetSelectedValues
+    resetSelectedValues, updateMovieList, updateCastList
 } from '../actions';
 import {Loader} from '../../loader/loader'
 import MovieInfo from '../components/movieInfo';
@@ -25,25 +25,24 @@ class Movie extends Component {
         if (nextProps.match.params.id && this.props.match.params.id !== nextProps.match.params.id) {
             console.log("Update kan göras");
             this.props.resetGenreValue();
+            this.props.updateCastList();
+            this.props.updateMovieList();
             this.load(nextProps.match.params.id);
         }
     }
 
-
-    load(hg) {
-        const id = hg;
-        this.props.getMovieByMovieID(id);
-        this.props.getTrailerByMovieID(id);
-        this.props.getCastByMovieID(id);
-        this.props.getSimilarMovies(id);
+    load(paramsID) {
+        const id = paramsID;
+        this.props.getSimilarMovies(id).then(()=>this.props.getTrailerByMovieID(id).then(()=>this.props.getMovieByMovieID(id).then(()=>this.props.getCastByMovieID(id) )))
     }
 
 
     render() {
         console.log("Render");
         console.log("Render");
-        console.log("Selector value:", this.props.selector.value);
-        const de = this.props.similarMovies !== undefined && this.props.similarMovies.length > 0 ?
+        console.log("Selector value:", this.props.castList);
+        const de =  (this.props.castList!==undefined &&this.props.castList.length>0 && this.props.movieInfo.movieInfo.genres!==undefined
+        && this.props.movieInfo.movieInfo.genres.length>0) ?
             (<MovieInfo movie={this.props.movieInfo.movieInfo} trailer={this.props.trailer}
                         castList={this.props.castList} similarMovies={this.props.similarMovies} user={this.props.auth.user} userUID={this.props.auth.userUID}/>)
             : (Loader());
@@ -75,7 +74,9 @@ function matchDispatchToProps(dispatch) {
         getTrailerByMovieID: getTrailerByMovieID,
         getCastByMovieID: getCastByMovieID,
         getSimilarMovies: getSimilarMovies,
-        resetGenreValue: resetSelectedValues
+        resetGenreValue: resetSelectedValues,
+        updateMovieList: updateMovieList,
+        updateCastList: updateCastList
     }, dispatch);
 }
 
