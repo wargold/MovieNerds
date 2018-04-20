@@ -41,8 +41,8 @@ class Movie extends Component {
         console.log("Render");
         console.log("Render");
         console.log("Selector value:", this.props.castList);
-        const de =  (this.props.castList!==undefined &&this.props.castList.length>0 && this.props.movieInfo.movieInfo.genres!==undefined
-        && this.props.movieInfo.movieInfo.genres.length>0) ?
+        let movieID = this.props.movieInfo.movieInfo.id;
+        const de =  (this.props.castList!==undefined &&this.props.castList.length>0 && this.props.movieInfo.movieInfo.id!==undefined) ?
             (<MovieInfo movie={this.props.movieInfo.movieInfo} trailer={this.props.trailer}
                         castList={this.props.castList} similarMovies={this.props.similarMovies} user={this.props.auth.user} userUID={this.props.auth.userUID}/>)
             : (Loader());
