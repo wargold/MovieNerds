@@ -6,7 +6,9 @@
 
 Building a website for browsing movies, the users will be able to register an account on the website, view trailers, and set/remove favorite movies only if they have an account and are logged in. For more advanced interaction, we are planning to implement dynamic data visualization, for example an interactive graph where the user is able to see the connections between their favorite movies and find related/similar movies. We have used Redux with ReactJS and Firebase for authorization and also as our database for storing the users favorite movies. We are using the api [themoviedb](https://www.themoviedb.org/documentation/api) for retrieving information about movies, genres, actors etc.
 
-##### Live Demo: https://movienerds.herokuapp.com/ or https://movienerds-1f94f.firebaseapp.com
+##### Live Demo: https://movienerds.herokuapp.com/ 
+
+(In case the website to heruko doesn't work chek: https://movienerds-1f94f.firebaseapp.com)
 
 #### What we have done and what we still plan to do
 
