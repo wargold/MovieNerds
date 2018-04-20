@@ -124,13 +124,3 @@ Close server
 ```
 
 
-New Dependencies for authentication:
-```
-> npm install @blueprintjs/core
-```
-> npm install npm install --save re-base
-```
-Firebase authentication:
-https://www.youtube.com/watch?v=XMuoDQy61ys
-
-To view your project, go to: [http://localhost:3000/](http://localhost:3000/)
