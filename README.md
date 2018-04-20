@@ -10,10 +10,15 @@ Building a website for browsing movies, the users will be able to register an ac
 
 #### What we have done and what we still plan to do
 
-We have implemented the majority of the functions of the app, everything works accordingly to what we planned.
+We have implemented the majority of the functions of the app, everything works accordingly to what we planned expect some bugs.
+The data visualization of the favorite is now hardcoded but will be fixed so that is show the common similar movies depending on
+the movies that is in the users favorite. We also have played around with different design choices and try to improve the
+overall design of the app. We are aware of that there are plenty bugs left to fix but our main goal was to iplement the functionality
+and then fix design and bugs issue.
+
 The things that we have left to implement are:
 
- * Fix some small bugs.
+ * Fix some bugs.
  * Improve the design of the app.
  * Implement the favorite page and make sure that the users can save favorite movies.
  * Implement the visualization of the users favorite movies by connecting them to each others similar movies.
@@ -59,6 +64,9 @@ then we save the error message.
 `src/.env:` firebase api keys, domain, db etc.
  
 `src/img/:` containing gif and logo.
+
+`src/loader/:` containing a function that returns our new loader and corresponding css code to that loader.
+
 
 `webpack/webpack.config.js:` The main webpack config, webpack is our build tool.
 
