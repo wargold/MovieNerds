@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {getCastInfoByID, getCastKnownMovies} from '../actions';
 import CastInfo from '../components/castInfo';
 import SearchBar from './searchBar';
-import MoviesByGenres from './moviesByGenres';
 import {Loader} from '../../loader/loader'
 
 class Cast extends Component {
@@ -27,11 +26,7 @@ class Cast extends Component {
             : (Loader());
         return (<div>
             <SearchBar/>
-            {this.props.selector.value.length > 0 ?
-                <MoviesByGenres/>
-                :
-                de
-            }
+            {de}
         </div>)
     }
 }

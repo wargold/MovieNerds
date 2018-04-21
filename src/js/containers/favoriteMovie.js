@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import {
     getMovieByMovieID, updateMovieFavorites
 } from '../actions';
 import SearchBar from './searchBar';
 import MoviesByGenres from './moviesByGenres';
-import { database, auth } from '../constants/base'
-import { Col, Grid, Row, Glyphicon, Button } from 'react-bootstrap'
+import {database, auth} from '../constants/base'
+import {Col, Grid, Row, Glyphicon, Button} from 'react-bootstrap'
 import MovieCardComponent from '../components/moviecards'
 import * as d3 from "d3";
 import {Loader} from '../../loader/loader'
@@ -15,7 +15,6 @@ import {Loader} from '../../loader/loader'
 let movies;
 
 class FavoriteMovies extends Component {
-
 
 
     componentDidMount() {
@@ -28,18 +27,19 @@ class FavoriteMovies extends Component {
             .append("svg")
             .attr("width", width)
             .attr("height", height)
-            .style("border-style", "solid");;
+            .style("border-style", "solid");
+        ;
 
         var fav = [{
             "id": "fav1",
             "poster_path": "/pQPRp30zd0BSaefterJnLmh4Rs9.jpg",
             "fav": 1
         },
-        {
-            "id": "fav2",
-            "poster_path": "/5T8VvuFTdaawKLJk34i69Utaw7o.jpg",
-            "fav": 1
-        }]
+            {
+                "id": "fav2",
+                "poster_path": "/5T8VvuFTdaawKLJk34i69Utaw7o.jpg",
+                "fav": 1
+            }]
 
         var simi = [
             [
@@ -326,7 +326,6 @@ class FavoriteMovies extends Component {
         console.log(edges)
 
 
-
         function checkExist(array, o) {
             for (var i = 0; i < array.length; i++) {
                 if (array[i].id === o.id) {
@@ -389,8 +388,8 @@ class FavoriteMovies extends Component {
 
         // make the image grow a little on mouse over and add the text details on click
         var setEvents = nodeImage
-            // Append hero text
-            // click on a node
+        // Append hero text
+        // click on a node
             .on('click', function (d) {
                 console.log(d)
                 d3.select("#desc").html(d.title);
@@ -503,9 +502,11 @@ class FavoriteMovies extends Component {
         let genre = this.props.favorites.map((mov) =>
             <Col xs={4} sm={3} md={2} key={mov.movieInfo.id}>
                 <div>
-                    <MovieCardComponent movie={mov.movieInfo} />
-                    <Button onClick={() => { this.removeFavorite(mov.movieInfo.id) }}>
-                        <Glyphicon glyph="trash" /> Remove Favorite
+                    <MovieCardComponent movie={mov.movieInfo}/>
+                    <Button onClick={() => {
+                        this.removeFavorite(mov.movieInfo.id)
+                    }}>
+                        <Glyphicon glyph="trash"/> Remove Favorite
                     </Button>
                 </div>
             </Col>);
@@ -533,8 +534,6 @@ class FavoriteMovies extends Component {
     }
 
 
-
-
     render() {
         if (this.props.favorites !== null && this.props.favorites.length > 0) {
             console.log("kaddasdasdsa", this.props.favorites);
@@ -551,14 +550,11 @@ class FavoriteMovies extends Component {
                 </Grid>)
                 : (Loader())) : (<h2>You Have To Be Logged In To Show This Page!</h2>)
         return (<div>
-            <SearchBar />
-            {this.props.selector.value.length > 0 ?
-                <MoviesByGenres />
-                : de
-            }
-            <h2 id="desc">Click to view their identity</h2>
-            <section id="vis"></section>
-        </div>
+                <SearchBar/>
+                {de}
+                <h2 id="desc">Click to view their identity</h2>
+                <section id="vis"></section>
+            </div>
 
         )
     }

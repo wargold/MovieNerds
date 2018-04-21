@@ -8,8 +8,6 @@ import {
 import {Loader} from '../../loader/loader'
 import MovieInfo from '../components/movieInfo';
 import SearchBar from './searchBar';
-import MoviesByGenres from './moviesByGenres';
-import history from '../history'
 class Movie extends Component {
 
     componentDidMount() {
@@ -42,8 +40,6 @@ class Movie extends Component {
     }
 
     render() {
-        console.log("HISTORY", history);
-
         console.log("Render");
         console.log("Render");
         console.log("Selector value:", this.props.castList);
@@ -53,11 +49,7 @@ class Movie extends Component {
             : (Loader());
         return (<div>
             <SearchBar/>
-            {this.props.selector.value.length > 0 ?
-                <MoviesByGenres/>
-                :
-                de
-            }
+            {de}
         </div>)
     }
 }

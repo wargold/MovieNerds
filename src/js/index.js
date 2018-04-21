@@ -18,6 +18,7 @@ import FavoriteMovies from './containers/favoriteMovie'
 import { BrowserRouter } from 'react-router-dom'
 import Vis from './containers/visualization'
 import history from './history'
+import MoviesByGenres from './containers/moviesByGenres'
 import "../../public/style.css"
 
 const routeMiddleware = routerMiddleware(hashHistory);
@@ -43,6 +44,7 @@ ReactDOM.render(
                 <Route path="/cast/:id" component={Cast}/>
                 <Route path="/vis" component={Vis}/>
                 <Route path="/myfavorites" component={FavoriteMovies}/>
+                <Route path="/searchGenres/:value" component={MoviesByGenres}/>
                 <Route path='/APIError' component={APIError} />
                 <Route path='/404' component={NotFound} />
                 <Redirect from='*' to='/404' />

@@ -4,7 +4,7 @@ import './css/selectGenre.css';
 import {connect} from "react-redux";
 import {updateSelectedValues, getMovieGenres} from "../actions";
 import {bindActionCreators} from 'redux';
-
+import history from '../history'
 const ASYNC_DELAY = 500;
 
 class SearchByGenres extends Component {
@@ -14,7 +14,18 @@ class SearchByGenres extends Component {
     }
 
     onChange = (value) => {
+        console.log("Kolla value av genres", value);
+        let gen=[];
+        for (var i = 0; i < value.length; i++) {
+            gen.push(value[i].id);
+        }
+        console.log("Kolla value av genres", gen);
         this.props.setValue(value);
+        if(gen.length>0) {
+            history.push('/searchGenres/' + gen);
+        }else {
+            history.push('/');
+        }
     };
 
     getContributors = (input, callback) => {

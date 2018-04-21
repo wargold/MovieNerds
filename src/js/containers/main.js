@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import SearchBar from './searchBar'
 import MovieGenreList from './movieGenreList'
-import MoviesByGenres from './moviesByGenres'
 import { app, base } from '../constants/base';
 import { setAuthenticated, notLoggedIn } from '../actions';
 import { Spinner } from '@blueprintjs/core';
@@ -42,11 +41,7 @@ class Main extends Component {
 
             <div>
                 <SearchBar />
-                {this.props.selector.value.length > 0 ?
-                    <MoviesByGenres />
-                    :
-                    <MovieGenreList />
-                }
+                <MovieGenreList />
             </div>
         )
     }

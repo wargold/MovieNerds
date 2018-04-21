@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {getMoviesByGenres} from '../actions';
 import MoviesListByGenres from '../components/moviesListByGenre';
 import {Loader} from '../../loader/loader'
+import SearchBar from './searchBar';
+import history from '../history'
 
 class MoviesByGenres extends Component {
 
@@ -18,23 +20,23 @@ class MoviesByGenres extends Component {
     }
 
     loadData() {
-        const lenOfGenres = this.props.selector.value.length;
-        let gen = '';
-        for (var i = 0; i < lenOfGenres; i++) {
-            gen += this.props.selector.value[i].id.toString();
-            if (i !== (lenOfGenres - 1)) {
-                gen += ',';
-            }
+        if(this.props.selector.value !== '') {
+            this.props.getMoviesByGenres(this.props.match.params.value);
+        }else{
+            history.push('/');
         }
-        console.log("Kolla genres värdet: ", gen);
-        this.props.getMoviesByGenres(gen);
     }
 
     render() {
+        console.log("Kolla props av serach genres: ", this.props.selector);
         console.log("Kolla props: ", this.props.moviesByGenres.moviesByGenres);
-        if(this.props.moviesByGenres.moviesByGenres!==null && this.props.moviesByGenres.moviesByGenres.length>0) {
-            return (<MoviesListByGenres movies={this.props.moviesByGenres.moviesByGenres} genres={this.props.selector.value}/>)
-        }else return(Loader())
+        const de =  (this.props.moviesByGenres.moviesByGenres!==null && this.props.moviesByGenres.moviesByGenres.length>0) ?
+            (<MoviesListByGenres movies={this.props.moviesByGenres.moviesByGenres} genres={this.props.selector.value}/>)
+            : (Loader());
+        return (<div>
+            <SearchBar/>
+            {de}
+        </div>)
     }
 }
 
