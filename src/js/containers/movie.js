@@ -9,11 +9,12 @@ import {Loader} from '../../loader/loader'
 import MovieInfo from '../components/movieInfo';
 import SearchBar from './searchBar';
 import MoviesByGenres from './moviesByGenres';
-
+import history from '../history'
 class Movie extends Component {
 
     componentDidMount() {
         console.log("Check param id", this.props.match.params.id);
+        this.resetValues();
         this.load(this.props.match.params.id);
 
     }
@@ -24,9 +25,7 @@ class Movie extends Component {
         console.log("New value: length", this.props.match.params.id);
         if (nextProps.match.params.id && this.props.match.params.id !== nextProps.match.params.id) {
             console.log("Update kan göras");
-            this.props.resetGenreValue();
-            this.props.updateCastList();
-            this.props.updateMovieList();
+            this.resetValues();
             this.load(nextProps.match.params.id);
         }
     }
@@ -36,12 +35,18 @@ class Movie extends Component {
         this.props.getSimilarMovies(id).then(()=>this.props.getTrailerByMovieID(id).then(()=>this.props.getMovieByMovieID(id).then(()=>this.props.getCastByMovieID(id) )))
     }
 
+    resetValues(){
+        this.props.resetGenreValue();
+        this.props.updateCastList();
+        this.props.updateMovieList();
+    }
 
     render() {
+        console.log("HISTORY", history);
+
         console.log("Render");
         console.log("Render");
         console.log("Selector value:", this.props.castList);
-        let movieID = this.props.movieInfo.movieInfo.id;
         const de =  (this.props.castList!==undefined &&this.props.castList.length>0 && this.props.movieInfo.movieInfo.id!==undefined) ?
             (<MovieInfo movie={this.props.movieInfo.movieInfo} trailer={this.props.trailer}
                         castList={this.props.castList} similarMovies={this.props.similarMovies} user={this.props.auth.user} userUID={this.props.auth.userUID}/>)
