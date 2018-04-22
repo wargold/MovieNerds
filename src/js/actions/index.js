@@ -501,16 +501,19 @@ export function getLoadedAllMoviesSucces() {
             .then(json => json.genres)
             .then(data => {
                 data.forEach(async (i) => {
-                    genres.push(i);
-                    let urlGen = constants.URL_GENRE + i.id + '/movies' + constants.API_KEY2 + '&language=en-US&include_adult=false&sort_by=created_at.asc';
-                    await fetch(urlGen)
-                        .then(response => response.json())
-                        .then(json => json.results)
-                        .then(async data => await moviesByGen.push(data))
-                        .catch(error => error)
+                    await genres.push(i);
                 })
-            }).then(() => dispatch(loadedAllMoviesSucces(genres, moviesByGen)))
-            .catch(error => dispatch(loadedAllMoviesFailure(error)))
+            }).catch(error => dispatch(loadedAllMoviesFailure(error)));
+
+        await genres.map(async (elem) => {
+            let urlGen = constants.URL_GENRE + elem.id + '/movies' + constants.API_KEY2 + '&language=en-US&include_adult=false&sort_by=created_at.asc';
+            await fetch(urlGen)
+                .then(response => response.json())
+                .then(json => json.results)
+                .then(async data => await moviesByGen.push(data))
+                .catch(error => dispatch(loadedAllMoviesFailure(error)))
+        });
+        await dispatch(loadedAllMoviesSucces(genres, moviesByGen));
     }
 }
 
