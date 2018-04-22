@@ -1,58 +1,30 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {getMovieGenres, getMoviesByGenre, updateAllMoviesGenres, getMostPopMovies} from '../actions';
+import {getMovieGenres, getMoviesByGenre, updateAllMoviesGenres, getMostPopMovies, getLoadedAllMoviesSucces, resetSelectedValues} from '../actions';
 import SimpleSlider from "../components/genreSlider";
-import MostPopularSlide from "../components/mostPopularSlide"
-import {Loader} from '../../loader/loader'
-let len;
+import MostPopularSlide from "../components/mostPopularSlide";
+import {Loader} from '../../loader/loader';
+
 class MovieGenreList extends Component {
 
     componentDidMount() {
-        if (this.props.updateMoviesByGenre.genres[0] === undefined || this.props.updateMoviesByGenre.movies[0] === undefined
-            && !(this.props.updateMoviesByGenre.genres[0].length > 0) ||
-            !(this.props.updateMoviesByGenre.movies[0].length > 0)) { //Dont Fetch data if data already exist!
-            let arr = [];
-            let pro = [];
-            this.props.getPopularMovies();
-            this.loadData().then((data) => {
-                data.data.map((elem) => {
-                    return (this.loadData2(elem.id)).then(() => {
-                        arr.push(elem);
-                        pro.push(this.props.movies);
-                    })
-                })
-            });
-            this.props.updateAllMoviesGenres(arr, pro);
+        this.props.resetGenreValue();
+        if (this.props.allMoviegenres.isFetching) {
+            this.props.getLoadedAllMoviesSucces();
+            setTimeout(() =>{
+                this.props.getPopularMovies();
+            }, 2000);
         }
     }
 
-    loadData() {
-        let promise = new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(this.props.getMovieGenres());
-            }, 3000);
-        });
-        return promise;
-    }
-
-    loadData2(item) {
-        let promise = new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(this.props.getMoviesByGenre(item));
-            }, 3000);
-        });
-        return promise;
-    }
-
     render() {
-        const de = this.props.updateMoviesByGenre.genres[0] !== undefined && this.props.updateMoviesByGenre.movies[0] !== undefined
-        && this.props.mostPopMovies.movies !== undefined && this.props.updateMoviesByGenre.genres[0].length > 0 &&
-        this.props.updateMoviesByGenre.movies[0].length > 0 && this.props.mostPopMovies.movies.length > 0 ?
+        console.log("kksd",this.props.mostPopMovies.movies);
+        const de = !this.props.allMoviegenres.isFetching && this.props.mostPopMovies.movies!==undefined&& this.props.mostPopMovies.movies.length>0?
             (<div className="sliderBackground">
                 <MostPopularSlide mostPopular={this.props.mostPopMovies.movies}/>
-                <SimpleSlider genres={this.props.updateMoviesByGenre.genres[0]}
-                              movies={this.props.updateMoviesByGenre.movies[0]}/>
+                <SimpleSlider genres={this.props.allMoviegenres.genres}
+                              movies={this.props.allMoviegenres.moviesByGenres[0]}/>
             </div>)
             : (Loader()
             );
@@ -65,7 +37,8 @@ function mapStateToProps(state) {
         genres: state.genres.genres,
         movies: state.movies,
         updateMoviesByGenre: state.updateMoviesByGenre,
-        mostPopMovies: state.mostPopularMovies
+        mostPopMovies: state.mostPopularMovies,
+        allMoviegenres: state.allMoviegenres
     };
 }
 
@@ -74,7 +47,9 @@ function matchDispatchToProps(dispatch) {
         getMovieGenres: getMovieGenres,
         getMoviesByGenre: getMoviesByGenre,
         updateAllMoviesGenres: updateAllMoviesGenres,
-        getPopularMovies: getMostPopMovies
+        getPopularMovies: getMostPopMovies,
+        getLoadedAllMoviesSucces: getLoadedAllMoviesSucces,
+        resetGenreValue: resetSelectedValues
     }, dispatch);
 }
 

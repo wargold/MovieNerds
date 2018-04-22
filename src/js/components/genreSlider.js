@@ -10,16 +10,16 @@ const SimpleSlider = (props) => {
     let getGenresName = () => {
         let genre = props.genres.map((elem, i) => <div className="genreSliderBox" key={elem.id}>
                 <h2 className="genreTitle"> {elem.name}</h2>
-                <Slider className="carsoule" {...settings}>
-                    {getMoviesByGenre(i)}
-                </Slider>
+            <Slider className="carsoule" {...settings}>
+                {getMoviesByGenre(i)}
+            </Slider>
             </div>
         );
         return genre
     };
 
     let getMoviesByGenre = (index) => {
-        return props.movies[index].movies.map((mov) => <div className="slideBox" key={mov.id}>
+        return props.movies[index].map((mov) => <div className="slideBox" key={mov.id}>
             <Link to={`/movie/${mov.id}`} key={mov.id} style={{ textDecoration: 'none' }}>
                 <LazyLoad height={200}>
                     <MovieCardComponent movie={mov}/>
@@ -78,7 +78,7 @@ const SimpleSlider = (props) => {
             </div>
         )
     };
-
+    console.log("Movie props",props.movies.length);
     return (
         <div className="genreSliderContainer">
             {getGenresName()}

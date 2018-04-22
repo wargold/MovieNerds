@@ -10,6 +10,7 @@ import {MovieByID, TrailerByMovieID, CastByMovieID, SimilarMovies} from './movie
 import {CastByID, CastKnowMovies} from './cast'
 import {routerReducer} from 'react-router-redux'
 import Auth from './auth'
+import AllMoviegenres from './allmoviesbygenres'
 
 /*
  * We combine all reducers into a single object before updated data is dispatched (sent) to store
@@ -32,7 +33,8 @@ const allReducers = combineReducers({
     castAbout: CastByID,
     castKnownMovies: CastKnowMovies,
     routing: routerReducer,
-    updateFavorites: UpdateFavoriteMovies
+    updateFavorites: UpdateFavoriteMovies,
+    allMoviegenres: AllMoviegenres
 });
 
 export default allReducers

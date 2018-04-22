@@ -1,7 +1,7 @@
 import * as constants from '../constants/constants'
-import { FETCHING_CASTBYID } from "../constants/constants";
-import { FETCHING_CASTBYID_SUCCESS } from "../constants/constants";
-import { FETCHING_CASTBYID_FAILURE } from "../constants/constants";
+import {FETCHING_CASTBYID} from "../constants/constants";
+import {FETCHING_CASTBYID_SUCCESS} from "../constants/constants";
+import {FETCHING_CASTBYID_FAILURE} from "../constants/constants";
 
 // Handles action for search movies api call
 function searchMovie(text) {
@@ -155,17 +155,17 @@ export function getMoviesByGenre(id) {
 
 // UPDATE list with all genres and movies
 export function updateAllMoviesGenres(allGenre, movieGenres) {
-    return { type: constants.UPDATE_ALLMOVIESBYGENRE, allGenre, movieGenres }
+    return {type: constants.UPDATE_ALLMOVIESBYGENRE, allGenre, movieGenres}
 }
 
 //UPDATE value of selected genres in selection
 export function updateSelectedValues(value) {
-    return { type: constants.UPDATE_GENRE_SELECTION, value }
+    return {type: constants.UPDATE_GENRE_SELECTION, value}
 }
 
 //UPDATE value of selected genres in selection
 export function resetSelectedValues() {
-    return { type: constants.RESET_GENRE_SELECTION }
+    return {type: constants.RESET_GENRE_SELECTION}
 }
 
 
@@ -457,15 +457,60 @@ export function notLoggedIn() {
 
 // UPDATE list with all genres and movies
 export function updateMovieFavorites(favoriteMovies, favoriteIDs) {
-    return { type: constants.UPDATE_FAVORITE_MOVIE, favoriteMovies, favoriteIDs }
+    return {type: constants.UPDATE_FAVORITE_MOVIE, favoriteMovies, favoriteIDs}
 }
 
 
 // UPDATE cast and movie list on update
 export function updateMovieList() {
-    return { type: constants.UPDATE_MOVIELIST }
+    return {type: constants.UPDATE_MOVIELIST}
 }
 
 export function updateCastList() {
-    return { type: constants.UPDATE_CASTLIST }
+    return {type: constants.UPDATE_CASTLIST}
 }
+
+// GET ALL MOVIES BY GENRES
+
+function loadedAllMovies() {
+    return {
+        type: constants.LOADED_ALL_MOVIES
+    };
+}
+
+function loadedAllMoviesSucces(genres, moviesByGenres) {
+    return {
+        type: constants.LOADED_ALL_MOVIES_SUCCESS, genres, moviesByGenres
+    };
+}
+
+function loadedAllMoviesFailure(error) {
+    return {
+        type: constants.LOADED_ALL_MOVIES_FAILURE, error
+    };
+}
+
+export function getLoadedAllMoviesSucces() {
+    let url = constants.URL_GENRE + 'movie/list' + constants.API_KEY2 + '&language=en-US';
+    return async function (dispatch) {
+        dispatch(loadedAllMovies());
+        let genres = [];
+        let moviesByGen = [];
+        await fetch(url)
+            .then(response => response.json())
+            .then(json => json.genres)
+            .then(data => {
+                data.forEach(async (i) => {
+                    genres.push(i);
+                    let urlGen = constants.URL_GENRE + i.id + '/movies' + constants.API_KEY2 + '&language=en-US&include_adult=false&sort_by=created_at.asc';
+                    await fetch(urlGen)
+                        .then(response => response.json())
+                        .then(json => json.results)
+                        .then(async data => await moviesByGen.push(data))
+                        .catch(error => error)
+                })
+            }).then(() => dispatch(loadedAllMoviesSucces(genres, moviesByGen)))
+            .catch(error => dispatch(loadedAllMoviesFailure(error)))
+    }
+}
+

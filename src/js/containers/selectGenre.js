@@ -5,25 +5,22 @@ import {connect} from "react-redux";
 import {updateSelectedValues, getMovieGenres} from "../actions";
 import {bindActionCreators} from 'redux';
 import history from '../history'
+
 const ASYNC_DELAY = 500;
 
 class SearchByGenres extends Component {
 
-    async componentDidMount() {
-        await this.props.getMovieGenres();
-    }
-
     onChange = (value) => {
         console.log("Kolla value av genres", value);
-        let gen=[];
+        let gen = [];
         for (var i = 0; i < value.length; i++) {
             gen.push(value[i].id);
         }
         console.log("Kolla value av genres", gen);
         this.props.setValue(value);
-        if(gen.length>0) {
+        if (gen.length > 0) {
             history.push('/searchGenres/' + gen);
-        }else {
+        } else {
             history.push('/');
         }
     };
