@@ -8,19 +8,24 @@ import LazyLoad from 'react-lazyload';
 const SimpleSlider = (props) => {
 
     let getGenresName = () => {
-        let genre = props.genres.map((elem, i) => <div className="genreSliderBox" key={elem.id}>
+        props.movies.sort(function (a, b) {
+            if (a.name > b.name) return 1;
+            if (a.name < b.name) return -1;
+            return 0;
+        });
+        let genre = props.movies.map((elem, i) => <div className="genreSliderBox" key={i}>
                 <h2 className="genreTitle"> {elem.name}</h2>
-            <Slider className="carsoule" {...settings}>
-                {getMoviesByGenre(i)}
-            </Slider>
+                <Slider className="carsoule" {...settings}>
+                    {getMoviesByGenre(elem.data)}
+                </Slider>
             </div>
         );
         return genre
     };
 
-    let getMoviesByGenre = (index) => {
-        return props.movies[index].map((mov) => <div className="slideBox" key={mov.id}>
-            <Link to={`/movie/${mov.id}`} key={mov.id} style={{ textDecoration: 'none' }}>
+    let getMoviesByGenre = (data) => {
+        return data.map((mov) => <div className="slideBox" key={mov.id}>
+            <Link to={`/movie/${mov.id}`} key={mov.id} style={{textDecoration: 'none'}}>
                 <LazyLoad height={200}>
                     <MovieCardComponent movie={mov}/>
                 </LazyLoad>
@@ -49,7 +54,7 @@ const SimpleSlider = (props) => {
                 settings: {
                     slidesToShow: 2
                 }
-            },{
+            }, {
                 breakpoint: 700,
                 settings: {
                     slidesToShow: 3
@@ -78,7 +83,7 @@ const SimpleSlider = (props) => {
             </div>
         )
     };
-    console.log("Movie props",props.movies.length);
+    console.log("Movie props", props.movies);
     return (
         <div className="genreSliderContainer">
             {getGenresName()}

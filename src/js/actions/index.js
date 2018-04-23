@@ -478,9 +478,9 @@ function loadedAllMovies() {
     };
 }
 
-function loadedAllMoviesSucces(genres, moviesByGenres) {
+function loadedAllMoviesSucces(moviesByGenres) {
     return {
-        type: constants.LOADED_ALL_MOVIES_SUCCESS, genres, moviesByGenres
+        type: constants.LOADED_ALL_MOVIES_SUCCESS, moviesByGenres
     };
 }
 
@@ -494,26 +494,21 @@ export function getLoadedAllMoviesSucces() {
     let url = constants.URL_GENRE + 'movie/list' + constants.API_KEY2 + '&language=en-US';
     return async function (dispatch) {
         dispatch(loadedAllMovies());
-        let genres = [];
         let moviesByGen = [];
         await fetch(url)
             .then(response => response.json())
             .then(json => json.genres)
             .then(data => {
-                data.forEach(async (i) => {
-                    await genres.push(i);
-                })
+                return Promise.all([data.map(async (i) => {
+                    let urlGen = constants.URL_GENRE + i.id + '/movies' + constants.API_KEY2 + '&language=en-US&include_adult=false&sort_by=created_at.asc';
+                    const response = await fetch(urlGen);
+                    const json = await response.json();
+                    const result = await json.results;
+                    await moviesByGen.push({name: i.name, data: result});
+                    await console.log(i.name);
+                })])
             }).catch(error => dispatch(loadedAllMoviesFailure(error)));
-
-        await genres.map(async (elem) => {
-            let urlGen = constants.URL_GENRE + elem.id + '/movies' + constants.API_KEY2 + '&language=en-US&include_adult=false&sort_by=created_at.asc';
-            await fetch(urlGen)
-                .then(response => response.json())
-                .then(json => json.results)
-                .then(async data => await moviesByGen.push(data))
-                .catch(error => dispatch(loadedAllMoviesFailure(error)))
-        });
-        await dispatch(loadedAllMoviesSucces(genres, moviesByGen));
+        dispatch(loadedAllMoviesSucces(moviesByGen));
     }
 }
 

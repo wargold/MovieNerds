@@ -14,7 +14,7 @@ class MovieGenreList extends Component {
             this.props.getLoadedAllMoviesSucces();
             setTimeout(() =>{
                 this.props.getPopularMovies();
-            }, 2000);
+            }, 3000);
         }
     }
 
@@ -23,8 +23,7 @@ class MovieGenreList extends Component {
         const de = !this.props.allMoviegenres.isFetching && this.props.mostPopMovies.movies!==undefined&& this.props.mostPopMovies.movies.length>0?
             (<div className="sliderBackground">
                 <MostPopularSlide mostPopular={this.props.mostPopMovies.movies}/>
-                <SimpleSlider genres={this.props.allMoviegenres.genres}
-                              movies={this.props.allMoviegenres.moviesByGenres[0]}/>
+                <SimpleSlider movies={this.props.allMoviegenres.moviesByGenres[0]}/>
             </div>)
             : (Loader()
             );
