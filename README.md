@@ -4,7 +4,14 @@
 #### Project Group 10
 #### Project Description
 
-Building a website for browsing movies, the users will be able to register an account on the website, view trailers, and set/remove favorite movies only if they have an account and are logged in. For more advanced interaction, we are planning to implement dynamic data visualization, for example an interactive graph where the user is able to see the connections between their favorite movies and find related/similar movies. We have used Redux with ReactJS and Firebase for authorization and also as our database for storing the users favorite movies. We are using the api [themoviedb](https://www.themoviedb.org/documentation/api) for retrieving information about movies, genres, actors etc.
+Building a website for browsing movies, the users will be able to register an account on the website, 
+view trailers, and set/remove favorite movies only if they have an account and are logged in. 
+For more advanced interaction, we are planning to implement dynamic data visualization, 
+for example an interactive graph where the user is able to see the connections between their 
+favorite movies and find related/similar movies. We have used Redux with ReactJS and Firebase 
+for authorization and also as our database for storing the users favorite movies. 
+We are using the api [themoviedb](https://www.themoviedb.org/documentation/api) for retrieving information 
+about movies, genres, actors etc.
 
 ##### Live Demo: https://movienerds.herokuapp.com/ 
 
@@ -16,7 +23,7 @@ We have implemented the majority of the functions of the app, everything works a
 The data visualization of the favorite is now hardcoded but will be fixed so that is show the common similar movies depending on
 the movies that is in the users favorite. We also have played around with different design choices and try to improve the
 overall design of the app. We are aware of that there are plenty bugs left to fix but our main goal was to iplement the functionality
-and then fix design and bugs issue.
+and then fix design and bugs issue. We have followed the architecture [Redux](https://redux.js.org).
 
 The things that we have left to implement are:
 

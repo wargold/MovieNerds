@@ -3,7 +3,6 @@ import Slider from 'react-slick'
 import MovieCardComponent from './moviecards'
 import './css/slider.css'
 import {Link} from 'react-router-dom'
-import LazyLoad from 'react-lazyload';
 
 const SimpleSlider = (props) => {
 
@@ -26,9 +25,7 @@ const SimpleSlider = (props) => {
     let getMoviesByGenre = (data) => {
         return data.map((mov) => <div className="slideBox" key={mov.id}>
             <Link to={`/movie/${mov.id}`} key={mov.id} style={{textDecoration: 'none'}}>
-                <LazyLoad height={200}>
                     <MovieCardComponent movie={mov}/>
-                </LazyLoad>
             </Link>
         </div>)
     }

@@ -14,15 +14,16 @@ class MovieGenreList extends Component {
             this.props.getLoadedAllMoviesSucces();
             setTimeout(() =>{
                 this.props.getPopularMovies();
-            }, 3000);
+            }, 3500);
         }
     }
 
     render() {
-        console.log("kksd",this.props.mostPopMovies.movies);
-        const de = !this.props.allMoviegenres.isFetching && this.props.mostPopMovies.movies!==undefined&& this.props.mostPopMovies.movies.length>0?
+        let mostPopMovies= this.props.mostPopMovies.movies;
+        console.log("mostPopMovies",mostPopMovies);
+        const de = !this.props.allMoviegenres.isFetching && mostPopMovies!==undefined&& mostPopMovies.length>0?
             (<div className="sliderBackground">
-                <MostPopularSlide mostPopular={this.props.mostPopMovies.movies}/>
+                <MostPopularSlide mostPopular={mostPopMovies}/>
                 <SimpleSlider movies={this.props.allMoviegenres.moviesByGenres[0]}/>
             </div>)
             : (Loader()
