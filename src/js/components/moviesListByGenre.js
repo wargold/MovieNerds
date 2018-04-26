@@ -55,14 +55,20 @@ const MoviesListByGenres = (props) => {
 
     console.log("Kolla dsddsds", props.movies);
 
+    let checkMoviesSize=()=>{
+        if(props.movies.length===0){
+            return <div className="noMovieTitle"><h2 className="noMovieTitle">Sorry No Movie Available By Those Genres!</h2></div>
+        }else{
+            return <Grid fluid={true}>
+                <Row>{getGenresName()}
+                {getMovies()}</Row>
+            </Grid>
+        }
+    }
+
     return (
         <div className="genreselectbackground">
-            <Grid fluid={true}>
-                <Row>
-                    {getGenresName()}
-                    {getMovies()}
-                </Row>
-            </Grid>
+                    {checkMoviesSize()}
         </div>
 );
 }

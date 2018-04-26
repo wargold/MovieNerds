@@ -30,7 +30,8 @@ class MoviesByGenres extends Component {
     render() {
         console.log("Kolla props av serach genres: ", this.props.selector);
         console.log("Kolla props: ", this.props.moviesByGenres.moviesByGenres);
-        const de =  (this.props.moviesByGenres.moviesByGenres!==null && this.props.moviesByGenres.moviesByGenres.length>0) ?
+        let moviesByGenres= this.props.moviesByGenres.moviesByGenres;
+        const de =  (moviesByGenres!==null && moviesByGenres.length>=0 && this.props.moviesByGenres.isFetching===false) ?
             (<MoviesListByGenres movies={this.props.moviesByGenres.moviesByGenres} genres={this.props.selector.value}/>)
             : (Loader());
         return (<div>

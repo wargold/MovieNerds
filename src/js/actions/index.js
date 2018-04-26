@@ -491,24 +491,16 @@ function loadedAllMoviesFailure(error) {
 }
 
 export function getLoadedAllMoviesSucces() {
-    let url = constants.URL_GENRE + 'movie/list' + constants.API_KEY2 + '&language=en-US';
     return async function (dispatch) {
         dispatch(loadedAllMovies());
         let moviesByGen = [];
-        await fetch(url)
-            .then(response => response.json())
-            .then(json => json.genres)
-            .then(data => {
-                return Promise.all([data.map(async (i) => {
-                    let urlGen = constants.URL_GENRE + i.id + '/movies' + constants.API_KEY2 + '&language=en-US&include_adult=false&sort_by=created_at.asc';
-                    const response = await fetch(urlGen);
-                    const json = await response.json();
-                    const result = await json.results;
-                    await moviesByGen.push({name: i.name, data: result});
-                    await console.log(i.name);
+        await dispatch(getMovieGenres()).then(data => {
+                return Promise.all([data.data.map(async (i) => {
+                    await dispatch(getMoviesByGenre(i.id)).then(async (movieGenre)=>await moviesByGen.push({name: i.name, data: movieGenre.data}));
                 })])
             }).catch(error => dispatch(loadedAllMoviesFailure(error)));
-        dispatch(loadedAllMoviesSucces(moviesByGen));
+        setTimeout(() =>{
+        dispatch(loadedAllMoviesSucces(moviesByGen))},2000);
     }
 }
 
