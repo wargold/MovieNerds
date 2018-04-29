@@ -11,6 +11,7 @@ import {Col, Grid, Row, Glyphicon, Button} from 'react-bootstrap'
 import MovieCardComponent from '../components/moviecards'
 import * as d3 from "d3";
 import {Loader} from '../../loader/loader'
+import history from "../history";
 
 let movies;
 
@@ -565,6 +566,7 @@ class FavoriteMovies extends Component {
             this.props.favoriteID !== null && this.state.loadedFavorite ?
                 (<Grid fluid={true}>
                     <h2>My Favorites Movies</h2>
+                    {this.props.favoriteID.length > 0? <Button onClick={()=>history.push('/vis')}>Visualisation</Button>: <h2>s</h2>}
                     <Row>
                         {this.props.favoriteID.length > 0 ?
                             this.getMovies() : <h2>No Movies In Your Favorite List</h2>

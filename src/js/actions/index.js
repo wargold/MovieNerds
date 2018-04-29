@@ -1,4 +1,5 @@
 import * as constants from '../constants/constants'
+import {auth, database} from "../constants/base";
 
 // Handles action for search movies api call
 function searchMovie(text) {
@@ -530,7 +531,7 @@ export function getFavoriteSimilarMovies(list) {
     return async function (dispatch) {
         dispatch(loadFavoriteSimilarMovies());
         let similarFavMovies = [];
-        await Promise.all([list.map(async (movieID) => await dispatch(getSimilarMovies(movieID)).then(async (similarMovies) =>
+        await Promise.all([list.map(async (movieID) => await dispatch(getSimilarMovies(movieID.id)).then(async (similarMovies) =>
             await similarFavMovies.push({FavMovieID: movieID, data:similarMovies.data})).catch(error => dispatch(loadFavoriteSimilarMoviesFailure(error))))]);
         setTimeout(() => {
             dispatch(loadFavoriteSimilarMoviesSuccess(similarFavMovies))
@@ -569,4 +570,67 @@ export function getFavoriteActors(list) {
             dispatch(loadFavoriteActorsSuccess(similarFavActors))
         }, 500);
     }
+}
+
+
+// GET ALL ACTORS THAT PLAY THE MOVIES IN A USERS FAVORITE MOVIE LIST
+
+function addFav() {
+    return {
+        type: constants.LOAD_FAVORITE_ACTORS
+    };
+}
+
+function loadFavoriteActorsSuccess(simFavActors) {
+    return {
+        type: constants.LOAD_FAVORITE_ACTORS_SUCCESS, simFavActors
+    };
+}
+
+function loadFavoriteActorsFailure(error) {
+    return {
+        type: constants.LOAD_FAVORITE_ACTORS_FAILURE, error
+    };
+}
+
+export function addFavorite(id) {
+    console.log(id)
+    var self = this;
+
+    database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
+        var favs = snapshot.val()
+        if (favs !== null && favs.some(item=> {if(item.movieID===id){return true}else{return false}})) {
+            console.log("Already favorited")
+        } else {
+            if (favs === null) {
+                favs = [];
+            }
+            favs.push(id);
+            console.log(favs)
+            self.setState({
+                isFav: true
+            })
+            var ref = database.ref('users/' + auth.currentUser.uid).child('favorites').set(favs);
+        }
+    })
+}
+
+export function removeFavorite(id) {
+    var self = this;
+    database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
+        var favs = snapshot.val()
+        if (favs !== null && favs.some(item=> {if(item.movieID===id){return true}else{return false}})) {
+            var index = favs.some((item, i)=> {if(item.movieID===id){return i}})
+            if (index > -1) {
+                favs.splice(index, 1);
+            }
+            console.log(favs)
+            self.setState({
+                isFav: false
+            })
+            var ref = database.ref('users/' + auth.currentUser.uid).child('favorites').set(favs);
+        } else {
+            console.log("Not in favs")
+        }
+    })
 }
