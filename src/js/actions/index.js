@@ -1,7 +1,4 @@
 import * as constants from '../constants/constants'
-import {FETCHING_CASTBYID} from "../constants/constants";
-import {FETCHING_CASTBYID_SUCCESS} from "../constants/constants";
-import {FETCHING_CASTBYID_FAILURE} from "../constants/constants";
 
 // Handles action for search movies api call
 function searchMovie(text) {
@@ -478,7 +475,7 @@ function loadedAllMovies() {
     };
 }
 
-function loadedAllMoviesSucces(moviesByGenres) {
+function loadedAllMoviesSuccess(moviesByGenres) {
     return {
         type: constants.LOADED_ALL_MOVIES_SUCCESS, moviesByGenres
     };
@@ -495,12 +492,81 @@ export function getLoadedAllMoviesSucces() {
         dispatch(loadedAllMovies());
         let moviesByGen = [];
         await dispatch(getMovieGenres()).then(data => {
-                return Promise.all([data.data.map(async (i) => {
-                    await dispatch(getMoviesByGenre(i.id)).then(async (movieGenre)=>await moviesByGen.push({name: i.name, data: movieGenre.data}));
-                })])
-            }).catch(error => dispatch(loadedAllMoviesFailure(error)));
-        setTimeout(() =>{
-        dispatch(loadedAllMoviesSucces(moviesByGen))},2000);
+            return Promise.all([data.data.map(async (i) => {
+                await dispatch(getMoviesByGenre(i.id)).then(async (movieGenre) => await moviesByGen.push({
+                    name: i.name,
+                    data: movieGenre.data
+                }));
+            })])
+        }).catch(error => dispatch(loadedAllMoviesFailure(error)));
+        setTimeout(() => {
+            dispatch(loadedAllMoviesSuccess(moviesByGen))
+        }, 2000);
     }
 }
 
+
+// GET ALL MOVIES BY A USERS FAVORITE MOVIE LIST
+
+function loadFavoriteSimilarMovies() {
+    return {
+        type: constants.LOAD_FAVORITE_SIMILAR_MOVIES
+    };
+}
+
+function loadFavoriteSimilarMoviesSuccess(simFavMovies) {
+    return {
+        type: constants.LOAD_FAVORITE_SIMILAR_MOVIES_SUCCESS, simFavMovies
+    };
+}
+
+function loadFavoriteSimilarMoviesFailure(error) {
+    return {
+        type: constants.LOAD_FAVORITE_SIMILAR_MOVIES_FAILURE, error
+    };
+}
+
+export function getFavoriteSimilarMovies(list) {
+    return async function (dispatch) {
+        dispatch(loadFavoriteSimilarMovies());
+        let similarFavMovies = [];
+        await Promise.all([list.map(async (movieID) => await dispatch(getSimilarMovies(movieID)).then(async (similarMovies) =>
+            await similarFavMovies.push({FavMovieID: movieID, data:similarMovies.data})).catch(error => dispatch(loadFavoriteSimilarMoviesFailure(error))))]);
+        setTimeout(() => {
+            dispatch(loadFavoriteSimilarMoviesSuccess(similarFavMovies))
+        }, 500);
+    }
+}
+
+
+// GET ALL ACTORS THAT PLAY THE MOVIES IN A USERS FAVORITE MOVIE LIST
+
+function loadFavoriteActors() {
+    return {
+        type: constants.LOAD_FAVORITE_ACTORS
+    };
+}
+
+function loadFavoriteActorsSuccess(simFavActors) {
+    return {
+        type: constants.LOAD_FAVORITE_ACTORS_SUCCESS, simFavActors
+    };
+}
+
+function loadFavoriteActorsFailure(error) {
+    return {
+        type: constants.LOAD_FAVORITE_ACTORS_FAILURE, error
+    };
+}
+
+export function getFavoriteActors(list) {
+    return async function (dispatch) {
+        dispatch(loadFavoriteActors());
+        let similarFavActors = [];
+        await Promise.all([list.map(async (movieID) => await dispatch(getCastByMovieID(movieID)).then(async (similarMovies) =>
+            await similarFavActors.push({FavMovieID: movieID, data:similarMovies.data})).catch(error => dispatch(loadFavoriteActorsFailure(error))))]);
+        setTimeout(() => {
+            dispatch(loadFavoriteActorsSuccess(similarFavActors))
+        }, 500);
+    }
+}

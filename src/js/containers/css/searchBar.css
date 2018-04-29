@@ -104,3 +104,9 @@
 div.panel.panel-default{
     margin-bottom: 0px;
 }
+.stickyhead {
+    position: sticky;
+    width: 100%;
+    z-index: 99999;
+    top: 0;
+}

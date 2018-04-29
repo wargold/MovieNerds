@@ -137,7 +137,7 @@ class SearchBar extends Component {
 
 
         return (
-            <div>
+            <div className="stickyhead">
                 <Panel>
                     <Panel.Heading>
                         <Link to={'/'}>

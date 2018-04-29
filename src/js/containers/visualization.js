@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {getSimilarMovies, updateAllMoviesGenres} from '../actions';
+import {getSimilarMovies, updateAllMoviesGenres, getFavoriteSimilarMovies,getFavoriteActors} from '../actions';
 var Heap = require('heap');
 
 
@@ -11,10 +11,17 @@ class Vis extends Component {
         //Get all the similar movies from the favorite list
         Promise.all(favorite.map((elem)=>this.props.getSimilarMovies(elem).then(()=> this.props.similarMovies)))
             .then((d)=>this.props.updateAllMoviesGenres(d,d));
+        this.props.getFavoriteSimilarMovies(favorite);
+        this.props.getFavoriteActors(favorite);
         }
 
 
     render() {
+
+        console.log("visualization.js favorite similar movies", this.props.similarFavoriteMov.similarFavorite);
+        console.log("visualization.js favorite similar actors", this.props.favoriteActors.similarFavorite);
+
+
         if (this.props.updateMoviesByGenre.genres[0] !== undefined && this.props.updateMoviesByGenre.genres[0].length > 0){
             console.log("Kolla Array", this.props.updateMoviesByGenre.genres[0]);
             let temp=[];
@@ -56,14 +63,18 @@ class Vis extends Component {
 function mapStateToProps(state) {
     return {
         similarMovies: state.similarMovies.movieInfo,
-        updateMoviesByGenre: state.updateMoviesByGenre
+        updateMoviesByGenre: state.updateMoviesByGenre,
+        similarFavoriteMov: state.similarFavoriteMov,
+        favoriteActors: state.favoriteActors
     };
 }
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
         getSimilarMovies: getSimilarMovies,
-        updateAllMoviesGenres: updateAllMoviesGenres
+        updateAllMoviesGenres: updateAllMoviesGenres,
+        getFavoriteSimilarMovies: getFavoriteSimilarMovies,
+        getFavoriteActors: getFavoriteActors
     }, dispatch);
 }
 

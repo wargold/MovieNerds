@@ -23,6 +23,7 @@ const MovieCardComponent = (props) => {
       position: absolute;
       top: 0;
       margin:10px;
+      padding-top:10px;
       color:white;
       font-weight:bold;
       opacity:0;

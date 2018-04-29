@@ -10,7 +10,8 @@
 }
 
 .genreSliderBox:last-child {
-    margin-bottom: -10em;
+    padding-bottom: 8em;
+    margin: 0;
 }
 
 .carsoule {
@@ -45,6 +46,11 @@ div.slick-slide.slick-active.slideBox{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.slick-active.slideBox:hover{
+    transform: scale(1.1);
+    z-index: 300;
 }
 
 img.image.img-responsive, div.sc-bdVaJa.btyTPY {
@@ -106,3 +112,4 @@ img.image.img-responsive, div.sc-bdVaJa.btyTPY {
        height: 250px;
    }
 }
+
