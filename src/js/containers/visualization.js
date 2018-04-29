@@ -3,7 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as d3 from "d3";
 import { getSimilarMovies, updateAllMoviesGenres, getFavoriteSimilarMovies, getFavoriteActors } from '../actions';
-import {auth, database} from "../constants/base";
+import { auth, database } from "../constants/base";
+import { black } from 'material-ui/styles/colors';
 
 let trs = [];
 class Vis extends Component {
@@ -11,13 +12,14 @@ class Vis extends Component {
     componentDidMount() {
         //Get all the similar movies from the favorite list
         this.handle();
-        setTimeout(() =>{
-        this.props.getFavoriteSimilarMovies(trs);},1500)
+        setTimeout(() => {
+            this.props.getFavoriteSimilarMovies(trs);
+        }, 1500)
     }
 
     handle() {
         let favs = [];
-        trs=[];
+        trs = [];
         database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
             favs = snapshot.val();
             favs.map((id) => trs.push(id));
@@ -45,8 +47,10 @@ class Vis extends Component {
 
         var fav = this.props.similarFavoriteMov.similarFavorite
 
-        for(i = 0; i < fav.length; i++) {
+        for (i = 0; i < fav.length; i++) {
             fav[i].poster_path = fav[i].FavMovieID.poster_path;
+            fav[i].title = fav[i].FavMovieID.original_title;
+            fav[i].id = fav[i].FavMovieID.id;
         }
 
         console.log(fav)
@@ -172,7 +176,11 @@ class Vis extends Component {
             // click on a node
             .on('click', function (d) {
                 console.log(d)
-                d3.select("#desc").html(d.title);
+                d3.select("#titlet").html(d.title);
+                d3.select("#title").attr("href", '/movie/' + d.id);
+                d3.select("#image").attr("src", 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + d.poster_path);
+                d3.select("#desc").html(d.overview);
+
 
             })
             .on('mouseenter', function () {
@@ -241,10 +249,21 @@ class Vis extends Component {
             d.fx = null;
             d.fy = null;
         }
-        return (<div>
-            
-            <section id="vis"></section>
-            <h2 id="desc">Click to view their identity</h2>
+
+        var divStyle = {
+            color: black
+        };
+
+        return (
+
+            <div>
+
+                <section id="vis"></section>
+                <a id="title" href="" target="_blank"><h2 id="titlet">Click a movie!</h2></a>
+                <h3 id="desc" style={divStyle}></h3>
+                <img id="image" src=""></img>
+
+
             </div>)
     }
 }

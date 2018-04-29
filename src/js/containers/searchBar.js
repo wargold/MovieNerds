@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {getSearchMovie, updateInputValue, clearSuggestions} from '../actions';
+import {getSearchMovie, updateInputValue, clearSuggestions, setAuthenticated, notLoggedIn} from '../actions';
 import history from '../history'
 import Autosuggest from 'react-autosuggest'
 import {Panel, Glyphicon, Button} from 'react-bootstrap'
@@ -10,10 +10,31 @@ import {URL_IMG, IMG_LOGO_XS_SIZE, BROKEN_IMAGE} from '../constants/constants'
 import SearchByGenres from './selectGenre'
 import { Link } from 'react-router-dom'
 import {DebounceInput} from 'react-debounce-input';
+import { app, base } from '../constants/base';
+import { Spinner } from '@blueprintjs/core';
 
 let debounce = require('lodash.debounce');
 
 class SearchBar extends Component {
+
+    componentDidMount() {
+        this.removeAuthListener = app.auth().onAuthStateChanged((user) => {
+            if (user) {
+                console.log("logged in", user.displayName)
+                if (user.displayName === null) {
+                    this.props.setAuthenticated(user.email);
+                } else { this.props.setAuthenticated(user.displayName); }
+
+            } else {
+                console.log("not logged in")
+                this.props.notLoggedIn();
+            }
+        })
+    }
+
+    componentWillUnmount() {
+        this.removeAuthListener();
+    }
 
     constructor() {
         super();
@@ -62,6 +83,7 @@ class SearchBar extends Component {
     };
 
     renderSuggestion = (suggestion) => {
+        
         return (
             <div className="divMovieSugg">
                 <img className="searchResult-image loader"
@@ -86,6 +108,7 @@ class SearchBar extends Component {
     };
 
     render() {
+        
         console.log("Check data", this.props.getse.suggestions);
 
         const value = this.props.getse.value;
@@ -183,7 +206,9 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({
         getsearch: getSearchMovie,
         updateInputValue: updateInputValue,
-        clearSuggestions: clearSuggestions
+        clearSuggestions: clearSuggestions,
+        setAuthenticated: setAuthenticated,
+        notLoggedIn: notLoggedIn
     }, dispatch);
 }
 
