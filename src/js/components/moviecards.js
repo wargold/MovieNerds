@@ -31,6 +31,7 @@ const MovieCardComponent = (props) => {
   `;
 
     const movie = props.movie;
+    console.log("kom hit 123456")
     return (
         <div className="moviecard">
             <StyleImage>

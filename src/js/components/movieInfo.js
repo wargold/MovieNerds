@@ -110,7 +110,7 @@ class MovieInfo extends React.Component {
 
         database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
             var favs = snapshot.val()
-            if (favs !== null && favs.includes(id)) {
+            if (favs !== null && favs.some(item=> {if(item.movieID===id){return true}else{return false}})) {
                 console.log("Already favorited")
             } else {
                 if (favs === null) {
@@ -130,8 +130,8 @@ class MovieInfo extends React.Component {
         var self = this;
         database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
             var favs = snapshot.val()
-            if (favs !== null && favs.includes(id)) {
-                var index = favs.indexOf(id);
+            if (favs !== null && favs.some(item=> {if(item.movieID===id){return true}else{return false}})) {
+                var index = favs.some((item, i)=> {if(item.movieID===id){return i}})
                 if (index > -1) {
                     favs.splice(index, 1);
                 }
@@ -152,7 +152,7 @@ class MovieInfo extends React.Component {
             var self = this;
             database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
                 var favs = snapshot.val()
-                if (favs !== null && favs.includes(self.props.movie.id)) {
+                if (favs !== null &&  favs.some(item=> {if(item.movieID===self.props.movie.id){return true}else{return false}})){
                     console.log("-----IS FAV")
                     self.setState({
                         isFav: true
@@ -170,7 +170,8 @@ class MovieInfo extends React.Component {
                 <Glyphicon glyph="trash" /> Remove Favorite
                 </Button>
         ) : (<div>
-            <Button onClick={() => { this.addFavorite(movie.id) }}>
+            <Button onClick={() => { this.addFavorite({id:movie.id, movieID:movie.id, poster_path: movie.poster_path,
+                original_title: movie.original_title, release_date: movie.release_date, vote_average: movie.vote_average}) }}>
                 <Glyphicon glyph="heart" /> Add Favorite
                 </Button>
         </div>

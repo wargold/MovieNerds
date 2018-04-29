@@ -15,7 +15,12 @@ import {Loader} from '../../loader/loader'
 let movies;
 
 class FavoriteMovies extends Component {
-
+    constructor() {//Can have a state due to that it only handles local state about a image...
+        super()
+        this.state = {
+            loadedFavorite: false
+        }
+    }
 
     componentDidMount() {
         this.handle();
@@ -468,6 +473,9 @@ class FavoriteMovies extends Component {
 
     componentDidUpdate(prevProps, preState) {
         if (prevProps.favoriteID.length !== this.props.favoriteID.length) {
+            this.setState({
+                loadedFavorite: false
+            });
             this.handle();
         }
     }
@@ -479,13 +487,16 @@ class FavoriteMovies extends Component {
         database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
             favs = snapshot.val();
             favs.map((id) => trs.push(id));
-        }).then(() => favs.map((id) => {
-            this.loadData(id).then(() => movies.push(this.props.movieInfo))
-        }));
+        });
         if (movies !== undefined) {
             console.log("dfdsfds", trs);
             this.props.updateFavorites(movies, trs);
         }
+        setTimeout(() => {
+            this.setState({
+                loadedFavorite: true
+            })
+        }, 3500);
     }
 
     loadData(id) {
@@ -498,13 +509,13 @@ class FavoriteMovies extends Component {
     }
 
     getMovies() {
-        this.props.favorites.map((mov) => console.log(mov.movieInfo));
-        let genre = this.props.favorites.map((mov) =>
-            <Col xs={4} sm={3} md={2} key={mov.movieInfo.id}>
+        this.props.favoriteID.map((mov) => console.log("123456", mov));
+        let genre = this.props.favoriteID.map((mov) =>
+            <Col xs={4} sm={3} md={2} key={mov.movieID}>
                 <div>
-                    <MovieCardComponent movie={mov.movieInfo}/>
+                    <MovieCardComponent movie={mov}/>
                     <Button onClick={() => {
-                        this.removeFavorite(mov.movieInfo.id)
+                        this.removeFavorite(mov.movieID)
                     }}>
                         <Glyphicon glyph="trash"/> Remove Favorite
                     </Button>
@@ -519,8 +530,18 @@ class FavoriteMovies extends Component {
         let moviess = [];
         database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
             var favs = snapshot.val()
-            if (favs !== null && favs.includes(id)) {
-                var index = favs.indexOf(id);
+            if (favs !== null && favs.some(item => {
+                    if (item.movieID === id) {
+                        return true
+                    } else {
+                        return false
+                    }
+                })) {
+                var index = favs.some((item, i) => {
+                    if (item.movieID === id) {
+                        return i
+                    }
+                })
                 if (index > -1) {
                     favs.splice(index, 1);
                 }
@@ -535,17 +556,19 @@ class FavoriteMovies extends Component {
 
 
     render() {
-        if (this.props.favorites !== null && this.props.favorites.length > 0) {
+        if (this.props.favorites !== null && this.state.loadedFavorite) {
             console.log("kaddasdasdsa", this.props.favorites);
             console.log("dfffff favoriteID", this.props.favoriteID);
 
         }
         const de = this.props.auth.user !== '' ? (
-            this.props.favorites !== null && this.props.favorites.length > 0 ?
+            this.props.favoriteID !== null && this.state.loadedFavorite ?
                 (<Grid fluid={true}>
                     <h2>My Favorites Movies</h2>
                     <Row>
-                        {this.getMovies()}
+                        {this.props.favoriteID.length > 0 ?
+                            this.getMovies() : <h2>No Movies In Your Favorite List</h2>
+                        }
                     </Row>
                 </Grid>)
                 : (Loader())) : (<h2>You Have To Be Logged In To Show This Page!</h2>)
