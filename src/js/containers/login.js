@@ -67,7 +67,7 @@ class Login extends Component {
                 } else {
                     // sign user in
                     console.log("success login")
-                    return app.auth().signInWithEmailAndPassword(email, password)
+                    return app.auth().signInWithEmailAndPassword(email, password).catch(error => this.toaster.show({ intent: Intent.DANGER, message: error.message }))
                 }
             })
             .then((user) => {
@@ -112,7 +112,7 @@ class Login extends Component {
                         Password
             <input style={{ width: "100%" }} className="pt-input" name="password" type="password" ref={(input) => { this.passwordInput = input }} placeholder="Password"></input>
                     </label>
-                    <input style={{ width: "100%" }} type="submit" className="pt-button pt-intent-primary" value="Log In / Register"></input>
+                    <input style={{ width: "100%", textAlign: 'center' }} type="submit" className="pt-button pt-intent-primary" value="Log In / Register"></input>
                 </form>
             </div>
 
