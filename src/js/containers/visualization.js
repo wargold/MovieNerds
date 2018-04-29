@@ -43,7 +43,13 @@ class Vis extends Component {
 
 
 
-        var fav = this.props.similarFavoriteMov.similarFavorite;
+        var fav = this.props.similarFavoriteMov.similarFavorite
+
+        for(i = 0; i < fav.length; i++) {
+            fav[i].poster_path = fav[i].FavMovieID.poster_path;
+        }
+
+        console.log(fav)
 
         var simi = []
 
@@ -107,12 +113,12 @@ class Vis extends Component {
         }
 
         function distance() {
-            return 30;
+            return 200;
         }
 
         var simulation = d3.forceSimulation()
             .force("link", d3.forceLink().distance(distance()).strength(0.1))
-            .force("charge", d3.forceManyBody().strength(-300))
+            .force("charge", d3.forceManyBody().strength(-10))
             .force("collide", d3.forceCollide().radius(10))
             .force("center", d3.forceCenter(width / 2, height / 2));
 
@@ -140,25 +146,30 @@ class Vis extends Component {
             .attr("stroke-width", "2px")
             .attr("fill", "white");
 
+
+        // Config for image
+        var imageH = 50;
+        var imageW = 50;
+
         var nodeImage = node.append("image")
             .attr("xlink:href", d => 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + d.poster_path)
-            .attr("height", "40")
-            .attr("width", "40")
-            .attr("x", -20)
-            .attr("y", -20)
+            .attr("height", imageH)
+            .attr("width", imageW)
+            .attr("x", -(imageW / 2))
+            .attr("y", -(imageH / 2))
 
         var texts = node.append("text")
             .style("fill", "black")
             .attr("dx", 20)
             .attr("dy", 8)
             .text(function (d) {
-                return d.id;
+                return;
             });
 
         // make the image grow a little on mouse over and add the text details on click
         var setEvents = nodeImage
-        // Append hero text
-        // click on a node
+            // Append hero text
+            // click on a node
             .on('click', function (d) {
                 console.log(d)
                 d3.select("#desc").html(d.title);
@@ -169,26 +180,22 @@ class Vis extends Component {
                 d3.select(this)
                     .transition()
                     .attr("x", function (d) {
-                        return -60;
+                        return -imageW;
                     })
                     .attr("y", function (d) {
-                        return -60;
+                        return -imageH;
                     })
-                    .attr("height", 100)
-                    .attr("width", 100);
+                    .attr("height", imageH * 2)
+                    .attr("width", imageW * 2);
             })
             // set back
             .on('mouseleave', function () {
                 d3.select(this)
                     .transition()
-                    .attr("x", function (d) {
-                        return -25;
-                    })
-                    .attr("y", function (d) {
-                        return -25;
-                    })
-                    .attr("height", 50)
-                    .attr("width", 50);
+                    .attr("height", imageH)
+                    .attr("width", imageW)
+                    .attr("x", -(imageW / 2))
+                    .attr("y", -(imageH / 2))
             });
 
 
@@ -234,8 +241,11 @@ class Vis extends Component {
             d.fx = null;
             d.fy = null;
         }
-
-        return (<div><section id="vis"></section></div>)
+        return (<div>
+            
+            <section id="vis"></section>
+            <h2 id="desc">Click to view their identity</h2>
+            </div>)
     }
 }
 
