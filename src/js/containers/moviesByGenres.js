@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {getMoviesByGenres} from '../actions';
 import MoviesListByGenres from '../components/moviesListByGenre';
 import {Loader} from '../../loader/loader'
-import SearchBar from './searchBar';
+import NavBarHeader from './navbar';
 import history from '../history'
 
 class MoviesByGenres extends Component {
@@ -35,7 +35,7 @@ class MoviesByGenres extends Component {
             (<MoviesListByGenres movies={this.props.moviesByGenres.moviesByGenres} genres={this.props.selector.value}/>)
             : (Loader());
         return (<div>
-            <SearchBar/>
+            <NavBarHeader/>
             {de}
         </div>)
     }

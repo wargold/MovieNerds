@@ -1,6 +1,8 @@
 .genreTitle {
     overflow: hidden;
     position: relative;
+    color: white;
+    font-weight: 600;
     left: 8%;
     width: 40%;
 }

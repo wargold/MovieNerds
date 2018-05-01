@@ -9,7 +9,7 @@ const MostPopularSlide = (props) => {
     let getMostPopularMovies = () => {
         let temp = props.mostPopular.slice(0, 6).map((movie) =>
             <Carousel.Item key={movie.id}>
-                <Image className="kan loader" src={"https://image.tmdb.org/t/p/w780" + movie.backdrop_path} responsive/>
+                <Image className="kan loader" src={"https://image.tmdb.org/t/p/original" + movie.backdrop_path} responsive/>
                 <Carousel.Caption>
                     <h3>{movie.title}</h3>
                     <div>

@@ -7,7 +7,8 @@ import {
 } from '../actions';
 import {Loader} from '../../loader/loader'
 import MovieInfo from '../components/movieInfo';
-import SearchBar from './searchBar';
+import NavBarHeader from './navbar';
+
 class Movie extends Component {
 
     componentDidMount() {
@@ -48,7 +49,7 @@ class Movie extends Component {
                         castList={this.props.castList} similarMovies={this.props.similarMovies} user={this.props.auth.user} userUID={this.props.auth.userUID}/>)
             : (Loader());
         return (<div>
-            <SearchBar/>
+            <NavBarHeader/>
             {de}
         </div>)
     }

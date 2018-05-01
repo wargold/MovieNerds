@@ -12,7 +12,7 @@ const MovieCardComponent = (props) => {
             height: 278px;
             width:185px;
     &:hover .image{
-       opacity:1;
+       opacity:0.3;
         transform: scale(1.3);
     }
     &:hover .title{

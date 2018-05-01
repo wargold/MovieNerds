@@ -2,33 +2,18 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from "react-dom";
 import {Provider} from 'react-redux';
-import {createStore, applyMiddleware} from 'redux';
-import thunk from 'redux-thunk';
-import promise from 'redux-promise';
-import createLogger from 'redux-logger';
-import allReducers from './reducers';
-import {Router, Route, browserHistory, hashHistory, Redirect, Switch} from 'react-router'
-import {syncHistoryWithStore, routerMiddleware} from 'react-router-redux'
+import {Router, Route, Redirect, Switch} from 'react-router'
 import App from './App';
 import Movie from './containers/movie'
 import Cast from './containers/cast'
 import Login from './containers/login'
 import Logout from './containers/logout'
 import FavoriteMovies from './containers/favoriteMovie'
-import { BrowserRouter } from 'react-router-dom'
 import Vis from './containers/visualization'
 import history from './history'
 import MoviesByGenres from './containers/moviesByGenres'
 import "../../public/style.css"
-
-const routeMiddleware = routerMiddleware(hashHistory);
-const logger = createLogger();
-const store = createStore(
-    allReducers,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-    applyMiddleware(thunk, promise, logger, routeMiddleware)
-
-);
+import store from './store'
 
 const NotFound = () => <h1>404.. Whoops, page not found!</h1>;
 const APIError = () => <h1>404.. Whoops, page not found!</h1>;

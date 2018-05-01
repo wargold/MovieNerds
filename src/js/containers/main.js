@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import SearchBar from './searchBar'
+import NavBarHeader from './navbar';
 import MovieGenreList from './movieGenreList'
-import { app, base } from '../constants/base';
+import { app } from '../constants/base';
 import { setAuthenticated, notLoggedIn } from '../actions';
 import { Spinner } from '@blueprintjs/core';
 
@@ -40,7 +40,7 @@ class Main extends Component {
         return (
 
             <div>
-                <SearchBar />
+                <NavBarHeader />
                 <MovieGenreList />
             </div>
         )

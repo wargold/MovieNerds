@@ -1,0 +1,82 @@
+.Sidebar {
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Transparent = rgba(0,0,0,0) / Translucent = (0,0,0,0.5)  */
+    height: 50px;
+    border-bottom: 0px;
+    transition: background-color .5s ease 0s;
+}
+
+.Sidebar.opaque {
+    background-color: black;
+    height: 50px;
+    transition: background-color .5s ease 0s;
+}
+
+nav.navbar.navbar-inverse {
+    margin: 0;
+    padding-right: 20px;
+}
+
+#movietitle {
+    color: white;
+}
+
+div.search.form-group {
+    margin-right: 20px;
+}
+
+div.Select.is-clearable.is-searchable.Select--multi {
+    width: 200px;
+}
+
+div.Select-control {
+    width: 200px;
+}
+
+div.navbar-form.navbar-left {
+    padding-right: 20px;
+}
+
+#react-select-2--value {
+    width: 200px;
+}
+
+div.Select-control {
+    width: 200px;
+}
+
+div.Select-menu-outer {
+    width: 215px;
+}
+
+span#react-select-3--value.Select-multi-value-wrapper {
+    width: 200px;
+}
+
+input {
+    width: 200px;
+}
+
+div.example {
+    transform: translateY(-5px);
+}
+
+div.dropdown.navbar-brand{
+    transform: translateX(10px);
+}
+
+ul.dropdown-menu{
+    background-color: lightgray;
+}
+
+nav.navbar.navbar-inverse{
+    z-index: 9999;
+}
+
+#basic-nav-dropdown.dropdown-toggle{
+    color: white;
+}
+
+div.dropdown.navbar-brand{
+    list-style-type: none;
+}

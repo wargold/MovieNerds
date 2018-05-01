@@ -2,17 +2,14 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {
-    getMovieByMovieID, updateMovieFavorites, setAuthenticated, notLoggedIn 
+    getMovieByMovieID, updateMovieFavorites, setAuthenticated, notLoggedIn
 } from '../actions';
-import SearchBar from './searchBar';
-import MoviesByGenres from './moviesByGenres';
 import {database, auth, app, base } from '../constants/base'
 import {Col, Grid, Row, Glyphicon, Button} from 'react-bootstrap'
 import MovieCardComponent from '../components/moviecards'
-import * as d3 from "d3";
 import {Loader} from '../../loader/loader'
 import history from "../history";
-import { Spinner } from '@blueprintjs/core';
+import NavBarHeader from './navbar';
 
 let movies;
 
@@ -38,7 +35,7 @@ class FavoriteMovies extends Component {
             }
             this.handle();
         })
-        
+
     }
 
     componentDidUpdate(prevProps, preState) {
@@ -144,7 +141,7 @@ class FavoriteMovies extends Component {
                 </Grid>)
                 : (Loader())) : (<h2>You Have To Be Logged In To Show This Page!</h2>)
         return (<div>
-                <SearchBar/>
+                <NavBarHeader/>
                 {de}
                 {/* <h2 id="desc">Click to view their identity</h2>
                 <section id="vis"></section> */}
