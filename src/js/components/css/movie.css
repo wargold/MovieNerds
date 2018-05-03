@@ -153,8 +153,7 @@
 }
 
 .fs {
-    color: black;
-    width: 40%;
+    color: white;
     text-align: center;
 }
 
@@ -167,13 +166,63 @@
     z-index: 4;
 }
 
-.tests {
+div.moviedetails {
     position: relative;
+    background: #000000;
 }
 
-div.poster {
-    display: inline-block;
-    margin: 0 auto;
+.movietexts {
+  background-color: #181818;
+
+  font-family: 'Merriweather Sans', sans-serif;
+  color: white;
+  position: relative;
+  text-align: center;
+}
+
+.textmovietitle {
+  font-size: 60px;
+  color: white;
+  font-family: 'Merriweather Sans', sans-serif;
+}
+
+.textmoviedesc {
+  font-size: 14px;
+  color: #DCDCDC;
+  position: relative;
+  font-family: 'Merriweather Sans', sans-serif;
+
+}
+
+.moviesummary {
+  position: relative;
+  text-align: center;
+  text-justify: inter-word;
+}
+
+.moviedesc {
+  padding-left: 20%;
+  padding-right: 20%
+}
+
+.textheaders {
+  font-size: 20px;
+  color: white;
+  font-family: 'Merriweather Sans', sans-serif;
+}
+
+.textgenres {
+  font-size: 10px;
+  color: white;
+  font-family: 'Merriweather Sans', sans-serif;
+}
+
+.trailerdiv {
+  background-color: #181818;
+}
+
+h6 {
+  color: white;
 }
 
 div.poster, img.pos.img-responsive {
@@ -184,11 +233,28 @@ div.poster, img.pos.img-responsive {
 }
 
 img.pos.img-responsive {
-    opacity: 0.3;
+}
+
+.castpics {
+    display: flex;
+    justify-content: center;
+}
+
+.similarmovies, .colImg {
+    justify-content: center;
 }
 
 div.poster {
-    background: #504f55;
+    display: inline-block;
+    margin: 0 auto;
+    background: rgba(24, 24, 24, 1.0);
+    box-shadow: inset 0px -120px 0px -50px rgba(24,24,24,1.0);
+}
+
+img.poster {
+    opacity: 0.3;
+    width: 100%;
+    height: auto;
 }
 
 @media (max-width: 900px) {
@@ -208,8 +274,4 @@ div.poster {
 
 .icons {
     font-size: 35px;
-}
-
-.nonsimilarMovies{
-    color: black;
 }

@@ -38,18 +38,21 @@ class MovieInfo extends React.Component {
 
     getImages() {
         let temp = (
-            <div>
-                <div className="poster">
-                    <Image className="pos loader"
-                        src={this.props.movie.backdrop_path == null ? BROKEN_IMAGE
-                            : "https://image.tmdb.org/t/p/w780" + this.props.movie.backdrop_path}
-                        responsive />
-                    <div className="ghd">
-                        <MovieCardComponent className="picture" movie={this.props.movie} />
-                    </div>
-                    {this.getVideo()}
-                </div>
-            </div>
+          <div className="trailerdiv">
+              <div className="">
+                  <div className="poster">
+                    <Image className="pos loading poster"
+                      src={this.props.movie.backdrop_path == null ? BROKEN_IMAGE
+                          : "https://image.tmdb.org/t/p/w780" + this.props.movie.backdrop_path}
+                    responsive />
+                    <div className="shadow"></div>
+                  </div>
+                  <div className="ghd">
+                      <MovieCardComponent className="picture" movie={this.props.movie} />
+                  </div>
+                  {this.getVideo()}
+              </div>
+          </div>
 
         );
         return temp;
@@ -57,15 +60,19 @@ class MovieInfo extends React.Component {
 
     getMovieInfo() {
         let info = (
-            <div>
-                <div className="icons"><Glyphicon
-                    glyph={'star'} />{this.props.movie.vote_average} &nbsp;
-                    <Glyphicon
-                        glyph={'heart'} /> {this.props.movie.vote_count} &nbsp;<Glyphicon
-                        glyph={'calendar'} /> {this.props.movie.release_date} </div>
-                <h3 className="fs"> Info: {<p>{this.props.movie.overview}</p>} </h3>
-                <h3 className="fs"> Genres: {<div>{this.getMovieGenres()}</div>}</h3>
+          <div className="moviedesc">
+            <div className="moviesummary">
+              {<p>{this.props.movie.overview}</p>}
             </div>
+             {<p>{this.getMovieGenres()}</p>}
+              <div className="icons">
+                  <Image src="https://www.themoviedb.org/static_cache/v4/logos/208x226-stacked-green-9484383bd9853615c113f020def5cbe27f6d08a84ff834f41371f223ebad4a3c.png" height="50"/>
+                  &nbsp;
+                  {this.props.movie.vote_average}/10
+                  &nbsp;&nbsp;
+                  <Glyphicon glyph={'calendar'} /> {this.props.movie.release_date}
+              </div>
+          </div>
         );
         return info;
     }
@@ -76,26 +83,26 @@ class MovieInfo extends React.Component {
     }
 
     getCast() {
-        let cast = this.props.castList.slice(0, 5).map((actor) =>
-            (<Col xs={4} sm={3} md={2} key={actor.cast_id}>
-                <Link to={`/cast/${actor.id}`} key={actor.id} style={{ textDecoration: 'none' }}>
-                    <div>
-                        <Image className="loader" src={actor.profile_path == null ? BROKEN_IMAGE
-                            : URL_IMG + IMG_LOGO_S_SIZE + actor.profile_path} alt={actor.name} responsive
-                               circle />
-                        <h3 className="fs"> Character: {<p>{actor.character}</p>} </h3>
-                        <h3 className="fs"> Name: {<p>{actor.name}</p>} </h3>
-                    </div>
-                </Link>
-            </Col>))
-        return cast;
+      let cast = this.props.castList.slice(0, 5).map((actor) =>
+          (<Col xs={12} sm={4} md={2} key={actor.cast_id}>
+              <Link to={`/cast/${actor.id}`} key={actor.id}>
+                  <div>
+                      <Image className="loading" src={actor.profile_path == null ? BROKEN_IMAGE
+                          : URL_IMG + IMG_LOGO_S_SIZE + actor.profile_path} alt={actor.name} responsive
+                          circle />
+                      <h3 className="fs"> Character: {<p>{actor.character}</p>} </h3>
+                      <h3 className="fs"> Name: {<p>{actor.name}</p>} </h3>
+                  </div>
+              </Link>
+          </Col>))
+      return cast;
     }
 
     getSimilarMovies() {
         let temp=  <h3 className="nonsimilarMovies">No Similar movies Found!</h3>;
         if (this.props.similarMovies.length>0) {
              temp = this.props.similarMovies.slice(0, 5).map((movie) =>
-                <Col xs={4} sm={3} md={2} key={movie.id}>
+                <Col xs={12} sm={4} md={2} key={movie.id}>
                     <MovieCardComponent className="picture" movie={movie}/>
                     <h3 className="fs"> Movie: {<p>{movie.original_title}</p>} </h3>
                 </Col>
@@ -184,26 +191,26 @@ class MovieInfo extends React.Component {
         }
 
         return (
-            <div className="tests">
-                <div>{this.getImages()}</div>
-                <div>
-                    <Grid fluid={true}>
-                        <Row>
-                            <h1>{movie.title}</h1>
-                            {ren()}
-                            <div>{this.getMovieInfo()}</div>
-                        </Row>
-                        <Row>
-                            <h1>Cast Members:</h1>
-                            {this.getCast()}
-                        </Row>
-                        <Row>
-                            <h1>Movies That You May Like:</h1>
-                            {this.getSimilarMovies()}
-                        </Row>
-                    </Grid>
-                </div>
-            </div>
+          <div className="moviedetails">
+              <div>{this.getImages()}</div>
+              <div className="movietexts">
+                  <Grid fluid={true}>
+                      <Row>
+                          <div className="textmovietitle">{movie.title}</div>
+                          {ren()}
+                          <div className="textmoviedesc">{this.getMovieInfo()}</div>
+                      </Row>
+                      <Row>
+                          <div className="textheaders">Cast Members:</div>
+                          <div className="castpics">{this.getCast()}</div>
+                      </Row>
+                      <Row>
+                          <div className="textheaders">Related Movies:</div>
+                          <div><Row className="similarmovies">{this.getSimilarMovies()}</Row></div>
+                      </Row>
+                  </Grid>
+              </div>
+          </div>
         );
     }
 }
