@@ -31,10 +31,10 @@ class Movie extends Component {
 
     load(paramsID) {
         const id = paramsID;
-        this.props.getSimilarMovies(id).then(()=>this.props.getTrailerByMovieID(id).then(()=>this.props.getMovieByMovieID(id).then(()=>this.props.getCastByMovieID(id) )))
+        this.props.getSimilarMovies(id).then(() => this.props.getTrailerByMovieID(id).then(() => this.props.getMovieByMovieID(id).then(() => this.props.getCastByMovieID(id))))
     }
 
-    resetValues(){
+    resetValues() {
         this.props.resetGenreValue();
         this.props.updateCastList();
         this.props.updateMovieList();
@@ -44,9 +44,10 @@ class Movie extends Component {
         console.log("Render");
         console.log("Render");
         console.log("Selector value:", this.props.castList);
-        const de =  (this.props.castList!==undefined &&this.props.castList.length>0 && this.props.movieInfo.movieInfo.id!==undefined) ?
+        const de = (this.props.castList !== undefined && this.props.castList.length > 0 && this.props.movieInfo.movieInfo.id !== undefined) ?
             (<MovieInfo movie={this.props.movieInfo.movieInfo} trailer={this.props.trailer}
-                        castList={this.props.castList} similarMovies={this.props.similarMovies} user={this.props.auth.user} userUID={this.props.auth.userUID}/>)
+                        castList={this.props.castList} similarMovies={this.props.similarMovies}
+                        user={this.props.auth.user} userUID={this.props.auth.userUID}/>)
             : (Loader());
         return (<div>
             <NavBarHeader/>

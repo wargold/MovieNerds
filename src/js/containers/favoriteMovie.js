@@ -78,11 +78,11 @@ class FavoriteMovies extends Component {
     getMovies() {
         this.props.favoriteID.map((mov) => console.log("123456", mov));
         let genre = this.props.favoriteID.map((mov) =>
-            <Col xs={4} sm={3} md={2} key={mov.movieID}>
+            <Col xs={4} sm={3} md={2} key={mov.id}>
                 <div>
                     <MovieCardComponent movie={mov}/>
                     <Button onClick={() => {
-                        this.removeFavorite(mov.movieID)
+                        this.removeFavorite(mov.id)
                     }}>
                         <Glyphicon glyph="trash"/> Remove Favorite
                     </Button>
@@ -98,14 +98,14 @@ class FavoriteMovies extends Component {
         database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
             var favs = snapshot.val()
             if (favs !== null && favs.some(item => {
-                    if (item.movieID === id) {
+                    if (item.id === id) {
                         return true
                     } else {
                         return false
                     }
                 })) {
                 var index = favs.some((item, i) => {
-                    if (item.movieID === id) {
+                    if (item.id === id) {
                         return i
                     }
                 })

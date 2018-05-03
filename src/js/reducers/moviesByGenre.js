@@ -1,8 +1,12 @@
-import {FETCHING_MOVIES_BY_GENRE, FETCHING_MOVIES_BY_GENRE_SUCCESS, FETCHING_MOVIES_BY_GENRE_FAILURE} from '../constants/constants'
+import {
+    FETCHING_MOVIES_BY_GENRE,
+    FETCHING_MOVIES_BY_GENRE_SUCCESS,
+    FETCHING_MOVIES_BY_GENRE_FAILURE
+} from '../constants/constants'
 
 const initialState = {
     id: '',
-    movies:[],
+    movies: [],
     isFetching: false,
     error: null
 }
@@ -12,7 +16,7 @@ const MoviesByGenre = (state = initialState, action) => {
         case FETCHING_MOVIES_BY_GENRE:
             return Object.assign({}, state, {
                 isFetching: true,
-                id:action.id,
+                id: action.id,
                 movies: []
             });
         case FETCHING_MOVIES_BY_GENRE_SUCCESS:

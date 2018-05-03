@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import './css/navbar.css';
-import { Navbar, FormGroup, Button, Glyphicon, NavDropdown, MenuItem } from 'react-bootstrap';
-import { setAuthenticated, notLoggedIn } from '../actions';
-import { Link } from 'react-router-dom';
-import { app } from '../constants/base';
+import {Navbar, FormGroup, Button, Glyphicon, NavDropdown, MenuItem} from 'react-bootstrap';
+import {setAuthenticated, notLoggedIn} from '../actions';
+import {Link} from 'react-router-dom';
+import {app} from '../constants/base';
 import SearchByGenres from './selectGenre';
 import SearchBar from './searchBar'
 import Login from './login';
@@ -20,7 +20,9 @@ class NavBarHeader extends Component {
                 console.log("logged in", user.displayName)
                 if (user.displayName === null) {
                     this.props.setAuthenticated(user.email);
-                } else { this.props.setAuthenticated(user.displayName); }
+                } else {
+                    this.props.setAuthenticated(user.displayName);
+                }
 
             } else {
                 console.log("not logged in")
@@ -39,10 +41,11 @@ class NavBarHeader extends Component {
 
         let loggin = this.props.authenticated ? (
             <div className="dropdown">
-                <NavDropdown eventKey={3} title={<span><Glyphicon glyph="user"/> {this.props.user}</span>} id="basic-nav-dropdown">
-                    <MenuItem eventKey={3.2} onClick={()=>history.push('/myfavorites')}>
+                <NavDropdown eventKey={3} title={<span><Glyphicon glyph="user"/> {this.props.user}</span>}
+                             id="basic-nav-dropdown">
+                    <MenuItem eventKey={3.2} onClick={() => history.push('/myfavorites')}>
                         <Glyphicon glyph="heart"/> My Favorites</MenuItem>
-                    <MenuItem eventKey={3.2} onClick={()=>history.push('/logout')}>
+                    <MenuItem eventKey={3.2} onClick={() => history.push('/logout')}>
                         <Glyphicon glyph="log-out"/> Log Out</MenuItem>
                 </NavDropdown>
             </div>

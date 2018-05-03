@@ -51,7 +51,7 @@ export const URL_YOUTUBE = 'https://www.youtube.com/embed/';
 export const CAST_CREDIT = '/credits';
 export const MOVIE_CREDIT = '/movie_credits';
 export const URL_VIDEO = '/videos';
-export const SIMILAR ='/similar';
+export const SIMILAR = '/similar';
 
 export const UPDATE_ALLMOVIESBYGENRE = 'UPDATE_ALLMOVIESBYGENRE';
 export const SEARCH = 'SEARCH';

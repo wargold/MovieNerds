@@ -5,61 +5,61 @@
 }
 
 body {
-   background-color: #181818;
+    background-color: #181818;
 }
 
 .description {
-  font-family: 'Merriweather Sans', sans-serif;
-  color: white;
-  font-size: 50px;
-  justify-content: center;
-  text-align:center;
+    font-family: 'Merriweather Sans', sans-serif;
+    color: white;
+    font-size: 50px;
+    justify-content: center;
+    text-align: center;
 }
 
 .biotitle {
-  font-family: 'Merriweather Sans', sans-serif;
-  color: white;
-  font-size: 20px;
-  justify-content: center;
-  text-align:center;
+    font-family: 'Merriweather Sans', sans-serif;
+    color: white;
+    font-size: 20px;
+    justify-content: center;
+    text-align: center;
 }
 
 .bio {
-  font-family: 'Merriweather Sans', sans-serif;
-  color: grey;
+    font-family: 'Merriweather Sans', sans-serif;
+    color: grey;
 
-  justify-content: center;
-  text-align:center;
+    justify-content: center;
+    text-align: center;
 
-  padding-left: 20%;
-  padding-right: 20%
+    padding-left: 20%;
+    padding-right: 20%
 }
 
 .bday {
-  font-family: 'Merriweather Sans', sans-serif;
-  color: white;
-  font-size: 28px;
-  justify-content: center;
-  text-align:center;
+    font-family: 'Merriweather Sans', sans-serif;
+    color: white;
+    font-size: 28px;
+    justify-content: center;
+    text-align: center;
 }
 
 .birth {
-  font-family: 'Merriweather Sans', sans-serif;
-  color: white;
-  font-size: 25px;
-  justify-content: center;
-  text-align:center;
+    font-family: 'Merriweather Sans', sans-serif;
+    color: white;
+    font-size: 25px;
+    justify-content: center;
+    text-align: center;
 }
 
 .knownfor {
-  font-family: 'Merriweather Sans', sans-serif;
-  color: white;
-  font-size: 25px;
-  justify-content: center;
-  text-align:center;
+    font-family: 'Merriweather Sans', sans-serif;
+    color: white;
+    font-size: 25px;
+    justify-content: center;
+    text-align: center;
 }
 
-.profilepic{
-  justify-content: center;
-  text-align:center;
+.profilepic {
+    justify-content: center;
+    text-align: center;
 }

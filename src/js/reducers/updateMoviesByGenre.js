@@ -1,9 +1,9 @@
 import {UPDATE_ALLMOVIESBYGENRE, UPDATE_FAVORITE_MOVIE} from "../constants/constants";
 
 const initialState = {
-    movies:[],
+    movies: [],
     favoriteID: [],
-    genres:[]
+    genres: []
 }
 
 export const UpdateMoviesByGenre = (state = initialState, action) => {

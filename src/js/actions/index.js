@@ -532,7 +532,10 @@ export function getFavoriteSimilarMovies(list) {
         dispatch(loadFavoriteSimilarMovies());
         let similarFavMovies = [];
         await Promise.all([list.map(async (movieID) => await dispatch(getSimilarMovies(movieID.id)).then(async (similarMovies) =>
-            await similarFavMovies.push({FavMovieID: movieID, data:similarMovies.data})).catch(error => dispatch(loadFavoriteSimilarMoviesFailure(error))))]);
+            await similarFavMovies.push({
+                FavMovieID: movieID,
+                data: similarMovies.data
+            })).catch(error => dispatch(loadFavoriteSimilarMoviesFailure(error))))]);
         setTimeout(() => {
             dispatch(loadFavoriteSimilarMoviesSuccess(similarFavMovies))
         }, 500);
@@ -565,7 +568,10 @@ export function getFavoriteActors(list) {
         dispatch(loadFavoriteActors());
         let similarFavActors = [];
         await Promise.all([list.map(async (movieID) => await dispatch(getCastByMovieID(movieID)).then(async (similarMovies) =>
-            await similarFavActors.push({FavMovieID: movieID, data:similarMovies.data})).catch(error => dispatch(loadFavoriteActorsFailure(error))))]);
+            await similarFavActors.push({
+                FavMovieID: movieID,
+                data: similarMovies.data
+            })).catch(error => dispatch(loadFavoriteActorsFailure(error))))]);
         setTimeout(() => {
             dispatch(loadFavoriteActorsSuccess(similarFavActors))
         }, 500);
@@ -599,7 +605,13 @@ export function addFavorite(id) {
 
     database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
         var favs = snapshot.val()
-        if (favs !== null && favs.some(item=> {if(item.movieID===id){return true}else{return false}})) {
+        if (favs !== null && favs.some(item => {
+                if (item.movieID === id) {
+                    return true
+                } else {
+                    return false
+                }
+            })) {
             console.log("Already favorited")
         } else {
             if (favs === null) {
@@ -619,8 +631,18 @@ export function removeFavorite(id) {
     var self = this;
     database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
         var favs = snapshot.val()
-        if (favs !== null && favs.some(item=> {if(item.movieID===id){return true}else{return false}})) {
-            var index = favs.some((item, i)=> {if(item.movieID===id){return i}})
+        if (favs !== null && favs.some(item => {
+                if (item.movieID === id) {
+                    return true
+                } else {
+                    return false
+                }
+            })) {
+            var index = favs.some((item, i) => {
+                if (item.movieID === id) {
+                    return i
+                }
+            })
             if (index > -1) {
                 favs.splice(index, 1);
             }

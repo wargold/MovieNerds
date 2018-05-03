@@ -20,9 +20,9 @@ class MoviesByGenres extends Component {
     }
 
     loadData() {
-        if(this.props.selector.value !== '') {
+        if (this.props.selector.value !== '') {
             this.props.getMoviesByGenres(this.props.match.params.value);
-        }else{
+        } else {
             history.push('/');
         }
     }
@@ -30,8 +30,8 @@ class MoviesByGenres extends Component {
     render() {
         console.log("Kolla props av serach genres: ", this.props.selector);
         console.log("Kolla props: ", this.props.moviesByGenres.moviesByGenres);
-        let moviesByGenres= this.props.moviesByGenres.moviesByGenres;
-        const de =  (moviesByGenres!==null && moviesByGenres.length>=0 && this.props.moviesByGenres.isFetching===false) ?
+        let moviesByGenres = this.props.moviesByGenres.moviesByGenres;
+        const de = (moviesByGenres !== null && moviesByGenres.length >= 0 && this.props.moviesByGenres.isFetching === false) ?
             (<MoviesListByGenres movies={this.props.moviesByGenres.moviesByGenres} genres={this.props.selector.value}/>)
             : (Loader());
         return (<div>

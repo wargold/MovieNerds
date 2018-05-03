@@ -61,22 +61,22 @@ div.example {
     transform: translateY(-5px);
 }
 
-div.dropdown.navbar-brand{
+div.dropdown.navbar-brand {
     transform: translateX(10px);
 }
 
-ul.dropdown-menu{
+ul.dropdown-menu {
     background-color: lightgray;
 }
 
-nav.navbar.navbar-inverse{
+nav.navbar.navbar-inverse {
     z-index: 9999;
 }
 
-#basic-nav-dropdown.dropdown-toggle{
+#basic-nav-dropdown.dropdown-toggle {
     color: white;
 }
 
-div.dropdown.navbar-brand{
+div.dropdown.navbar-brand {
     list-style-type: none;
 }

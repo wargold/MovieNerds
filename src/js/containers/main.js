@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import NavBarHeader from './navbar';
 import MovieGenreList from './movieGenreList'
-import { app } from '../constants/base';
-import { setAuthenticated, notLoggedIn } from '../actions';
-import { Spinner } from '@blueprintjs/core';
+import {app} from '../constants/base';
+import {setAuthenticated, notLoggedIn} from '../actions';
+import {Spinner} from '@blueprintjs/core';
 
 class Main extends Component {
     componentDidMount() {
@@ -14,7 +14,9 @@ class Main extends Component {
                 console.log("logged in", user.displayName)
                 if (user.displayName === null) {
                     this.props.setAuthenticated(user.email);
-                } else { this.props.setAuthenticated(user.displayName); }
+                } else {
+                    this.props.setAuthenticated(user.displayName);
+                }
 
             } else {
                 console.log("not logged in")
@@ -30,9 +32,9 @@ class Main extends Component {
     render() {
         if (this.props.loading) {
             return (
-                <div style={{ textAlign: "center", position: "absolute", top: "25%", left: "50%" }}>
+                <div style={{textAlign: "center", position: "absolute", top: "25%", left: "50%"}}>
                     <h3>Loading</h3>
-                    <Spinner />
+                    <Spinner/>
                 </div>
             )
         }
@@ -40,8 +42,8 @@ class Main extends Component {
         return (
 
             <div>
-                <NavBarHeader />
-                <MovieGenreList />
+                <NavBarHeader/>
+                <MovieGenreList/>
             </div>
         )
     }

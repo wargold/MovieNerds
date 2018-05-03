@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { getSearchMovie, updateInputValue, clearSuggestions, setAuthenticated, notLoggedIn } from '../actions';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {getSearchMovie, updateInputValue, clearSuggestions, setAuthenticated, notLoggedIn} from '../actions';
 import history from '../history';
 import Autosuggest from 'react-autosuggest';
 import './css/searchBar.css';
-import { URL_IMG, IMG_LOGO_XS_SIZE, BROKEN_IMAGE } from '../constants/constants';
-import { DebounceInput } from 'react-debounce-input';
+import {URL_IMG, IMG_LOGO_XS_SIZE, BROKEN_IMAGE} from '../constants/constants';
+import {DebounceInput} from 'react-debounce-input';
 
 
 class SearchBar extends Component {
 
-    onChange = (event, { newValue, method }) => {
+    onChange = (event, {newValue, method}) => {
         this.props.updateInputValue(newValue);
     };
 
@@ -30,7 +30,7 @@ class SearchBar extends Component {
         return suggestion.title;
     };
 
-    onSuggestionsFetchRequested = ({ value }) => {
+    onSuggestionsFetchRequested = ({value}) => {
         if (value.length > 0 && value.replace(/\s/g, '').length > 0) {
             this.props.getsearch(value);
         }
@@ -61,7 +61,7 @@ class SearchBar extends Component {
     };
 
 
-    onSuggestionSelected = (event, { suggestion, method }) => {
+    onSuggestionSelected = (event, {suggestion, method}) => {
         if (method === 'enter') {
             event.preventDefault();
         }

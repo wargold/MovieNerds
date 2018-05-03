@@ -1,7 +1,7 @@
 import './loader.css'
 
 
-export const Loader =()=>{
+export const Loader = () => {
     const loader = <div className="background">
         <div className="icon">
             <div className="parts">

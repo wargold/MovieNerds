@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import * as d3 from "d3";
-import { getSimilarMovies, updateAllMoviesGenres, getFavoriteSimilarMovies, getFavoriteActors } from '../actions';
-import { auth, database } from "../constants/base";
-import { black } from 'material-ui/styles/colors';
+import {getSimilarMovies, updateAllMoviesGenres, getFavoriteSimilarMovies, getFavoriteActors} from '../actions';
+import {auth, database} from "../constants/base";
+import {black} from 'material-ui/styles/colors';
 
 let trs = [];
+
 class Vis extends Component {
 
     componentDidMount() {
@@ -44,7 +45,6 @@ class Vis extends Component {
             .style("border-style", "solid");
 
 
-
         var fav = this.props.similarFavoriteMov.similarFavorite
 
         for (i = 0; i < fav.length; i++) {
@@ -62,7 +62,6 @@ class Vis extends Component {
         }
 
         console.log(simi)
-
 
 
         var edges = [];
@@ -172,8 +171,8 @@ class Vis extends Component {
 
         // make the image grow a little on mouse over and add the text details on click
         var setEvents = nodeImage
-            // Append hero text
-            // click on a node
+        // Append hero text
+        // click on a node
             .on('click', function (d) {
                 console.log(d)
                 d3.select("#titlet").html(d.title);
@@ -222,13 +221,25 @@ class Vis extends Component {
                 return "translate(" + x + "," + y + ")";
             })
 
-            node.attr("cx", function (d) { return d.x = Math.max(radius, Math.min(width - radius, d.x)); })
-                .attr("cy", function (d) { return d.y = Math.max(radius, Math.min(height - radius, d.y)); });
+            node.attr("cx", function (d) {
+                return d.x = Math.max(radius, Math.min(width - radius, d.x));
+            })
+                .attr("cy", function (d) {
+                    return d.y = Math.max(radius, Math.min(height - radius, d.y));
+                });
 
-            links.attr("x1", function (d) { return d.source.x; })
-                .attr("y1", function (d) { return d.source.y; })
-                .attr("x2", function (d) { return d.target.x; })
-                .attr("y2", function (d) { return d.target.y; });
+            links.attr("x1", function (d) {
+                return d.source.x;
+            })
+                .attr("y1", function (d) {
+                    return d.source.y;
+                })
+                .attr("x2", function (d) {
+                    return d.target.x;
+                })
+                .attr("y2", function (d) {
+                    return d.target.y;
+                });
 
 
         });

@@ -3,14 +3,14 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {getCastInfoByID, getCastKnownMovies} from '../actions';
 import CastInfo from '../components/castInfo';
-import SearchBar from './searchBar';
+import NavBarHeader from './navbar';
 import {Loader} from '../../loader/loader'
 
 class Cast extends Component {
 
     componentDidMount() {
-        console.log("Check param id",this.props.match.params.id);
-        const id=this.props.match.params.id;
+        console.log("Check param id", this.props.match.params.id);
+        const id = this.props.match.params.id;
         this.props.getCastInfoByID(id);
         this.props.getCastKnownMovies(id);
     }
@@ -20,12 +20,12 @@ class Cast extends Component {
         console.log("Kolla castlist", this.props.castKnownMovies);
 
 
-        const de = this.props.castAbout !== undefined && this.props.castKnownMovies!==undefined &&
-        this.props.castKnownMovies.length>0?
+        const de = this.props.castAbout !== undefined && this.props.castKnownMovies !== undefined &&
+        this.props.castKnownMovies.length > 0 ?
             (<CastInfo castInfo={this.props.castAbout} moviesKnown={this.props.castKnownMovies}/>)
             : (Loader());
         return (<div>
-            <SearchBar/>
+            <NavBarHeader/>
             {de}
         </div>)
     }

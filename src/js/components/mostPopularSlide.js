@@ -9,7 +9,8 @@ const MostPopularSlide = (props) => {
     let getMostPopularMovies = () => {
         let temp = props.mostPopular.slice(0, 6).map((movie) =>
             <Carousel.Item key={movie.id}>
-                <Image className="kan loader" src={"https://image.tmdb.org/t/p/original" + movie.backdrop_path} responsive/>
+                <Image className="kan loader" src={"https://image.tmdb.org/t/p/w1280" + movie.backdrop_path}
+                       responsive/>
                 <Carousel.Caption>
                     <h3>{movie.title}</h3>
                     <div>
@@ -19,8 +20,9 @@ const MostPopularSlide = (props) => {
                             glyph={'heart'}/> {movie.vote_count} &nbsp;<Glyphicon
                         glyph={'calendar'}/> {movie.release_date}
                     </div>
-                    <p>{movie.overview}&nbsp; {<Link to={`/movie/${movie.id}`} key={movie.id} style={{ textDecoration: 'none' }}>
-                     <Glyphicon className="moreInfo" glyph={'info-sign'}/> </Link>}</p>
+                    <p>{movie.overview}&nbsp; {<Link to={`/movie/${movie.id}`} key={movie.id}
+                                                     style={{textDecoration: 'none'}}>
+                        <Glyphicon className="moreInfo" glyph={'info-sign'}/> </Link>}</p>
                 </Carousel.Caption>
             </Carousel.Item>);
         return temp;

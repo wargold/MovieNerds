@@ -30,9 +30,9 @@ ReactDOM.render(
                 <Route path="/vis" component={Vis}/>
                 <Route path="/myfavorites" component={FavoriteMovies}/>
                 <Route path="/searchGenres/:value" component={MoviesByGenres}/>
-                <Route path='/APIError' component={APIError} />
-                <Route path='/404' component={NotFound} />
-                <Redirect from='*' to='/404' />
+                <Route path='/APIError' component={APIError}/>
+                <Route path='/404' component={NotFound}/>
+                <Redirect from='*' to='/404'/>
             </Switch>
         </Router>
     </Provider>,

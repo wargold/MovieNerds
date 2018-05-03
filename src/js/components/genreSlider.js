@@ -6,22 +6,22 @@ import './css/dots.scss'
 import {Link} from 'react-router-dom'
 
 function SampleNextArrow(props) {
-    const { className, style, onClick } = props;
+    const {className, style, onClick} = props;
     return (
         <div
-            className={className} id="arrowa"
-            style={{ ...style, display: "block", background: "gray" }}
+            className={className}
+            style={{...style, display: "block", transform: "scale(1.5,1.5)"}}
             onClick={onClick}
         />
     );
 }
 
 function SamplePrevArrow(props) {
-    const { className, style, onClick } = props;
+    const {className, style, onClick} = props;
     return (
         <div
-            className={className} id="arrowa"
-            style={{ ...style, display: "block", background: "gray" }}
+            className={className}
+            style={{...style, display: "block",  transform: "scale(1.5,1.5)" }}
             onClick={onClick}
         />
     );
@@ -48,7 +48,7 @@ const SimpleSlider = (props) => {
     let getMoviesByGenre = (data) => {
         return data.map((mov) => <div className="slideBox" key={mov.id}>
             <Link to={`/movie/${mov.id}`} key={mov.id} style={{textDecoration: 'none'}}>
-                    <MovieCardComponent movie={mov}/>
+                <MovieCardComponent movie={mov}/>
             </Link>
         </div>)
     }
@@ -61,24 +61,23 @@ const SimpleSlider = (props) => {
         speed: 500,
         slidesToShow: 6,
         slidesToScroll: 2,
-        nextArrow: <SampleNextArrow />,
-        prevArrow: <SamplePrevArrow />,
+        arrows: true,
         responsive: [
             {
-                breakpoint: 550,
+                breakpoint: 520,
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1
                 }
             },
             {
-                breakpoint: 650,
+                breakpoint: 700,
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2
                 }
             }, {
-                breakpoint: 700,
+                breakpoint: 910,
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 3
@@ -86,14 +85,14 @@ const SimpleSlider = (props) => {
             }
             ,
             {
-                breakpoint: 900,
+                breakpoint: 1160,
                 settings: {
                     slidesToShow: 4,
                     slidesToScroll: 4
                 }
             },
             {
-                breakpoint: 1200,
+                breakpoint: 1400,
                 settings: {
                     slidesToShow: 5,
                     slidesToScroll: 5

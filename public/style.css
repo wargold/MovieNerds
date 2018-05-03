@@ -1,5 +1,4 @@
 
-
 html, body {
     height: 100%;
     width: 100%;
@@ -14,6 +13,7 @@ html, body {
 #root {
     min-height: calc(100vh - 70px);
 }
+
 .footer {
     display: none;
     height: 50px;

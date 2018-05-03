@@ -1,4 +1,4 @@
-.facebooklogo{
+.facebooklogo {
     position: relative;
     left: -3em;
 }
@@ -6,55 +6,62 @@
 .transition-enter {
     transform: scale(0);
 }
+
 .transition-enter-active {
     transform: scale(1);
     transition: transform 1000ms ease;
 }
+
 .transition-exit {
     transform: scale(1);
 }
+
 .transition-exit-active {
     transform: scale(0);
     transition: transform 1000ms ease;
 }
 
-.facebookButton{
+.facebookButton {
     position: relative;
     top: -2em;
 }
 
-.pt-portal{
+.pt-portal {
     z-index: 99999;
 }
-div.pt-overlay.pt-toast-container.pt-toast-container-top{
+
+div.pt-overlay.pt-toast-container.pt-toast-container-top {
     transform: translateY(20em);
 }
 
-div.styles_modal__gNwvD{
+div.styles_modal__gNwvD {
     width: 100%;
     max-width: 350px;
     background: #4b4b4b;
 }
 
-.pt-Name{
+.pt-Name {
     font-size: 1.3em;
     font-weight: lighter;
     color: white;
 }
 
-div.pt-callout.pt-icon-info-sign{
+div.pt-callout.pt-icon-info-sign {
     background: lightgray;
 }
 
-#signin{
+#signin {
     font-size: 2em;
     font-weight: 400;
     color: white;
 }
 
-
-button.styles_closeButton__20ID4:hover{
+button.styles_closeButton__20ID4:hover {
     cursor: pointer;
     fill: white;
-    transform: scale(1.5,2);
+    transform: scale(1.5, 2);
+}
+
+div.styles_overlay__CLSq-.styles_overlayCenter__YHoO7 {
+    z-index: 9999;
 }

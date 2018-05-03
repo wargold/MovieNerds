@@ -72,7 +72,7 @@
     margin-right: 8px;
 }
 
-.react-autosuggest__suggestion.react-autosuggest__suggestion--first{
+.react-autosuggest__suggestion.react-autosuggest__suggestion--first {
 }
 
 .searchResult-name {
@@ -85,22 +85,21 @@
     padding: 5px;
 }
 
-
-.homeTitle{
+.homeTitle {
     text-align: center;
     color: darkslategray;
 }
 
-.divMovieSugg{
+.divMovieSugg {
     width: auto;
     height: 30px;
 }
 
-.myfavorites{
+.myfavorites {
     position: absolute;
     right: 3em;
 }
 
-div.panel.panel-default{
+div.panel.panel-default {
     margin-bottom: 0px;
 }

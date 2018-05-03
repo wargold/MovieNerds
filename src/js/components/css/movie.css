@@ -138,7 +138,7 @@
     color: white;
 }
 
-.notrailer{
+.notrailer {
     z-index: 2;
     position: absolute;
     transform: translate(-50%, -15%);
@@ -172,57 +172,57 @@ div.moviedetails {
 }
 
 .movietexts {
-  background-color: #181818;
+    background-color: #181818;
 
-  font-family: 'Merriweather Sans', sans-serif;
-  color: white;
-  position: relative;
-  text-align: center;
+    font-family: 'Merriweather Sans', sans-serif;
+    color: white;
+    position: relative;
+    text-align: center;
 }
 
 .textmovietitle {
-  font-size: 60px;
-  color: white;
-  font-family: 'Merriweather Sans', sans-serif;
+    font-size: 60px;
+    color: white;
+    font-family: 'Merriweather Sans', sans-serif;
 }
 
 .textmoviedesc {
-  font-size: 14px;
-  color: #DCDCDC;
-  position: relative;
-  font-family: 'Merriweather Sans', sans-serif;
+    font-size: 14px;
+    color: #DCDCDC;
+    position: relative;
+    font-family: 'Merriweather Sans', sans-serif;
 
 }
 
 .moviesummary {
-  position: relative;
-  text-align: center;
-  text-justify: inter-word;
+    position: relative;
+    text-align: center;
+    text-justify: inter-word;
 }
 
 .moviedesc {
-  padding-left: 20%;
-  padding-right: 20%
+    padding-left: 20%;
+    padding-right: 20%
 }
 
 .textheaders {
-  font-size: 20px;
-  color: white;
-  font-family: 'Merriweather Sans', sans-serif;
+    font-size: 20px;
+    color: white;
+    font-family: 'Merriweather Sans', sans-serif;
 }
 
 .textgenres {
-  font-size: 10px;
-  color: white;
-  font-family: 'Merriweather Sans', sans-serif;
+    font-size: 10px;
+    color: white;
+    font-family: 'Merriweather Sans', sans-serif;
 }
 
 .trailerdiv {
-  background-color: #181818;
+    background-color: #181818;
 }
 
 h6 {
-  color: white;
+    color: white;
 }
 
 div.poster, img.pos.img-responsive {
@@ -237,7 +237,7 @@ img.pos.img-responsive {
 
 .castpics {
     justify-content: center;
-    text-align:center
+    text-align: center
 }
 
 .similarmovies, .colImg {
@@ -245,23 +245,23 @@ img.pos.img-responsive {
 }
 
 .actorpic {
-    display:table-cell;
-    vertical-align:middle;
-    text-align:center;
-    justify-content:center;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    justify-content: center;
 }
 
 .relatedmoviepic {
-    display:table-cell;
-    vertical-align:middle;
-    text-align:center
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center
 }
 
 div.poster {
     display: inline-block;
     margin: 0 auto;
     background: rgba(24, 24, 24, 1.0);
-    box-shadow: inset 0px -120px 0px -50px rgba(24,24,24,1.0);
+    box-shadow: inset 0px -120px 0px -50px rgba(24, 24, 24, 1.0);
 }
 
 img.poster {
@@ -275,6 +275,7 @@ img.poster {
         width: auto;
         height: auto;
     }
+
     .ghd {
         position: absolute;
         width: 150px;
