@@ -21,10 +21,12 @@ const CastInfo = (props) => {
     let castInfo = () => {
         let info = (
             <div>
-                <h3 className="text" > Name: {<p>{props.castInfo.name}</p>} </h3>
-                <h3 className="text"> Biography: {<p>{props.castInfo.biography}</p>} </h3>
-                <h3 className="text"> Birthday: {<p>{props.castInfo.birthday}</p>}</h3>
-                <h3 className="text"> Place Of Birth: {<p>{props.castInfo.place_of_birth}</p>}</h3>
+                <div className="description" > {<p>{props.castInfo.name}</p>} </div>
+                <div className="bday"> {<p>{props.castInfo.birthday}</p>}</div>
+                <div className="birth"> {<p>{props.castInfo.place_of_birth}</p>}</div>
+                <div className="biotitle" > Bio </div>
+                <div className="bio"> {<p>{props.castInfo.biography}</p>} </div>
+                <div className="knownfor">Stars in:</div>
             </div>
         );
         return info;
@@ -32,9 +34,11 @@ const CastInfo = (props) => {
 
     return (
         <div>
-            <Image src={URL_IMG+IMG_LOGO_S_SIZE+props.castInfo.profile_path} responsive circle/>
+            <div className="profilepic">
+              <Image src={URL_IMG+IMG_LOGO_S_SIZE+props.castInfo.profile_path}  rounded/>
+            </div>
             {castInfo()}
-            <div><h2 className="text">Known For</h2>{getMovies()}</div>
+            <div>{getMovies()}</div>
         </div>
     );
 }

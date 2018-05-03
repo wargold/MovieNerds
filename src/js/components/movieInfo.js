@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom'
 import { database, auth } from '../constants/base'
 import './css/movie.css'
 
-
 class MovieInfo extends React.Component {
     constructor() {//Can have a state due to that it only handles local state about a image...
         super()
@@ -86,7 +85,7 @@ class MovieInfo extends React.Component {
       let cast = this.props.castList.slice(0, 5).map((actor) =>
           (<Col xs={12} sm={4} md={2} key={actor.cast_id}>
               <Link to={`/cast/${actor.id}`} key={actor.id}>
-                  <div>
+                  <div className="actorpic">
                       <Image className="loading" src={actor.profile_path == null ? BROKEN_IMAGE
                           : URL_IMG + IMG_LOGO_S_SIZE + actor.profile_path} alt={actor.name} responsive
                           circle />
@@ -103,8 +102,10 @@ class MovieInfo extends React.Component {
         if (this.props.similarMovies.length>0) {
              temp = this.props.similarMovies.slice(0, 5).map((movie) =>
                 <Col xs={12} sm={4} md={2} key={movie.id}>
+                <div className="relatedmoviepic">
                     <MovieCardComponent className="picture" movie={movie}/>
                     <h3 className="fs"> Movie: {<p>{movie.original_title}</p>} </h3>
+                </div>
                 </Col>
             );
         }

@@ -236,12 +236,25 @@ img.pos.img-responsive {
 }
 
 .castpics {
-    display: flex;
     justify-content: center;
+    text-align:center
 }
 
 .similarmovies, .colImg {
     justify-content: center;
+}
+
+.actorpic {
+    display:table-cell;
+    vertical-align:middle;
+    text-align:center;
+    justify-content:center;
+}
+
+.relatedmoviepic {
+    display:table-cell;
+    vertical-align:middle;
+    text-align:center
 }
 
 div.poster {
