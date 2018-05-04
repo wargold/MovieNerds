@@ -65,18 +65,15 @@ class NavBarHeader extends Component {
                         </Link>
                     </Navbar.Brand>
                     <Navbar.Brand>{loggin}</Navbar.Brand>
-                    <Navbar.Toggle/>
                 </Navbar.Header>
-                <Navbar.Collapse>
                     <Navbar.Form pullLeft>
                         <FormGroup className="search">
                             <SearchByGenres/>
                         </FormGroup>{' '}
-                        <FormGroup className="search">
+                <FormGroup className="search">
                             <SearchBar/>
                         </FormGroup>
-                    </Navbar.Form>
-                </Navbar.Collapse>
+                </Navbar.Form>
             </Navbar>
         );
     }

@@ -10,7 +10,7 @@ const MovieCardComponent = (props) => {
 
     const StyleImage = styled.div`
             height: 278px;
-            width:250px;
+            width:220px;
     &:hover .image{
        opacity:0.3;
     }
@@ -41,9 +41,9 @@ const MovieCardComponent = (props) => {
                                alt={movie.original_title} responsive/>
                     </Link>
                     <MovieInfo className="title">
-                        <h4 className="hiddenTitle">{movie.original_title}</h4>
+                        <h4 className="hiddenTitle">{movie.original_title}</h4> &nbsp;
                         <div><Glyphicon
-                            glyph={'star'}/> {movie.vote_average}</div>
+                            glyph={'star'}/> {movie.vote_average}</div>&nbsp;
                         <div><Glyphicon glyph={'calendar'}/>
                             {movie.release_date}</div>
                     </MovieInfo>

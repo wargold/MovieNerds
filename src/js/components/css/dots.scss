@@ -40,8 +40,27 @@
 
 }
 
-@media (max-width: 520px) {
+@media (min-width: 520px) and (max-width: 547px) {
+  .slick-dots {
+    transform: translateY(60px);
+  }
+}
+
+@media (min-width: 420px) and (max-width: 520px) {
   .slick-dots {
     transform: translateY(35px);
   }
 }
+
+@media (min-width: 410px) and (max-width: 420px) {
+  .slick-dots {
+    transform: translateY(100px);
+  }
+}
+
+@media (max-width: 410px) {
+  .slick-dots {
+    transform: translateY(70px);
+  }
+}
+

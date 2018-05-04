@@ -43,19 +43,12 @@ button.slick-arrow.slick-prev,button.slick-arrow.slick-next{
     display: inline-block;
 }
 
-.slick-dots {
-}
-
 div.slick-slide.slick-active.slideBox {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.slick-active.slideBox:hover {
-    transform: scale(1.1);
-    z-index: 300;
-}
 
 img.image.img-responsive, div.sc-bdVaJa.btyTPY {
     width: 100%;
@@ -66,6 +59,12 @@ img.image.img-responsive, div.sc-bdVaJa.btyTPY {
     display: inline-block;
 }
 
+@media (max-width:1160px){
+    .genreTitle {
+        left: 10%;
+    }
+}
+
 @media (max-width: 900px) {
     .genreTitle {
         left: 12%;
@@ -73,22 +72,30 @@ img.image.img-responsive, div.sc-bdVaJa.btyTPY {
 }
 
 @media (max-width: 700px) {
+
+    .carsoule {
+        margin: 0 auto;
+        overflow: visible;
+        width: 80%;
+        height: 250px;
+    }
+
     .genreTitle {
-        left: 6%;
+        left: 18%;
     }
 
     .genreSliderBox {
-        margin-bottom: 10em;
+        margin-bottom: 8em;
     }
 
     button.slick-arrow.slick-prev{
         position: absolute;
-        transform: translateX(15px) scale(2,2);
+        transform: translateX(10px) scale(2,2);
     }
 
     button.slick-arrow.slick-next {
         position: absolute;
-        transform: translateX(-15px) scale(2,2);
+        transform: translateX(-10px) scale(2,2);
     }
 
     .genreSliderBox:last-child {
@@ -97,22 +104,30 @@ img.image.img-responsive, div.sc-bdVaJa.btyTPY {
 }
 
 @media (max-width: 520px) {
+
+    .carsoule {
+        margin: 0 auto;
+        overflow: visible;
+        width: 50%;
+        height: 250px;
+    }
+
     .genreTitle {
-        left: 6em;
+        left: 33%;
     }
 
     button.slick-arrow.slick-prev{
         position: absolute;
-        transform: translateX(30px) scale(2,2);
+        transform: translateX(2px) scale(2,2);
     }
 
     button.slick-arrow.slick-next {
         position: absolute;
-        transform: translateX(-30px) scale(2,2);
+        transform: translateX(-2px) scale(2,2);
     }
 
     .genreSliderBox {
-        margin-bottom: 12em;
+        margin-bottom: 10em;
         width: auto;
         height: auto;
     }
@@ -121,4 +136,3 @@ img.image.img-responsive, div.sc-bdVaJa.btyTPY {
         margin-bottom: 0;
     }
 }
-

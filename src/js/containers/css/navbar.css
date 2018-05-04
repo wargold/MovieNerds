@@ -37,6 +37,10 @@ div.navbar-form.navbar-left {
     padding-right: 20px;
 }
 
+.section{
+    z-index: 8;
+}
+
 #react-select-2--value {
     width: 200px;
 }
@@ -79,4 +83,5 @@ nav.navbar.navbar-inverse {
 
 div.dropdown.navbar-brand {
     list-style-type: none;
+    z-index: 99999999999;
 }

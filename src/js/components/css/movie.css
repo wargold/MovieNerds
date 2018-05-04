@@ -127,40 +127,60 @@
 }
 
 .glyphicon.playIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
     font-size: 75px;
     cursor: pointer;
-    z-index: 2;
-    position: absolute;
-    transform: translate(-50%, -15%);
-    margin: auto;
-    top: 15%;
-    left: 50%;
     color: white;
+}
+
+.glyphicon.playIcon:hover {
+    color: #7d7777;
 }
 
 .notrailer {
-    z-index: 2;
     position: absolute;
-    transform: translate(-50%, -15%);
-    margin: auto;
-    top: 15%;
+    top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 400;
+    z-index: 10;
     color: white;
 }
 
-.player {
-    width: 40%;
+.playsd {
+    position: relative;
+}
+.imgsds{
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /*magic*/
 }
 
 .fs {
     color: white;
+    margin: 0 auto;
     text-align: center;
+    transform: translateY(10px);
+}
+
+.pd {
+    color: white;
+    margin: 0 auto;
+    text-align: center;
+    transform: translateY(-10px);
 }
 
 .ghd {
+    display: inline-block;
     position: absolute;
-    width: 250px;
-    height: 250px;
+    overflow: hidden;
+    margin: 0;
+    max-width: 250px;
+    max-height: 250px;
     top: 3em;
     left: 0;
     z-index: 4;
@@ -209,6 +229,8 @@ div.moviedetails {
     font-size: 20px;
     color: white;
     font-family: 'Merriweather Sans', sans-serif;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .textgenres {
@@ -225,14 +247,13 @@ h6 {
     color: white;
 }
 
-div.poster, img.pos.img-responsive {
+div.poster {
     width: 100%;
     max-width: 100%;
-    height: 500px;
     margin: auto;
-}
-
-img.pos.img-responsive {
+    display: inline-block;
+    background: rgba(24, 24, 24, 1.0);
+    box-shadow: inset 0px -120px 0px -50px rgba(24, 24, 24, 1.0);
 }
 
 .castpics {
@@ -245,24 +266,23 @@ img.pos.img-responsive {
 }
 
 .actorpic {
-    display: table-cell;
-    vertical-align: middle;
+    margin: 0 auto;
     text-align: center;
-    justify-content: center;
 }
 
 .relatedmoviepic {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center
+    margin: 0 auto;
+    text-align: center;
 }
 
-div.poster {
-    display: inline-block;
-    margin: 0 auto;
-    background: rgba(24, 24, 24, 1.0);
-    box-shadow: inset 0px -120px 0px -50px rgba(24, 24, 24, 1.0);
+.justRelatedMoviePic {
+    width: auto;
+    max-width: 230px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 
 img.poster {
     opacity: 0.3;
@@ -270,22 +290,85 @@ img.poster {
     height: auto;
 }
 
-@media (max-width: 900px) {
-    div.poster, img.pos.img-responsive {
-        width: auto;
-        height: auto;
-    }
+.icons {
+    font-size: 35px;
+}
 
-    .ghd {
-        position: absolute;
-        width: 150px;
-        height: 150px;
-        top: 1em;
-        left: 0;
-        z-index: 4;
+.addFavButt {
+    margin-bottom: 10px;
+}
+
+div.col-md-3.col-sm-4.col-xs-12 {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 770px) {
+    div.col-md-3.col-sm-4.col-xs-12 {
+        margin-bottom: 30px;
     }
 }
 
-.icons {
-    font-size: 35px;
+img.loading.img-responsive.img-circle {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 185px;
+    height: 278px;
+}
+
+#noCharacName {
+    color: #f26267;
+    font-style: italic;
+}
+
+#glyphStar, #glyphCalender {
+    transform: translateY(5px);
+}
+
+#movieStarCalend {
+    display: inline-block;
+}
+
+@media (max-width: 1100px) {
+    .modal-video-body {
+        max-width: 700px;
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        display: table
+    }
+}
+
+@media (max-width: 820px) {
+    .modal-video-body {
+        max-width: 520px;
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        display: table
+    }
+}
+
+@media (max-width: 620px) {
+    .modal-video-body {
+        max-width: 380px;
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        display: table
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-video-body {
+        max-width: 280px;
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        display: table
+    }
+}
+
+button.modal-video-close-btn:hover {
+    transform: scale(1.5);
 }
