@@ -5,6 +5,8 @@ import * as d3 from "d3";
 import {getSimilarMovies, updateAllMoviesGenres, getFavoriteSimilarMovies, getFavoriteActors} from '../actions';
 import {auth, database} from "../constants/base";
 import {black} from 'material-ui/styles/colors';
+import {Col, Grid, Row, Glyphicon, Button} from 'react-bootstrap'
+import history from '../history';
 
 let trs = [];
 
@@ -33,8 +35,8 @@ class Vis extends Component {
         console.log("visualization.js favorite similar movies", this.props.similarFavoriteMov.similarFavorite);
         console.log("visualization.js favorite similar actors", this.props.favoriteActors.similarFavorite);
 
-        var width = 1500;
-        var height = 900;
+        var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) - 5;
+        var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - 5;
 
 
         d3.select("svg").remove();
@@ -42,7 +44,7 @@ class Vis extends Component {
             .append("svg")
             .attr("width", width)
             .attr("height", height)
-            .style("border-style", "solid");
+            // .style("border-style", "solid");
 
 
         var fav = this.props.similarFavoriteMov.similarFavorite
@@ -121,7 +123,7 @@ class Vis extends Component {
 
         var simulation = d3.forceSimulation()
             .force("link", d3.forceLink().distance(distance()).strength(0.1))
-            .force("charge", d3.forceManyBody().strength(-10))
+            .force("charge", d3.forceManyBody().strength(-5))
             .force("collide", d3.forceCollide().radius(10))
             .force("center", d3.forceCenter(width / 2, height / 2));
 
@@ -262,17 +264,48 @@ class Vis extends Component {
         }
 
         var divStyle = {
-            color: black
+            color: '#FFF'
         };
+
+        var headStyle = {
+            padding: '40px',
+            position: 'absolute',
+            top: '20px',
+            left: '0',
+            'pointer-events' : 'none'
+        };
+
+        var headStyle2 = {
+            padding: '20px',
+            position: 'absolute',
+            top: '0',
+            left: '0',
+            
+        };
+
+
+        var imgStyle = {
+            opacity: '0.2',
+            filter: 'alpha(opacity = 50)'
+        }
+
+        var buttonStyle = {
+            position: 'absolute',
+            right: '10px',
+            top: '10px'
+        }
 
         return (
 
             <div>
+                <a style={headStyle2} id="title" href="" target="_blank"><h2 id="titlet">Click a movie!</h2></a>
+                <Button style={buttonStyle} onClick={() => history.push('/myfavorites')}>Back to favorites</Button>
+                <header style={headStyle}>
 
+                    <h3 id="desc" style={divStyle}></h3>
+                    <img id="image" src="" style={imgStyle}></img>
+                </header>
                 <section id="vis"></section>
-                <a id="title" href="" target="_blank"><h2 id="titlet">Click a movie!</h2></a>
-                <h3 id="desc" style={divStyle}></h3>
-                <img id="image" src=""></img>
 
 
             </div>)
