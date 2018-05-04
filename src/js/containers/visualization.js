@@ -53,6 +53,7 @@ class Vis extends Component {
             fav[i].poster_path = fav[i].FavMovieID.poster_path;
             fav[i].title = fav[i].FavMovieID.original_title;
             fav[i].id = fav[i].FavMovieID.id;
+            fav[i].overview = fav[i].FavMovieID.overview;
         }
 
         console.log(fav)
