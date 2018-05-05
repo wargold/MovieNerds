@@ -47,11 +47,11 @@ class MovieInfo extends React.Component {
                                    : "https://image.tmdb.org/t/p/w1280" + this.props.movie.backdrop_path}
                                    responsive/></div>
                         {this.getVideo()}
+                            <div className="ghd">
+                                <MovieCardComponent className="picture" movie={this.props.movie}/>
+                            </div>
                         </div>
                         <div className="shadow"></div>
-                    </div>
-                    <div className="ghd">
-                        <MovieCardComponent className="picture" movie={this.props.movie}/>
                     </div>
                 </div>
             </div>
@@ -201,11 +201,13 @@ class MovieInfo extends React.Component {
         const movie = this.props.movie;
         console.log("kolla movieinfo", movie);
         const favButton = this.state.isFav && this.props.user !== '' ? (
+            <div className="removeFavButt">
             <Button onClick={() => {
                 this.removeFavorite(movie.id)
             }}>
                 <Glyphicon glyph="trash"/> Remove Favorite
             </Button>
+            </div>
         ) : (<div className="addFavButt">
                 <Button onClick={() => {
                     this.addFavorite({
