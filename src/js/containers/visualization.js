@@ -1,23 +1,45 @@
-import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import * as d3 from "d3";
-import {getSimilarMovies, updateAllMoviesGenres, getFavoriteSimilarMovies, getFavoriteActors} from '../actions';
-import {auth, database} from "../constants/base";
-import {black} from 'material-ui/styles/colors';
-import {Col, Grid, Row, Glyphicon, Button} from 'react-bootstrap'
+import { getSimilarMovies, updateAllMoviesGenres, getFavoriteSimilarMovies, getFavoriteActors, setAuthenticated, notLoggedIn } from '../actions';
+import { database, auth, app, base } from "../constants/base";
+import { black } from 'material-ui/styles/colors';
+import { Col, Grid, Row, Glyphicon, Button } from 'react-bootstrap'
+import { Loader } from '../../loader/loader'
 import history from '../history';
+import {Spinner} from '@blueprintjs/core';
 
 let trs = [];
 
 class Vis extends Component {
 
+    // componentDidMount() {
+    //     //Get all the similar movies from the favorite list
+    //     this.handle();
+    //     setTimeout(() => {
+    //         this.props.getFavoriteSimilarMovies(trs);
+    //     }, 1500)
+    // }
+
     componentDidMount() {
-        //Get all the similar movies from the favorite list
-        this.handle();
-        setTimeout(() => {
-            this.props.getFavoriteSimilarMovies(trs);
-        }, 1500)
+        this.removeAuthListener = app.auth().onAuthStateChanged((user) => {
+            if (user) {
+                console.log("logged in", user.displayName)
+                if (user.displayName === null) {
+                    this.props.setAuthenticated(user.email);
+                } else { this.props.setAuthenticated(user.displayName); }
+
+            } else {
+                console.log("not logged in")
+                this.props.notLoggedIn();
+            }
+            this.handle();
+            setTimeout(() => {
+                this.props.getFavoriteSimilarMovies(trs);
+            }, 1500)
+        })
+
     }
 
     handle() {
@@ -32,6 +54,15 @@ class Vis extends Component {
 
     render() {
 
+        if (this.props.loading) {
+            return (
+                <div style={{textAlign: "center", position: "absolute", top: "25%", left: "50%"}}>
+                    <h3>Loading</h3>
+                    <Spinner/>
+                </div>
+            )
+        }
+
         console.log("visualization.js favorite similar movies", this.props.similarFavoriteMov.similarFavorite);
         console.log("visualization.js favorite similar actors", this.props.favoriteActors.similarFavorite);
 
@@ -44,7 +75,7 @@ class Vis extends Component {
             .append("svg")
             .attr("width", width)
             .attr("height", height)
-            // .style("border-style", "solid");
+        // .style("border-style", "solid");
 
 
         var fav = this.props.similarFavoriteMov.similarFavorite
@@ -54,6 +85,7 @@ class Vis extends Component {
             fav[i].title = fav[i].FavMovieID.original_title;
             fav[i].id = fav[i].FavMovieID.id;
             fav[i].overview = fav[i].FavMovieID.overview;
+            fav[i].isFav = true;
         }
 
         console.log(fav)
@@ -154,15 +186,32 @@ class Vis extends Component {
 
 
         // Config for image
-        var imageH = 50;
-        var imageW = 50;
+        // var imageH = 50;
+        // var imageW = 50;
+
+        function imageH(d) {
+            if (d.isFav) {
+                return 100;
+            } else {
+                return 50;
+            }
+        }
+
+        function imageW(d) {
+            if (d.isFav) {
+                return 100;
+            } else {
+                return 50;
+            }
+        }
+
 
         var nodeImage = node.append("image")
             .attr("xlink:href", d => 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + d.poster_path)
-            .attr("height", imageH)
-            .attr("width", imageW)
-            .attr("x", -(imageW / 2))
-            .attr("y", -(imageH / 2))
+            .attr("height", d =>  imageH(d))
+            .attr("width",  d => imageW(d))
+            .attr("x",  d =>  -(imageW(d) / 2))
+            .attr("y",  d =>  -(imageH(d) / 2))
 
         var texts = node.append("text")
             .style("fill", "black")
@@ -174,8 +223,8 @@ class Vis extends Component {
 
         // make the image grow a little on mouse over and add the text details on click
         var setEvents = nodeImage
-        // Append hero text
-        // click on a node
+            // Append hero text
+            // click on a node
             .on('click', function (d) {
                 console.log(d)
                 d3.select("#titlet").html(d.title);
@@ -190,22 +239,22 @@ class Vis extends Component {
                 d3.select(this)
                     .transition()
                     .attr("x", function (d) {
-                        return -imageW;
+                        return -imageW(d);
                     })
                     .attr("y", function (d) {
-                        return -imageH;
+                        return -imageH(d);
                     })
-                    .attr("height", imageH * 2)
-                    .attr("width", imageW * 2);
+                    .attr("height",  d =>  imageH(d) * 2)
+                    .attr("width",  d =>  imageW(d) * 2);
             })
             // set back
             .on('mouseleave', function () {
                 d3.select(this)
                     .transition()
-                    .attr("height", imageH)
-                    .attr("width", imageW)
-                    .attr("x", -(imageW / 2))
-                    .attr("y", -(imageH / 2))
+                    .attr("height",  d =>  imageH(d))
+                    .attr("width",  d =>  imageW(d))
+                    .attr("x",   d => -(imageW(d) / 2))
+                    .attr("y",  d =>  -(imageH(d) / 2))
             });
 
 
@@ -273,7 +322,7 @@ class Vis extends Component {
             position: 'absolute',
             top: '20px',
             left: '0',
-            'pointer-events' : 'none'
+            'pointer-events': 'none'
         };
 
         var headStyle2 = {
@@ -281,7 +330,7 @@ class Vis extends Component {
             position: 'absolute',
             top: '0',
             left: '0',
-            
+
         };
 
 
@@ -297,19 +346,22 @@ class Vis extends Component {
         }
 
         return (
+            
+            this.props.auth.user !== '' ? (
+                <div>
+                    <a style={headStyle2} id="title" href="" target="_blank"><h2 id="titlet">Click a movie!</h2></a>
+                    <Button style={buttonStyle} onClick={() => history.push('/myfavorites')}>Back to favorites</Button>
+                    <header style={headStyle}>
 
-            <div>
-                <a style={headStyle2} id="title" href="" target="_blank"><h2 id="titlet">Click a movie!</h2></a>
-                <Button style={buttonStyle} onClick={() => history.push('/myfavorites')}>Back to favorites</Button>
-                <header style={headStyle}>
-
-                    <h3 id="desc" style={divStyle}></h3>
-                    <img id="image" src="" style={imgStyle}></img>
-                </header>
-                <section id="vis"></section>
+                        <h3 id="desc" style={divStyle}></h3>
+                        <img id="image" src="" style={imgStyle}></img>
+                    </header>
+                    <section id="vis"></section>
 
 
-            </div>)
+                </div>
+            ) : (<h2>You Have To Be Logged In To Show This Page!</h2>))
+
     }
 }
 
@@ -318,7 +370,9 @@ function mapStateToProps(state) {
         similarMovies: state.similarMovies.movieInfo,
         updateMoviesByGenre: state.updateMoviesByGenre,
         similarFavoriteMov: state.similarFavoriteMov,
-        favoriteActors: state.favoriteActors
+        favoriteActors: state.favoriteActors,
+        auth: state.auth,
+        loading: state.auth.loading
     };
 }
 
@@ -327,7 +381,9 @@ function matchDispatchToProps(dispatch) {
         getSimilarMovies: getSimilarMovies,
         updateAllMoviesGenres: updateAllMoviesGenres,
         getFavoriteSimilarMovies: getFavoriteSimilarMovies,
-        getFavoriteActors: getFavoriteActors
+        getFavoriteActors: getFavoriteActors,
+        setAuthenticated: setAuthenticated,
+        notLoggedIn: notLoggedIn
     }, dispatch);
 }
 

@@ -39,8 +39,13 @@ class NavBarHeader extends Component {
     render() {
         console.log('aseewf', this.props.authenticated);
 
+        var userButton = {
+            position: 'absolute',
+            right: '20px'
+        }
+
         let loggin = this.props.authenticated ? (
-            <div className="dropdown">
+            <div className="dropdown"  style={userButton}  >
                 <NavDropdown eventKey={3} title={<span><Glyphicon glyph="user"/> {this.props.user}</span>}
                              id="basic-nav-dropdown">
                     <MenuItem eventKey={3.2} onClick={() => history.push('/myfavorites')}>
