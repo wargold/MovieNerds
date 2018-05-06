@@ -366,6 +366,15 @@ img.loading.img-responsive.img-circle {
         transform: translate(-50%, -50%);
         z-index: 4;
     }
+
+    .ghd .styleImg:hover .image.loader.img-responsive{
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .ghd div.title{
+        display: none;
+    }
 }
 
 
@@ -396,11 +405,11 @@ img.loading.img-responsive.img-circle {
 @media (max-width: 480px) {
     .ghd {
         width: 160px;
-        height: 210px;
+        height: 200px;
     }
     .ghd .moviecard, .ghd .container {
         width: 160px;
-        height: 210px;
+        height: 200px;
     }
 
 

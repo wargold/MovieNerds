@@ -41,28 +41,12 @@ div.navbar-form.navbar-left {
     z-index: 8;
 }
 
-#react-select-2--value {
-    width: 200px;
-}
-
-div.Select-control {
+#react-select-2--value, div.Select-control, span#react-select-3--value.Select-multi-value-wrapper input  {
     width: 200px;
 }
 
 div.Select-menu-outer {
     width: 215px;
-}
-
-span#react-select-3--value.Select-multi-value-wrapper {
-    width: 200px;
-}
-
-input {
-    width: 200px;
-}
-
-div.example {
-    transform: translateY(-5px);
 }
 
 div.dropdown.navbar-brand {
@@ -85,3 +69,4 @@ div.dropdown.navbar-brand {
     list-style-type: none;
     z-index: 99999999999;
 }
+

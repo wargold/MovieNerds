@@ -1,6 +1,94 @@
+#favTitle {
+    margin-top: 30px;
+    color: white;
+    font-weight: bolder;
+    font-size: 45px;
+}
+
+table#dwds.table {
+    width: 100%;
+}
+
+thead {
+    width: 100%;
+}
+
+th {
+    width: 100%;
+}
+
+#noFavMovie {
+    text-align: center;
+    font-weight: bolder;
+    font-style: italic;
+    color: #be0004;
+}
+
+#notLoggedIn {
+    text-align: center;
+    font-weight: bolder;
+    font-style: oblique;
+    color: red;
+}
+
 .th {
     z-index: 10;
     position: absolute;
     margin: auto;
     left: 4em;
+}
+
+.relatedamoviepic {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.justRelatedaMoviePic {
+    width: auto;
+    max-width: 230px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#removeButton {
+    display: none;
+    transform: translateX(-5px) translateY(-23px);
+    justify-content: center;
+    text-align: center;
+}
+
+#removeButton:hover {
+    background-color: #c6c6c6;
+    color: red;
+    font-weight: bolder;
+}
+
+.justRelatedaMoviePic .styleImg:hover .image.loader.img-responsive {
+    transform: scale(1);
+}
+
+.relatedamoviepic:hover #removeButton {
+    display: inline-block;
+}
+
+.relatedamoviepic {
+    height: 330px;
+}
+
+div.col-md-3.col-sm-4.col-xs-12 {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 450px) {
+    #favTitle {
+        font-size: 30px;
+    }
+}
+
+#visualButt:hover{
+    font-weight:400;
+    font-size: 15px;
+    color: white;
+    background: #575757;
 }

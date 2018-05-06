@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as d3 from "d3";
-import { getSimilarMovies, updateAllMoviesGenres, getFavoriteSimilarMovies, getFavoriteActors, setAuthenticated, notLoggedIn } from '../actions';
+import { getSimilarMovies, updateAllMoviesGenres, getFavoriteSimilarMovies, setAuthenticated, notLoggedIn } from '../actions';
 import { database, auth, app, base } from "../constants/base";
 import { black } from 'material-ui/styles/colors';
 import { Col, Grid, Row, Glyphicon, Button } from 'react-bootstrap'
@@ -346,7 +346,7 @@ class Vis extends Component {
         }
 
         return (
-            
+
             this.props.auth.user !== '' ? (
                 <div>
                     <a style={headStyle2} id="title" href="" target="_blank"><h2 id="titlet">Click a movie!</h2></a>
@@ -381,15 +381,9 @@ function matchDispatchToProps(dispatch) {
         getSimilarMovies: getSimilarMovies,
         updateAllMoviesGenres: updateAllMoviesGenres,
         getFavoriteSimilarMovies: getFavoriteSimilarMovies,
-        getFavoriteActors: getFavoriteActors,
         setAuthenticated: setAuthenticated,
         notLoggedIn: notLoggedIn
     }, dispatch);
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(Vis);
-
-
-let favorite = [284054, 284053, 76338, 1924];//Black panther and thor ragnarok
-
-//let favorite =[284054,338970];//Black panther and tom raider

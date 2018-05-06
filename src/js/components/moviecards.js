@@ -33,7 +33,7 @@ const MovieCardComponent = (props) => {
     console.log("kom hit 123456")
     return (
         <div className="moviecard">
-            <StyleImage>
+            <StyleImage className="styleImg">
                 <div className="container" key={movie.id}>
                     <Link to={`/movie/${movie.id}`} key={movie.id} style={{textDecoration: 'none'}}>
                         <Image className="image loader" src={movie.poster_path == null ? BROKEN_IMAGE

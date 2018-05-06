@@ -52,7 +52,8 @@ class SearchBar extends Component {
                      alt={suggestion.title}/>
                 <div className="searchResult-text">
                     <div className="searchResult-name">
-                        {suggestion.title}
+                        {(suggestion.title.length <= 30) ? (suggestion.title) :
+                            (suggestion.title.substring(0, 25).replace(/\s/g, '') + '...')}
                     </div>
                     {suggestion.release_date == null ? 1994 : suggestion.release_date.substring(0, 4)}
                 </div>
