@@ -1,24 +1,23 @@
-img.kan.loader.img-responsive {
+.carousel-inner{
+    max-height: 100%;
+}
+div.heh.carousel.slide{
+    max-height: 100%;
+}
+img.kan.loader.img-responsive{
+    max-height: 100%;
     width: 100%;
-    height: 100%;
-    object-fit: cover; /*magic*/
-    position: relative;
 }
 
-
-.carousel-inner, .carousel {
-    width: 100%;
-    max-width: 100%;
-    margin: auto;
+#movieTitle{
+    font-weight: 600;
 }
-
-@media (max-width: 900px) {
-    .carousel, .carousel-inner, img.kan.loader.img-responsive {
-        width:auto;
-        height:auto;
-    }
+#glyphIcons{
+    font-weight: 600;
 }
-
+#movieInfo{
+    font-weight: 600;
+}
 .mostPopularMovies{
     padding-top: 20px;
     margin-bottom: 20px;
@@ -38,7 +37,25 @@ h3{
 }
 
 .glyphicon.moreInfo {
+    margin-top: 5px;
+    margin-bottom: 5px;
     font-size: 20px;
     cursor: pointer;
 }
 
+.glyphicon.moreInfo:hover {
+    transform: scale(1.3);
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    #movieTitle{
+        font-size: 15px;
+    }
+    #glyphIcons{
+        font-size: 15px;
+    }
+    #movieInfo{
+        display: none;
+    }
+}

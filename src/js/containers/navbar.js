@@ -69,13 +69,13 @@ class NavBarHeader extends Component {
                             <a id="movietitle" href="#home">Movie Nerds</a>
                         </Link>
                     </Navbar.Brand>
-                    <Navbar.Brand>{loggin}</Navbar.Brand>
+                    <Navbar.Brand className="logginButt">{loggin}</Navbar.Brand>
                 </Navbar.Header>
                     <Navbar.Form pullLeft>
                         <FormGroup className="search">
                             <SearchByGenres/>
                         </FormGroup>{' '}
-                <FormGroup className="search">
+                <FormGroup className="searchMovieTitle">
                             <SearchBar/>
                         </FormGroup>
                 </Navbar.Form>

@@ -7,6 +7,7 @@ import {URL_IMG, IMG_LOGO_S_SIZE, BROKEN_IMAGE} from "../constants/constants"
 import {Link} from 'react-router-dom'
 import {database, auth} from '../constants/base'
 import './css/movie.css'
+import Ratio from 'react-ratio';
 
 class MovieInfo extends React.Component {
     constructor() {//Can have a state due to that it only handles local state about a image...
@@ -39,20 +40,17 @@ class MovieInfo extends React.Component {
         let temp = (
             <div className="trailerdiv">
                 <div className="">
-                    <div className="poster">
-                        <div className="playsd">
-                            <div className="imgsds">
+                    <Ratio ratio={ 21 / 9 }>
                             <Image className="pos loading poster"
                                src={this.props.movie.backdrop_path == null ? BROKEN_IMAGE
                                    : "https://image.tmdb.org/t/p/w1280" + this.props.movie.backdrop_path}
-                                   responsive/></div>
+                                   responsive/>
                         {this.getVideo()}
                             <div className="ghd">
                                 <MovieCardComponent className="picture" movie={this.props.movie}/>
-                            </div>
-                        </div>
                         <div className="shadow"></div>
                     </div>
+                    </Ratio>
                 </div>
             </div>
 
