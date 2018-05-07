@@ -25,16 +25,15 @@ div.search.form-group {
     margin-right: 30px;
 }
 
-div.Select.is-clearable.is-searchable.Select--multi {
+div.section, div.Select.is-clearable.is-searchable.Select--multi, div.Select-control, .is-open {
     width: 200px;
 }
 
-div.Select-control {
-    width: 200px;
-}
 
 div.navbar-form.navbar-left {
-    padding-right: 20px;
+    display:inline-flex;
+    margin-top: 11px;
+    margin-bottom: 11px;
 }
 
 .section{
@@ -88,10 +87,11 @@ div.navbar-header{
     display: none !important;
 }
 
-div.searchMovieTitle.form-group{
-    padding-right: 120px;
-}
 
+
+div.dropdown.logginButt.navbar-brand{
+    display:block;
+}
 @media (max-width: 1000px) {
     .navbar-header {
         float: none;
@@ -127,5 +127,17 @@ div.searchMovieTitle.form-group{
     }
     .collapsing {
         overflow: hidden!important;
+    }
+}
+
+@media (max-width: 750px) {
+    .genreTitle{
+        background: blue;
+    }
+    div.navbar-form.navbar-left {
+        display:block;
+    }
+    div.searchMovieTitle.form-group{
+        margin-top: 15px;
     }
 }

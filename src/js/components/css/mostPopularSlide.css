@@ -51,9 +51,11 @@ h3{
 @media (max-width: 600px) {
     #movieTitle{
         font-size: 15px;
+        transform: translateY(20px);
     }
     #glyphIcons{
         font-size: 15px;
+        transform: translateY(20px);
     }
     #movieInfo{
         display: none;
