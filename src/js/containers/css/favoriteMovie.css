@@ -53,7 +53,7 @@ th {
 
 #removeButton {
     display: none;
-    transform: translateX(-5px) translateY(-23px);
+    transform: translateX(-6px) translateY(-23px);
     justify-content: center;
     text-align: center;
 }

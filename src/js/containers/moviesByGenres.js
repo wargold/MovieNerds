@@ -28,6 +28,9 @@ class MoviesByGenres extends Component {
     }
 
     render() {
+        if (this.props.moviesByGenres.error !== null) {
+            history.push('/APIError');
+        }
         console.log("Kolla props av serach genres: ", this.props.selector);
         console.log("Kolla props: ", this.props.moviesByGenres.moviesByGenres);
         let moviesByGenres = this.props.moviesByGenres.moviesByGenres;

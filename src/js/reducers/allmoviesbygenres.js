@@ -1,9 +1,9 @@
-import {LOADED_ALL_MOVIES, LOADED_ALL_MOVIES_SUCCESS,LOADED_ALL_MOVIES_FAILURE} from '../constants/constants'
+import {LOADED_ALL_MOVIES, LOADED_ALL_MOVIES_SUCCESS, LOADED_ALL_MOVIES_FAILURE} from '../constants/constants'
 
 const initialState = {
     moviesByGenres: [],
     isFetching: true,
-    error:''
+    error: null
 }
 
 const AllMoviegenres = (state = initialState, action) => {
@@ -11,9 +11,9 @@ const AllMoviegenres = (state = initialState, action) => {
         case LOADED_ALL_MOVIES:
             return {...state, isFetching: true, moviesByGenres: []};
         case LOADED_ALL_MOVIES_SUCCESS:
-            return {...state, isFetching: false, moviesByGenres: [...state,action.moviesByGenres]};
+            return {...state, isFetching: false, moviesByGenres: [...state, action.moviesByGenres]};
         case LOADED_ALL_MOVIES_FAILURE:
-            return {...state, isFetching: false, error:action.error};
+            return {...state, isFetching: false, error: action.error};
         default:
             return state;
     }

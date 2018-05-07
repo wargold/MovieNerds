@@ -5,21 +5,20 @@ import {getCastInfoByID, getCastKnownMovies} from '../actions';
 import CastInfo from '../components/castInfo';
 import NavBarHeader from './navbar';
 import {Loader} from '../../loader/loader'
+import history from '../history';
 
 class Cast extends Component {
 
     componentDidMount() {
-        console.log("Check param id", this.props.match.params.id);
         const id = this.props.match.params.id;
         this.props.getCastInfoByID(id);
         this.props.getCastKnownMovies(id);
     }
 
     render() {
-        console.log("Kolla cast Info", this.props.castAbout);
-        console.log("Kolla castlist", this.props.castKnownMovies);
-
-
+        if (this.props.castAboutError !== null || this.props.castKnownMoviesError !== null) {
+            history.push('/APIError');
+        }
         const de = this.props.castAbout !== undefined && this.props.castKnownMovies !== undefined &&
         this.props.castKnownMovies.length > 0 ?
             (<CastInfo castInfo={this.props.castAbout} moviesKnown={this.props.castKnownMovies}/>)
@@ -35,7 +34,9 @@ function mapStateToProps(state) {
     return {
         selector: state.selections,
         castAbout: state.castAbout.info,
-        castKnownMovies: state.castKnownMovies.info
+        castAboutError: state.castAbout.error,
+        castKnownMovies: state.castKnownMovies.info,
+        castKnownMoviesError: state.castKnownMovies.error
     };
 }
 

@@ -10,6 +10,13 @@ import SearchByGenres from './selectGenre';
 import SearchBar from './searchBar'
 import Login from './login';
 import history from '../history';
+import { Offline } from 'react-detect-offline';
+import {Toaster, Intent, Position} from '@blueprintjs/core';
+
+const OurToaster = Toaster.create({
+    className: "my-toaster",
+    position: Position.TOP,
+});
 
 class NavBarHeader extends Component {
 
@@ -70,6 +77,9 @@ class NavBarHeader extends Component {
                         </Link>
                     </Navbar.Brand>
                     <Navbar.Brand className="logginButt">{loggin}</Navbar.Brand>
+                    {!navigator.onLine ? OurToaster.show({
+                        message: "Please Check Your Internet Connection!",
+                        intent: Intent.WARNING }): <h2/>}
                 </Navbar.Header>
                     <Navbar.Form pullLeft>
                         <FormGroup className="search">

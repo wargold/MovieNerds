@@ -12,6 +12,7 @@ import {
 import SimpleSlider from "../components/genreSlider";
 import MostPopularSlide from "../components/mostPopularSlide";
 import {Loader} from '../../loader/loader';
+import history from "../history";
 
 class MovieGenreList extends Component {
 
@@ -26,6 +27,11 @@ class MovieGenreList extends Component {
     }
 
     render() {
+        if (this.props.movies.error !== null || this.props.mostPopMovies.error !== null ||
+            this.props.allMoviegenres.error !== null) {
+            history.push('/APIError');
+        }
+
         let mostPopMovies = this.props.mostPopMovies.movies;
         console.log("mostPopMovies", mostPopMovies);
         const de = !this.props.allMoviegenres.isFetching && mostPopMovies !== undefined && mostPopMovies.length > 0 ?

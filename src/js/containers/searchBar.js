@@ -114,7 +114,6 @@ class SearchBar extends Component {
 function mapStateToProps(state) {
     return {
         getse: state.search,
-        selector: state.selections,
         authenticated: state.auth.authenticated,
         user: state.auth.user,
         loading: state.auth.loading,

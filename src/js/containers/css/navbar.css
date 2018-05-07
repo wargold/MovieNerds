@@ -21,8 +21,9 @@ nav.navbar.navbar-inverse {
     color: white;
 }
 
+
 div.search.form-group {
-    margin-right: 30px;
+    margin-right: 40px;
 }
 
 div.section, div.Select.is-clearable.is-searchable.Select--multi, div.Select-control, .is-open {
@@ -72,9 +73,10 @@ div.dropdown.navbar-brand {
 .logginButt{
     position: absolute;
     top: 0;
-    right: 0;
+    right: 20px;
     height: 60px;
 }
+
 div.navbar-header{
     height: 60px;
 }
@@ -91,6 +93,7 @@ div.navbar-header{
 
 div.dropdown.logginButt.navbar-brand{
     display:block;
+    margin-right: 20px;
 }
 @media (max-width: 1000px) {
     .navbar-header {
@@ -131,9 +134,6 @@ div.dropdown.logginButt.navbar-brand{
 }
 
 @media (max-width: 750px) {
-    .genreTitle{
-        background: blue;
-    }
     div.navbar-form.navbar-left {
         display:block;
     }

@@ -8,6 +8,7 @@ import {
 import {Loader} from '../../loader/loader'
 import MovieInfo from '../components/movieInfo';
 import NavBarHeader from './navbar';
+import history from "../history";
 
 class Movie extends Component {
 
@@ -41,9 +42,10 @@ class Movie extends Component {
     }
 
     render() {
-        console.log("Render");
-        console.log("Render");
-        console.log("Selector value:", this.props.castList);
+        if (this.props.auth.error !== null || this.props.movieInfo.error !== null) {
+            history.push('/APIError');
+        }
+
         const de = (this.props.castList !== undefined && this.props.castList.length > 0 && this.props.movieInfo.movieInfo.id !== undefined) ?
             (<MovieInfo movie={this.props.movieInfo.movieInfo} trailer={this.props.trailer}
                         castList={this.props.castList} similarMovies={this.props.similarMovies}
@@ -58,7 +60,6 @@ class Movie extends Component {
 
 function mapStateToProps(state) {
     return {
-        selector: state.selections,
         movieInfo: state.movieInfo,
         trailer: state.trailer.movieInfo,
         castList: state.castList.movieInfo,

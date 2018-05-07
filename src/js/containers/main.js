@@ -52,7 +52,6 @@ class Main extends Component {
 
 function mapStateToProps(state) {
     return {
-        selector: state.selections,
         loading: state.auth.loading
     };
 }

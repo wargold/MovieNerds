@@ -1,22 +1,12 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
 import {Toaster, Intent} from '@blueprintjs/core';
 import {setAuthenticated} from '../actions';
 import {app, facebookProvider, database} from '../constants/base';
 import './css/login.css';
 import Modal from 'react-responsive-modal';
 import {Glyphicon, Button} from 'react-bootstrap'
-
-const loginStyles = {
-    width: '90%',
-    maxWidth: '315px',
-    margin: '20px auto',
-    border: '1px solid #ddd',
-    borderRadius: '5px',
-    padding: '10px',
-};
 
 class Login extends Component {
 

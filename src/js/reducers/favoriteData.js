@@ -6,7 +6,7 @@ import {
 const initialState = {
     similarFavorite: [],
     isFetching: true,
-    error: ''
+    error: null
 }
 
 export const FavoriteData = (state = initialState, action) => {

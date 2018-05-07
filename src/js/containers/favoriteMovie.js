@@ -2,17 +2,15 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {
-     updateMovieFavorites, setAuthenticated, notLoggedIn
+    updateMovieFavorites, setAuthenticated, notLoggedIn
 } from '../actions';
 import {database, auth, app, base} from '../constants/base'
-import {Col, Grid, Row, Glyphicon, Button, Table, thead, th } from 'react-bootstrap'
+import {Col, Grid, Row, Glyphicon, Button, Table, thead, th} from 'react-bootstrap'
 import MovieCardComponent from '../components/moviecards'
 import {Loader} from '../../loader/loader'
 import history from "../history";
 import NavBarHeader from './navbar';
 import './css/favoriteMovie.css'
-
-let movies;
 
 class FavoriteMovies extends Component {
     constructor() {//Can have a state due to that it only handles local state
@@ -51,7 +49,7 @@ class FavoriteMovies extends Component {
     }
 
     handle() {
-        movies = [];
+        let movies = [];
         let favs = [];
         let trs = [];
         database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
@@ -119,47 +117,44 @@ class FavoriteMovies extends Component {
 
 
     render() {
-        if (this.props.favorites !== null && this.state.loadedFavorite) {
-            console.log("kaddasdasdsa", this.props.favorites);
-            console.log("dfffff favoriteID", this.props.favoriteID);
-
+        if (this.props.auth.error !== null || this.props.movieInfo.error !== null) {
+            history.push('/APIError');
         }
         const de = this.props.auth.user !== null ? (
             this.props.favoriteID !== null && this.state.loadedFavorite ?
                 (<Grid fluid={true}>
-                    <Table id="dwds">
-                        <thead>
-                        <th> <h2 id="favTitle">My Favorites Movies</h2></th>
-                        <th>{this.props.favoriteID.length > 0 ?
-                            <Button id="visualButt" onClick={() => history.push('/vis')}>Visualisation</Button> :
-                            <h2/>}</th>
-                        </thead>
-                    </Table>
+                        <Table id="dwds">
+                            <thead>
+                            <th><h2 id="favTitle">My Favorites Movies</h2></th>
+                            <th>{this.props.favoriteID.length > 0 ?
+                                <Button id="visualButt" onClick={() => history.push('/vis')}>Visualisation</Button> :
+                                <h2/>}</th>
+                            </thead>
+                        </Table>
                         <Row>
                             {this.props.favoriteID.length > 0 ?
                                 this.getMovies() : <h2 id="noFavMovie">No Movies In Your Favorite List</h2>
                             }
                         </Row>
-                </Grid>
-    )
-    : (Loader())) : (
-        <h2 id="notLoggedIn"> You Have To Be Logged In To Show This Page!</h2>
-    )
-    return (
-        <div>
-            <NavBarHeader/>
-            {de}
-            {/* <h2 id="desc">Click to view their identity</h2>
+                    </Grid>
+                )
+                : (Loader())) : (
+            <h2 id="notLoggedIn"> You Have To Be Logged In To Show This Page!</h2>
+        )
+        return (
+            <div>
+                <NavBarHeader/>
+                {de}
+                {/* <h2 id="desc">Click to view their identity</h2>
                 <section id="vis"></section> */}
-        </div>
+            </div>
 
-    )
+        )
     }
-    }
+}
 
-    function mapStateToProps(state) {
-        return {
-        selector: state.selections,
+function mapStateToProps(state) {
+    return {
         auth: state.auth,
         movieInfo: state.movieInfo,
         favorites: state.updateFavorites.movies,
@@ -167,14 +162,14 @@ class FavoriteMovies extends Component {
         loading: state.auth.loading
 
     };
-    }
+}
 
-    function matchDispatchToProps(dispatch) {
-        return bindActionCreators({
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({
         updateFavorites: updateMovieFavorites,
         setAuthenticated: setAuthenticated,
         notLoggedIn: notLoggedIn
     }, dispatch);
-    }
+}
 
-    export default connect(mapStateToProps, matchDispatchToProps)(FavoriteMovies);
+export default connect(mapStateToProps, matchDispatchToProps)(FavoriteMovies);
