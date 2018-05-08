@@ -78,7 +78,7 @@ class Login extends Component {
                     // sign user in
                     console.log('success login');
                     return app.auth()
-                        .signInWithEmailAndPassword(email, password).then(() => this.onCloseModal())
+                        .signInWithEmailAndPassword(email, password)
                         .catch(error => this.toaster.show({intent: Intent.DANGER, message: error.message}));
                 }
             })
