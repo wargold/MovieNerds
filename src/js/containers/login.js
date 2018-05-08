@@ -45,7 +45,6 @@ class Login extends Component {
                 } else {
                     // Successfully signed in with facebook
                     //this.setState({ redirect: true })
-                    this.onCloseModal();
                     console.log(result.user);
                     this.props.setAuthenticated(result.user.displayName);
 

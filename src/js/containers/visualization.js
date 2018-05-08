@@ -336,7 +336,9 @@ class Vis extends Component {
 
         var imgStyle = {
             opacity: '0.2',
-            filter: 'alpha(opacity = 50)'
+            filter: 'alpha(opacity = 50)',
+            width: '50%',
+            height: '50%'
         }
 
         var buttonStyle = {

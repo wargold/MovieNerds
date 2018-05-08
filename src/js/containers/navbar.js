@@ -10,7 +10,6 @@ import SearchByGenres from './selectGenre';
 import SearchBar from './searchBar'
 import Login from './login';
 import history from '../history';
-import { Offline } from 'react-detect-offline';
 import {Toaster, Intent, Position} from '@blueprintjs/core';
 
 const OurToaster = Toaster.create({

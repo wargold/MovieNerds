@@ -241,7 +241,7 @@ class MovieInfo extends React.Component {
                         </Row>
                         <Row>
                             <div className="textheaders">Related Movies:</div>
-                            <div><Row className="similarmovies">{this.getSimilarMovies()}</Row></div>
+                            <div>{this.getSimilarMovies()}</div>
                         </Row>
                     </Grid>
                 </div>

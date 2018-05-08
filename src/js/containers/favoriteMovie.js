@@ -5,7 +5,7 @@ import {
     updateMovieFavorites, setAuthenticated, notLoggedIn
 } from '../actions';
 import {database, auth, app, base} from '../constants/base'
-import {Col, Grid, Row, Glyphicon, Button, Table, thead, th} from 'react-bootstrap'
+import {Col, Grid, Row, Glyphicon, Button, Table, thead, th, OverlayTrigger, Popover} from 'react-bootstrap'
 import MovieCardComponent from '../components/moviecards'
 import {Loader} from '../../loader/loader'
 import history from "../history";
@@ -125,10 +125,16 @@ class FavoriteMovies extends Component {
                 (<Grid fluid={true}>
                         <Table id="dwds">
                             <thead>
-                            <th><h2 id="favTitle">My Favorites Movies</h2></th>
+                            <th><h2 id="favTitle">My Favorite Movies</h2></th>
                             <th>{this.props.favoriteID.length > 0 ?
-                                <Button id="visualButt" onClick={() => history.push('/vis')}>Visualisation</Button> :
-                                <h2/>}</th>
+                                <OverlayTrigger
+                                    trigger={['hover', 'focus']}
+                                    placement="bottom"
+                                    overlay={popoverHoverFocus}
+                                >
+                                    <Button id="visualButt" onClick={() => history.push('/vis')}>Visualisation</Button>
+                                </OverlayTrigger> : <h2/>}
+                            </th>
                             </thead>
                         </Table>
                         <Row>
@@ -152,6 +158,12 @@ class FavoriteMovies extends Component {
         )
     }
 }
+
+const popoverHoverFocus = (
+    <Popover id="popover-trigger-hover-focus">
+        Discover new movies based on your favorites, <i>note may take a few seconds to load all movies!</i>
+    </Popover>
+);
 
 function mapStateToProps(state) {
     return {
