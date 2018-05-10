@@ -12,11 +12,6 @@ import Login from './login';
 import history from '../history';
 import {Toaster, Intent, Position} from '@blueprintjs/core';
 
-const OurToaster = Toaster.create({
-    className: "my-toaster",
-    position: Position.TOP,
-});
-
 class NavBarHeader extends Component {
 
 
@@ -51,7 +46,7 @@ class NavBarHeader extends Component {
         }
 
         let loggin = this.props.authenticated ? (
-            <div className="dropdown"  style={userButton}  >
+            <div className="dropdown" style={userButton}>
                 <NavDropdown eventKey={3} title={<span><Glyphicon glyph="user"/> {this.props.user}</span>}
                              id="basic-nav-dropdown">
                     <MenuItem eventKey={3.2} onClick={() => history.push('/myfavorites')}>
@@ -78,20 +73,26 @@ class NavBarHeader extends Component {
                     <Navbar.Brand className="logginButt">{loggin}</Navbar.Brand>
                     {!navigator.onLine ? OurToaster.show({
                         message: "Please Check Your Internet Connection!",
-                        intent: Intent.WARNING }): <h2/>}
+                        intent: Intent.WARNING
+                    }) : <h2/>}
                 </Navbar.Header>
-                    <Navbar.Form pullLeft>
-                        <FormGroup className="search">
-                            <SearchByGenres/>
-                        </FormGroup>{' '}
-                <FormGroup className="searchMovieTitle">
-                            <SearchBar/>
-                        </FormGroup>
+                <Navbar.Form pullLeft>
+                    <FormGroup className="search">
+                        <SearchByGenres/>
+                    </FormGroup>{' '}
+                    <FormGroup className="searchMovieTitle">
+                        <SearchBar/>
+                    </FormGroup>
                 </Navbar.Form>
             </Navbar>
         );
     }
 }
+
+const OurToaster = Toaster.create({
+    className: "my-toaster",
+    position: Position.TOP,
+});
 
 function mapStateToProps(state) {
     return {

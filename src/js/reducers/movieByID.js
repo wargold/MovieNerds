@@ -2,13 +2,14 @@ import {
     FETCHING_MOVIEBYID, FETCHING_MOVIEBYID_SUCCESS, FETCHING_MOVIEBYID_FAILURE, FETCHING_MOVIETRAILER,
     FETCHING_MOVIETRAILER_SUCCESS, FETCHING_MOVIETRAILER_FAILURE, FETCHING_CAST, FETCHING_CAST_SUCCESS,
     FETCHING_CAST_FAILURE, FETCHING_SIMILAR_MOVIES, FETCHING_SIMILAR_MOVIES_SUCCESS, FETCHING_SIMILAR_MOVIES_FAILURE,
-    UPDATE_CASTLIST, UPDATE_MOVIELIST
+    UPDATE_CASTLIST, UPDATE_MOVIELIST, CHECK_IF_MOVIE_FAVORITE, CHECK_IF_MOVIE_FAVORITE_FAILURE
 } from '../constants/constants'
 
 const initialState = {
     movieID: '',
     movieInfo: [],
     isFetching: false,
+    isMovieFavorite: false,
     error: null
 }
 
@@ -68,3 +69,13 @@ export const SimilarMovies = (state = initialState, action) => {
     }
 };
 
+export const IsMovieFav = (state = initialState, action) => {
+    switch (action.type) {
+        case CHECK_IF_MOVIE_FAVORITE:
+            return {...state, isMovieFavorite: action.bool};
+        case CHECK_IF_MOVIE_FAVORITE_FAILURE:
+            return {...state, error: action.error};
+        default:
+            return state;
+    }
+};

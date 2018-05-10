@@ -104,7 +104,6 @@ div.panel.panel-default {
     margin-bottom: 0px;
 }
 
-
 @media (max-width: 450px) {
     .react-autosuggest__input {
         width: 280px;

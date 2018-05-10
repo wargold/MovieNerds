@@ -29,8 +29,6 @@ class Logout extends Component {
             </div>
         )
     }
-
-
 }
 
 // Import actions that the view uses to update the store

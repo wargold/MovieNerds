@@ -238,7 +238,7 @@ h6 {
     color: white;
 }
 
-img.pos.loading.poster.img-responsive{
+img.pos.loading.poster.img-responsive {
     max-height: 100%;
 }
 
@@ -254,11 +254,13 @@ img.pos.loading.poster.img-responsive{
 .actorpic {
     margin: 0 auto;
     text-align: center;
+    height: 400px;
 }
 
 .relatedmoviepic {
     margin: 0 auto;
     text-align: center;
+    height: 340px;
 }
 
 .justRelatedMoviePic {
@@ -268,7 +270,6 @@ img.pos.loading.poster.img-responsive{
     margin-left: auto;
     margin-right: auto;
 }
-
 
 img.poster {
     opacity: 0.3;
@@ -323,6 +324,7 @@ img.loading.img-responsive.img-circle {
         margin: 0 auto;
         display: table
     }
+
     .textmovietitle {
         font-size: 50px;
     }
@@ -343,9 +345,8 @@ img.loading.img-responsive.img-circle {
     }
 }
 
-
 @media (max-width: 720px) {
-    .ghd{
+    .ghd {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -355,7 +356,7 @@ img.loading.img-responsive.img-circle {
         height: 220px;
     }
 
-    .ghd .styleImg:hover .image.loader.img-responsive{
+    .ghd .styleImg:hover .image.loader.img-responsive {
         opacity: 1;
         transform: scale(1);
     }
@@ -365,11 +366,10 @@ img.loading.img-responsive.img-circle {
         height: 220px;
     }
 
-    .ghd div.title{
+    .ghd div.title {
         display: none;
     }
 }
-
 
 @media (max-width: 620px) {
     .modal-video-body {
@@ -379,6 +379,7 @@ img.loading.img-responsive.img-circle {
         margin: 0 auto;
         display: table
     }
+
     .textmovietitle {
         font-size: 30px;
         margin-bottom: 15px;
@@ -390,12 +391,13 @@ img.loading.img-responsive.img-circle {
         width: 140px;
         height: 170px;
     }
+
     .ghd .moviecard, .ghd .container {
         width: 140px;
         height: 170px;
     }
 
-    img.pos.loading.poster.img-responsive{
+    img.pos.loading.poster.img-responsive {
         opacity: 0.2;
     }
 }
@@ -413,6 +415,7 @@ img.loading.img-responsive.img-circle {
         width: 130px;
         height: 120px;
     }
+
     .ghd .moviecard, .ghd .container {
         width: 130px;
         height: 120px;

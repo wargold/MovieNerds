@@ -23,15 +23,15 @@
     border-radius: 100%;
     text-indent: -9999px;
   }
-  li button{
+  li button {
     background-color: #e5e5e5;
     width: 5px;
     height: 5px;
   }
 
-  li button:hover{
+  li button:hover {
     background-color: #1f1f1f;
-    transform: scale(1.5,1.5);
+    transform: scale(1.5, 1.5);
   }
 
   li.slick-active button {

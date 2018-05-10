@@ -458,6 +458,10 @@ export function updateMovieFavorites(favoriteMovies, favoriteIDs) {
     return {type: constants.UPDATE_FAVORITE_MOVIE, favoriteMovies, favoriteIDs}
 }
 
+export function updateMovieFavorites_FAILURE(error) {
+    return {type: constants.UPDATE_FAVORITE_MOVIE_FAILURE, error}
+}
+
 
 // UPDATE cast and movie list on update
 export function updateMovieList() {
@@ -579,80 +583,130 @@ export function getFavoriteActors(list) {
 }
 
 
-// GET ALL ACTORS THAT PLAY THE MOVIES IN A USERS FAVORITE MOVIE LIST
+// Actions for user data
 
-function addFav() {
-    return {
-        type: constants.LOAD_FAVORITE_ACTORS
-    };
-}
-
-function loadFavoriteActorsSuccess(simFavActors) {
-    return {
-        type: constants.LOAD_FAVORITE_ACTORS_SUCCESS, simFavActors
-    };
-}
-
-function loadFavoriteActorsFailure(error) {
-    return {
-        type: constants.LOAD_FAVORITE_ACTORS_FAILURE, error
-    };
-}
-
-export function addFavorite(id) {
-    console.log(id)
-    var self = this;
-
-    database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
-        var favs = snapshot.val()
-        if (favs !== null && favs.some(item => {
-                if (item.movieID === id) {
-                    return true
-                } else {
-                    return false
+export function addFavorites(movie, uid) {
+    let favs = [];
+    return async function (dispatch) {
+        database.ref('users/' + uid + '/favorites').once('value').then(function (snapshot) {
+            favs = snapshot.val()
+            if (favs !== null && favs.some(item => {
+                    if (item.movieID === parseInt(movie.id)) {
+                        return true
+                    } else {
+                        return false
+                    }
+                })) {
+                console.log("Already favorited")
+            } else {
+                if (favs === null) {
+                    favs = [];
                 }
-            })) {
-            console.log("Already favorited")
-        } else {
-            if (favs === null) {
-                favs = [];
+                favs.push(movie);
+                console.log("addFavorites", favs);
+                var ref = database.ref('users/' + uid).child('favorites').set(favs);
             }
-            favs.push(id);
-            console.log(favs)
-            self.setState({
-                isFav: true
-            })
-            var ref = database.ref('users/' + auth.currentUser.uid).child('favorites').set(favs);
-        }
-    })
+        }).then(() => {
+            dispatch(updateMovieFavorites(favs, favs));
+            dispatch(movieFavorite(true));
+        })
+    }
 }
 
-export function removeFavorite(id) {
-    var self = this;
-    database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
-        var favs = snapshot.val()
-        if (favs !== null && favs.some(item => {
-                if (item.movieID === id) {
-                    return true
-                } else {
-                    return false
+export function removeFavorites(id, uid) {
+    let trs = [];
+    let moviess = [];
+    let removeIndex = [];
+    return async function (dispatch) {
+        database.ref('users/' + uid + '/favorites').once('value').then(function (snapshot) {
+            var favs = snapshot.val()
+            if (favs !== null && favs.some(item => {
+                    console.log("dfdfgd1 item.id", item.id)
+                    console.log("dfdfgd2 id", id)
+                    if (item.id === id) {
+                        return true
+                    } else {
+                        return false
+                    }
+                })) {
+                var index = favs.some((item, i) => {
+                    if (item.id === id) {
+                        console.log("kolla remove iiii", i)
+                        removeIndex = i;
+                        return i
+                    }
+                })
+                if (index > -1) {
+                    console.log("kolla remove index", index, removeIndex)
+                    favs.splice(removeIndex, 1);
                 }
-            })) {
-            var index = favs.some((item, i) => {
-                if (item.movieID === id) {
-                    return i
-                }
-            })
-            if (index > -1) {
-                favs.splice(index, 1);
+                favs.map((id) => trs.push(id));
+                console.log(favs)
+                var ref = database.ref('users/' + uid).child('favorites').set(favs);
+                dispatch(updateMovieFavorites(moviess, trs));
+                dispatch(movieFavorite(false));
+            } else {
+                console.log("Not in favs")
             }
-            console.log(favs)
-            self.setState({
-                isFav: false
-            })
-            var ref = database.ref('users/' + auth.currentUser.uid).child('favorites').set(favs);
-        } else {
-            console.log("Not in favs")
+        })
+    }
+}
+
+export function checkDB(uid) {
+    let movies = [];
+    let favs = [];
+    let trs = [];
+    return async function (dispatch) {
+        database.ref('users/' + uid + '/favorites').once('value').then(function (snapshot) {
+            console.log("snapshot.val()", snapshot.val());
+            if (snapshot.val() !== null) {
+                favs = snapshot.val();
+                favs.map((id) => trs.push(id));
+            }
+        }).catch(error => dispatch(updateMovieFavorites_FAILURE(error)));
+        if (movies !== undefined) {
+            console.log("dfdsfds", trs);
+            dispatch(updateMovieFavorites(movies, trs));
         }
-    })
+    }
+}
+
+function movieFavorite(bool) {
+    return {
+        type: constants.CHECK_IF_MOVIE_FAVORITE, bool
+    };
+}
+
+function movieFavoriteFailure(error) {
+    return {
+        type: constants.CHECK_IF_MOVIE_FAVORITE_FAILURE, error
+    };
+}
+
+export function isMovieFavorite(movieID, uid) {
+    return async function (dispatch) {
+        database.ref('users/' + uid + '/favorites').once('value').then(function (snapshot) {
+            var favs = snapshot.val()
+            if (favs !== null && favs.some(item => {
+                    console.log("dfdfgd1", item.id)
+                    console.log("dfdfgd2", parseInt(movieID))
+                    if (item.id === parseInt(movieID)) {
+                        console.log("dfdfgd3", true)
+                        return true
+                    } else {
+                        return false
+                    }
+                })) {
+                console.log("-----IS FAV")
+                console.log("dfdfgd3", true)
+                dispatch(movieFavorite(true))
+            }
+        }).catch(error => dispatch(movieFavoriteFailure(error)));
+    }
+}
+
+export function resetIsMovieFavorite() {
+    return async function (dispatch) {
+        dispatch(movieFavorite(false))
+    }
 }

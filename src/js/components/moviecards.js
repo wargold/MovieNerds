@@ -43,7 +43,8 @@ const MovieCardComponent = (props) => {
                     <MovieInfo className="title">
                         <h4 className="hiddenTitle">{movie.original_title}</h4> &nbsp;
                         <div><Glyphicon
-                            glyph={'star'}/> {movie.vote_average}</div>&nbsp;
+                            glyph={'star'}/> {movie.vote_average}</div>
+                        &nbsp;
                         <div><Glyphicon glyph={'calendar'}/>
                             {movie.release_date}</div>
                     </MovieInfo>

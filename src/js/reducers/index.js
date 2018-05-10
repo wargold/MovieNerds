@@ -6,7 +6,7 @@ import {UpdateMoviesByGenre, UpdateFavoriteMovies} from './updateMoviesByGenre'
 import GenreSelections from './genreSelection'
 import MoviesByMultiGenre from './moviesByMultiGenres'
 import MostPopularMovies from './mostPopularMovies'
-import {MovieByID, TrailerByMovieID, CastByMovieID, SimilarMovies} from './movieByID'
+import {MovieByID, TrailerByMovieID, CastByMovieID, SimilarMovies, IsMovieFav} from './movieByID'
 import {CastByID, CastKnowMovies} from './cast'
 import {FavoriteData, FavoriteActors} from "./favoriteData";
 import {routerReducer} from 'react-router-redux'
@@ -37,7 +37,8 @@ const allReducers = combineReducers({
     updateFavorites: UpdateFavoriteMovies,
     allMoviegenres: AllMoviegenres,
     similarFavoriteMov: FavoriteData,
-    favoriteActors: FavoriteActors
+    favoriteActors: FavoriteActors,
+    isMovieFav: IsMovieFav
 });
 
 export default allReducers

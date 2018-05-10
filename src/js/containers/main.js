@@ -49,7 +49,6 @@ class Main extends Component {
     }
 }
 
-
 function mapStateToProps(state) {
     return {
         loading: state.auth.loading

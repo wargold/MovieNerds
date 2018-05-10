@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {
-    updateMovieFavorites, setAuthenticated, notLoggedIn
+    removeFavorites, setAuthenticated, notLoggedIn, updateMovieFavorites, checkDB
 } from '../actions';
 import {database, auth, app, base} from '../constants/base'
 import {Col, Grid, Row, Glyphicon, Button, Table, thead, th, OverlayTrigger, Popover} from 'react-bootstrap'
@@ -21,22 +21,24 @@ class FavoriteMovies extends Component {
     }
 
     componentDidMount() {
-        this.removeAuthListener = app.auth().onAuthStateChanged((user) => {
-            if (user) {
-                console.log("logged in", user.displayName)
-                if (user.displayName === null) {
-                    this.props.setAuthenticated(user.email);
-                } else {
-                    this.props.setAuthenticated(user.displayName);
-                }
+        setTimeout(() => {
+                this.removeAuthListener = app.auth().onAuthStateChanged((user) => {
+                    if (user) {
+                        console.log("logged in", user.displayName)
+                        if (user.displayName === null) {
+                            this.props.setAuthenticated(user.email);
+                        } else {
+                            this.props.setAuthenticated(user.displayName);
+                        }
 
-            } else {
-                console.log("not logged in")
-                this.props.notLoggedIn();
-            }
-            this.handle();
-        })
-
+                    } else {
+                        console.log("not logged in")
+                        this.props.notLoggedIn();
+                    }
+                    this.handle();
+                })
+            }, 4500
+        )
     }
 
     componentDidUpdate(prevProps, preState) {
@@ -49,22 +51,12 @@ class FavoriteMovies extends Component {
     }
 
     handle() {
-        let movies = [];
-        let favs = [];
-        let trs = [];
-        database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
-            favs = snapshot.val();
-            favs.map((id) => trs.push(id));
-        });
-        if (movies !== undefined) {
-            console.log("dfdsfds", trs);
-            this.props.updateFavorites(movies, trs);
-        }
+        this.props.checkFavMovieDB(auth.currentUser.uid);
         setTimeout(() => {
             this.setState({
                 loadedFavorite: true
             })
-        }, 4750);
+        }, 500);
     }
 
     getMovies() {
@@ -76,7 +68,7 @@ class FavoriteMovies extends Component {
                         <MovieCardComponent movie={mov}/>
                     </div>
                     <Button id="removeButton" onClick={() => {
-                        this.removeFavorite(mov.id)
+                        this.props.removeFavorites(mov.id, auth.currentUser.uid)
                     }}>
                         <Glyphicon glyph="trash"/> Remove Favorite
                     </Button>
@@ -86,38 +78,8 @@ class FavoriteMovies extends Component {
         return genre
     };
 
-    removeFavorite(id) {
-        let trs = [];
-        let moviess = [];
-        database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
-            var favs = snapshot.val()
-            if (favs !== null && favs.some(item => {
-                    if (item.id === id) {
-                        return true
-                    } else {
-                        return false
-                    }
-                })) {
-                var index = favs.some((item, i) => {
-                    if (item.id === id) {
-                        return i
-                    }
-                })
-                if (index > -1) {
-                    favs.splice(index, 1);
-                }
-                favs.map((id) => trs.push(id));
-                console.log(favs)
-                var ref = database.ref('users/' + auth.currentUser.uid).child('favorites').set(favs);
-            } else {
-                console.log("Not in favs")
-            }
-        }).then(() => this.props.updateFavorites(moviess, trs));
-    }
-
-
     render() {
-        if (this.props.auth.error !== null || this.props.movieInfo.error !== null) {
+        if (this.props.movieInfo.error !== null) {
             history.push('/APIError');
         }
         const de = this.props.auth.user !== null ? (
@@ -161,7 +123,7 @@ class FavoriteMovies extends Component {
 
 const popoverHoverFocus = (
     <Popover id="popover-trigger-hover-focus">
-        Discover new movies based on your favorites, <i>note may take a few seconds to load all movies!</i>
+        Discover new movies based on your favorites, <i>(note: may take a few seconds to load)</i>
     </Popover>
 );
 
@@ -172,15 +134,16 @@ function mapStateToProps(state) {
         favorites: state.updateFavorites.movies,
         favoriteID: state.updateFavorites.favoriteID,
         loading: state.auth.loading
-
     };
 }
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
-        updateFavorites: updateMovieFavorites,
         setAuthenticated: setAuthenticated,
-        notLoggedIn: notLoggedIn
+        notLoggedIn: notLoggedIn,
+        updateFavorites: updateMovieFavorites,
+        removeFavorites: removeFavorites,
+        checkFavMovieDB: checkDB
     }, dispatch);
 }
 

@@ -12,9 +12,9 @@ const CastInfo = (props) => {
         let cast = props.moviesKnown.slice(0, 5).map((movie) =>
             (<Col xs={12} sm={4} md={3} key={movie.id}>
                 <div className="actPlayMovies">
-                <Link to={`/movie/${movie.id}`} key={movie.id} style={{textDecoration: 'none'}}>
-                    <MovieCardComponent movie={movie}/>
-                </Link>
+                    <Link to={`/movie/${movie.id}`} key={movie.id} style={{textDecoration: 'none'}}>
+                        <MovieCardComponent movie={movie}/>
+                    </Link>
                 </div>
             </Col>))
         return cast;
@@ -43,10 +43,10 @@ const CastInfo = (props) => {
             <div>
                 <Grid fluid={true}>
                     <Row>
-                {getMovies()}
+                        {getMovies()}
                     </Row>
                 </Grid>
-                </div>
+            </div>
         </div>
     );
 }

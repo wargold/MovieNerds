@@ -67,7 +67,7 @@ body {
     margin-bottom: 30px;
 }
 
-.actPlayMovies{
+.actPlayMovies {
     width: auto;
     max-width: 230px;
     display: block;
@@ -75,8 +75,6 @@ body {
     margin-right: auto;
 }
 
-
 @media (max-width: 480px) {
-
 
 }

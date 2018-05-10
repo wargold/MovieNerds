@@ -21,7 +21,7 @@ function SamplePrevArrow(props) {
     return (
         <div
             className={className}
-            style={{...style, display: "block",  transform: "scale(1.5,1.5)" }}
+            style={{...style, display: "block", transform: "scale(1.5,1.5)"}}
             onClick={onClick}
         />
     );

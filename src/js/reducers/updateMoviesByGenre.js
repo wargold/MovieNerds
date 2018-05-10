@@ -1,9 +1,10 @@
-import {UPDATE_ALLMOVIESBYGENRE, UPDATE_FAVORITE_MOVIE} from "../constants/constants";
+import {UPDATE_ALLMOVIESBYGENRE, UPDATE_FAVORITE_MOVIE, UPDATE_FAVORITE_MOVIE_FAILURE} from "../constants/constants";
 
 const initialState = {
     movies: [],
     favoriteID: [],
-    genres: []
+    genres: [],
+    error: null
 }
 
 export const UpdateMoviesByGenre = (state = initialState, action) => {
@@ -26,6 +27,10 @@ export const UpdateFavoriteMovies = (state = initialState, action) => {
                 ...state,
                 movies: action.favoriteMovies, favoriteID: action.favoriteIDs,
                 genres: []
+            };
+        case UPDATE_FAVORITE_MOVIE_FAILURE:
+            return {
+                ...state, error: action.error
             };
         default:
             return state;

@@ -1,11 +1,10 @@
 import React from 'react';
 import {Image} from 'react-bootstrap'
-import {Glyphicon, Col, Grid, Row, Button} from 'react-bootstrap'
+import {Glyphicon, Col, Grid, Row} from 'react-bootstrap'
 import ModalVideo from 'react-modal-video'
 import MovieCardComponent from './moviecards'
 import {URL_IMG, IMG_LOGO_S_SIZE, BROKEN_IMAGE} from "../constants/constants"
 import {Link} from 'react-router-dom'
-import {database, auth} from '../constants/base'
 import './css/movie.css'
 import Ratio from 'react-ratio';
 
@@ -13,8 +12,7 @@ class MovieInfo extends React.Component {
     constructor() {//Can have a state due to that it only handles local state about a image...
         super()
         this.state = {
-            isOpen: false,
-            isFav: false
+            isOpen: false
         }
         this.openModal = this.openModal.bind(this)
     }
@@ -40,16 +38,16 @@ class MovieInfo extends React.Component {
         let temp = (
             <div className="trailerdiv">
                 <div className="">
-                    <Ratio ratio={ 21 / 9 }>
-                            <Image className="pos loading poster"
+                    <Ratio ratio={21 / 9}>
+                        <Image className="pos loading poster"
                                src={this.props.movie.backdrop_path == null ? BROKEN_IMAGE
                                    : "https://image.tmdb.org/t/p/w1280" + this.props.movie.backdrop_path}
-                                   responsive/>
+                               responsive/>
                         {this.getVideo()}
-                            <div className="ghd">
-                                <MovieCardComponent className="picture" movie={this.props.movie}/>
-                        <div className="shadow"></div>
-                    </div>
+                        <div className="ghd">
+                            <MovieCardComponent className="picture" movie={this.props.movie}/>
+                            <div className="shadow"></div>
+                        </div>
                     </Ratio>
                 </div>
             </div>
@@ -67,10 +65,13 @@ class MovieInfo extends React.Component {
                 {<p>{this.getMovieGenres()}</p>}
                 <div className="icons">
                     <div id="movieStarCalend">
-                    <Glyphicon glyph={'star'} id="glyphStar"/>
-                    &nbsp;
-                        {this.props.movie.vote_average}/10 </div>&nbsp;&nbsp;
-                    <div id="movieStarCalend"><Glyphicon glyph={'calendar'} id="glyphCalender"/> {this.props.movie.release_date}</div>
+                        <Glyphicon glyph={'star'} id="glyphStar"/>
+                        &nbsp;
+                        {this.props.movie.vote_average}/10
+                    </div>
+                    &nbsp;&nbsp;
+                    <div id="movieStarCalend"><Glyphicon glyph={'calendar'}
+                                                         id="glyphCalender"/> {this.props.movie.release_date}</div>
                 </div>
             </div>
         );
@@ -90,8 +91,11 @@ class MovieInfo extends React.Component {
                         <Image className="loading" src={actor.profile_path == null ? BROKEN_IMAGE
                             : URL_IMG + IMG_LOGO_S_SIZE + actor.profile_path} alt={actor.name} responsive
                                circle/>
-                        <h3 className="fs"> Character: {<p>{actor.character==='' ? <div id="noCharacName">Not Available</div>: actor.character }</p>} </h3>
-                        <h3 className="fs"> Name: {<p>{actor.name}</p>} </h3>
+                        <div id="actorInfo">
+                            <h3 className="fs"> Character: {<p>{actor.character === '' ?
+                                <div id="noCharacName">Not Available</div> : actor.character}</p>} </h3>
+                            <h3 className="fs"> Name: {<p>{actor.name}</p>} </h3>
+                        </div>
                     </div>
                 </Link>
             </Col>))
@@ -105,7 +109,7 @@ class MovieInfo extends React.Component {
                 <Col xs={12} sm={4} md={3} key={movie.id}>
                     <div className="relatedmoviepic">
                         <div className="justRelatedMoviePic">
-                        <MovieCardComponent  movie={movie}/>
+                            <MovieCardComponent movie={movie}/>
                         </div>
                         <h3 className="pd"> Movie: {<p>{movie.original_title}</p>} </h3>
                     </div>
@@ -115,113 +119,12 @@ class MovieInfo extends React.Component {
         return temp;
     }
 
-    addFavorite(id) {
-        console.log(id)
-        var self = this;
-
-        database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
-            var favs = snapshot.val()
-            if (favs !== null && favs.some(item => {
-                    if (item.id === id) {
-                        return true
-                    } else {
-                        return false
-                    }
-                })) {
-                console.log("Already favorited")
-            } else {
-                if (favs === null) {
-                    favs = [];
-                }
-                favs.push(id);
-                console.log(favs)
-                self.setState({
-                    isFav: true
-                })
-                var ref = database.ref('users/' + auth.currentUser.uid).child('favorites').set(favs);
-            }
-        })
-    }
-
-    removeFavorite(id) {
-        var self = this;
-        database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
-            var favs = snapshot.val()
-            if (favs !== null && favs.some(item => {
-                    if (item.id === id) {
-                        return true
-                    } else {
-                        return false
-                    }
-                })) {
-                var index = favs.some((item, i) => {
-                    if (item.id === id) {
-                        return i
-                    }
-                })
-                if (index > -1) {
-                    favs.splice(index, 1);
-                }
-                console.log(favs)
-                self.setState({
-                    isFav: false
-                })
-                var ref = database.ref('users/' + auth.currentUser.uid).child('favorites').set(favs);
-            } else {
-                console.log("Not in favs")
-            }
-        })
-    }
-
-    componentDidMount() {
-        console.log("KOLA ASASSA", auth.currentUser);
-        if (auth.currentUser !== null) {
-            var self = this;
-            database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
-                var favs = snapshot.val()
-                if (favs !== null && favs.some(item => {
-                        if (item.id === self.props.movie.id) {
-                            return true
-                        } else {
-                            return false
-                        }
-                    })) {
-                    console.log("-----IS FAV")
-                    self.setState({
-                        isFav: true
-                    })
-                }
-            })
-        }
-    }
-
     render() {
         const movie = this.props.movie;
-        console.log("kolla movieinfo", movie);
-        const favButton = this.state.isFav && this.props.user !== '' ? (
-            <div className="removeFavButt">
-            <Button onClick={() => {
-                this.removeFavorite(movie.id)
-            }}>
-                <Glyphicon glyph="trash"/> Remove Favorite
-            </Button>
-            </div>
-        ) : (<div className="addFavButt">
-                <Button onClick={() => {
-                    this.addFavorite({
-                        id: movie.id, poster_path: movie.poster_path,
-                        original_title: movie.original_title, release_date: movie.release_date,
-                        vote_average: movie.vote_average, overview: movie.overview
-                    })
-                }}>
-                    <Glyphicon glyph="heart"/> Add Favorite
-                </Button>
-            </div>
-        );
 
         let ren = () => {
             if (this.props.user !== '') {
-                return favButton;
+                return this.props.ff;
             }
         }
 

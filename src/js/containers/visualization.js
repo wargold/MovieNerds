@@ -1,12 +1,18 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import * as d3 from "d3";
-import { getSimilarMovies, updateAllMoviesGenres, getFavoriteSimilarMovies, setAuthenticated, notLoggedIn } from '../actions';
-import { database, auth, app, base } from "../constants/base";
-import { black } from 'material-ui/styles/colors';
-import { Col, Grid, Row, Glyphicon, Button } from 'react-bootstrap'
-import { Loader } from '../../loader/loader'
+import {
+    getSimilarMovies,
+    updateAllMoviesGenres,
+    getFavoriteSimilarMovies,
+    setAuthenticated,
+    notLoggedIn
+} from '../actions';
+import {database, auth, app, base} from "../constants/base";
+import {black} from 'material-ui/styles/colors';
+import {Col, Grid, Row, Glyphicon, Button} from 'react-bootstrap'
+import {Loader} from '../../loader/loader'
 import history from '../history';
 import {Spinner} from '@blueprintjs/core';
 
@@ -28,7 +34,9 @@ class Vis extends Component {
                 console.log("logged in", user.displayName)
                 if (user.displayName === null) {
                     this.props.setAuthenticated(user.email);
-                } else { this.props.setAuthenticated(user.displayName); }
+                } else {
+                    this.props.setAuthenticated(user.displayName);
+                }
 
             } else {
                 console.log("not logged in")
@@ -208,10 +216,10 @@ class Vis extends Component {
 
         var nodeImage = node.append("image")
             .attr("xlink:href", d => 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + d.poster_path)
-            .attr("height", d =>  imageH(d))
-            .attr("width",  d => imageW(d))
-            .attr("x",  d =>  -(imageW(d) / 2))
-            .attr("y",  d =>  -(imageH(d) / 2))
+            .attr("height", d => imageH(d))
+            .attr("width", d => imageW(d))
+            .attr("x", d => -(imageW(d) / 2))
+            .attr("y", d => -(imageH(d) / 2))
 
         var texts = node.append("text")
             .style("fill", "black")
@@ -223,8 +231,8 @@ class Vis extends Component {
 
         // make the image grow a little on mouse over and add the text details on click
         var setEvents = nodeImage
-            // Append hero text
-            // click on a node
+        // Append hero text
+        // click on a node
             .on('click', function (d) {
                 console.log(d)
                 d3.select("#titlet").html(d.title);
@@ -244,17 +252,17 @@ class Vis extends Component {
                     .attr("y", function (d) {
                         return -imageH(d);
                     })
-                    .attr("height",  d =>  imageH(d) * 2)
-                    .attr("width",  d =>  imageW(d) * 2);
+                    .attr("height", d => imageH(d) * 2)
+                    .attr("width", d => imageW(d) * 2);
             })
             // set back
             .on('mouseleave', function () {
                 d3.select(this)
                     .transition()
-                    .attr("height",  d =>  imageH(d))
-                    .attr("width",  d =>  imageW(d))
-                    .attr("x",   d => -(imageW(d) / 2))
-                    .attr("y",  d =>  -(imageH(d) / 2))
+                    .attr("height", d => imageH(d))
+                    .attr("width", d => imageW(d))
+                    .attr("x", d => -(imageW(d) / 2))
+                    .attr("y", d => -(imageH(d) / 2))
             });
 
 

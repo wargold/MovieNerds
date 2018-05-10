@@ -2,16 +2,16 @@
     color: white;
 }
 
-div.title{
+div.title {
     transform: translateY(15px);
     width: 100%;
     max-width: 140px;
 }
 
-span.glyphicon.glyphicon-calendar{
+span.glyphicon.glyphicon-calendar {
     padding-right: 5px;
 }
 
-.image.loader.img-responsive:hover{
+.image.loader.img-responsive:hover {
     transform: scale(1.1);
 }
