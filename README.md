@@ -15,24 +15,13 @@ about movies, genres, actors etc.
 
 ##### Live Demo: https://movienerds.herokuapp.com/ 
 
-(In case the website to heruko doesn't work chek: https://movienerds-1f94f.firebaseapp.com)
+#### What we have done
 
-#### What we have done and what we still plan to do
-
-We have implemented the majority of the functions of the app, everything works accordingly to what we planned expect some bugs.
-The data visualization of the favorite is now hardcoded but will be fixed so that is show the common similar movies depending on
-the movies that is in the users favorite. We also have played around with different design choices and try to improve the
-overall design of the app. We are aware of that there are plenty bugs left to fix but our main goal was to iplement the functionality
-and then fix design and bugs issue. We have followed the architecture [Redux](https://redux.js.org).
-
-The things that we have left to implement are:
-
- * Fix some bugs.
- * Improve the design of the app.
- * Implement the favorite page and make sure that the users can save favorite movies.
- * Implement the visualization of the users favorite movies by connecting them to each others similar movies.
- * Implement error when internet connections is lost.
- * Implement error when API Call fails.
+We have implemented the all of the functions of the app accordingly to what we described in our project plan, the user
+can store favorite movies and see they how they connect to each other by their similar movies, this is 
+visualized by a graph. We also have played around with different design choices and improved the
+overall design of the app och usability of the website.
+We have followed the architecture [Redux](https://redux.js.org).
                  
 
 #### File Structure
