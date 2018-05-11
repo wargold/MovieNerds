@@ -20,6 +20,13 @@ let trs = [];
 
 class Vis extends Component {
 
+    constructor() {//Can have a state due to that it only handles local state
+        super()
+        this.state = {
+            loadedFavorite: false
+        }
+    }
+
     // componentDidMount() {
     //     //Get all the similar movies from the favorite list
     //     this.handle();
@@ -45,6 +52,9 @@ class Vis extends Component {
             this.handle();
             setTimeout(() => {
                 this.props.getFavoriteSimilarMovies(trs);
+                this.setState({
+                    loadedFavorite: true
+                });
             }, 1500)
         })
 
@@ -356,21 +366,18 @@ class Vis extends Component {
         }
 
         return (
-
+            this.state.loadedFavorite ? (
             this.props.auth.user !== '' ? (
                 <div>
                     <a style={headStyle2} id="title" href="" target="_blank"><h2 id="titlet">Click a movie!</h2></a>
                     <Button style={buttonStyle} onClick={() => history.push('/myfavorites')}>Back to favorites</Button>
                     <header style={headStyle}>
-
                         <h3 id="desc" style={divStyle}></h3>
                         <img id="image" src="" style={imgStyle}></img>
                     </header>
                     <section id="vis"></section>
-
-
                 </div>
-            ) : (<h2>You Have To Be Logged In To Show This Page!</h2>))
+            ) : (<h2>You Have To Be Logged In To Show This Page!</h2>)):(<Loader/>))
 
     }
 }

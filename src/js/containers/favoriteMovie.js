@@ -123,7 +123,8 @@ class FavoriteMovies extends Component {
 
 const popoverHoverFocus = (
     <Popover id="popover-trigger-hover-focus">
-        Discover new movies based on your favorites, <i>(note: may take a few seconds to load)</i>
+        Discover new movies based on your favorites,
+        <i>(note: Favorites connect to each other if they have common similar movies)</i>
     </Popover>
 );
 
