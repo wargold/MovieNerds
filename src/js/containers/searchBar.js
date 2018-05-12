@@ -65,7 +65,9 @@ class SearchBar extends Component {
         if (method === 'enter') {
             event.preventDefault();
         }
-        history.push('/movie/' + suggestion.id);
+        if(suggestion.id !== undefined) {
+            history.push('/movie/' + suggestion.id);
+        }
         this.props.updateInputValue('');
     };
 
