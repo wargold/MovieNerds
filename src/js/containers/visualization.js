@@ -11,10 +11,11 @@ import {
 } from '../actions';
 import {database, auth, app, base} from "../constants/base";
 import {black} from 'material-ui/styles/colors';
-import {Col, Grid, Row, Glyphicon, Button} from 'react-bootstrap'
+import {Button} from 'react-bootstrap'
 import {Loader} from '../../loader/loader'
 import history from '../history';
 import {Spinner} from '@blueprintjs/core';
+import {BROKEN_IMAGE} from '../constants/constants'
 
 let trs = [];
 
@@ -225,7 +226,7 @@ class Vis extends Component {
 
 
         var nodeImage = node.append("image")
-            .attr("xlink:href", d => 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + d.poster_path)
+            .attr("xlink:href", d => d.poster_path=== undefined ? BROKEN_IMAGE:'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + d.poster_path)
             .attr("height", d => imageH(d))
             .attr("width", d => imageW(d))
             .attr("x", d => -(imageW(d) / 2))
@@ -247,7 +248,7 @@ class Vis extends Component {
                 console.log(d)
                 d3.select("#titlet").html(d.title);
                 d3.select("#title").attr("href", '/movie/' + d.id);
-                d3.select("#image").attr("src", 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + d.poster_path);
+                d3.select("#image").attr("src", d.poster_path=== undefined ? BROKEN_IMAGE:'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + d.poster_path);
                 d3.select("#desc").html(d.overview);
 
 
