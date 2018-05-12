@@ -60,7 +60,12 @@ class MovieInfo extends React.Component {
         let info = (
             <div className="moviedesc">
                 <div className="moviesummary">
-                    {<p>{this.props.movie.overview}</p>}
+                    {<p>
+                        {this.props.movie.overview===undefined ||this.props.movie.overview==="" ?
+                            <h3 className="nonsimilarMovies">Movie Info Unavailable!</h3> :
+                            this.props.movie.overview
+                        }
+                        </p>}
                 </div>
                 {<p>{this.getMovieGenres()}</p>}
                 <div className="icons">
@@ -70,8 +75,10 @@ class MovieInfo extends React.Component {
                         {this.props.movie.vote_average}/10
                     </div>
                     &nbsp;&nbsp;
-                    <div id="movieStarCalend"><Glyphicon glyph={'calendar'}
-                                                         id="glyphCalender"/> {this.props.movie.release_date}</div>
+                    <div id="movieStarCalend">
+                        <Glyphicon glyph={'calendar'} id="glyphCalender"/>
+                        {this.props.movie.release_date==="" ? 'Unavailable': this.props.movie.release_date}
+                    </div>
                 </div>
             </div>
         );
@@ -84,26 +91,29 @@ class MovieInfo extends React.Component {
     }
 
     getCast() {
-        let cast = this.props.castList.slice(0, 5).map((actor) =>
-            (<Col xs={12} sm={4} md={3} key={actor.cast_id}>
-                <Link to={`/cast/${actor.id}`} key={actor.id}>
-                    <div className="actorpic">
-                        <Image className="loading" src={actor.profile_path == null ? BROKEN_IMAGE
-                            : URL_IMG + IMG_LOGO_S_SIZE + actor.profile_path} alt={actor.name} responsive
-                               circle/>
-                        <div id="actorInfo">
-                            <h3 className="fs"> Character: {<p>{actor.character === '' ?
-                                <div id="noCharacName">Not Available</div> : actor.character}</p>} </h3>
-                            <h3 className="fs"> Name: {<p>{actor.name}</p>} </h3>
+        let cast = <h3 className="nonsimilarMovies">No Actors Available!</h3>;
+        if (this.props.castList.length > 0) {
+            cast = this.props.castList.slice(0, 5).map((actor) =>
+                (<Col xs={12} sm={4} md={3} key={actor.cast_id}>
+                    <Link to={`/cast/${actor.id}`} key={actor.id}>
+                        <div className="actorpic">
+                            <Image className="loading" src={actor.profile_path == null ? BROKEN_IMAGE
+                                : URL_IMG + IMG_LOGO_S_SIZE + actor.profile_path} alt={actor.name} responsive
+                                   circle/>
+                            <div id="actorInfo">
+                                <h3 className="fs"> Character: {<p>{actor.character === '' ?
+                                    <div id="noCharacName">Not Available</div> : actor.character}</p>} </h3>
+                                <h3 className="fs"> Name: {<p>{actor.name}</p>} </h3>
+                            </div>
                         </div>
-                    </div>
-                </Link>
-            </Col>))
+                    </Link>
+                </Col>))
+        }
         return cast;
     }
 
     getSimilarMovies() {
-        let temp = <h3 className="nonsimilarMovies">No Similar movies Found!</h3>;
+        let temp = <h3 className="nonsimilarMovies">No Similar movies Available!</h3>;
         if (this.props.similarMovies.length > 0) {
             temp = this.props.similarMovies.slice(0, 5).map((movie) =>
                 <Col xs={12} sm={4} md={3} key={movie.id}>

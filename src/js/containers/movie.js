@@ -95,7 +95,7 @@ class Movie extends Component {
         }
 
 
-        const de = (this.props.castList !== undefined && this.props.castList.length > 0 && this.props.movieInfo.movieInfo.id !== undefined) ?
+        const de = (this.props.movieInfo.movieInfo.id !== undefined) ?
             (<MovieInfo movie={this.props.movieInfo.movieInfo} trailer={this.props.trailer}
                         castList={this.props.castList} similarMovies={this.props.similarMovies}
                         user={this.props.auth.user} userUID={this.props.auth.userUID} removeAddButton={this.removeAddButton()}/>)
