@@ -124,7 +124,7 @@ class MovieInfo extends React.Component {
 
         let ren = () => {
             if (this.props.user !== '') {
-                return this.props.ff;
+                return this.props.removeAddButton;
             }
         }
 

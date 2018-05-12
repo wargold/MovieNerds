@@ -2,18 +2,8 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {
-    getMovieByMovieID,
-    getTrailerByMovieID,
-    getCastByMovieID,
-    getSimilarMovies,
-    resetSelectedValues,
-    updateMovieList,
-    updateCastList,
-    isMovieFavorite,
-    removeFavorites,
-    addFavorites,
-    resetIsMovieFavorite
-} from '../actions';
+    getMovieByMovieID, getTrailerByMovieID, getCastByMovieID, getSimilarMovies, resetSelectedValues, updateMovieList,
+    updateCastList, isMovieFavorite, removeFavorites, addFavorites, resetIsMovieFavorite, clearSuggestions} from '../actions';
 import {Loader} from '../../loader/loader'
 import MovieInfo from '../components/movieInfo';
 import NavBarHeader from './navbar';
@@ -30,6 +20,7 @@ class Movie extends Component {
     }
 
     componentDidMount() {
+        this.props.clearSuggestions();
         console.log("Check param id", this.props.match.params.id);
         this.resetValues();
         this.load(this.props.match.params.id);
@@ -69,17 +60,7 @@ class Movie extends Component {
         this.props.updateMovieList();
     }
 
-    addFavorite() {
-        let movie = this.props.movieInfo.movieInfo;
-        setTimeout(
-            this.props.addFavorites({
-                id: movie.id, poster_path: movie.poster_path,
-                original_title: movie.original_title, release_date: movie.release_date,
-                vote_average: movie.vote_average, overview: movie.overview
-            }, auth.currentUser.uid))
-    }
-
-    ff() {
+    removeAddButton() {
         let movie = this.props.movieInfo.movieInfo;
         console.log("asdf", movie);
         const favButton = this.props.isMovieFavorite && this.props.user !== null ? (
@@ -117,7 +98,7 @@ class Movie extends Component {
         const de = (this.props.castList !== undefined && this.props.castList.length > 0 && this.props.movieInfo.movieInfo.id !== undefined) ?
             (<MovieInfo movie={this.props.movieInfo.movieInfo} trailer={this.props.trailer}
                         castList={this.props.castList} similarMovies={this.props.similarMovies}
-                        user={this.props.auth.user} userUID={this.props.auth.userUID} ff={this.ff()}/>)
+                        user={this.props.auth.user} userUID={this.props.auth.userUID} removeAddButton={this.removeAddButton()}/>)
             : (Loader());
         return (<div>
             <NavBarHeader/>
@@ -149,7 +130,8 @@ function matchDispatchToProps(dispatch) {
         isMovieFavoritAct: isMovieFavorite,
         removeFavorites: removeFavorites,
         addFavorites: addFavorites,
-        resetIsMovieFavorite: resetIsMovieFavorite
+        resetIsMovieFavorite: resetIsMovieFavorite,
+        clearSuggestions: clearSuggestions
     }, dispatch);
 }
 

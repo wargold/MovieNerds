@@ -31,7 +31,13 @@ export function getSearchMovie(text) {
         return fetch(url)
             .then(response => response.json())
             .then(json => json.results)
-            .then(data => dispatch(searchMovieSuccess(text, data)))
+            .then(data => {
+                if (data.length > 0) {
+                    dispatch(searchMovieSuccess(text, data))
+                } else {
+                    dispatch(searchMovieSuccess(text, [{title: "No Result Found!"}]))
+                }
+            })
             .catch(error => dispatch(searchMovieFAILURE(text, error)))
     }
 }

@@ -39,15 +39,15 @@ const MovieCardComponent = (props) => {
                         <Image className="image loader" src={movie.poster_path == null ? BROKEN_IMAGE
                             : URL_IMG + IMG_LOGO_M_SIZE + movie.poster_path}
                                alt={movie.original_title} responsive/>
+                        <MovieInfo className="title">
+                            <h4 className="hiddenTitle">{movie.original_title}</h4> &nbsp;
+                            <div><Glyphicon
+                                glyph={'star'}/> {movie.vote_average}</div>
+                            &nbsp;
+                            <div><Glyphicon glyph={'calendar'}/>
+                                {movie.release_date}</div>
+                        </MovieInfo>
                     </Link>
-                    <MovieInfo className="title">
-                        <h4 className="hiddenTitle">{movie.original_title}</h4> &nbsp;
-                        <div><Glyphicon
-                            glyph={'star'}/> {movie.vote_average}</div>
-                        &nbsp;
-                        <div><Glyphicon glyph={'calendar'}/>
-                            {movie.release_date}</div>
-                    </MovieInfo>
                 </div>
             </StyleImage>
         </div>

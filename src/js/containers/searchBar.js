@@ -44,7 +44,6 @@ class SearchBar extends Component {
     };
 
     renderSuggestion = (suggestion) => {
-
         return (
             <div className="divMovieSugg">
                 <img className="searchResult-image loader"
@@ -55,7 +54,7 @@ class SearchBar extends Component {
                         {(suggestion.title.length <= 30) ? (suggestion.title) :
                             (suggestion.title.substring(0, 25).replace(/\s/g, '') + '...')}
                     </div>
-                    {suggestion.release_date == null ? 1994 : suggestion.release_date.substring(0, 4)}
+                    {suggestion.release_date == null ? '-' : suggestion.release_date.substring(0, 4)}
                 </div>
             </div>
         );

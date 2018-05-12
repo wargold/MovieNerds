@@ -36,7 +36,7 @@ const MostPopularSlide = (props) => {
 
     return (
         <div className="mostPopularMovies">
-            <h2 className="mostPopularMoviesTitle">{"Most Popular Movies"}</h2>
+            <h2 className="genreTitle">{"Most Popular Movies"}</h2>
             <Ratio ratio={21 / 9}>
                 <Carousel className="heh" pauseOnHover={true} interval={2000000000}>
                     {getMostPopularMovies()}

@@ -114,7 +114,7 @@ img.image.img-responsive, div.sc-bdVaJa.btyTPY {
     .genreTitle {
         left: 33%;
         font-size: large;
-        width: auto;
+        width: 200px;
     }
 
     button.slick-arrow.slick-prev {

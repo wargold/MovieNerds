@@ -2,11 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {
-    getMovieGenres,
-    getMoviesByGenre,
-    updateAllMoviesGenres,
-    getMostPopMovies,
-    getLoadedAllMoviesSucces,
+    getMovieGenres, getMoviesByGenre, updateAllMoviesGenres, getMostPopMovies, getLoadedAllMoviesSucces,
     resetSelectedValues
 } from '../actions';
 import SimpleSlider from "../components/genreSlider";
