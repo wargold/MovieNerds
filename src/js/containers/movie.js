@@ -41,11 +41,11 @@ class Movie extends Component {
         const id = paramsID;
         setTimeout(() => {
             this.props.isMovieFavoritAct(id, auth.currentUser.uid)
-        }, 2500)
+        }, 1750)
         setTimeout(() => {
             this.props.getSimilarMovies(id).then(() => this.props.getTrailerByMovieID(id).then(() =>
                 this.props.getCastByMovieID(id).then(() =>  this.props.getMovieByMovieID(id))))
-        }, 2750)
+        }, 2000)
     }
 
     resetValues() {

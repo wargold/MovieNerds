@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {
     removeFavorites, setAuthenticated, notLoggedIn, updateMovieFavorites, checkDB
 } from '../actions';
-import {database, auth, app, base} from '../constants/base'
+import {auth, app} from '../constants/base'
 import {Col, Grid, Row, Glyphicon, Button, Table, thead, th, OverlayTrigger, Popover} from 'react-bootstrap'
 import MovieCardComponent from '../components/moviecards'
 import {Loader} from '../../loader/loader'
@@ -37,7 +37,7 @@ class FavoriteMovies extends Component {
                     }
                     this.handle();
                 })
-            }, 4500
+            }, 1750
         )
     }
 
@@ -82,7 +82,7 @@ class FavoriteMovies extends Component {
         if (this.props.movieInfo.error !== null) {
             history.push('/APIError');
         }
-        const de = this.props.auth.user !== null ? (
+        const de = this.props.auth.user !== null || this.props.auth.user===''? (
             this.props.favoriteID !== null && this.state.loadedFavorite ?
                 (<Grid fluid={true}>
                         <Table id="dwds">
@@ -113,8 +113,6 @@ class FavoriteMovies extends Component {
             <div>
                 <NavBarHeader/>
                 {de}
-                {/* <h2 id="desc">Click to view their identity</h2>
-                <section id="vis"></section> */}
             </div>
 
         )

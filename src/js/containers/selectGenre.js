@@ -11,12 +11,10 @@ const ASYNC_DELAY = 500;
 class SearchByGenres extends Component {
 
     onChange = (value) => {
-        console.log("Kolla value av genres", value);
         let gen = [];
         for (var i = 0; i < value.length; i++) {
             gen.push(value[i].id);
         }
-        console.log("Kolla value av genres", gen);
         this.props.setValue(value);
         if (gen.length > 0) {
             history.push('/searchGenres/' + gen);
@@ -35,10 +33,8 @@ class SearchByGenres extends Component {
             console.error(err)
         });
 
-        console.log("Optionsss", arr);
 
         var options = arr;
-        console.log("Options", options);
         var data = {
             options: options
         };

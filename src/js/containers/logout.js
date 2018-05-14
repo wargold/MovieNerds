@@ -19,8 +19,12 @@ class Logout extends Component {
 
     render() {
         if (this.props.redirect === true) {
-            return <Redirect to="/"/>
-        }
+            if (process.env.NODE_ENV !== 'production') {
+                location.assign("http://localhost:3000");
+            }else{
+                location.assign("https://movienerds.herokuapp.com");
+            }
+            }
 
         return (
             <div style={{textAlign: "center", position: "absolute", top: "25%", left: "50%"}}>

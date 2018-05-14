@@ -47,11 +47,17 @@ class Login extends Component {
                     //this.setState({ redirect: true })
                     console.log(result.user);
                     this.props.setAuthenticated(result.user.displayName);
-
+                    this.checkIfReload();
                     //this.saveUser(result.user.uid, result.user.email)
                 }
             });
 
+    }
+
+    checkIfReload(){
+        if(window.location.pathname!=='/'){
+            window.location.reload();
+        }
     }
 
     authWithEmailPassword(event) {
@@ -87,7 +93,7 @@ class Login extends Component {
                     //this.setState({ redirect: true })
                     console.log(user);
                     this.props.setAuthenticated(user.email);
-
+                    this.checkIfReload();
                     //this.saveUser(user.uid, user.email)
                 }
             })

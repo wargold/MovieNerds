@@ -3,21 +3,15 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as d3 from "d3";
 import {
-    getSimilarMovies,
-    updateAllMoviesGenres,
-    getFavoriteSimilarMovies,
-    setAuthenticated,
-    notLoggedIn
+    getSimilarMovies, getFavoriteSimilarMovies, setAuthenticated, notLoggedIn, checkDB
 } from '../actions';
-import {database, auth, app, base} from "../constants/base";
+import {auth, app} from "../constants/base";
 import {black} from 'material-ui/styles/colors';
 import {Button} from 'react-bootstrap'
 import {Loader} from '../../loader/loader'
 import history from '../history';
 import {Spinner} from '@blueprintjs/core';
 import {BROKEN_IMAGE} from '../constants/constants'
-
-let trs = [];
 
 class Vis extends Component {
 
@@ -27,14 +21,6 @@ class Vis extends Component {
             loadedFavorite: false
         }
     }
-
-    // componentDidMount() {
-    //     //Get all the similar movies from the favorite list
-    //     this.handle();
-    //     setTimeout(() => {
-    //         this.props.getFavoriteSimilarMovies(trs);
-    //     }, 1500)
-    // }
 
     componentDidMount() {
         this.removeAuthListener = app.auth().onAuthStateChanged((user) => {
@@ -50,26 +36,16 @@ class Vis extends Component {
                 console.log("not logged in")
                 this.props.notLoggedIn();
             }
-            this.handle();
+            this.props.checkFavMovieDB(auth.currentUser.uid);
             setTimeout(() => {
-                this.props.getFavoriteSimilarMovies(trs);
+                this.props.getFavoriteSimilarMovies(this.props.favoriteID);
                 this.setState({
                     loadedFavorite: true
                 });
-            }, 1500)
+            }, 2000)
         })
 
     }
-
-    handle() {
-        let favs = [];
-        trs = [];
-        database.ref('users/' + auth.currentUser.uid + '/favorites').once('value').then(function (snapshot) {
-            favs = snapshot.val();
-            favs.map((id) => trs.push(id));
-        });
-    }
-
 
     render() {
 
@@ -83,7 +59,6 @@ class Vis extends Component {
         }
 
         console.log("visualization.js favorite similar movies", this.props.similarFavoriteMov.similarFavorite);
-        console.log("visualization.js favorite similar actors", this.props.favoriteActors.similarFavorite);
 
         var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) - 5;
         var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - 5;
@@ -101,7 +76,7 @@ class Vis extends Component {
 
         for (i = 0; i < fav.length; i++) {
             fav[i].poster_path = fav[i].FavMovieID.poster_path;
-            fav[i].title = fav[i].FavMovieID.original_title;
+            fav[i].title = fav[i].FavMovieID.title;
             fav[i].id = fav[i].FavMovieID.id;
             fav[i].overview = fav[i].FavMovieID.overview;
             fav[i].isFav = true;
@@ -226,7 +201,7 @@ class Vis extends Component {
 
 
         var nodeImage = node.append("image")
-            .attr("xlink:href", d => d.poster_path=== undefined ? BROKEN_IMAGE:'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + d.poster_path)
+            .attr("xlink:href", d => d.poster_path === undefined ? BROKEN_IMAGE : 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + d.poster_path)
             .attr("height", d => imageH(d))
             .attr("width", d => imageW(d))
             .attr("x", d => -(imageW(d) / 2))
@@ -248,7 +223,7 @@ class Vis extends Component {
                 console.log(d)
                 d3.select("#titlet").html(d.title);
                 d3.select("#title").attr("href", '/movie/' + d.id);
-                d3.select("#image").attr("src", d.poster_path=== undefined ? BROKEN_IMAGE:'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + d.poster_path);
+                d3.select("#image").attr("src", d.poster_path === undefined ? BROKEN_IMAGE : 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + d.poster_path);
                 d3.select("#desc").html(d.overview);
 
 
@@ -368,17 +343,18 @@ class Vis extends Component {
 
         return (
             this.state.loadedFavorite ? (
-            this.props.auth.user !== '' ? (
-                <div>
-                    <a style={headStyle2} id="title" href="" target="_blank"><h2 id="titlet">Click a movie!</h2></a>
-                    <Button style={buttonStyle} onClick={() => history.push('/myfavorites')}>Back to favorites</Button>
-                    <header style={headStyle}>
-                        <h3 id="desc" style={divStyle}></h3>
-                        <img id="image" src="" style={imgStyle}></img>
-                    </header>
-                    <section id="vis"></section>
-                </div>
-            ) : (<h2>You Have To Be Logged In To Show This Page!</h2>)):(<Loader/>))
+                this.props.auth.user !== '' ? (
+                    <div>
+                        <a style={headStyle2} id="title" href="" target="_blank"><h2 id="titlet">Click a movie!</h2></a>
+                        <Button style={buttonStyle} onClick={() => history.push('/myfavorites')}>Back to
+                            favorites</Button>
+                        <header style={headStyle}>
+                            <h3 id="desc" style={divStyle}></h3>
+                            <img id="image" src="" style={imgStyle}></img>
+                        </header>
+                        <section id="vis"></section>
+                    </div>
+                ) : (<h2>You Have To Be Logged In To Show This Page!</h2>)) : (<Loader/>))
 
     }
 }
@@ -388,19 +364,19 @@ function mapStateToProps(state) {
         similarMovies: state.similarMovies.movieInfo,
         updateMoviesByGenre: state.updateMoviesByGenre,
         similarFavoriteMov: state.similarFavoriteMov,
-        favoriteActors: state.favoriteActors,
         auth: state.auth,
-        loading: state.auth.loading
+        loading: state.auth.loading,
+        favoriteID: state.updateFavorites.favoriteID
     };
 }
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
         getSimilarMovies: getSimilarMovies,
-        updateAllMoviesGenres: updateAllMoviesGenres,
         getFavoriteSimilarMovies: getFavoriteSimilarMovies,
         setAuthenticated: setAuthenticated,
-        notLoggedIn: notLoggedIn
+        notLoggedIn: notLoggedIn,
+        checkFavMovieDB: checkDB
     }, dispatch);
 }
 

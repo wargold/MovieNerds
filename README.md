@@ -26,6 +26,9 @@ We have followed the architecture [Redux](https://redux.js.org).
 
 #### File Structure
 
+Under each folder (action, component, containers & reducers) there is a README file that describe each file within those
+folders.
+
 `public/index.html` - This is the static HTML file. It only contains the a div with id=root that's shared among all the 
 containers. It also contains script and links to different themes. 
 

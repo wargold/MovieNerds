@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {
-    getMovieGenres, getMoviesByGenre, updateAllMoviesGenres, getMostPopMovies, getLoadedAllMoviesSucces,
+    getMovieGenres, getMoviesByGenre, getMostPopMovies, getLoadedAllMoviesSucces,
     resetSelectedValues
 } from '../actions';
 import SimpleSlider from "../components/genreSlider";
@@ -18,7 +18,7 @@ class MovieGenreList extends Component {
             this.props.getLoadedAllMoviesSucces();
             setTimeout(() => {
                 this.props.getPopularMovies();
-            }, 3500);
+            }, 2500);
         }
     }
 
@@ -55,7 +55,6 @@ function matchDispatchToProps(dispatch) {
     return bindActionCreators({
         getMovieGenres: getMovieGenres,
         getMoviesByGenre: getMoviesByGenre,
-        updateAllMoviesGenres: updateAllMoviesGenres,
         getPopularMovies: getMostPopMovies,
         getLoadedAllMoviesSucces: getLoadedAllMoviesSucces,
         resetGenreValue: resetSelectedValues
