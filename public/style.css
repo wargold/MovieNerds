@@ -31,3 +31,7 @@ h2 {
     opacity: 1;
     z-index: 10;
 }
+
+a, a:visited, a:focus, a:active, a:hover{
+    outline:0 none !important;
+}

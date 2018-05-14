@@ -32,8 +32,9 @@ const MoviesListByGenres = (props) => {
                                      src={mov.poster_path == null ? BROKEN_IMAGE
                                          : URL_IMG + IMG_LOGO_S_SIZE + mov.poster_path}
                                      alt={mov.title}/>
-                                <h2>{mov.title}</h2>
-                                <div className="dsas">
+                                {mov.title.length <= 39 ? <h2>{mov.title}</h2> :
+                                    <h2 id="movieTitleSmall">{mov.title}</h2>}
+                                <div>
                                     <h4>{mov.release_date.substring(0, 4)}
                                         <span className="minutes"><div><Glyphicon
                                             glyph={'star'}/> {mov.vote_average}</div></span>
@@ -60,7 +61,7 @@ const MoviesListByGenres = (props) => {
 
     let checkMoviesSize = () => {
         if (props.movies.length === 0) {
-            return <div className="noMovieTitle"><h2 className="noMovieTitle">Sorry No Movie Available By Those
+            return <div className="noMovieTitle"><h2 className="noMovieTitle">Sorry No Movie Available With Those
                 Genres!</h2></div>
         } else {
             return <Grid fluid={true}>

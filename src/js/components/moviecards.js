@@ -12,7 +12,7 @@ const MovieCardComponent = (props) => {
             height: 278px;
             width:220px;
     &:hover .image{
-       opacity:0.3;
+       opacity:0.25;
     }
     &:hover .title{
        opacity: 1;
@@ -30,7 +30,6 @@ const MovieCardComponent = (props) => {
   `;
 
     const movie = props.movie;
-    console.log("kom hit 123456")
     return (
         <div className="moviecard">
             <StyleImage className="styleImg">
@@ -38,14 +37,16 @@ const MovieCardComponent = (props) => {
                     <Link to={`/movie/${movie.id}`} key={movie.id} style={{textDecoration: 'none'}}>
                         <Image className="image loader" src={movie.poster_path == null ? BROKEN_IMAGE
                             : URL_IMG + IMG_LOGO_M_SIZE + movie.poster_path}
-                               alt={movie.original_title} responsive/>
+                               alt={movie.title} responsive/>
                         <MovieInfo className="title">
-                            <h4 className="hiddenTitle">{movie.original_title}</h4> &nbsp;
+                            <h4 className="hiddenTitle">{movie.title}</h4> &nbsp;
                             <div><Glyphicon
-                                glyph={'star'}/> {movie.vote_average}</div>
+                                glyph={'star'}/> {movie.vote_average}&nbsp;/&nbsp;10
+                            </div>
                             &nbsp;
                             <div><Glyphicon glyph={'calendar'}/>
-                                {movie.release_date}</div>
+                                {movie.release_date === "" ? 'Unavailable' : movie.release_date}
+                            </div>
                         </MovieInfo>
                     </Link>
                 </div>

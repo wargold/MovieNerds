@@ -5,28 +5,6 @@ import './css/slider.css'
 import './css/dots.scss'
 import {Link} from 'react-router-dom'
 
-function SampleNextArrow(props) {
-    const {className, style, onClick} = props;
-    return (
-        <div
-            className={className}
-            style={{...style, display: "block", transform: "scale(1.5,1.5)"}}
-            onClick={onClick}
-        />
-    );
-}
-
-function SamplePrevArrow(props) {
-    const {className, style, onClick} = props;
-    return (
-        <div
-            className={className}
-            style={{...style, display: "block", transform: "scale(1.5,1.5)"}}
-            onClick={onClick}
-        />
-    );
-}
-
 const SimpleSlider = (props) => {
 
     let getGenresName = () => {

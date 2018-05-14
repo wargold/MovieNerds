@@ -44,10 +44,8 @@ class Movie extends Component {
         }, 2500)
         setTimeout(() => {
             this.props.getSimilarMovies(id).then(() => this.props.getTrailerByMovieID(id).then(() =>
-                this.props.getMovieByMovieID(id).then(() => this.props.getCastByMovieID(id))))
+                this.props.getCastByMovieID(id).then(() =>  this.props.getMovieByMovieID(id))))
         }, 2750)
-        console.log("before")
-        console.log("after")
     }
 
     resetValues() {
@@ -78,7 +76,7 @@ class Movie extends Component {
                     });
                     this.props.addFavorites({
                         id: movie.id, poster_path: movie.poster_path,
-                        original_title: movie.original_title, release_date: movie.release_date,
+                        title: movie.title, release_date: movie.release_date,
                         vote_average: movie.vote_average, overview: movie.overview
                     }, auth.currentUser.uid);
                 }}>

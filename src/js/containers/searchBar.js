@@ -93,7 +93,6 @@ class SearchBar extends Component {
             <DebounceInput
                 minLength={1}
                 debounceTimeout={500}
-                autoFocus
                 {...inputProps}
             />
         );

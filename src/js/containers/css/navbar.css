@@ -22,11 +22,8 @@ nav.navbar.navbar-inverse {
 }
 
 div.search.form-group {
-    margin-right: 40px;
-}
-
-div.section, div.Select.is-clearable.is-searchable.Select--multi, div.Select-control, .is-open, .Select {
-    width: 200px;
+    margin-right: 20px;
+    width: 250px;
 }
 
 div.navbar-form.navbar-left {
@@ -37,14 +34,6 @@ div.navbar-form.navbar-left {
 
 .section {
     z-index: 8;
-}
-
-#react-select-2--value, div.Select-control, span#react-select-3--value.Select-multi-value-wrapper input {
-    width: 200px;
-}
-
-div.Select-menu-outer {
-    width: 215px;
 }
 
 div.dropdown.navbar-brand {

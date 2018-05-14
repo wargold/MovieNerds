@@ -11,7 +11,3 @@ div.title {
 span.glyphicon.glyphicon-calendar {
     padding-right: 5px;
 }
-
-.image.loader.img-responsive:hover {
-    transform: scale(1.1);
-}

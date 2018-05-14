@@ -95,7 +95,7 @@ class MovieInfo extends React.Component {
         if (this.props.castList.length > 0) {
             cast = this.props.castList.slice(0, 5).map((actor) =>
                 (<Col xs={12} sm={4} md={3} key={actor.cast_id}>
-                    <Link to={`/cast/${actor.id}`} key={actor.id}>
+                    <Link to={`/cast/${actor.id}`} key={actor.id} style={{textDecoration: 'none'}}>
                         <div className="actorpic">
                             <Image className="loading" src={actor.profile_path == null ? BROKEN_IMAGE
                                 : URL_IMG + IMG_LOGO_S_SIZE + actor.profile_path} alt={actor.name} responsive
@@ -117,12 +117,14 @@ class MovieInfo extends React.Component {
         if (this.props.similarMovies.length > 0) {
             temp = this.props.similarMovies.slice(0, 5).map((movie) =>
                 <Col xs={12} sm={4} md={3} key={movie.id}>
+                    <Link to={`/movie/${movie.id}`} key={movie.id} style={{textDecoration: 'none'}}>
                     <div className="relatedmoviepic">
                         <div className="justRelatedMoviePic">
                             <MovieCardComponent movie={movie}/>
                         </div>
-                        <h3 className="pd"> Movie: {<p>{movie.original_title}</p>} </h3>
+                        <h3 className="pd"> Movie: {<p>{movie.title}</p>} </h3>
                     </div>
+                    </Link>
                 </Col>
             );
         }
@@ -131,6 +133,7 @@ class MovieInfo extends React.Component {
 
     render() {
         const movie = this.props.movie;
+        console.log("123456789");
 
         let ren = () => {
             if (this.props.user !== '') {

@@ -2,7 +2,7 @@
     margin-top: 30px;
     color: white;
     font-weight: bolder;
-    font-size: 45px;
+    font-size: 40px;
 }
 
 table#dwds.table {
@@ -53,7 +53,7 @@ th {
 
 #removeButton {
     display: none;
-    transform: translateX(-3.5px) translateY(-23px);
+    transform: translateX(-6.5px) translateY(-23px);
     justify-content: center;
     text-align: center;
 }
@@ -62,6 +62,7 @@ th {
     background-color: #c6c6c6;
     color: red;
     font-weight: bolder;
+    transform: translateX(-5px) translateY(-23px);
 }
 
 .justRelatedaMoviePic .styleImg:hover .image.loader.img-responsive {
@@ -80,10 +81,19 @@ div.col-md-3.col-sm-4.col-xs-12 {
     margin-bottom: 10px;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
     #favTitle {
         font-size: 30px;
         margin-right: 20px;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    #favTitle {
+        font-size: 18px;
+        margin-right: 20px;
+        margin-top: 20px;
     }
 }
 
