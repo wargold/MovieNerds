@@ -31,8 +31,6 @@ class MoviesByGenres extends Component {
         if (this.props.moviesByGenres.error !== null) {
             history.push('/APIError');
         }
-        console.log("Kolla props av serach genres: ", this.props.selector);
-        console.log("Kolla props: ", this.props.moviesByGenres.moviesByGenres);
         let moviesByGenres = this.props.moviesByGenres.moviesByGenres;
         const de = (moviesByGenres !== null && moviesByGenres.length >= 0 && this.props.moviesByGenres.isFetching === false) ?
             (<MoviesListByGenres movies={this.props.moviesByGenres.moviesByGenres} genres={this.props.selector.value}/>)

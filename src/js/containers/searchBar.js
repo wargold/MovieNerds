@@ -72,11 +72,7 @@ class SearchBar extends Component {
     };
 
     render() {
-
-        console.log('Check data', this.props.getse.suggestions);
-
         const value = this.props.getse.value;
-        console.log('kolla input value', value);
         let suggestions = this.props.getse.suggestions;
         if (suggestions === undefined) {
             suggestions = [];

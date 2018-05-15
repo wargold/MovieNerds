@@ -29,7 +29,6 @@ class MovieGenreList extends Component {
         }
 
         let mostPopMovies = this.props.mostPopMovies.movies;
-        console.log("mostPopMovies", mostPopMovies);
         const de = !this.props.allMoviegenres.isFetching && mostPopMovies !== undefined && mostPopMovies.length > 0 ?
             (<div className="sliderBackground">
                 <MostPopularSlide mostPopular={mostPopMovies}/>

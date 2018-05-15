@@ -155,12 +155,16 @@
   }
 }
 
-.noMovieTitleDiv {
-  width: auto;
-}
 
 .noMovieTitle {
-  padding-top: 20px;
+  padding-top: 40px;
   color: white;
   text-align: center;
+}
+
+
+@media screen and (max-width: 480px) {
+ h2.noMovieTitle{
+   font-size: 18px;
+ }
 }

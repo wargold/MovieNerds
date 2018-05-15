@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {
-    removeFavorites, setAuthenticated, notLoggedIn, updateMovieFavorites, checkDB
+    removeFavorites, setAuthenticated, notLoggedIn, updateMovieFavorites, checkDB, resetSelectedValues
 } from '../actions';
 import {auth, app} from '../constants/base'
 import {Col, Grid, Row, Glyphicon, Button, Table, thead, th, OverlayTrigger, Popover} from 'react-bootstrap'
@@ -21,6 +21,7 @@ class FavoriteMovies extends Component {
     }
 
     componentDidMount() {
+        this.reset();
         setTimeout(() => {
                 this.removeAuthListener = app.auth().onAuthStateChanged((user) => {
                     if (user) {
@@ -43,6 +44,7 @@ class FavoriteMovies extends Component {
 
     componentDidUpdate(prevProps, preState) {
         if (prevProps.favoriteID.length !== this.props.favoriteID.length) {
+            this.reset();
             this.setState({
                 loadedFavorite: false
             });
@@ -57,6 +59,10 @@ class FavoriteMovies extends Component {
                 loadedFavorite: true
             })
         }, 500);
+    }
+
+    reset(){
+        this.props.resetGenreValue();
     }
 
     getMovies() {
@@ -142,7 +148,8 @@ function matchDispatchToProps(dispatch) {
         notLoggedIn: notLoggedIn,
         updateFavorites: updateMovieFavorites,
         removeFavorites: removeFavorites,
-        checkFavMovieDB: checkDB
+        checkFavMovieDB: checkDB,
+        resetGenreValue: resetSelectedValues
     }, dispatch);
 }
 

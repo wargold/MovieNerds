@@ -61,8 +61,8 @@ const MoviesListByGenres = (props) => {
 
     let checkMoviesSize = () => {
         if (props.movies.length === 0) {
-            return <div className="noMovieTitle"><h2 className="noMovieTitle">Sorry No Movie Available With Those
-                Genres!</h2></div>
+            return <h2 className="noMovieTitle">Sorry No Movie Available With Those
+                Genres!</h2>
         } else {
             return <Grid fluid={true}>
                 <Row>{getGenresName()}

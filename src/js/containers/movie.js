@@ -28,8 +28,6 @@ class Movie extends Component {
 
     async componentWillReceiveProps(nextProps) {
         console.log("Compenent Update");
-        console.log("Previous params id length", nextProps.match.params.id);
-        console.log("New value: length", this.props.match.params.id);
         if (nextProps.match.params.id && this.props.match.params.id !== nextProps.match.params.id) {
             console.log("Update kan göras");
             await this.resetValues();
@@ -60,7 +58,6 @@ class Movie extends Component {
 
     removeAddButton() {
         let movie = this.props.movieInfo.movieInfo;
-        console.log("asdf", movie);
         const favButton = this.props.isMovieFavorite && this.props.user !== null ? (
             <div className="removeFavButt">
                 <Button onClick={() => {
