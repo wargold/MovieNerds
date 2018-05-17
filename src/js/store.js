@@ -5,6 +5,7 @@ import createLogger from 'redux-logger';
 import allReducers from './reducers';
 import {browserHistory, hashHistory} from 'react-router'
 import {routerMiddleware} from 'react-router-redux'
+import * as Actions from "./actions";
 
 const routeMiddleware = routerMiddleware(hashHistory);
 const logger = createLogger();
@@ -15,8 +16,12 @@ if (process.env.NODE_ENV !== 'production') {
     middleware = [...middleware, logger];
 }
 
-export default createStore(
+const store = createStore(
     allReducers,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
     applyMiddleware(...middleware)
 );
+
+store.dispatch(Actions.checkLoggin());
+
+export default store;

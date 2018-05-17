@@ -21,10 +21,10 @@ class Logout extends Component {
         if (this.props.redirect === true) {
             if (process.env.NODE_ENV !== 'production') {
                 location.assign("http://localhost:3000");
-            }else{
+            } else {
                 location.assign("https://movienerds.herokuapp.com");
             }
-            }
+        }
 
         return (
             <div style={{textAlign: "center", position: "absolute", top: "25%", left: "50%"}}>

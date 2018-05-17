@@ -12,6 +12,7 @@ import {Loader} from '../../loader/loader'
 import history from '../history';
 import {Spinner} from '@blueprintjs/core';
 import {BROKEN_IMAGE} from '../constants/constants'
+import './css/visualization.css'
 
 class Vis extends Component {
 
@@ -48,15 +49,6 @@ class Vis extends Component {
     }
 
     render() {
-
-        if (this.props.loading) {
-            return (
-                <div style={{textAlign: "center", position: "absolute", top: "25%", left: "50%"}}>
-                    <h3>Loading</h3>
-                    <Spinner/>
-                </div>
-            )
-        }
 
         console.log("visualization.js favorite similar movies", this.props.similarFavoriteMov.similarFavorite);
 
@@ -307,11 +299,11 @@ class Vis extends Component {
             d.fy = null;
         }
 
-        var divStyle = {
+        let divStyle = {
             color: '#FFF'
         };
 
-        var headStyle = {
+        let headStyle = {
             padding: '40px',
             position: 'absolute',
             top: '20px',
@@ -319,7 +311,7 @@ class Vis extends Component {
             'pointer-events': 'none'
         };
 
-        var headStyle2 = {
+        let headStyle2 = {
             padding: '20px',
             position: 'absolute',
             top: '0',
@@ -327,15 +319,18 @@ class Vis extends Component {
 
         };
 
+        let title = {
+            display: 'inline-block'
+        };
 
-        var imgStyle = {
+        let imgStyle = {
             opacity: '0.2',
             filter: 'alpha(opacity = 50)',
             width: '50%',
             height: '50%'
         }
 
-        var buttonStyle = {
+        let buttonStyle = {
             position: 'absolute',
             right: '10px',
             top: '10px'
@@ -345,11 +340,13 @@ class Vis extends Component {
             this.state.loadedFavorite ? (
                 this.props.auth.user !== '' ? (
                     <div>
-                        <a style={headStyle2} id="title" href="" target="_blank"><h2 id="titlet">Click a movie!</h2></a>
-                        <Button style={buttonStyle} onClick={() => history.push('/myfavorites')}>Back to
+                        <div style={headStyle2}>
+                            <a id="title" href="" target="_blank"><h2 id="titlet">Click a movie!</h2></a>
+                            <h3 id="desc" style={divStyle}></h3>
+                        </div>
+                        <Button id="backButton" style={buttonStyle} onClick={() => history.push('/myfavorites')}>Back to
                             favorites</Button>
                         <header style={headStyle}>
-                            <h3 id="desc" style={divStyle}></h3>
                             <img id="image" src="" style={imgStyle}></img>
                         </header>
                         <section id="vis"></section>
@@ -364,9 +361,11 @@ function mapStateToProps(state) {
         similarMovies: state.similarMovies.movieInfo,
         updateMoviesByGenre: state.updateMoviesByGenre,
         similarFavoriteMov: state.similarFavoriteMov,
+        similarFavoriteMovStatus: state.similarFavoriteMov.fetching,
         auth: state.auth,
         loading: state.auth.loading,
-        favoriteID: state.updateFavorites.favoriteID
+        favoriteID: state.updateFavorites.favoriteID,
+        favoriteIDStatus: state.updateFavorites.fetching,
     };
 }
 

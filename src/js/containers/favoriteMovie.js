@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {
-    removeFavorites, setAuthenticated, notLoggedIn, updateMovieFavorites, checkDB, resetSelectedValues
+    removeFavorites, updateMovieFavoritesSuccess, checkDB, resetSelectedValues, checkLoggin
 } from '../actions';
 import {auth, app} from '../constants/base'
 import {Col, Grid, Row, Glyphicon, Button, Table, thead, th, OverlayTrigger, Popover} from 'react-bootstrap'
@@ -22,28 +22,17 @@ class FavoriteMovies extends Component {
 
     componentDidMount() {
         this.reset();
-        setTimeout(() => {
-                this.removeAuthListener = app.auth().onAuthStateChanged((user) => {
-                    if (user) {
-                        console.log("logged in", user.displayName)
-                        if (user.displayName === null) {
-                            this.props.setAuthenticated(user.email);
-                        } else {
-                            this.props.setAuthenticated(user.displayName);
-                        }
-
-                    } else {
-                        console.log("not logged in")
-                        this.props.notLoggedIn();
-                    }
-                    this.handle();
-                })
-            }, 1750
-        )
+        if (auth.currentUser !== null) {
+            this.props.checkFavMovieDB(auth.currentUser.uid);
+        }
+        this.handle();
     }
 
-    componentDidUpdate(prevProps, preState) {
-        if (prevProps.favoriteID.length !== this.props.favoriteID.length) {
+
+    componentWillReceiveProps(nextProps) {
+        if ((nextProps.favoriteID.length !== this.props.favoriteID.length) ||
+            (nextProps.auth.user && this.props.auth.user !== nextProps.auth.user)) {
+            this.props.checkFavMovieDB(auth.currentUser.uid);
             this.reset();
             this.setState({
                 loadedFavorite: false
@@ -53,15 +42,14 @@ class FavoriteMovies extends Component {
     }
 
     handle() {
-        this.props.checkFavMovieDB(auth.currentUser.uid);
         setTimeout(() => {
             this.setState({
                 loadedFavorite: true
             })
-        }, 500);
+        }, 3000);
     }
 
-    reset(){
+    reset() {
         this.props.resetGenreValue();
     }
 
@@ -88,8 +76,8 @@ class FavoriteMovies extends Component {
         if (this.props.movieInfo.error !== null) {
             history.push('/APIError');
         }
-        const de = this.props.auth.user !== null || this.props.auth.user===''? (
-            this.props.favoriteID !== null && this.state.loadedFavorite ?
+        const de = this.props.auth.user !== null || this.props.auth.user === '' ? (
+            this.props.favoriteID !== null && this.state.loadedFavorite && this.props.favoriteIDStatus !== false ?
                 (<Grid fluid={true}>
                         <Table id="dwds">
                             <thead>
@@ -138,18 +126,18 @@ function mapStateToProps(state) {
         movieInfo: state.movieInfo,
         favorites: state.updateFavorites.movies,
         favoriteID: state.updateFavorites.favoriteID,
+        favoriteIDStatus: state.updateFavorites.fetching,
         loading: state.auth.loading
     };
 }
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
-        setAuthenticated: setAuthenticated,
-        notLoggedIn: notLoggedIn,
-        updateFavorites: updateMovieFavorites,
+        updateFavorites: updateMovieFavoritesSuccess,
         removeFavorites: removeFavorites,
         checkFavMovieDB: checkDB,
-        resetGenreValue: resetSelectedValues
+        resetGenreValue: resetSelectedValues,
+        checkLoggin: checkLoggin
     }, dispatch);
 }
 

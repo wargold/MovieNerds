@@ -36,7 +36,6 @@ class NavBarHeader extends Component {
         this.removeAuthListener();
     }
 
-
     render() {
         console.log('aseewf', this.props.authenticated);
 

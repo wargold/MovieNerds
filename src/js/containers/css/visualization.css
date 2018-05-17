@@ -1,0 +1,15 @@
+#titlet {
+    display: block;
+    width: 70%;
+    opacity: 1;
+}
+
+#backButton {
+    display: block;
+}
+
+@media (max-width: 600px) {
+    #desc {
+        display: none;
+    }
+}

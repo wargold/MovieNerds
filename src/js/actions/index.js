@@ -1,5 +1,5 @@
 import * as constants from '../constants/constants'
-import {auth, database} from "../constants/base";
+import {app, auth, database} from "../constants/base";
 
 // Handles action for search movies api call
 function searchMovie(text) {
@@ -436,8 +436,8 @@ export function getSimilarMovies(id) {
 }
 
 export function setAuthenticated(user) {
-    return function (dispatch) {
-        dispatch(facebookLoginSuccess(user))
+    return async function (dispatch) {
+        await dispatch(facebookLoginSuccess(user))
     }
 }
 
@@ -460,8 +460,12 @@ export function notLoggedIn() {
 }
 
 // UPDATE list with all genres and movies
-export function updateMovieFavorites(favoriteMovies, favoriteIDs) {
-    return {type: constants.UPDATE_FAVORITE_MOVIE, favoriteMovies, favoriteIDs}
+export function updateMovieFavorites() {
+    return {type: constants.UPDATE_FAVORITE_MOVIE}
+}
+
+export function updateMovieFavoritesSuccess(favoriteMovies, favoriteIDs) {
+    return {type: constants.UPDATE_FAVORITE_MOVIE_SUCCESS, favoriteMovies, favoriteIDs}
 }
 
 export function updateMovieFavorites_FAILURE(error) {
@@ -552,48 +556,12 @@ export function getFavoriteSimilarMovies(list) {
     }
 }
 
-
-// GET ALL ACTORS THAT PLAY THE MOVIES IN A USERS FAVORITE MOVIE LIST
-
-function loadFavoriteActors() {
-    return {
-        type: constants.LOAD_FAVORITE_ACTORS
-    };
-}
-
-function loadFavoriteActorsSuccess(simFavActors) {
-    return {
-        type: constants.LOAD_FAVORITE_ACTORS_SUCCESS, simFavActors
-    };
-}
-
-function loadFavoriteActorsFailure(error) {
-    return {
-        type: constants.LOAD_FAVORITE_ACTORS_FAILURE, error
-    };
-}
-
-export function getFavoriteActors(list) {
-    return async function (dispatch) {
-        dispatch(loadFavoriteActors());
-        let similarFavActors = [];
-        await Promise.all([list.map(async (movieID) => await dispatch(getCastByMovieID(movieID)).then(async (similarMovies) =>
-            await similarFavActors.push({
-                FavMovieID: movieID,
-                data: similarMovies.data
-            })).catch(error => dispatch(loadFavoriteActorsFailure(error))))]);
-        setTimeout(() => {
-            dispatch(loadFavoriteActorsSuccess(similarFavActors))
-        }, 500);
-    }
-}
-
-
 // Actions for user data
 
 export function addFavorites(movie, uid) {
     let favs = [];
     return async function (dispatch) {
+        dispatch(updateMovieFavorites())
         database.ref('users/' + uid + '/favorites').once('value').then(function (snapshot) {
             favs = snapshot.val()
             if (favs !== null && favs.some(item => {
@@ -613,7 +581,7 @@ export function addFavorites(movie, uid) {
                 var ref = database.ref('users/' + uid).child('favorites').set(favs);
             }
         }).then(() => {
-            dispatch(updateMovieFavorites(favs, favs));
+            dispatch(updateMovieFavoritesSuccess(favs, favs));
             dispatch(movieFavorite(true));
         })
     }
@@ -624,6 +592,7 @@ export function removeFavorites(id, uid) {
     let moviess = [];
     let removeIndex = [];
     return async function (dispatch) {
+        dispatch(updateMovieFavorites())
         database.ref('users/' + uid + '/favorites').once('value').then(function (snapshot) {
             var favs = snapshot.val()
             if (favs !== null && favs.some(item => {
@@ -649,7 +618,7 @@ export function removeFavorites(id, uid) {
                 favs.map((id) => trs.push(id));
                 console.log(favs)
                 var ref = database.ref('users/' + uid).child('favorites').set(favs);
-                dispatch(updateMovieFavorites(moviess, trs));
+                dispatch(updateMovieFavoritesSuccess(moviess, trs));
                 dispatch(movieFavorite(false));
             } else {
                 console.log("Not in favs")
@@ -663,6 +632,7 @@ export function checkDB(uid) {
     let favs = [];
     let trs = [];
     return async function (dispatch) {
+        dispatch(updateMovieFavorites())
         database.ref('users/' + uid + '/favorites').once('value').then(function (snapshot) {
             console.log("snapshot.val()", snapshot.val());
             if (snapshot.val() !== null) {
@@ -672,7 +642,7 @@ export function checkDB(uid) {
         }).catch(error => dispatch(updateMovieFavorites_FAILURE(error)));
         if (movies !== undefined) {
             console.log("dfdsfds", trs);
-            dispatch(updateMovieFavorites(movies, trs));
+            dispatch(updateMovieFavoritesSuccess(movies, trs));
         }
     }
 }
@@ -714,5 +684,24 @@ export function isMovieFavorite(movieID, uid) {
 export function resetIsMovieFavorite() {
     return async function (dispatch) {
         dispatch(movieFavorite(false))
+    }
+}
+
+export function checkLoggin() {
+    return function (dispatch) {
+        app.auth().onAuthStateChanged((user) => {
+            if (user) {
+                console.log("logged in", user.displayName)
+                if (user.displayName === null) {
+                    dispatch(setAuthenticated(user.email));
+                } else {
+                    dispatch(setAuthenticated(user.displayName));
+                }
+
+            } else {
+                console.log("not logged in")
+                dispatch(this.props.notLoggedIn());
+            }
+        })
     }
 }

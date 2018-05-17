@@ -61,11 +61,11 @@ class MovieInfo extends React.Component {
             <div className="moviedesc">
                 <div className="moviesummary">
                     {<p>
-                        {this.props.movie.overview===undefined ||this.props.movie.overview==="" ?
+                        {this.props.movie.overview === undefined || this.props.movie.overview === "" ?
                             <h3 className="nonsimilarMovies">Movie Info Unavailable!</h3> :
                             this.props.movie.overview
                         }
-                        </p>}
+                    </p>}
                 </div>
                 {<p>{this.getMovieGenres()}</p>}
                 <div className="icons">
@@ -77,7 +77,7 @@ class MovieInfo extends React.Component {
                     &nbsp;&nbsp;
                     <div id="movieStarCalend">
                         <Glyphicon glyph={'calendar'} id="glyphCalender"/>
-                        {this.props.movie.release_date==="" ? 'Unavailable': this.props.movie.release_date}
+                        {this.props.movie.release_date === "" ? 'Unavailable' : this.props.movie.release_date}
                     </div>
                 </div>
             </div>
@@ -118,12 +118,12 @@ class MovieInfo extends React.Component {
             temp = this.props.similarMovies.slice(0, 5).map((movie) =>
                 <Col xs={12} sm={4} md={3} key={movie.id}>
                     <Link to={`/movie/${movie.id}`} key={movie.id} style={{textDecoration: 'none'}}>
-                    <div className="relatedmoviepic">
-                        <div className="justRelatedMoviePic">
-                            <MovieCardComponent movie={movie}/>
+                        <div className="relatedmoviepic">
+                            <div className="justRelatedMoviePic">
+                                <MovieCardComponent movie={movie}/>
+                            </div>
+                            <h3 className="pd"> Movie: {<p>{movie.title}</p>} </h3>
                         </div>
-                        <h3 className="pd"> Movie: {<p>{movie.title}</p>} </h3>
-                    </div>
                     </Link>
                 </Col>
             );
@@ -136,7 +136,7 @@ class MovieInfo extends React.Component {
         console.log("123456789");
 
         let ren = () => {
-            if (this.props.user !== '') {
+            if (this.props.userUID !== null) {
                 return this.props.removeAddButton;
             }
         }

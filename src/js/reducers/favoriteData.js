@@ -4,18 +4,18 @@ import {
 
 const initialState = {
     similarFavorite: [],
-    isFetching: true,
+    fetching: false,
     error: null
 }
 
 export const FavoriteData = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_FAVORITE_SIMILAR_MOVIES:
-            return {...state, isFetching: true, similarFavorite: []};
+            return {...state, fetching: false, similarFavorite: []};
         case LOAD_FAVORITE_SIMILAR_MOVIES_SUCCESS:
-            return {...state, isFetching: false, similarFavorite: action.simFavMovies};
+            return {...state, similarFavorite: action.simFavMovies, fetching: true};
         case LOAD_FAVORITE_SIMILAR_MOVIES_FAILURE:
-            return {...state, isFetching: false, error: action.error};
+            return {...state, fetching: true, error: action.error};
         default:
             return state;
     }

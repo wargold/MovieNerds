@@ -1,5 +1,6 @@
 import {
-    AUTH_FACEBOOK, AUTH_FACEBOOK_SUCCESS, AUTH_FACEBOOK_FAIL, AUTH_LOGOUT, AUTH_UNREGISTERED, UPDATE_FAVORITE_MOVIE
+    AUTH_FACEBOOK, AUTH_FACEBOOK_SUCCESS, AUTH_FACEBOOK_FAIL, AUTH_LOGOUT, AUTH_UNREGISTERED,
+    UPDATE_FAVORITE_MOVIE_SUCCESS
 } from '../constants/constants'
 
 const initialState = {
@@ -29,7 +30,7 @@ const Auth = (state = initialState, action) => {
             return {...state, authenticated: false, redirect: false, error: action.error, loading: false};
         case AUTH_LOGOUT:
             return {...state, authenticated: false, redirectLogout: true, error: action.error, loading: false};
-        case UPDATE_FAVORITE_MOVIE:
+        case UPDATE_FAVORITE_MOVIE_SUCCESS:
             return {
                 ...state, favorite: [...state.favorite, action.favorite]
             };

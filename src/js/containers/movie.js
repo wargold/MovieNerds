@@ -2,17 +2,29 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {
-    getMovieByMovieID, getTrailerByMovieID, getCastByMovieID, getSimilarMovies, resetSelectedValues, updateMovieList,
-    updateCastList, isMovieFavorite, removeFavorites, addFavorites, resetIsMovieFavorite, clearSuggestions} from '../actions';
+    getMovieByMovieID,
+    getTrailerByMovieID,
+    getCastByMovieID,
+    getSimilarMovies,
+    resetSelectedValues,
+    updateMovieList,
+    updateCastList,
+    isMovieFavorite,
+    removeFavorites,
+    addFavorites,
+    resetIsMovieFavorite,
+    clearSuggestions,
+    checkLoggin
+} from '../actions';
 import {Loader} from '../../loader/loader'
 import MovieInfo from '../components/movieInfo';
 import NavBarHeader from './navbar';
 import history from "../history";
 import {Glyphicon, Button} from 'react-bootstrap'
-import {auth} from "../constants/base";
+import {app, auth} from "../constants/base";
 
 class Movie extends Component {
-    constructor() {
+    constructor() {//Can have a state due to that it only handles local state
         super()
         this.state = {
             isButtonDisabled: false
@@ -23,27 +35,27 @@ class Movie extends Component {
         this.props.clearSuggestions();
         console.log("Check param id", this.props.match.params.id);
         this.resetValues();
-        this.load(this.props.match.params.id);
+        //this.props.checkLoggin();
+        this.load(this.props.match.params.id)
     }
 
-    async componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps) {
         console.log("Compenent Update");
-        if (nextProps.match.params.id && this.props.match.params.id !== nextProps.match.params.id) {
+        if ((nextProps.match.params.id && this.props.match.params.id !== nextProps.match.params.id) ||
+            (nextProps.auth.user && this.props.auth.user!==nextProps.auth.user)) {
             console.log("Update kan göras");
-            await this.resetValues();
-            await this.load(nextProps.match.params.id);
+            this.resetValues();
+            this.load(nextProps.match.params.id);
         }
     }
 
     load(paramsID) {
         const id = paramsID;
-        setTimeout(() => {
+        if (auth.currentUser !== null) {
             this.props.isMovieFavoritAct(id, auth.currentUser.uid)
-        }, 1750)
-        setTimeout(() => {
-            this.props.getSimilarMovies(id).then(() => this.props.getTrailerByMovieID(id).then(() =>
-                this.props.getCastByMovieID(id).then(() =>  this.props.getMovieByMovieID(id))))
-        }, 2000)
+        }
+        this.props.getSimilarMovies(id).then(() => this.props.getTrailerByMovieID(id).then(() =>
+            this.props.getCastByMovieID(id).then(() => this.props.getMovieByMovieID(id))))
     }
 
     resetValues() {
@@ -93,7 +105,8 @@ class Movie extends Component {
         const de = (this.props.movieInfo.movieInfo.id !== undefined) ?
             (<MovieInfo movie={this.props.movieInfo.movieInfo} trailer={this.props.trailer}
                         castList={this.props.castList} similarMovies={this.props.similarMovies}
-                        user={this.props.auth.user} userUID={this.props.auth.userUID} removeAddButton={this.removeAddButton()}/>)
+                        user={this.props.auth.user} userUID={auth.currentUser}
+                        removeAddButton={this.removeAddButton()}/>)
             : (Loader());
         return (<div>
             <NavBarHeader/>
@@ -115,6 +128,7 @@ function mapStateToProps(state) {
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
+        checkLoggin: checkLoggin,
         getMovieByMovieID: getMovieByMovieID,
         getTrailerByMovieID: getTrailerByMovieID,
         getCastByMovieID: getCastByMovieID,
