@@ -24,7 +24,7 @@ export const UpdateFavoriteMovies = (state = initialState, action) => {
             };
         case UPDATE_FAVORITE_MOVIE_FAILURE:
             return {
-                ...state, error: action.error
+                ...state, error: action.error, fetching: true
             };
         default:
             return state;

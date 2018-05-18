@@ -8,7 +8,7 @@ import {
 import {auth, app} from "../constants/base";
 import {black} from 'material-ui/styles/colors';
 import {Button} from 'react-bootstrap'
-import {Loader} from '../../loader/loader'
+import {Loader} from '../Help Functions/loader/loader'
 import history from '../history';
 import {Spinner} from '@blueprintjs/core';
 import {BROKEN_IMAGE} from '../constants/constants'

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {getCastInfoByID, getCastKnownMovies} from '../actions';
 import CastInfo from '../components/castInfo';
 import NavBarHeader from './navbar';
-import {Loader} from '../../loader/loader'
+import {Loader} from '../Help Functions/loader/loader'
 import history from '../history';
 
 class Cast extends Component {

@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {getMoviesByGenres} from '../actions';
 import MoviesListByGenres from '../components/moviesListByGenre';
-import {Loader} from '../../loader/loader'
+import {Loader} from '../Help Functions/loader/loader'
 import NavBarHeader from './navbar';
 import history from '../history'
 

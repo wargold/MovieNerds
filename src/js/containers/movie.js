@@ -16,7 +16,7 @@ import {
     clearSuggestions,
     checkLoggin
 } from '../actions';
-import {Loader} from '../../loader/loader'
+import {Loader} from '../Help Functions/loader/loader'
 import MovieInfo from '../components/movieInfo';
 import NavBarHeader from './navbar';
 import history from "../history";

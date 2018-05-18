@@ -29,6 +29,7 @@ th {
     font-weight: bolder;
     font-style: oblique;
     color: red;
+    padding-top: 30px;
 }
 
 .th {
@@ -86,6 +87,10 @@ div.col-md-3.col-sm-4.col-xs-12 {
         font-size: 30px;
         margin-right: 20px;
         margin-top: 20px;
+    }
+
+    #notLoggedIn {
+        font-size: 20px;
     }
 }
 

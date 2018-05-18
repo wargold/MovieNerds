@@ -63,11 +63,10 @@ then we save the error message.
 `src/js/history.js:` For pushing routes to the react router.
  
 `src/.env:` firebase api keys, domain, db etc.
- 
-`src/img/:` containing gif and logo.
 
-`src/loader/:` containing a function that returns our new loader and corresponding css code to that loader.
+`src/js/Help Functions/loader/loader.js:` containing a function that returns our new loader and corresponding css code to that loader.
 
+`src/js/Help Functions/ErrorFunctions.js:` containing a functions that returns text and buttons depending on the error.
 
 `webpack/webpack.config.js:` The main webpack config, webpack is our build tool.
 
@@ -113,7 +112,7 @@ Then you can start your server
 
 ```
 > npm run start
-> The open http://localhost:8080
+> Then open http://localhost:8080
 ```
 
 Close server

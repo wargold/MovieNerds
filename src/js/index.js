@@ -13,11 +13,7 @@ import history from './history'
 import MoviesByGenres from './containers/moviesByGenres'
 import "../../public/style.css"
 import store from './store'
-
-const NotFound = () =>
-    <h1 style={{color: "red", margin: "50px 0", textAlign: "center"}}>404... Whoops, page not found!</h1>;
-const APIError = () =>
-    <h1 style={{color: "red", margin: "50px 0", textAlign: "center"}}>404... API ERROR / No Internet Connection!</h1>;
+import {APIError,NotFound} from './Help Functions/ErrorFunctions'
 
 ReactDOM.render(
     <Provider store={store}>

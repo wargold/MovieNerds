@@ -35,3 +35,19 @@ h2 {
 a, a:visited, a:focus, a:active, a:hover{
     outline:0 none !important;
 }
+
+#pageNotFound{
+    margin: -20px -50px;
+    width: auto;
+    height: auto;
+    position:relative;
+    top:50%;
+    left:50%;
+}
+
+#pageApiNetError{
+    color: red;
+    padding: 50px 0;
+    text-align: center;
+}
+

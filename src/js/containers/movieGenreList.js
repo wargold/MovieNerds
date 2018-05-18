@@ -7,7 +7,7 @@ import {
 } from '../actions';
 import SimpleSlider from "../components/genreSlider";
 import MostPopularSlide from "../components/mostPopularSlide";
-import {Loader} from '../../loader/loader';
+import {Loader} from '../Help Functions/loader/loader';
 import history from "../history";
 
 class MovieGenreList extends Component {

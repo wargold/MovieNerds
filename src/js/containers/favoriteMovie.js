@@ -7,7 +7,7 @@ import {
 import {auth, app} from '../constants/base'
 import {Col, Grid, Row, Glyphicon, Button, Table, thead, th, OverlayTrigger, Popover} from 'react-bootstrap'
 import MovieCardComponent from '../components/moviecards'
-import {Loader} from '../../loader/loader'
+import {Loader} from '../Help Functions/loader/loader'
 import history from "../history";
 import NavBarHeader from './navbar';
 import './css/favoriteMovie.css'
@@ -76,33 +76,31 @@ class FavoriteMovies extends Component {
         if (this.props.movieInfo.error !== null) {
             history.push('/APIError');
         }
-        const de = this.props.auth.user !== null || this.props.auth.user === '' ? (
-            this.props.favoriteID !== null && this.state.loadedFavorite && this.props.favoriteIDStatus !== false ?
+        const de = (this.state.loadedFavorite) ?(
+            (this.props.auth.user !== '' ?
+            this.props.favoriteID !== null && this.props.favoriteIDStatus !== false?(
                 (<Grid fluid={true}>
-                        <Table id="dwds">
-                            <thead>
-                            <th><h2 id="favTitle">My Favorite Movies</h2></th>
-                            <th>{this.props.favoriteID.length > 0 ?
-                                <OverlayTrigger
-                                    trigger={['hover', 'focus']}
-                                    placement="bottom"
-                                    overlay={popoverHoverFocus}
-                                >
-                                    <Button id="visualButt" onClick={() => history.push('/vis')}>Visualisation</Button>
-                                </OverlayTrigger> : <h2/>}
-                            </th>
-                            </thead>
-                        </Table>
-                        <Row>
-                            {this.props.favoriteID.length > 0 ?
-                                this.getMovies() : <h2 id="noFavMovie">No Movies In Your Favorite List</h2>
-                            }
-                        </Row>
-                    </Grid>
-                )
-                : (Loader())) : (
-            <h2 id="notLoggedIn"> You Have To Be Logged In To Show This Page!</h2>
-        )
+                <Table id="dwds">
+                    <thead>
+                    <th><h2 id="favTitle">My Favorite Movies</h2></th>
+                    <th>{this.props.favoriteID.length > 0 ?
+                        <OverlayTrigger
+                            trigger={['hover', 'focus']}
+                            placement="bottom"
+                            overlay={popoverHoverFocus}
+                        >
+                            <Button id="visualButt"
+                                    onClick={() => history.push('/vis')}>Visualisation</Button>
+                        </OverlayTrigger> : <h2/>}
+                    </th>
+                    </thead>
+                </Table>
+                <Row>
+                    {this.props.favoriteID.length > 0 ?
+                        this.getMovies() : <h2 id="noFavMovie">No Movies In Your Favorite List</h2>
+                    }
+                </Row>
+            </Grid>)):(<h2/>) : (<h2 id="notLoggedIn"> You Have To Be Logged In To Show This Page!</h2>))) : (Loader())
         return (
             <div>
                 <NavBarHeader/>
@@ -115,7 +113,7 @@ class FavoriteMovies extends Component {
 
 const popoverHoverFocus = (
     <Popover id="popover-trigger-hover-focus">
-        Discover new movies based on your favorites,
+        Discover new movies based on your favorites,&nbsp;
         <i>(note: Favorites connect to each other if they have common similar movies)</i>
     </Popover>
 );
