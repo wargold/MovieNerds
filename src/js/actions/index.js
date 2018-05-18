@@ -700,7 +700,7 @@ export function checkLoggin() {
 
             } else {
                 console.log("not logged in")
-                dispatch(this.props.notLoggedIn());
+                dispatch(notLoggedIn());
             }
         })
     }
