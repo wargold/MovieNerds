@@ -73,6 +73,9 @@ class Movie extends Component {
         const favButton = this.props.isMovieFavorite && this.props.user !== null ? (
             <div className="removeFavButt">
                 <Button onClick={() => {
+                    this.setState({
+                        isButtonDisabled: false
+                    });
                     this.props.removeFavorites(movie.id, auth.currentUser.uid)
                 }}>
                     <Glyphicon glyph="trash"/> Remove Favorite
