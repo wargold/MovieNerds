@@ -24,7 +24,7 @@ class Vis extends Component {
     }
 
     componentDidMount() {
-        this.removeAuthListener = app.auth().onAuthStateChanged((user) => {
+        app.auth().onAuthStateChanged((user) => {
             if (user) {
                 console.log("logged in", user.displayName)
                 if (user.displayName === null) {
@@ -37,7 +37,9 @@ class Vis extends Component {
                 console.log("not logged in")
                 this.props.notLoggedIn();
             }
-            this.props.checkFavMovieDB(auth.currentUser.uid);
+            if (auth.currentUser!==null) {
+                this.props.checkFavMovieDB(auth.currentUser.uid);
+            }
             setTimeout(() => {
                 this.props.getFavoriteSimilarMovies(this.props.favoriteID);
                 this.setState({

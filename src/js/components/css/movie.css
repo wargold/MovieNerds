@@ -428,6 +428,26 @@ img.loading.img-responsive.img-circle {
 
 }
 
+@media (max-width: 400px) {
+    .modal-video-body {
+        max-width: 260px;
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        display: table
+    }
+}
+
+@media (max-width: 340px) {
+    .modal-video-body {
+        max-width: 230px;
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        display: table
+    }
+}
+
 button.modal-video-close-btn:hover {
     transform: scale(1.5);
 }
