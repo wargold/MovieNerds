@@ -30,16 +30,36 @@ const MovieCardComponent = (props) => {
   `;
 
     const movie = props.movie;
+
+    function drag(ev) {
+        console.log(ev.target)
+        //ev.dataTransfer.setData("image", ev.target);
+        // var sendObj = {
+        //     src: ev.target.getAttribute("src"),
+        //     id: ev.target.getAttribute("data-id"),
+        //     alt: ev.target.getAttribute("alt")
+        // }
+
+        //ev.dataTransfer.setData("id", JSON.stringify(sendObj));
+        ev.dataTransfer.setData("id", ev.target.getAttribute("data-id"));
+
+        console.log("Drag start")
+    }
+
+    let dragStyle = {
+        cursor: 'pointer'
+    }
+
     return (
         <div className="moviecard">
-            <StyleImage className="styleImg">
+            <StyleImage className="styleImg" draggable="true" onDragStart={drag}>
                 <div className="container" key={movie.id}>
                     <Link to={`/movie/${movie.id}`} key={movie.id} style={{textDecoration: 'none'}}>
-                        <Image className="image loader" src={movie.poster_path == null ? BROKEN_IMAGE
+                        <Image className="image loader" style={dragStyle} data-id={movie.id} src={movie.poster_path == null ? BROKEN_IMAGE
                             : URL_IMG + IMG_LOGO_M_SIZE + movie.poster_path}
                                alt={movie.title} responsive/>
                         <MovieInfo className="title">
-                            <h4 className="hiddenTitle">{movie.title}</h4> &nbsp;
+                            <h4 className="hiddenTitle" draggable="false">{movie.title}</h4> &nbsp;
                             <div><Glyphicon
                                 glyph={'star'}/> {movie.vote_average}&nbsp;/&nbsp;10
                             </div>

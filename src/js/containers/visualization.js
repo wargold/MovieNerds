@@ -344,7 +344,7 @@ class Vis extends Component {
                     <div>
                         <div style={headStyle2}>
                             <a id="title" href="" target="_blank"><h2 id="titlet">Click a movie!</h2></a>
-                            <h3 id="desc" style={divStyle}></h3>
+                            <h3 id="desc" style={divStyle}>This visualization shows the relationships between your favorited movies!</h3>
                         </div>
                         <Button id="backButton" style={buttonStyle} onClick={() => history.push('/myfavorites')}>Back to
                             favorites</Button>

@@ -16,8 +16,12 @@ class FavoriteMovies extends Component {
     constructor() {//Can have a state due to that it only handles local state
         super()
         this.state = {
-            loadedFavorite: false
+            loadedFavorite: false,
+            test: [],
+            isDragging: false
         }
+
+        this.drop = this.drop.bind(this);
     }
 
     componentDidMount() {
@@ -61,21 +65,50 @@ class FavoriteMovies extends Component {
                     <div className="justRelatedaMoviePic">
                         <MovieCardComponent movie={mov}/>
                     </div>
-                    <Button id="removeButton" onClick={() => {
+                    {/* <Button id="removeButton" onClick={() => {
                         this.props.removeFavorites(mov.id, auth.currentUser.uid)
                     }}>
                         <Glyphicon glyph="trash"/> Remove Favorite
-                    </Button>
+                    </Button> */}
                 </div>
             </Col>);
 
         return genre
     };
 
+    allowDrop(ev) {
+        ev.preventDefault();
+    };
+    
+     drop(ev) {
+        ev.preventDefault();
+        // var data = ev.dataTransfer.getData("image");
+        // //ev.target.appendChild(document.getElementById(data));
+        // console.log(data)
+        // this.setState(prevState => ({
+        //     test: [...prevState.test, data]
+        //   }))
+        var data = ev.dataTransfer.getData("id");
+
+        console.log(data)
+
+         // this.setState(prevState => ({
+        //     test: [...prevState.test, data]
+        //   }))
+
+        this.props.removeFavorites(parseInt(data), auth.currentUser.uid)
+    };
+
+    
+
     render() {
         if (this.props.movieInfo.error !== null) {
             history.push('/APIError');
         }
+
+
+        const dragged = this.state.test
+        
         const de = (this.state.loadedFavorite) ?(
             (this.props.auth.user !== '' ?
             this.props.favoriteID !== null && this.props.favoriteIDStatus !== false?(
@@ -100,6 +133,16 @@ class FavoriteMovies extends Component {
                         this.getMovies() : <h2 id="noFavMovie">No Movies In Your Favorite List</h2>
                     }
                 </Row>
+                <Row>
+                    
+                    <Glyphicon style={{
+            'font-size': '100px',
+            'padding-left': 'calc(50% - 50px)',
+            'color': this.state.isDragging ? 'green': 'white'
+            }} glyph="trash" onDrop={this.drop} onDragOver={this.allowDrop}/> 
+                        {dragged}
+                    
+                </Row>
             </Grid>)):(<h2/>) : (<h2 id="notLoggedIn"> You Have To Be Logged In To Show This Page!</h2>))) : (Loader())
         return (
             <div>
@@ -109,7 +152,10 @@ class FavoriteMovies extends Component {
 
         )
     }
+
 }
+
+
 
 const popoverHoverFocus = (
     <Popover id="popover-trigger-hover-focus">
