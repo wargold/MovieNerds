@@ -10,7 +10,8 @@ import MovieCardComponent from '../components/moviecards'
 import {Loader} from '../Help Functions/loader/loader'
 import history from "../history";
 import NavBarHeader from './navbar';
-import './css/favoriteMovie.css'
+import './css/favoriteMovie.css';
+import PopUpFavPageInfo from '../components/PopUpPageInfo';
 
 class FavoriteMovies extends Component {
     constructor() {//Can have a state due to that it only handles local state
@@ -79,8 +80,8 @@ class FavoriteMovies extends Component {
     allowDrop(ev) {
         ev.preventDefault();
     };
-    
-     drop(ev) {
+
+    drop(ev) {
         ev.preventDefault();
         // var data = ev.dataTransfer.getData("image");
         // //ev.target.appendChild(document.getElementById(data));
@@ -89,83 +90,91 @@ class FavoriteMovies extends Component {
         //     test: [...prevState.test, data]
         //   }))
         var data = ev.dataTransfer.getData("id");
+        this.setState({
+            isDragging: false
+        });
 
-        console.log(data)
-
-         // this.setState(prevState => ({
+        // this.setState(prevState => ({
         //     test: [...prevState.test, data]
         //   }))
 
         this.props.removeFavorites(parseInt(data), auth.currentUser.uid)
     };
 
-    
 
     render() {
         if (this.props.movieInfo.error !== null) {
             history.push('/APIError');
         }
 
-
         const dragged = this.state.test
-        
-        const de = (this.state.loadedFavorite) ?(
-            (this.props.auth.user !== '' ?
-            this.props.favoriteID !== null && this.props.favoriteIDStatus !== false?(
-                (<Grid fluid={true}>
-                <Table id="dwds">
-                    <thead>
-                    <th><h2 id="favTitle">My Favorite Movies</h2></th>
-                    <th>{this.props.favoriteID.length > 0 ?
-                        <OverlayTrigger
-                            trigger={['hover', 'focus']}
-                            placement="bottom"
-                            overlay={popoverHoverFocus}
-                        >
-                            <Button id="visualButt"
-                                    onClick={() => history.push('/vis')}>Visualisation</Button>
-                        </OverlayTrigger> : <h2/>}
-                    </th>
-                    </thead>
-                </Table>
-                <Row>
-                    {this.props.favoriteID.length > 0 ?
-                        this.getMovies() : <h2 id="noFavMovie">No Movies In Your Favorite List</h2>
-                    }
-                </Row>
-                <Row>
-                    
-                    <Glyphicon style={{
-            'font-size': '100px',
-            'padding-left': 'calc(50% - 50px)',
-            'color': this.state.isDragging ? 'green': 'white'
-            }} glyph="trash" onDrop={this.drop} onDragOver={this.allowDrop}/> 
-                        {dragged}
-                    
-                </Row>
-            </Grid>)):(<h2/>) : (<h2 id="notLoggedIn"> You Have To Be Logged In To Show This Page!</h2>))) : (Loader())
-        return (
-            <div>
-                <NavBarHeader/>
-                {de}
-            </div>
 
-        )
+        const de = (this.state.loadedFavorite) ? (
+            (this.props.auth.user !== '' ?
+                this.props.favoriteID !== null && this.props.favoriteIDStatus !== false ? (
+                    (<Grid fluid={true}>
+                        <Table id="dwds">
+                            <thead>
+                            <th>
+                                <div><h2 id="favTitle">My Favorite Movies</h2></div>
+                            </th>
+                            <th><div id="info"><PopUpFavPageInfo
+                                username={this.props.auth.user}/></div></th>
+                            <th>{this.props.favoriteID.length > 0 ?
+                                <OverlayTrigger
+                                    trigger={['hover', 'focus']}
+                                    placement="bottom"
+                                    overlay={popoverHoverFocus}
+                                >
+                                    <Button id="visualButt"
+                                            onClick={() => history.push('/vis')}>Visualisation</Button>
+                                </OverlayTrigger> : <h2/>}
+                            </th>
+                            </thead>
+                        </Table>
+                        <Row>
+                            {this.props.favoriteID.length > 0 ?
+                                this.getMovies() : <h2 id="noFavMovie">No Movies In Your Favorite List</h2>
+                            }
+                        </Row>
+                        <Row>
+
+                            <Glyphicon style={{
+                                'font-size': '100px',
+                                'padding-left': 'calc(50% - 50px)',
+                                'color': this.state.isDragging ? 'green' : 'white'
+                            }} glyph="trash" onDrop={this.drop} onDragOver={this.allowDrop}/>
+                            {dragged}
+
+                        </Row>
+                    </Grid>
+    )):(
+        <h2/>
+    ) : (
+        <h2 id="notLoggedIn"> You Have To Be Logged In To Show This Page!</h2>
+    ))) : (Loader())
+    return (
+        <div>
+            <NavBarHeader/>
+            {de}
+        </div>
+
+    )
     }
 
-}
+    }
 
 
 
-const popoverHoverFocus = (
-    <Popover id="popover-trigger-hover-focus">
-        Discover new movies based on your favorites,&nbsp;
-        <i>(note: Favorites connect to each other if they have common similar movies)</i>
-    </Popover>
-);
+    const popoverHoverFocus = (
+        <Popover id="popover-trigger-hover-focus">
+            Discover new movies based on your favorites,&nbsp;
+            <i>(note: Favorites connect to each other if they have common similar movies)</i>
+        </Popover>
+    );
 
-function mapStateToProps(state) {
-    return {
+    function mapStateToProps(state) {
+        return {
         auth: state.auth,
         movieInfo: state.movieInfo,
         favorites: state.updateFavorites.movies,
@@ -173,16 +182,16 @@ function mapStateToProps(state) {
         favoriteIDStatus: state.updateFavorites.fetching,
         loading: state.auth.loading
     };
-}
+    }
 
-function matchDispatchToProps(dispatch) {
-    return bindActionCreators({
+    function matchDispatchToProps(dispatch) {
+        return bindActionCreators({
         updateFavorites: updateMovieFavoritesSuccess,
         removeFavorites: removeFavorites,
         checkFavMovieDB: checkDB,
         resetGenreValue: resetSelectedValues,
         checkLoggin: checkLoggin
     }, dispatch);
-}
+    }
 
-export default connect(mapStateToProps, matchDispatchToProps)(FavoriteMovies);
+    export default connect(mapStateToProps, matchDispatchToProps)(FavoriteMovies);

@@ -41,7 +41,7 @@ const MovieCardComponent = (props) => {
         // }
 
         //ev.dataTransfer.setData("id", JSON.stringify(sendObj));
-        ev.dataTransfer.setData("id", ev.target.getAttribute("data-id"));
+        ev.dataTransfer.setData("id", ev.target.firstChild.getAttribute("data-id"));
 
         console.log("Drag start")
     }

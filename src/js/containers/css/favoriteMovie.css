@@ -12,6 +12,16 @@
     font-size: 40px;
 }
 
+#info{
+    font-size: 40px;
+    padding-right: 20px;
+    margin-top: 10px;
+}
+
+#info:hover{
+    cursor: pointer;
+}
+
 table#dwds.table {
     width: 100%;
 }
@@ -99,6 +109,10 @@ div.col-md-3.col-sm-4.col-xs-12 {
     #notLoggedIn {
         font-size: 20px;
     }
+
+    #info{
+        font-size: 30px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -122,3 +136,4 @@ div.col-md-3.col-sm-4.col-xs-12 {
     color: black;
     background: #aeaeae;
 }
+
