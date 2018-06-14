@@ -41,9 +41,18 @@ const MovieCardComponent = (props) => {
         // }
 
         //ev.dataTransfer.setData("id", JSON.stringify(sendObj));
-        ev.dataTransfer.setData("id", ev.target.firstChild.getAttribute("data-id"));
+        ev.dataTransfer.setData("id", ev.target.getAttribute("data-id"));
 
+        var x = document.getElementById("glyptest");
+        x.style.color = "red";
         console.log("Drag start")
+    }
+
+    function dragE(ev) {
+    
+        var x = document.getElementById("glyptest");
+        x.style.color = "white";
+        console.log("Drag end")
     }
 
     let dragStyle = {
@@ -52,7 +61,7 @@ const MovieCardComponent = (props) => {
 
     return (
         <div className="moviecard">
-            <StyleImage className="styleImg" draggable="true" onDragStart={drag}>
+            <StyleImage className="styleImg" draggable="true" onDragStart={drag} onDragEnd={dragE}>
                 <div className="container" key={movie.id}>
                     <Link to={`/movie/${movie.id}`} key={movie.id} style={{textDecoration: 'none'}}>
                         <Image className="image loader" style={dragStyle} data-id={movie.id} src={movie.poster_path == null ? BROKEN_IMAGE

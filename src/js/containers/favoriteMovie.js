@@ -139,7 +139,7 @@ class FavoriteMovies extends Component {
                         </Row>
                         <Row>
 
-                            <Glyphicon style={{
+                            <Glyphicon id="glyptest" style={{
                                 'font-size': '100px',
                                 'padding-left': 'calc(50% - 50px)',
                                 'color': this.state.isDragging ? 'green' : 'white'
