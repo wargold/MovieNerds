@@ -21,7 +21,6 @@ class FavoriteMovies extends Component {
             test: [],
             isDragging: false
         }
-
         this.drop = this.drop.bind(this);
     }
 
@@ -133,11 +132,9 @@ class FavoriteMovies extends Component {
                             <Row>
                                 {this.props.favoriteID.length > 0 ?
                                 <Glyphicon id="glyptest" style={{
-                                    'font-size': '100px',
-                                    'padding-left': 'calc(50% - 50px)',
+                                    'font-size': '125px',
                                     'color': this.state.isDragging ? 'green' : 'white'
-                                }} glyph="trash" onDrop={this.drop} onDragOver={this.allowDrop}/>:null}
-                                {dragged}
+                                }} glyph="trash" onDrop={this.drop} onDragOver={this.allowDrop}>{dragged}</Glyphicon>:null}
 
                             </Row>
                         </Grid>

@@ -39,12 +39,19 @@ th {
     width: 100%;
 }
 
+#glyptest{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 #noFavMovie {
     text-align: center;
     font-weight: bolder;
     font-style: italic;
     color: #be0004;
 }
+
 
 #notLoggedIn {
     text-align: center;
