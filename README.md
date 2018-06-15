@@ -2,6 +2,15 @@
 
 #### Authors: War Ahmed, Mehrdad Bahador, Thomas Wang & Tim Wayburn
 #### Project Group 10
+
+#### Update
+After receiving feedback from our TA, we have implemented a drag and drop in the favorite page, that works if 
+the screen size is suitable otherwise the user can remove their favorite movies with a click of a button. We then
+have also implemented popup on the the users first login that describes the functionality of the website,
+the second popup on the favorite page that describe how to add movies and the purpose of the favorite page, lastly
+a popup on the visualisation page if its the first time the user visit that page, that describe how the user can
+use that page. We have also fixed some smaller design issues. 
+
 #### Project Description
 
 Building a website for browsing movies, the users will be able to register an account on the website, 
