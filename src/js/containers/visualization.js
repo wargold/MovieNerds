@@ -13,6 +13,7 @@ import history from '../history';
 import {Spinner} from '@blueprintjs/core';
 import {BROKEN_IMAGE} from '../constants/constants'
 import './css/visualization.css'
+import PopUpFavPageInfo from '../components/PopUpPageInfo';
 
 class Vis extends Component {
 
@@ -37,7 +38,7 @@ class Vis extends Component {
                 console.log("not logged in")
                 this.props.notLoggedIn();
             }
-            if (auth.currentUser!==null) {
+            if (auth.currentUser !== null) {
                 this.props.checkFavMovieDB(auth.currentUser.uid);
             }
             setTimeout(() => {
@@ -344,8 +345,11 @@ class Vis extends Component {
                     <div>
                         <div style={headStyle2}>
                             <a id="title" href="" target="_blank"><h2 id="titlet">Click a movie!</h2></a>
-                            <h3 id="desc" style={divStyle}>This visualization shows the relationships between your favorited movies!</h3>
+                            <h3 id="desc" style={divStyle}>This visualization shows the relationships between your
+                                favorited movies!</h3>
                         </div>
+                        <PopUpFavPageInfo
+                            username={this.props.auth.user} whatPage={"visualizationPage"}/>
                         <Button id="backButton" style={buttonStyle} onClick={() => history.push('/myfavorites')}>Back to
                             favorites</Button>
                         <header style={headStyle}>

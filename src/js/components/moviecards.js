@@ -41,15 +41,32 @@ const MovieCardComponent = (props) => {
         // }
 
         //ev.dataTransfer.setData("id", JSON.stringify(sendObj));
+
+
+        /*
+        *  if(ev.target.pathname)
+        let myRe = new RegExp('^/movie/(.*)');
+        let id = myRe.exec(ev.target.pathname);
+        console.log("hittat id", id[1]);
         ev.dataTransfer.setData("id", ev.target.getAttribute("data-id"));
 
+        var x = document.getElementById("glyptest");
+        x.style.color = "red";
+        console.log("Drag start")
+        */
+
+        if(ev.target.getAttribute("data-id") !== null) {
+            ev.dataTransfer.setData("id", ev.target.getAttribute("data-id"));
+            }else {
+            ev.dataTransfer.setData("id", ev.target.firstChild.getAttribute("data-id"));
+        }
         var x = document.getElementById("glyptest");
         x.style.color = "red";
         console.log("Drag start")
     }
 
     function dragE(ev) {
-    
+
         var x = document.getElementById("glyptest");
         x.style.color = "white";
         console.log("Drag end")

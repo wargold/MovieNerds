@@ -66,11 +66,11 @@ class FavoriteMovies extends Component {
                     <div className="justRelatedaMoviePic">
                         <MovieCardComponent movie={mov}/>
                     </div>
-                    {/* <Button id="removeButton" onClick={() => {
+                    { <Button id="removeButton" onClick={() => {
                         this.props.removeFavorites(mov.id, auth.currentUser.uid)
                     }}>
                         <Glyphicon glyph="trash"/> Remove Favorite
-                    </Button> */}
+                    </Button>}
                 </div>
             </Col>);
 
@@ -119,7 +119,7 @@ class FavoriteMovies extends Component {
                                 <div><h2 id="favTitle">My Favorite Movies</h2></div>
                             </th>
                             <th><div id="info"><PopUpFavPageInfo
-                                username={this.props.auth.user}/></div></th>
+                                username={this.props.auth.user} whatPage={"favoritePage"}/></div></th>
                             <th>{this.props.favoriteID.length > 0 ?
                                 <OverlayTrigger
                                     trigger={['hover', 'focus']}

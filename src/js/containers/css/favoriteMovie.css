@@ -12,14 +12,19 @@
     font-size: 40px;
 }
 
-#info{
+#info {
     font-size: 40px;
     padding-right: 20px;
     margin-top: 10px;
 }
 
-#info:hover{
+#removeButton {
+    visibility: hidden;
+}
+
+#info:hover {
     cursor: pointer;
+    color: white;
 }
 
 table#dwds.table {
@@ -110,8 +115,18 @@ div.col-md-3.col-sm-4.col-xs-12 {
         font-size: 20px;
     }
 
-    #info{
+    #info {
         font-size: 30px;
+    }
+}
+
+@media (max-width: 650px) {
+    #removeButton {
+        visibility: visible;
+    }
+
+    #glyptest {
+        visibility: hidden;
     }
 }
 

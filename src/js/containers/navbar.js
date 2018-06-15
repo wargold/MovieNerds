@@ -11,6 +11,7 @@ import SearchBar from './searchBar'
 import Login from './login';
 import history from '../history';
 import {Toaster, Intent, Position} from '@blueprintjs/core';
+import PopUpFavPageInfo from '../components/PopUpPageInfo';
 
 class NavBarHeader extends Component {
 
@@ -67,6 +68,9 @@ class NavBarHeader extends Component {
                     <Navbar.Brand>
                         <Link to={'/'}>
                             <a id="movietitle" href="#home">Movie Nerds</a>
+                            {this.props.auth.user !== '' ?
+                                <PopUpFavPageInfo
+                                    username={this.props.auth.user} whatPage={"firstLoginPage"}/> : null}
                         </Link>
                     </Navbar.Brand>
                     <Navbar.Brand className="logginButt">{loggin}</Navbar.Brand>
@@ -95,6 +99,7 @@ const OurToaster = Toaster.create({
 
 function mapStateToProps(state) {
     return {
+        auth: state.auth,
         getse: state.search,
         selector: state.selections,
         authenticated: state.auth.authenticated,
