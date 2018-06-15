@@ -131,12 +131,12 @@ class FavoriteMovies extends Component {
                                 }
                             </Row>
                             <Row>
-
+                                {this.props.favoriteID.length > 0 ?
                                 <Glyphicon id="glyptest" style={{
                                     'font-size': '100px',
                                     'padding-left': 'calc(50% - 50px)',
                                     'color': this.state.isDragging ? 'green' : 'white'
-                                }} glyph="trash" onDrop={this.drop} onDragOver={this.allowDrop}/>
+                                }} glyph="trash" onDrop={this.drop} onDragOver={this.allowDrop}/>:null}
                                 {dragged}
 
                             </Row>
