@@ -42,7 +42,7 @@ class Movie extends Component {
     componentWillReceiveProps(nextProps) {
         console.log("Compenent Update");
         if ((nextProps.match.params.id && this.props.match.params.id !== nextProps.match.params.id) ||
-            (nextProps.auth.user && this.props.auth.user!==nextProps.auth.user)) {
+            (nextProps.auth.user && this.props.auth.user !== nextProps.auth.user)) {
             console.log("Update kan göras");
             this.resetValues();
             this.load(nextProps.match.params.id);

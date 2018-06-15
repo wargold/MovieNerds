@@ -13,7 +13,7 @@ import history from './history'
 import MoviesByGenres from './containers/moviesByGenres'
 import "../../public/style.css"
 import store from './store'
-import {APIError,NotFound} from './Help Functions/ErrorFunctions'
+import {APIError, NotFound} from './Help Functions/ErrorFunctions'
 
 ReactDOM.render(
     <Provider store={store}>

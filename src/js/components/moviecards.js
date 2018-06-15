@@ -33,27 +33,6 @@ const MovieCardComponent = (props) => {
 
     function drag(ev) {
         console.log(ev.target)
-        //ev.dataTransfer.setData("image", ev.target);
-        // var sendObj = {
-        //     src: ev.target.getAttribute("src"),
-        //     id: ev.target.getAttribute("data-id"),
-        //     alt: ev.target.getAttribute("alt")
-        // }
-
-        //ev.dataTransfer.setData("id", JSON.stringify(sendObj));
-
-
-        /*
-        *  if(ev.target.pathname)
-        let myRe = new RegExp('^/movie/(.*)');
-        let id = myRe.exec(ev.target.pathname);
-        console.log("hittat id", id[1]);
-        ev.dataTransfer.setData("id", ev.target.getAttribute("data-id"));
-
-        var x = document.getElementById("glyptest");
-        x.style.color = "red";
-        console.log("Drag start")
-        */
 
         if(ev.target.getAttribute("data-id") !== null) {
             ev.dataTransfer.setData("id", ev.target.getAttribute("data-id"));

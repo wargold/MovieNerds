@@ -1,10 +1,12 @@
-import { Button, OverlayTrigger, Popover} from 'react-bootstrap'
+import {Button, OverlayTrigger, Popover} from 'react-bootstrap'
 import history from '../history'
 
 export const NotFound = () =>
     <div>
         <h1 id="pageApiNetError">404... Whoops, page not found!</h1>;
-        <Button id="pageNotFound" onClick={()=>{history.push('/')}}>Go Home</Button>
+        <Button id="pageNotFound" onClick={() => {
+            history.push('/')
+        }}>Go Home</Button>
     </div>
 
 export const APIError = () =>
@@ -18,7 +20,9 @@ export const APIError = () =>
             overlay={popoverHoverFocusAPI}
         >
             <Button id="pageNotFound"
-                    onClick={()=>{(navigator.onLine ? history.push('/'):history.push('/APIError'))}}>Go Home!</Button>
+                    onClick={() => {
+                        (navigator.onLine ? history.push('/') : history.push('/APIError'))
+                    }}>Go Home!</Button>
         </OverlayTrigger>
     </div>;
 

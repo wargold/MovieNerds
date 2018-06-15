@@ -66,7 +66,7 @@ class FavoriteMovies extends Component {
                     <div className="justRelatedaMoviePic">
                         <MovieCardComponent movie={mov}/>
                     </div>
-                    { <Button id="removeButton" onClick={() => {
+                    {<Button id="removeButton" onClick={() => {
                         this.props.removeFavorites(mov.id, auth.currentUser.uid)
                     }}>
                         <Glyphicon glyph="trash"/> Remove Favorite
@@ -83,20 +83,11 @@ class FavoriteMovies extends Component {
 
     drop(ev) {
         ev.preventDefault();
-        // var data = ev.dataTransfer.getData("image");
-        // //ev.target.appendChild(document.getElementById(data));
-        // console.log(data)
-        // this.setState(prevState => ({
-        //     test: [...prevState.test, data]
-        //   }))
+
         var data = ev.dataTransfer.getData("id");
         this.setState({
             isDragging: false
         });
-
-        // this.setState(prevState => ({
-        //     test: [...prevState.test, data]
-        //   }))
 
         this.props.removeFavorites(parseInt(data), auth.currentUser.uid)
     };
@@ -113,68 +104,69 @@ class FavoriteMovies extends Component {
             (this.props.auth.user !== '' ?
                 this.props.favoriteID !== null && this.props.favoriteIDStatus !== false ? (
                     (<Grid fluid={true}>
-                        <Table id="dwds">
-                            <thead>
-                            <th>
-                                <div><h2 id="favTitle">My Favorite Movies</h2></div>
-                            </th>
-                            <th><div id="info"><PopUpFavPageInfo
-                                username={this.props.auth.user} whatPage={"favoritePage"}/></div></th>
-                            <th>{this.props.favoriteID.length > 0 ?
-                                <OverlayTrigger
-                                    trigger={['hover', 'focus']}
-                                    placement="bottom"
-                                    overlay={popoverHoverFocus}
-                                >
-                                    <Button id="visualButt"
-                                            onClick={() => history.push('/vis')}>Visualisation</Button>
-                                </OverlayTrigger> : <h2/>}
-                            </th>
-                            </thead>
-                        </Table>
-                        <Row>
-                            {this.props.favoriteID.length > 0 ?
-                                this.getMovies() : <h2 id="noFavMovie">No Movies In Your Favorite List</h2>
-                            }
-                        </Row>
-                        <Row>
+                            <Table id="dwds">
+                                <thead>
+                                <th>
+                                    <div><h2 id="favTitle">My Favorite Movies</h2></div>
+                                </th>
+                                <th>
+                                    <div id="info"><PopUpFavPageInfo
+                                        username={this.props.auth.user} whatPage={"favoritePage"}/></div>
+                                </th>
+                                <th>{this.props.favoriteID.length > 0 ?
+                                    <OverlayTrigger
+                                        trigger={['hover', 'focus']}
+                                        placement="bottom"
+                                        overlay={popoverHoverFocus}
+                                    >
+                                        <Button id="visualButt"
+                                                onClick={() => history.push('/vis')}>Visualisation</Button>
+                                    </OverlayTrigger> : <h2/>}
+                                </th>
+                                </thead>
+                            </Table>
+                            <Row>
+                                {this.props.favoriteID.length > 0 ?
+                                    this.getMovies() : <h2 id="noFavMovie">No Movies In Your Favorite List</h2>
+                                }
+                            </Row>
+                            <Row>
 
-                            <Glyphicon id="glyptest" style={{
-                                'font-size': '100px',
-                                'padding-left': 'calc(50% - 50px)',
-                                'color': this.state.isDragging ? 'green' : 'white'
-                            }} glyph="trash" onDrop={this.drop} onDragOver={this.allowDrop}/>
-                            {dragged}
+                                <Glyphicon id="glyptest" style={{
+                                    'font-size': '100px',
+                                    'padding-left': 'calc(50% - 50px)',
+                                    'color': this.state.isDragging ? 'green' : 'white'
+                                }} glyph="trash" onDrop={this.drop} onDragOver={this.allowDrop}/>
+                                {dragged}
 
-                        </Row>
-                    </Grid>
-    )):(
-        <h2/>
-    ) : (
-        <h2 id="notLoggedIn"> You Have To Be Logged In To Show This Page!</h2>
-    ))) : (Loader())
-    return (
-        <div>
-            <NavBarHeader/>
-            {de}
-        </div>
+                            </Row>
+                        </Grid>
+                    )) : (
+                    <h2/>
+                ) : (
+                    <h2 id="notLoggedIn"> You Have To Be Logged In To Show This Page!</h2>
+                ))) : (Loader())
+        return (
+            <div>
+                <NavBarHeader/>
+                {de}
+            </div>
 
-    )
+        )
     }
 
-    }
+}
 
 
+const popoverHoverFocus = (
+    <Popover id="popover-trigger-hover-focus">
+        Discover new movies based on your favorites,&nbsp;
+        <i>(note: Favorites connect to each other if they have common similar movies)</i>
+    </Popover>
+);
 
-    const popoverHoverFocus = (
-        <Popover id="popover-trigger-hover-focus">
-            Discover new movies based on your favorites,&nbsp;
-            <i>(note: Favorites connect to each other if they have common similar movies)</i>
-        </Popover>
-    );
-
-    function mapStateToProps(state) {
-        return {
+function mapStateToProps(state) {
+    return {
         auth: state.auth,
         movieInfo: state.movieInfo,
         favorites: state.updateFavorites.movies,
@@ -182,16 +174,16 @@ class FavoriteMovies extends Component {
         favoriteIDStatus: state.updateFavorites.fetching,
         loading: state.auth.loading
     };
-    }
+}
 
-    function matchDispatchToProps(dispatch) {
-        return bindActionCreators({
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({
         updateFavorites: updateMovieFavoritesSuccess,
         removeFavorites: removeFavorites,
         checkFavMovieDB: checkDB,
         resetGenreValue: resetSelectedValues,
         checkLoggin: checkLoggin
     }, dispatch);
-    }
+}
 
-    export default connect(mapStateToProps, matchDispatchToProps)(FavoriteMovies);
+export default connect(mapStateToProps, matchDispatchToProps)(FavoriteMovies);

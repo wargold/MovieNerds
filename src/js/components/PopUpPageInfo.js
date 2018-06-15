@@ -28,7 +28,8 @@ class PopUpPageInfo extends React.Component {
                 then adding that movie to your favorites by clicking on the button "<Glyphicon glyph="heart"/> Add
                 Favorite"</p>
             <p id="popupText">After you have added movies to your favorite list then you can click on the Visualisation
-                button for seeing recommend movies that area movies that you may like. Our algorithm will show you which of your favorite movies are
+                button for seeing recommend movies that area movies that you may like. Our algorithm will show you which
+                of your favorite movies are
                 similar then you can check out your favorites similar movies.</p>
         </div>
         return text
@@ -53,7 +54,8 @@ class PopUpPageInfo extends React.Component {
 
     firstLoginPage = () => {
         let text = <div><h2 id="popupTextTitle">Hello {this.props.username}</h2>
-            <p id="popupText">Welcome to our website, in this website you can search for movies and see all the necessary
+            <p id="popupText">Welcome to our website, in this website you can search for movies and see all the
+                necessary
                 information about a particular movie, add movies to your own favorite list, by clicking on
                 the button "<Glyphicon glyph="heart"/> Add Favorite", in a movie page</p>
             <p id="popupText">
@@ -64,8 +66,8 @@ class PopUpPageInfo extends React.Component {
         return text
     }
 
-    checkPopupType = (text) =>{
-        switch(text) {
+    checkPopupType = (text) => {
+        switch (text) {
             case 'favoritePage':
                 return this.favoritePage();
             case 'visualizationPage':
@@ -80,8 +82,8 @@ class PopUpPageInfo extends React.Component {
     render() {
         return (
             <div>
-                {this.props.whatPage==='favoritePage' ?
-                <Glyphicon glyph="info-sign" onClick={this.onOpenModal}/>: null}
+                {this.props.whatPage === 'favoritePage' ?
+                    <Glyphicon glyph="info-sign" onClick={this.onOpenModal}/> : null}
                 {!JSON.parse(localStorage.getItem(this.props.whatPage)) ?
                     <Modal
                         open={this.state.open}
@@ -95,7 +97,7 @@ class PopUpPageInfo extends React.Component {
                         }}
                         animationDuration={1000}>
                         {this.checkPopupType(this.props.whatPage)}
-                    </Modal>:<div/>}
+                    </Modal> : <div/>}
             </div>
         );
     }

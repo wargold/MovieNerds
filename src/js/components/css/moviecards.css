@@ -1,6 +1,6 @@
 .hiddenTitle {
     color: white;
-    user-drag: none; 
+    user-drag: none;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-drag: none;
@@ -13,7 +13,7 @@ div.title {
     transform: translateY(15px);
     width: 100%;
     max-width: 140px;
-    user-drag: none; 
+    user-drag: none;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-drag: none;

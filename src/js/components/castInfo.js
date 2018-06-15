@@ -3,6 +3,7 @@ import './css/slider.css'
 import {Link} from 'react-router-dom'
 import {IMG_LOGO_S_SIZE, URL_IMG} from "../constants/constants";
 import {Image, Col, Grid, Row} from 'react-bootstrap'
+
 require('./css/cast.css')
 import MovieCardComponent from './moviecards'
 

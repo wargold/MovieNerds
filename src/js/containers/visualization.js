@@ -55,21 +55,21 @@ class Vis extends Component {
 
         console.log("visualization.js favorite similar movies", this.props.similarFavoriteMov.similarFavorite);
 
-        var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) - 5;
-        var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - 5;
+        let width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) - 5;
+        let height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - 5;
 
 
         d3.select("svg").remove();
-        var svg = d3.select("#vis")
+        let svg = d3.select("#vis")
             .append("svg")
             .attr("width", width)
             .attr("height", height)
         // .style("border-style", "solid");
 
 
-        var fav = this.props.similarFavoriteMov.similarFavorite
+        let fav = this.props.similarFavoriteMov.similarFavorite
 
-        for (i = 0; i < fav.length; i++) {
+        for (let i = 0; i < fav.length; i++) {
             fav[i].poster_path = fav[i].FavMovieID.poster_path;
             fav[i].title = fav[i].FavMovieID.title;
             fav[i].id = fav[i].FavMovieID.id;
@@ -79,26 +79,26 @@ class Vis extends Component {
 
         console.log(fav)
 
-        var simi = []
+        let simi = []
 
-        for (i = 0; i < this.props.similarFavoriteMov.similarFavorite.length; i++) {
+        for (let i = 0; i < this.props.similarFavoriteMov.similarFavorite.length; i++) {
             simi.push(this.props.similarFavoriteMov.similarFavorite[i].data);
         }
 
         console.log(simi)
 
 
-        var edges = [];
+        let edges = [];
 
-        var nodes = JSON.parse(JSON.stringify(fav));
+        let nodes = JSON.parse(JSON.stringify(fav));
 
-        var index = fav.length - 1;
+        let index = fav.length - 1;
 
         // Loop all fav
-        for (var i = 0; i < fav.length; i++) {
+        for (let i = 0; i < fav.length; i++) {
             // Loop all similiar movies
 
-            for (var j = 0; j < simi[i].length; j++)
+            for (let j = 0; j < simi[i].length; j++)
 
 
                 if (checkExist(nodes, simi[i][j])) { // Similar already exists
@@ -128,7 +128,7 @@ class Vis extends Component {
 
 
         function checkExist(array, o) {
-            for (var i = 0; i < array.length; i++) {
+            for (let i = 0; i < array.length; i++) {
                 if (array[i].id === o.id) {
 
                     return i;
@@ -143,22 +143,22 @@ class Vis extends Component {
             return 200;
         }
 
-        var simulation = d3.forceSimulation()
+        let simulation = d3.forceSimulation()
             .force("link", d3.forceLink().distance(distance()).strength(0.1))
             .force("charge", d3.forceManyBody().strength(-5))
             .force("collide", d3.forceCollide().radius(10))
             .force("center", d3.forceCenter(width / 2, height / 2));
 
-        var links = svg.selectAll("foo")
+        let links = svg.selectAll("foo")
             .data(edges)
             .enter()
             .append("line")
             .style("stroke", "#ccc")
             .style("stroke-width", 1);
 
-        var color = d3.scaleOrdinal(d3.schemeCategory20);
+        let color = d3.scaleOrdinal(d3.schemeCategory20);
 
-        var node = svg.selectAll("foo")
+        let node = svg.selectAll("foo")
             .data(nodes)
             .enter()
             .append("g")
@@ -167,16 +167,12 @@ class Vis extends Component {
                 .on("drag", dragged)
                 .on("end", dragended));
 
-        var nodeCircle = node.append("circle")
+        let nodeCircle = node.append("circle")
             .attr("r", 1)
             .attr("stroke", "gray")
             .attr("stroke-width", "2px")
             .attr("fill", "white");
 
-
-        // Config for image
-        // var imageH = 50;
-        // var imageW = 50;
 
         function imageH(d) {
             if (d.isFav) {
@@ -195,14 +191,14 @@ class Vis extends Component {
         }
 
 
-        var nodeImage = node.append("image")
+        let nodeImage = node.append("image")
             .attr("xlink:href", d => d.poster_path === undefined ? BROKEN_IMAGE : 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + d.poster_path)
             .attr("height", d => imageH(d))
             .attr("width", d => imageW(d))
             .attr("x", d => -(imageW(d) / 2))
             .attr("y", d => -(imageH(d) / 2))
 
-        var texts = node.append("text")
+        let texts = node.append("text")
             .style("fill", "black")
             .attr("dx", 20)
             .attr("dy", 8)
@@ -211,7 +207,7 @@ class Vis extends Component {
             });
 
         // make the image grow a little on mouse over and add the text details on click
-        var setEvents = nodeImage
+        let setEvents = nodeImage
         // Append hero text
         // click on a node
             .on('click', function (d) {
@@ -253,12 +249,12 @@ class Vis extends Component {
 
         simulation.on("tick", function () {
 
-            var radius = 1;
+            let radius = 1;
 
             node.attr("transform", function (d) {
 
-                var x = Math.max(radius, Math.min(width - radius, d.x));
-                var y = Math.max(radius, Math.min(height - radius, d.y));
+                let x = Math.max(radius, Math.min(width - radius, d.x));
+                let y = Math.max(radius, Math.min(height - radius, d.y));
                 return "translate(" + x + "," + y + ")";
             })
 
