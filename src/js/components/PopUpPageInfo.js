@@ -22,46 +22,57 @@ class PopUpPageInfo extends React.Component {
     };
 
     favoritePage = () => {
-        let text = <div><h2 id="popupTextTitle">Hello {this.props.username}</h2>
-            <p id="popupText">In this page you can see all of your favorite movies that you have added to your favorites.
-                You can also click on a movie poster to go to that specific movie page, remove favorites by dragging the
-                movie poster to the <Glyphicon glyph="trash"/>-icon, only if your screen is suitable otherwise their will
-                be a remove button under each movie when your mouse is over a specific poster.
-            </p>
-            <p id="popupText">After you have added movies to your favorites you can click on the Visualisation
-                button for seeing recommend movies that you may highly like. Our algorithm will show you which
-                of your favorite movies are similar.</p>
-        </div>
+        let text = <div>
+            <div><h2 id="popupTextTitle">Hello {this.props.username}</h2>
+                <p id="popupText">In this page you can see all of your favorite movies that you have added to your
+                    favorites.
+                    You can also click on a movie poster to go to that specific movie page, remove favorites by dragging
+                    the
+                    movie poster to the <Glyphicon glyph="trash"/>-icon, only if your screen is suitable otherwise their
+                    will
+                    be a remove button under each movie when your mouse is over a specific poster.
+                </p>
+                <p id="popupText">After you have added movies to your favorites you can click on the Visualisation
+                    button for seeing recommend movies that you may highly like. Our algorithm will show you which
+                    of your favorite movies are similar.</p>
+            </div>
+            <Button id="userCloseButton" onClick={this.onCloseModal}>Close</Button></div>
         return text
     };
 
     visualisationPage = () => {
-        let text = <div><h2 id="popupTextTitle">Hello {this.props.username}</h2>
-            <p id="popupText">
-                In this visualisation page a graph will be plotted for you based on the movies in your favorites,
-                you can then see how similar movies to those in your favorite movies correlate to each other. If there
-                is an edge between for example two movies than there is a high chance you like that movie.
-            </p>
-            <p id="popupText">
-                If you click on the movie poster in the graph, then the title and overview of that movie will be
-                shown. If you are more interested in reading more about a movie then just click on the movies title.
-                Then a new tab with that movie page will open.
-            </p>
-        </div>
+        let text = <div>
+            <div><h2 id="popupTextTitle">Hello {this.props.username}</h2>
+                <p id="popupText">
+                    In this visualisation page a graph will be plotted for you based on the movies in your favorites,
+                    you can then see how similar movies to those in your favorite movies correlate to each other. If
+                    there
+                    is an edge between for example two movies than there is a high chance you like that movie.
+                </p>
+                <p id="popupText">
+                    If you click on the movie poster in the graph, then the title and overview of that movie will be
+                    shown. If you are more interested in reading more about a movie then just click on the movies title.
+                    Then a new tab with that movie page will open.
+                </p>
+            </div>
+            <Button id="userCloseButton" onClick={this.onCloseModal}>Close</Button></div>
         return text
     };
 
     firstLoginPage = () => {
-        let text = <div><h2 id="popupTextTitle">Hello {this.props.username}</h2>
-            <p id="popupText">Welcome to our website, in this website you can search for movies and see all the
-                necessary
-                information about a particular movie, add movies to your own favorite list, by clicking on
-                the button "<Glyphicon glyph="heart"/> Add Favorite", in a movie page</p>
-            <p id="popupText">
-                You can search in the text box "Search Movie Title... " for movies by their title and in the text box
-                "Select genres" movies based on the genres you choose will be shown.
-            </p>
-        </div>
+        let text = <div>
+            <div><h2 id="popupTextTitle">Hello {this.props.username}</h2>
+                <p id="popupText">Welcome to our website, in this website you can search for movies and see all the
+                    necessary
+                    information about a particular movie, add movies to your own favorite list, by clicking on
+                    the button "<Glyphicon glyph="heart"/> Add Favorite", in a movie page</p>
+                <p id="popupText">
+                    You can search in the text box "Search Movie Title... " for movies by their title and in the text
+                    box
+                    "Select genres" movies based on the genres you choose.
+                </p>
+            </div>
+            <Button id="userCloseButton"onClick={this.onCloseModal}>Close</Button></div>
         return text
     }
 
@@ -94,6 +105,9 @@ class PopUpPageInfo extends React.Component {
                             transitionExit: 'transition-exit-active',
                             transitionExitActive: 'transition-exit-active',
                         }}
+                        closeOnOverlayClick={false}
+                        closeOnEsc={true}
+                        showCloseIcon={false}
                         animationDuration={1000}>
                         {this.checkPopupType(this.props.whatPage)}
                     </Modal> : <div/>}

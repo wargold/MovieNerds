@@ -6,3 +6,13 @@
 #popupText {
     color: #c3c3c3;
 }
+
+#userCloseButton{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(#999faa, #999999);
+    color: black;
+    font-size: medium;
+    font-weight: bold;
+}
